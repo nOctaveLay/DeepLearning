@@ -127,27 +127,47 @@ A person's age cannot be negative, a man cannot be pregnant and under-aged perso
 특징 삽입
 ### Hot-Deck
 The technique then finds the first missing value and uses the cell value immediately prior to the data that are missing to impute the missing value<br>
-
 = first missing value를 찾음, missing value를 imput하는 것을 잃어버리는 데이터 이전에 cell value를 즉각적으로 찾음. <br><br>
 
 ### Cold-Deck
 Selects donors from another dataset to complete missing data<br>
-
 = missing data를 완성시키기 위해서 다른 dataset에서 donor를 선택<br><br>
 
 ### Mean-substitution
 Another imputation technique involves replacing any missing value with the mean of that variable for all other cases, which has the benefit of not changing the sample mean for that variable.<br>
-
 = 다른 삽입 기술은 그 varibale을 위한 샘플 평균을 변화시키는 것이 아닌 것으로 산출되는 이득을 가지는 모든 cases를 위해 있는 그 variable 의 평균으로 어떤 missing value를 대체하는 것을 포함한다.<br><br>
 
 ### Regression
-A regression model is estimated to predict observed values of a variable based on other variables, and that model is then used to impute values in cases where that variable is missing <br><br>
-
+A regression model is estimated to predict observed values of a variable based on other variables, and that model is then used to impute values in cases where that variable is missing <br>
 = 다른 variable에 기반한 variable의 observed value를 예측하도록 추정되는 모델.<br>
-= 이 모델은 variable이 사라진 곳에 value를 넣는데 사용한다.<br>
-
+= 이 모델은 variable이 사라진 곳에 value를 넣는데 사용한다.<br><br>
 
 ## Feature Engineering
+
+### Decompose
+Converting 2014-09-20T20:45:40Z into categorical attributes like hour_of_the_day, part_of_day, etc. <br>
+= 2014-09-20T20:45:40Z를 카테고리 속성으로 바꿈 : hour_of_the_day, part_of_day 같은 식으로<br><br>
+
+### Discretization
+**Continuous Features**
+Typically data is discretized into partitions of K equal lengths/width (equal intervals) or K% of the total data (equal frequencies)<br>
+= 일반적으로 data는 K개의 같은 길이/넓이 (같은 구간)의 조각 혹은 모든 데이터 (주파수가 동등한)의 K%로 나눠진다.<br><br>
+
+**Categorical Features**
+Values for categorical features may be combined, particularly when there’s few samples for some categories<br>
+= 특히 어떤 카테고리에 매우 적은량의 sample만 있을 때 카테고리로 만들 수있는 특징들은 결합된다. 
+
+### Reframe Numerical Quantities
+Changing from grams to kg, and losing detail might be both wanted and efficient for calculation
+= gram을 kg으로 바꾸면서, detail을 잃는 것은 원해서 그러거나 계산을 효율적으로 하기 위함이다.
+
+### Crossing
+Creating new features as a combination of existing features. 
+Could be multiplying numerical features, or combining categorical variables. 
+This is a great way to add domain expertise knowledge to the dataset.
+= 현재 있는 특징들을 결합함으로서 새로운 특징들을 만든다.
+numerical features를 곱할 수 있거나, 카테고리 변수를 결합할 수 있다.
+= 
 
 ## Feature Selection
 
