@@ -166,11 +166,15 @@ Changing from grams to kg, and losing detail might be both wanted and efficient 
 Creating new features as a combination of existing features. <br>
 Could be multiplying numerical features, or combining categorical variables.<br> 
 This is a great way to add domain expertise knowledge to the dataset.<br><br>
-현재 있는 특징들을 결합함으로서 새로운 특징들을 만든다.<br>
-셀 수 있는 특징들을 곱하거나 카테고리 변수들을 결합할 수 있다 <br>
 
+= 현재 있는 특징들을 결합함으로서 새로운 특징들을 만든다.<br>
+= 셀 수 있는 특징들을 곱하거나 카테고리 변수들을 결합할 수 있다 <br>
+= 데이터 셋에 전문적인 지식의 domain을 추가하는 아주 좋은 방법이다. <br><br>
 
 ## Feature Selection
+### Correlation
+### Dimensionality
+### Importance
 
 ## Feature Encoding
 
