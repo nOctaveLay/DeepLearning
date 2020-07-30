@@ -1,8 +1,7 @@
 # deep_learning_mindmap
 
 ## Machine Learning Data Processing
-[create an anchor](#anchors-in-markdown)
-https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md
+[https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md](#Machine-Learning-Data-Processing)
 
 ## Machine Learning Concept
 https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md
