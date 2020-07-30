@@ -43,6 +43,15 @@ Standard deviation, Variable|  |   | O | O |
 Mode|O|O|O|O
 Median||O|O|O
 Mean|||O|O
+
+|    | Nominal | Ordinal| Interval | Ratio 
+|:----|:----:|:----:|:----:|:----:
+Countable|O|O|O|O
+Order defined||O|O|O
+Difference defined (addition, subtraction) |||O|O
+Zero defined (multiplication, division) ||||O
+
+
 ### Data Exploration
 
 ### Feature Cleaning
