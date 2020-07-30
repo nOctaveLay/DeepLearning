@@ -277,8 +277,20 @@ Another reason why feature scaling is applied is that gradient descent converges
     
 ## Dataset Construction 
 ### Training Dataset
-    * A set examples
+A set examples used for learning <br>
+학습을 위해 사용되는 예제.<br>
+
+To fit the parameters of the classifier in the Multilayer Perceptron, for instance, we would use the training set to find the "optimal" weights when using back-progapation.<br>
+Multilayer Perceptron에서 classifier의 parameter를 맞추기 위함, 예를 들어, back propagation을 할 때 "최적의" weight를 찾기 위해서 training set을 사용한다.<br><br>
 ### Test Dataset
+A set of examples used only to assess the performance of a fully-trained classifier<br>
+완전히 훈련된 classifier의 performance로 접근할 때 사용되는 예제.<br>
+
+In the Multilayer Perceptron case, we would use the test to estimate the error rate after we have chosen the final model (MLP size and actual weights) <br>
+Multilayer Perceptron case에서, 최종 모델을 고른 후에 error rate를 추정하기 위해서 test를 사용한다. <br>
+After assessing the final model on the test set, YOU MUST NOT tune the model any further<br>
+test set에서의 최종 모델에 접근한 후, 더 이상 모델을 조정하면 안된다.
+
 ### Validation Dataset
 ### Cross Validation
 
