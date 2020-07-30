@@ -11,3 +11,14 @@ https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learni
 
 
 개인적으로 많은 정보가 들어있다고 생각하는 사이트 : https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
+
+deview 2019 : https://deview.kr/2019/schedule
+
+RoBERTa: https://arxiv.org/abs/1907.11692?fbclid=IwAR1ZISElXegapWYpz0Ut3kV3mQFoh8IOiJevKJd5QH9P7SMt9XJWKFfrgx4
+ALBERT : https://arxiv.org/abs/1909.11942?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w
+딥러닝을 이용한 자연어 처리 입문 : https://wikidocs.net/book/2155?fbclid=IwAR1jXkBthksuedED_dxANn_NRHzKgSw1oBEoZSPPnNJulpcDyUSg17BokG8
+
+데이터 전처리 : https://blog.pingpong.us/dialog-bert-tokenizer/?fbclid=IwAR0O2mtCrn4ilEusZE2fV3waGWl1BGE7Q3ifV6TBHu-nbQ5XViflE271B2U
+BERT : http://docs.likejazz.com/bert/?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w#fn:fn-2
+https://acl2020.org/blog/ACL-2020-best-papers/
+
