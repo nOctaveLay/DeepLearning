@@ -126,6 +126,16 @@ A person's age cannot be negative, a man cannot be pregnant and under-aged perso
 ## Feature Imputation
 특징 삽입
 ### Hot-Deck
+The technique then finds the first missing value and uses the cell value immediately prior to the data that are missing to impute the missing value<br>
+= first missing value를 찾음, missing value를 imput하는 것을 잃어버리는 데이터 이전에 cell value를 즉각적으로 찾음. <br><br>
+
+### Cold-Deck
+Selects donors from another dataset to complete missing data<br>
+= missing data를 완성시키기 위해서 다른 dataset에서 donor를 선택<br><br>
+
+### Mean-substitution
+Another imputation technique involves replacing any missing value with the mean of that variable for all other cases, which has the benefit of not changing the sample mean for that variable.<br>
+다른 삽입 기술은 그 varibale을 위한 샘플 평균을 변화시키는 것이 아닌 것으로 산출되는 이득을 가지는 모든 cases를 위해 있는 그 variable 의 평균으로 어떤 missing value를 대체하는 것을 포함한다.
 
 ## Feature Engineering
 
