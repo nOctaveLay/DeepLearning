@@ -273,9 +273,14 @@ Another reason why feature scaling is applied is that gradient descent converges
     Feature standardization makes the values of each feature in the data have zero-mean (when subtracting the mean in the numerator) and unitvariance.<br>
     Feature standardization은 zero-mean (numerator에서 평균을 빼는 것)과 unitvariance를 가지는 data 안에서 각각의 feature의 value를 만드는 것이다.<br>
     * Scaling to unit length - To scale the components of a feature vector such that the complete vector has length one.
-    Feature vector의 컴포넌트를 증가시키기 위함. 그래서 complete vector는 length one을 가진다.<br>    
+    Feature vector의 컴포넌트를 증가시키기 위함. 그래서 complete vector는 length one을 가진다.<br>
+    
 ## Dataset Construction 
-
+### Training Dataset
+    * A set examples
+### Test Dataset
+### Validation Dataset
+### Cross Validation
 
 
 [correlation1] 
