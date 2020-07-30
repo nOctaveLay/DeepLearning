@@ -1,8 +1,6 @@
-# 알아보기 쉽게 정리한 머신러닝 roadmap
+# machine learning data processing
 
-## machine learning data processing
-
-### Data Types
+## Data Types
 **Nominal**<br>
 is for mutual exclusive, but not ordered, categories<br>
 서로가 서로에게 어떠한 영향도 미치지 않는 것, 순서, 카테고리 x<br>
@@ -51,24 +49,24 @@ Order defined||O|O|O
 Difference defined (addition, subtraction) |||O|O
 Zero defined (multiplication, division) ||||O
 
-### Data Exploration
-#### Variable Identification
+## Data Exploration
+### Variable Identification
 Identify Predictor (Input) and Target(output) variables<br>
 Next, identify the data type and category of the variables<br>
 Input, Output 정의 -> data type과 변수 카테고리 정의 <br>
 
-#### Univariate Analysis
+### Univariate Analysis
 * Continuous Features (연속된 특징)
 Mean, Median, Mode, Min, Max, Range, Quartile, IQR, Variance, Standard, Deviation, Skewness, Histogram, Box Plot
 
 * Categorical Features (분류된 특징)
 Frequency, Histogram
 
-#### Bi-variate Analysis
+### Bi-variate Analysis
 Finds out the relationship between two variables<br>
 두개의 variable 사이에서 관계를 찾음
 
-##### Numerical & Numerical <br>
+#### Numerical & Numerical <br>
 **Scatter Plot**<br>
 is usually drawn before working out a linear correlation or fitting a regression line<br>
 linear correlation을 하기 전에 그리거나, regression line을 맞추기 위함<br>
@@ -77,7 +75,7 @@ linear correlation을 하기 전에 그리거나, regression line을 맞추기 �
 quantifies the strength of a linear relationship between two numerical variables<br>
 2개의 numerical variable 사이에서 linear relationship의 강점을 수량화한다.<br><br>
 
-##### Categorical & Categorical
+#### Categorical & Categorical
 **Two-way table(=contigency table)**<br>
 can start analyzing the relationship by creating a two way table of count and count%<br>
 count와 count%에 대한 두가지 방법의 table을 생성함으로서 관계를 분석하는 것<br><br>
@@ -93,23 +91,23 @@ two or more chart types to emphasize that the chart contains different kinds of 
 can be used to determine the association between categorical variables<br>
 This test is used to derive the statistical significance of relationship between the variables<br><br>
 
-##### Categorical & Numerical
+#### Categorical & Numerical
 Z-Test / T-Test
 ANOVA
 
-### Feature Cleaning
+## Feature Cleaning
 
-### Feature Imputation
+## Feature Imputation
 
-### Feature Engineering
+## Feature Engineering
 
-### Feature Selection
+## Feature Selection
 
-### Feature Encoding
+## Feature Encoding
 
-### Feature Normalisation or Scaling
+## Feature Normalisation or Scaling
 
-### Dataset Construction 
+## Dataset Construction 
 
 
 
