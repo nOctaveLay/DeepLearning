@@ -149,11 +149,11 @@ Converting 2014-09-20T20:45:40Z into categorical attributes like hour_of_the_day
 = 2014-09-20T20:45:40Z를 카테고리 속성으로 바꿈 : hour_of_the_day, part_of_day 같은 식으로<br><br>
 
 ### Discretization
-**Continuous Features**
+**Continuous Features**<br>
 Typically data is discretized into partitions of K equal lengths/width (equal intervals) or K% of the total data (equal frequencies)<br>
 = 일반적으로 data는 K개의 같은 길이/넓이 (같은 구간)의 조각 혹은 모든 데이터 (주파수가 동등한)의 K%로 나눠진다.<br><br>
 
-**Categorical Features**
+**Categorical Features**<br>
 Values for categorical features may be combined, particularly when there’s few samples for some categories<br>
 = 특히 어떤 카테고리에 매우 적은량의 sample만 있을 때 카테고리로 만들 수있는 특징들은 결합된다. <br><br>
 
@@ -173,8 +173,37 @@ This is a great way to add domain expertise knowledge to the dataset.<br><br>
 
 ## Feature Selection
 ### Correlation
-### Dimensionality
+Features should be uncorrelated with each other and highly correlated to the feature we’re trying to predict.
+[correlation 1]<br><br>
+**Convariance** :  A measure of how much two random variables change together. <br> 
+Math: dot(de_mean(x), de_mean(y)) / (n - 1)<br><br>
+
+### Dimensionality Reduction
+**Principal Component Analysis(PCA)**
+Principal component analysis (PCA) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components.<br><br>
+
+This transformation is defined in such a way that the first principal component has the largest possible variance (that is, accounts for as much of the variability in the data as possible), and each succeeding component in turn has the highest variance possible under the constraint that it is orthogonal to the preceding components.<br><br>
+
+= PCA는 가능한 상호 연관된 변수(possibly correlated variables)들의 관찰 집합을 principal component라고 불리는 선형 비상호 연관 변수(linearly uncorrelated variables)들의 값의 집합으로 변환하는 직교 변환을 사용하는 통계적인 과정이다.<br>
+이런 변형은 first principal component가 가장 큰 가능한 변수를 갖는것이다. <br>
+(이 말은, data에서 가능한 한 variability를 많이 설명한다.) <br>
+그리고, 각각의 연속적인 component는 앞서 가는 component들에게 직교해야 한다는 제한 아래에서 차례로 가능한 가장 높은 variance를 가진다.<br>
+<br>
+Plot the variance per feature and select the features with the largest variance.<br><br>
+= feature별로 변수를 plot해라, 그리고 가장 큰 변수로 feature를 골라라.<br><br>
+
+**Singular Value Decomposition(SVD)**
+SVD is a factorization of a real or complex matrix. 
+It is the generalization of the eigendecomposition of a positive semidefinite normal matrix (for example, a symmetric matrix with positive eigenvalues) to any m×n matrix via an extension of the polar decomposition. 
+It has many useful applications in signal processing and statistics.
+
+SVD는 real or complex 행렬의 인수분해이다.
+positive semidefinite normal matrix(0이 포함되고, 모든 행렬이 양수인 정규행렬) 의 고유값분해(eigendecomposition)의 일반화이다.
+(예를 들어, positive 고유벡터를 가지고 있는 sysmmetric matrix다)
+
+
 ### Importance
+
 
 ## Feature Encoding
 
@@ -183,6 +212,8 @@ This is a great way to add domain expertise knowledge to the dataset.<br><br>
 ## Dataset Construction 
 
 
+
+[correlation1] 
 
 출처 :
 https://github.com/dformoso/machine-learning-mindmap 
