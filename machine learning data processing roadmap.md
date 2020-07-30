@@ -241,17 +241,29 @@ A learning algorithm takes advantage of its own variable selection process and p
 Embedded method는 과거의 method들의 장점들을 결합하려고 한다.<br>
 학습 알고리즘은 변수 선택 과정의 이점을 취한다. 그리고 특징 선택과 분류를 동시에 한다.<br><br>
 
-* Lasso regression performs L1 regularization which adds penalty equivalent to absolute value of the magnitude of coefficients.
-    = Lasso regression은 coefficient의 크기의 절댓값과 동일하게 페널티를 더하는 L1 정규화를 한다.
-* Ridge regression performs L2 regularization which adds penalty equivalent to square of the magnitude of coefficients.
-    = Ridge regression은 coefficient의 크기의 제곱과 동등하게 페널티를 더하는 L2 정규화를 한다.
+* Lasso regression performs L1 regularization which adds penalty equivalent to absolute value of the magnitude of coefficients.<br>
+    = Lasso regression은 coefficient의 크기의 절댓값과 동일하게 페널티를 더하는 L1 정규화를 한다. <br>
+* Ridge regression performs L2 regularization which adds penalty equivalent to square of the magnitude of coefficients.<br>
+    = Ridge regression은 coefficient의 크기의 제곱과 동등하게 페널티를 더하는 L2 정규화를 한다.<br>
 
 ## Feature Encoding
-Machine Learning algorithms perform Linear Algebra on Matrices, which means all features must be numeric. Encoding helps us do this.
+Machine Learning algorithms perform Linear Algebra on Matrices, which means all features must be numeric. 
+Encoding helps us do this.<br><br>
 
+= 머신 러닝 알고리즘은 모든 feature가 numeric 한 행렬에 작용하는 선형 대수를 수행한다.<br><br>
 
+* Label Encoding<br>
+* One Hot Encoding<br>
+
+In One Hot Encoding, make sure the encodings are done in a way that all features are linearly independent.<br>
+One Hot Encoding에서 모든 feature들이 선형 독립적인 방법으로 encoding이 된다는 것을 확신해라.
 
 ## Feature Normalisation or Scaling
+Since the range of values of raw data varies widely, in some machine
+learning algorithms, objective functions will not work properly without
+normalization. Another reason why feature scaling is applied is that gradient
+descent converges much faster with feature scaling than without it.
+
 
 ## Dataset Construction 
 
