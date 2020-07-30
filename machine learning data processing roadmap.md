@@ -231,12 +231,20 @@ Wrapper methods는 filter 접근과는 다르게 variable 사이에서 가능한
 
 * Forward Selection
 * Backward Elimination
-
+* Recursive Feature Ellimination
+* Genetic Algorithms
 
 #### Embedded Methods
 Embedded methods try to combine the advantages of both previous methods.<br>
 A learning algorithm takes advantage of its own variable selection process and performs feature selection and classification simultaneously.<br><br>
 
+Embedded method는 과거의 method들의 장점들을 결합하려고 한다.<br>
+학습 알고리즘은 변수 선택 과정의 이점을 취한다. 그리고 특징 선택과 분류를 동시에 한다.<br><br>
+
+* Lasso regression performs L1 regularization which adds penalty equivalent to absolute value of the magnitude of coefficients.
+    = Lasso regression은 coefficient의 크기의 절댓값과 동일하게 페널티를 더하는 L1 정규화를 한다.
+* Ridge regression performs L2 regularization which adds penalty equivalent to square of the magnitude of coefficients.
+    = Ridge regression은 coefficient의 크기의 제곱과 동등하게 페널티를 더하는 L2 정규화를 한다.
 
 ## Feature Encoding
 
