@@ -8,3 +8,6 @@ https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learni
 
 ## Machine Learning Process
 https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md
+
+
+개인적으로 많은 정보가 들어있다고 생각하는 사이트 : https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
