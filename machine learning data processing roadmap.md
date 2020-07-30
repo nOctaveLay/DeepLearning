@@ -30,9 +30,10 @@ interval variable 의 모든 property를 가지고 있고, 0.0.의 명확한 정
 
 > enzyme activity, dose amount, reaction rate, flow rate, concentration, pulse, weight, length, temperature in Kelvin (0.0 Kelvin really does mean “no heat”), survival time.
 
-|  ㅇ  |Normal|Ordinal|Interval|Ratio
+|    |Normal|Ordinal|Interval|Ratio
+|----|----|----|----|----
 Counts / Distribution| O | O | O | O 
-Minimum, Maximum| ㅠ   | O | O | O 
+Minimum, Maximum|    | O | O | O 
 
 ### Data Exploration
 
