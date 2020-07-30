@@ -269,12 +269,11 @@ Another reason why feature scaling is applied is that gradient descent converges
     * Rescaling <br> 
     The simplest method is rescaling the range of features to scale the range in [0, 1] or [-1, 1].<br>
     가장 일반적인 방법은 [0,1] [-1,1] 범위 안으로 들이기 위해서 feature의 범위를 리스케일링하는 것이다.<br>
-    <br><br>
     * Standardization <br>
     Feature standardization makes the values of each feature in the data have zero-mean (when subtracting the mean in the numerator) and unitvariance.<br>
-    
+    Feature standardization은 zero-mean (numerator에서 평균을 빼는 것)과 unitvariance를 가지는 data 안에서 각각의 feature의 value를 만드는 것이다.<br>
     * Scaling to unit length - To scale the components of a feature vector such that the complete vector has length one.
-
+    Feature vector의 컴포넌트를 증가시키기 위함. 그래서 complete vector는 length one을 가진다.<br>    
 ## Dataset Construction 
 
 
