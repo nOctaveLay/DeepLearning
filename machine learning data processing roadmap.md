@@ -155,18 +155,19 @@ Typically data is discretized into partitions of K equal lengths/width (equal in
 
 **Categorical Features**
 Values for categorical features may be combined, particularly when there’s few samples for some categories<br>
-= 특히 어떤 카테고리에 매우 적은량의 sample만 있을 때 카테고리로 만들 수있는 특징들은 결합된다. 
+= 특히 어떤 카테고리에 매우 적은량의 sample만 있을 때 카테고리로 만들 수있는 특징들은 결합된다. <br><br>
 
 ### Reframe Numerical Quantities
-Changing from grams to kg, and losing detail might be both wanted and efficient for calculation
-= gram을 kg으로 바꾸면서, detail을 잃는 것은 원해서 그러거나 계산을 효율적으로 하기 위함이다.
+Changing from grams to kg, and losing detail might be both wanted and efficient for calculation<br>
+= gram을 kg으로 바꾸면서, detail을 잃는 것은 원해서 그러거나 계산을 효율적으로 하기 위함이다.<br><br>
 
 ### Crossing
-Creating new features as a combination of existing features. 
-Could be multiplying numerical features, or combining categorical variables. 
-This is a great way to add domain expertise knowledge to the dataset.
-= 현재 있는 특징들을 결합함으로서 새로운 특징들을 만든다.
-numerical features를 곱할 수 있거나, 카테고리 변수를 결합할 수 있다.
+Creating new features as a combination of existing features. <br>
+Could be multiplying numerical features, or combining categorical variables.<br> 
+This is a great way to add domain expertise knowledge to the dataset.<br><br>
+
+= 현재 있는 특징들을 결합함으로서 새로운 특징들을 만든다.<br>
+= numerical features를 곱할 수 있거나, 카테고리 변수를 결합할 수 있다.<br>
 = 
 
 ## Feature Selection
