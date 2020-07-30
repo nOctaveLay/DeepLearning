@@ -3,20 +3,22 @@
 ## machine learning data processing
 
 ### Data Types
-**Nominal**
+**Nominal**<br>
 is for mutual exclusive, but not ordered, categories<br>
 서로가 서로에게 어떠한 영향도 미치지 않는 것, 순서, 카테고리 x<br>
 
 > ex : genotype, blood type, zip code, gender, race, eye color, political party<br>
 
-**Ordinal**
+**Ordinal**<br>
 is one where the order matters but not the difference between values<br>
 순서는 중요하지만 value 사이에 차이 x<br>
 
-> ex : socio economic status (“low income”,”middle income”,”high income”), education level (“high school”,”BS”,”MS”,”PhD”), income 
-level (“less than 50K”, “50K-100K”, “over 100K”), satisfaction rating (“extremely dislike”, “dislike”, “neutral”, “like”, “extremely like”).
+> ex : socio economic status (“low income”,”middle income”,”high income”)<br>
+> education level (“high school”,”BS”,”MS”,”PhD”), <br>
+> income level (“less than 50K”, “50K-100K”, “over 100K”), <br>
+> satisfaction rating (“extremely dislike”, “dislike”, “neutral”, “like”, “extremely like”).
 
-**Interval** 
+**Interval** <br>
 is a measurement where the difference between two values is meaningful <br>
 두 개의 value의 차이가 의미있는 값 <br>
 
