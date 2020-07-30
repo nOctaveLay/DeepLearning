@@ -259,11 +259,21 @@ In One Hot Encoding, make sure the encodings are done in a way that all features
 One Hot Encoding에서 모든 feature들이 선형 독립적인 방법으로 encoding이 된다는 것을 확신해라.
 
 ## Feature Normalisation or Scaling
-Since the range of values of raw data varies widely, in some machine
-learning algorithms, objective functions will not work properly without
-normalization. Another reason why feature scaling is applied is that gradient
-descent converges much faster with feature scaling than without it.
+Since the range of values of raw data varies widely, in some machine learning algorithms, objective functions will not work properly without normalization. 
+Another reason why feature scaling is applied is that gradient descent converges much faster with feature scaling than without it.
 
+= raw data의 값의 범위가 넓기 때문에, machine learning algorithm에서, objective function(목적 함수)은 normalization(정규화)없이는 적절하게 작동하지 않을 것이다.
+= 왜 feature scaling이 적용되는 지에 대한 또 다른 이유는, gradient descent가 feature scaling과 함께 하면 더 빠르게 수렴되기 때문이다.
+
+* Method
+    * Rescaling <br> 
+    The simplest method is rescaling the range of features to scale the range in [0, 1] or [-1, 1].<br>
+    가장 일반적인 방법은 [0,1] [-1,1] 범위 안으로 들이기 위해서 feature의 범위를 리스케일링하는 것이다.<br>
+    <br><br>
+    * Standardization <br>
+    Feature standardization makes the values of each feature in the data have zero-mean (when subtracting the mean in the numerator) and unitvariance.<br>
+    
+    * Scaling to unit length - To scale the components of a feature vector such that the complete vector has length one.
 
 ## Dataset Construction 
 
