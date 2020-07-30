@@ -65,10 +65,37 @@ Mean, Median, Mode, Min, Max, Range, Quartile, IQR, Variance, Standard, Deviatio
 Frequency, Histogram
 
 #### Bi-variate Analysis
-Finds out the relationship between two variables
-Scatter Plot
-Correlation Plot
+Finds out the relationship between two variables<br>
+두개의 variable 사이에서 관계를 찾음
 
+##### Numerical & Numerical <br>
+**Scatter Plot**<br>
+is usually drawn before working out a linear correlation or fitting a regression line<br>
+linear correlation을 하기 전에 그리거나, regression line을 맞추기 위함<br>
+<br>
+**Correlation Plot** - Heatmap<br>
+quantifies the strength of a linear relationship between two numerical variables<br>
+2개의 numerical variable 사이에서 linear relationship의 강점을 수량화한다.<br><br>
+
+##### Categorical & Categorical
+**Two-way table(=contigency table)**<br>
+can start analyzing the relationship by creating a two way table of count and count%<br>
+count와 count%에 대한 두가지 방법의 table을 생성함으로서 관계를 분석하는 것<br><br>
+
+**Stacked Column Chart**<br>
+compares the percentage that each category from one variable contributes to a total across categories of the second variables<br>
+하나의 variable에서 나온 각각의 카테고리가 2번째 variable의 카테고리를 가로질러 전체에게 영향을 주는 비율.<br><br>
+
+**Combination Chart** <br>
+two or more chart types to emphasize that the chart contains different kinds of information<br><br>
+
+**Chi-Square Test** <br>
+can be used to determine the association between categorical variables<br>
+This test is used to derive the statistical significance of relationship between the variables<br><br>
+
+##### Categorical & Numerical
+Z-Test / T-Test
+ANOVA
 
 ### Feature Cleaning
 
@@ -89,3 +116,5 @@ Correlation Plot
 출처 :
 https://github.com/dformoso/machine-learning-mindmap 
 https://www.graphpad.com/support/faq/what-is-the-difference-between-ordinal-interval-and-ratio-variables-why-should-i-care/
+https://www.saedsayad.com/bivariate_analysis.htm
+
