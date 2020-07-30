@@ -92,8 +92,9 @@ can be used to determine the association between categorical variables<br>
 This test is used to derive the statistical significance of relationship between the variables<br><br>
 
 #### Categorical & Numerical
-Z-Test / T-Test
-ANOVA
+Line Chart with Error Bars
+Z-Test / T-Test<br>
+ANOVA<br>
 
 ## Feature Cleaning
 
