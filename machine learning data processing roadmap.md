@@ -3,13 +3,13 @@
 ## Data Types
 **Nominal**<br>
 is for mutual exclusive, but not ordered, categories<br>
-서로가 서로에게 어떠한 영향도 미치지 않는 것, 순서, 카테고리 x<br>
+-> 서로가 서로에게 어떠한 영향도 미치지 않는 것, 순서, 카테고리 x<br>
 
 > ex : genotype, blood type, zip code, gender, race, eye color, political party<br>
 
 **Ordinal**<br>
 is one where the order matters but not the difference between values<br>
-순서는 중요하지만 value 사이에 차이 x<br>
+-> 순서는 중요하지만 value 사이에 차이 x<br>
 
 > ex : socio economic status (“low income”,”middle income”,”high income”)<br>
 > education level (“high school”,”BS”,”MS”,”PhD”), <br>
@@ -18,7 +18,7 @@ is one where the order matters but not the difference between values<br>
 
 **Interval** <br>
 is a measurement where the difference between two values is meaningful <br>
-두 개의 value의 차이가 의미있는 값 <br>
+-> 두 개의 value의 차이가 의미있는 값 <br>
 
 > ex : emperature (Farenheit), temperature (Celcius), pH, SAT score (200-800), credit score (300-850).
 
@@ -53,7 +53,7 @@ Zero defined (multiplication, division) ||||O
 ### Variable Identification
 Identify Predictor (Input) and Target(output) variables<br>
 Next, identify the data type and category of the variables<br>
-Input, Output 정의 -> data type과 변수 카테고리 정의 <br>
+-> Input, Output 정의 -> data type과 변수 카테고리 정의 <br>
 
 ### Univariate Analysis
 * Continuous Features (연속된 특징)
@@ -64,25 +64,25 @@ Frequency, Histogram
 
 ### Bi-variate Analysis
 Finds out the relationship between two variables<br>
-두개의 variable 사이에서 관계를 찾음
+-> 두개의 variable 사이에서 관계를 찾음
 
 #### Numerical & Numerical <br>
 **Scatter Plot**<br>
 is usually drawn before working out a linear correlation or fitting a regression line<br>
-linear correlation을 하기 전에 그리거나, regression line을 맞추기 위함<br>
+-> linear correlation을 하기 전에 그리거나, regression line을 맞추기 위함<br>
 <br>
 **Correlation Plot** - Heatmap<br>
 quantifies the strength of a linear relationship between two numerical variables<br>
-2개의 numerical variable 사이에서 linear relationship의 강점을 수량화한다.<br><br>
+-> 2개의 numerical variable 사이에서 linear relationship의 강점을 수량화한다.<br><br>
 
 #### Categorical & Categorical
 **Two-way table(=contigency table)**<br>
 can start analyzing the relationship by creating a two way table of count and count%<br>
-count와 count%에 대한 두가지 방법의 table을 생성함으로서 관계를 분석하는 것<br><br>
+-> count와 count%에 대한 두가지 방법의 table을 생성함으로서 관계를 분석하는 것<br><br>
 
 **Stacked Column Chart**<br>
 compares the percentage that each category from one variable contributes to a total across categories of the second variables<br>
-하나의 variable에서 나온 각각의 카테고리가 2번째 variable의 카테고리를 가로질러 전체에게 영향을 주는 비율.<br><br>
+-> 하나의 variable에서 나온 각각의 카테고리가 2번째 variable의 카테고리를 가로질러 전체에게 영향을 주는 비율.<br><br>
 
 **Combination Chart** <br>
 two or more chart types to emphasize that the chart contains different kinds of information<br><br>
