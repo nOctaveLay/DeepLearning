@@ -247,6 +247,9 @@ Embedded method는 과거의 method들의 장점들을 결합하려고 한다.<b
     = Ridge regression은 coefficient의 크기의 제곱과 동등하게 페널티를 더하는 L2 정규화를 한다.
 
 ## Feature Encoding
+Machine Learning algorithms perform Linear Algebra on Matrices, which means all features must be numeric. Encoding helps us do this.
+
+
 
 ## Feature Normalisation or Scaling
 
