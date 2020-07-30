@@ -193,16 +193,49 @@ Plot the variance per feature and select the features with the largest variance.
 = feature별로 변수를 plot해라, 그리고 가장 큰 변수로 feature를 골라라.<br><br>
 
 **Singular Value Decomposition(SVD)**
-SVD is a factorization of a real or complex matrix. 
-It is the generalization of the eigendecomposition of a positive semidefinite normal matrix (for example, a symmetric matrix with positive eigenvalues) to any m×n matrix via an extension of the polar decomposition. 
-It has many useful applications in signal processing and statistics.
+SVD is a factorization of a real or complex matrix.<br> 
+It is the generalization of the eigendecomposition of a positive semidefinite normal matrix (for example, a symmetric matrix with positive eigenvalues) to any m×n matrix via an extension of the polar decomposition.<br> 
+It has many useful applications in signal processing and statistics.<br><br>
 
-SVD는 real or complex 행렬의 인수분해이다.
-positive semidefinite normal matrix(0이 포함되고, 모든 행렬이 양수인 정규행렬) 의 고유값분해(eigendecomposition)의 일반화이다.
-(예를 들어, positive 고유벡터를 가지고 있는 sysmmetric matrix다)
+= SVD는 real or complex 행렬의 인수분해이다.<br>
+= 양극 분해(polar decomposition)의 확장을 통해 모든 mxn 행렬에 대한 positive semidefinite normal matrix(0이 포함되고, 모든 행렬이 양수인 정규행렬 예를 들어, positive 고유벡터를 가지고 있는 sysmmetric matrix 다) 의 고유값분해(eigendecomposition)의 일반화이다.<br>
+= 시그널 프로세싱과 통계학에 많이 적용된다. <br><br>
 
 
 ### Importance
+#### Filter Methods 
+Filter type methods select features based only on general metrics like the correlation with the variable to predict.<br> 
+Filter methods suppress the least interesting variables. <br>
+The other variables will be part of a classification or a regression model used to classify or to predict data.<br>
+These methods are particularly effective in computation time and robust to overfitting.<br><br>
+
+Filter type method는 예측하기 위한 variable으로 하는 correlation 처럼 일반적인 행렬에 기본을 두고 특징을 선택한다. <br>
+Filter method는 덜 흥미로운 변수들을 압도한다.<br>
+다른 variable들은 classification의 부분이거나 데이터를 분류하거나 예측하기 위해 사용되는 regression model의 부분이 된다.<br>
+이러한 방법은 계산 시간에서 특히 효과적이다. 그리고 overfitting에 robust하다.<br><br>
+* Correlation
+* Linear Discriminant Analysis
+* ANOVA: Analysis of Variance
+* Chi Square
+
+#### Wrapper Methods
+Wrapper methods evaluate subsets of variables which allows, unlike filter approaches, to detect the possible interactions
+between variables. <br>
+The two main disadvantages of these methods are : The increasing overfitting risk when the number of observations is insufficient.<br> 
+AND. The significant computation time when the number of variables is large.<br><br>
+
+Wrapper methods는 filter 접근과는 다르게 variable 사이에서 가능한 상호작용을 탐지하는 것을 허락하는 variable의 subset을 평가하는 것이다.<br>
+이러한 방법들에서 안 좋은 2가지 점이 있다.<br>
+첫 번째는, observation의 수가 불충분할 때 overfitting risk가 증가<br>
+두 번째는, variable의 수가 많을 때 중요한 계산 시간이다.<br><br>
+
+* Forward Selection
+* Backward Elimination
+
+
+#### Embedded Methods
+Embedded methods try to combine the advantages of both previous methods.<br>
+A learning algorithm takes advantage of its own variable selection process and performs feature selection and classification simultaneously.<br><br>
 
 
 ## Feature Encoding
