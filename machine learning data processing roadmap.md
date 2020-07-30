@@ -51,8 +51,24 @@ Order defined||O|O|O
 Difference defined (addition, subtraction) |||O|O
 Zero defined (multiplication, division) ||||O
 
-
 ### Data Exploration
+#### Variable Identification
+Identify Predictor (Input) and Target(output) variables<br>
+Next, identify the data type and category of the variables<br>
+Input, Output 정의 -> data type과 변수 카테고리 정의 <br>
+
+#### Univariate Analysis
+* Continuous Features (연속된 특징)
+Mean, Median, Mode, Min, Max, Range, Quartile, IQR, Variance, Standard, Deviation, Skewness, Histogram, Box Plot
+
+* Categorical Features (분류된 특징)
+Frequency, Histogram
+
+#### Bi-variate Analysis
+Finds out the relationship between two variables
+Scatter Plot
+Correlation Plot
+
 
 ### Feature Cleaning
 
