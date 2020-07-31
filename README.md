@@ -1,4 +1,6 @@
 # deep_learning_mindmap
+https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva
+
 
 ## Machine Learning Data Processing
 https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20data%20processing%20roadmap.md
