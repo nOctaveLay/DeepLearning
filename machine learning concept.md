@@ -29,15 +29,10 @@
         1. Grid Search
         1. Random Search
         1. Gradient-based optimization
-        
     1. Early Stopping(Regularization)
-    
     1. Overfitting
-    
     1. Underfitting
-    
     1. Bootstrap
-    
     1. Bagging
     
 1. Types
