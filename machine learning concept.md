@@ -1,7 +1,7 @@
 # Machine learning concepts
 
 ## Index
-1. [Motivation] (#motivation)
+[1. Motivation](#motivation)
     1. Prediction
     1. Inference
     
@@ -127,7 +127,7 @@
     1. Microsoft Cognitive Toolkit
 
 
-## Motivation <a id="motivation"></a>
+## Motivation<a id="motivation"></a>
 ### Prediction
 
 >When we are interested mainly in the predicted variable as a result of the inputs, <br>
