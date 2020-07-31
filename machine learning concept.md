@@ -151,8 +151,47 @@ Linear model은 inference에 적합하다. 왜냐하면 모델이 Non linear cou
 [confusion Matrix]
 
 ### Accuracy
-Fraction of correct predictions, not reliable as skewed when the data set is unbalanced (that is, when the number of samples in different classes vary greatly)
+Fraction of correct predictions, not reliable as skewed when the data set is unbalanced (that is, when the number of samples in different classes vary greatly)<br><br>
+
+* 맞는 예측들의 조각, dataset이 unbalanced되어 있을 때 비뚤어져 있기 때문에 신뢰할 수 있는 게 아님.
+* 다른 샘플의 수가 매우 다양하게 있음
+
+### f1 score
+#### Precision
+> (TP) / (TP + FP)
+> 암이 있다고 진단한 사람이 실제로 암이 있을 확률.
+> 다른 말로 말하자면, 암이 있다고 진단한 집단 중에서 TP의 비율.
+
+Out of all the examples the classifier labeled as positive, what fraction were correct?
+positive라고 이름 붙인 classifier있을 때, **정말로** positive한 fraction은 무엇일까.?
+
+#### Recall
+> (TP)/ (TP+FN)
+> 정말 병이 있기 때문에 병이 있다고 진단한 비율.
+> 정말 병이 있는 사람들 중에서의 TP
+> confusion matrix의 bottom row
+
+Out of all the positive examples there were, what fraction did the classifier pick up?
+정말로 모든 예제들이 positive example일 때 어떤 fraction을 고를 것인가?
+
+### Harmonic Mean of Precision and Recall
+
+(2 * p * r / (p+r))
 
 
+### ROC Curve - Receiver Operating Characteristics
+[roc-curve]
+True Positive Rate (Recall / Sensitivity) vs False Positive Rate (1-Specificity)
+정말 Positive한 비율 (Recall/ Sensitivity) vs 가짜 Positive한 비율 (1 - Specificity)
 
+### Bias-Variance Tradeoff
+Bias refers to the amount of error that is introduced by approximating a real-life problem, which may be extremely
+complicated, by a simple model. 
+If Bias is high, and/or if the algorithm performs poorly even on your training data, try adding more features, or a more flexible model.
+
+Variance is the amount our model’s prediction would change when using a different training data set.
+High: Remove features, or obtain more data.
+
+# 이미지 필요
 [confusion Matrix]
+[roc-curve]
