@@ -23,9 +23,9 @@ is a measurement where the difference between two values is meaningful <br>
 
 > ex : emperature (Farenheit), temperature (Celcius), pH, SAT score (200-800), credit score (300-850).
 
-**Ratio**
+**Ratio**<br>
 has all the properties of an interval variable, and also has a clear definition of 0.0. <br>
-interval variable 의 모든 property를 가지고 있고, 0.0.의 명확한 정의 <br>
+= interval variable 의 모든 property를 가지고 있고, 0.0.의 명확한 정의 <br>
 
 > enzyme activity, dose amount, reaction rate, flow rate, concentration, pulse, weight, length, temperature in Kelvin (0.0 Kelvin really does mean “no heat”), survival time.
 
