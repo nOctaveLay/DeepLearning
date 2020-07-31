@@ -1,41 +1,29 @@
 # Machine learning concepts
 
 ## Index
-1. Motivation
+1. [Motivation] (#motivation)
     1. Prediction
-    
     1. Inference
     
 1. Performance Analysis
     1. Confusion Matrix
-    
     1. Accuracy
-    
     1. f1 score
-    
         1. Precision
         1. Recall
         1. Harmonic Mean of Precision and Recall
-        
     1. ROC Curve - Receiver Operating Characteristics
-    
     1. Bias-Variance Tradeoff
-    
-    1. Goodness of Fit = R^2
-    
+    1. Goodness of Fit = R^2 
     1. Mean Squared Error
-    
-    1. Error Rate
-    
+    1. Error Rate 
 1. Tuning
-
     1. Cross-validation
         1. Leave-p-out cross-validation
         1. Leave-one-out cross validation
         1. k-fold cross-validation
         1. Holdout method
-        1. Repeated random sub-sampling validation
-        
+        1. Repeated random sub-sampling validation  
     1. Hyperparameters
         1. Grid Search
         1. Random Search
@@ -139,7 +127,7 @@
     1. Microsoft Cognitive Toolkit
 
 
-## Motivation
+## Motivation <a id="motivation"></a>
 ### Prediction
 
 >When we are interested mainly in the predicted variable as a result of the inputs, <br>
