@@ -15,9 +15,9 @@
 Non-linear model이 이러한 예측에 매우 좋다. 그렇지만 inference에는 좋지 않다. 왜냐하면 모델을 해석하기 어렵기 때문이다.<br>
 
 ### Inference
-When we are interested in the way each one of the inputs affect the prediction. <br>
-In a real estate example, Inference would answer the question of: How much would my house cost if it had a view of the sea? <br>
-Linear models are more suited for inference because the models themselves are easier to understand than their non-linear counterparts<br><br>
+>When we are interested in the way each one of the inputs affect the prediction. <br>
+>In a real estate example, Inference would answer the question of: How much would my house cost if it had a view of the sea? <br>
+>Linear models are more suited for inference because the models themselves are easier to understand than their non-linear counterparts<br><br>
 
 우리가 input의 각각의 방법이 예측에 영향을 끼치는 것에 대해 궁금해 할 때<br>
 대표적인 예제 : 내가 바닷가가 보이는 집을 가지려면, 얼마나 들까요?<br>
