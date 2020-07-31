@@ -27,7 +27,7 @@ Linear model은 inference에 적합하다. 왜냐하면 모델이 Non linear cou
 ### Confusion Matrix
 
 |||True condition|| ||
-|:----:|:----:|:----:|:----:|:----:|:----:|
+|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
 ||Total population|Condition positive|Condition negative|Prevalence|Accuracy(ACC)
 |Predicted Condition|Predicted condition positive|True positive|False positive(TypeI error)|Positive predictive value(PPV)| False discovery rate(FDR)|
 |Predicted Condition|Predicted condition negative|False negative (TypeII error)|True negative|False omission rate(FOR)|Negative predictive value(NPV)
