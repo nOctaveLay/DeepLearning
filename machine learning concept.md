@@ -25,6 +25,7 @@ Linear model은 inference에 적합하다. 왜냐하면 모델이 Non linear cou
 
 ## Performance Analysis
 ### Confusion Matrix
+
 |||True condition|| |
 |:----:|:----:|:----:|:----:|:----:|:----:
 ||Total population|Condition positive|Condition negative|Prevalence|Accuracy(ACC)
