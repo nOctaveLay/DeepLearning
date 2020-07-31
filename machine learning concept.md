@@ -6,7 +6,7 @@
     1. Prediction
     1. Inference
     
-1. Performance Analysis
+1. [Performance Analysis](#performance-analysis)
     1. Confusion Matrix
     1. Accuracy
     1. f1 score
@@ -18,7 +18,7 @@
     1. Goodness of Fit = R^2 
     1. Mean Squared Error
     1. Error Rate 
-1. Tuning
+1. [Tuning](#tuning)
     1. Cross-validation
         1. Leave-p-out cross-validation
         1. Leave-one-out cross validation
@@ -151,7 +151,7 @@ Non-linear model이 이러한 예측에 매우 좋다. 그렇지만 inference에
 대표적인 예제 : 내가 바닷가가 보이는 집을 가지려면, 얼마나 들까요?<br>
 Linear model은 inference에 적합하다. 왜냐하면 모델이 Non linear counterpart보다 이해하기 쉽기 때문이다.<br>
 
-## Performance Analysis
+## Performance Analysis<a id="performance-analysis"></a> 
 ### Confusion Matrix
 [confusion Matrix]
 
