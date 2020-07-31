@@ -284,15 +284,29 @@ To fit the parameters of the classifier in the Multilayer Perceptron, for instan
 Multilayer Perceptron에서 classifier의 parameter를 맞추기 위함, 예를 들어, back propagation을 할 때 "최적의" weight를 찾기 위해서 training set을 사용한다.<br><br>
 ### Test Dataset
 A set of examples used only to assess the performance of a fully-trained classifier<br>
-완전히 훈련된 classifier의 performance로 접근할 때 사용되는 예제.<br>
+완전히 훈련된 classifier의 performance을 측정할 때 사용되는 예제.<br>
 
 In the Multilayer Perceptron case, we would use the test to estimate the error rate after we have chosen the final model (MLP size and actual weights) <br>
 Multilayer Perceptron case에서, 최종 모델을 고른 후에 error rate를 추정하기 위해서 test를 사용한다. <br>
 After assessing the final model on the test set, YOU MUST NOT tune the model any further<br>
-test set에서의 최종 모델에 접근한 후, 더 이상 모델을 조정하면 안된다.
+test set에서의 최종 모델에 접근한 후, 더 이상 모델을 조정하면 안된다.<br>
 
 ### Validation Dataset
+A set of examples used to tune the parameters of a classifier<br>
+= classifier의 parameter를 조정하는데 사용되는 예제.<br><br>
+
+In the Multilayer Perceptron case, we would use the validation set to find the “optimal” number of hidden units or determine a stopping point for the back-propagation algorithm<br>
+Multilayer Perceptron case에서, hidden unit의 최적의 갯수를 찾고 싶거나, back-propagation algorithm에서 stopping point를 결정하기 위해 validation set을 사용한다.<br><br>
+
 ### Cross Validation
+One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br>
+cross-validation의 첫번째 라운드는 하나의 subset에 대한 분석을 수행하는 동안 데이터 샘플을 complementary subset으로 분리하는 것을 포함한다. (이를 training set이라고 부른다.)<br>
+그리고 다른 subset에 대한 유효성 분석을 한다. (이를 validation set 혹은 testing set이라고 부른다)<br><br>
+
+To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds.<br>
+variability를 줄이기 위해서, cross-validation의 여러 번의 round는 다른 partition을 사용해서 수행된다. 그리고 validation result는 round마다 평균을 낸다.<br><br>
+
+
 
 
 [correlation1] 
