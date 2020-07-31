@@ -27,9 +27,9 @@ Linear model은 inference에 적합하다. 왜냐하면 모델이 Non linear cou
 ### Confusion Matrix
 
 |||True condition|| ||
-|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|:----:|:----:|:----:|:----:|:----:|:----:|
 ||Total population|Condition positive|Condition negative|Prevalence|Accuracy(ACC)
 |Predicted Condition|Predicted condition positive|True positive|False positive(TypeI error)|Positive predictive value(PPV)| False discovery rate(FDR)|
 |Predicted Condition|Predicted condition negative|False negative (TypeII error)|True negative|False omission rate(FOR)|Negative predictive value(NPV)
-|||True positive rate(TPR), Recall, Sensitivity, probability of detection|False positive rate(FPR), Fall-out,probability of false alarm|Positive likelihood ratio(LR+)|Diagnostic odds ratio(DOR)|F1 score|
-|||False negative rate(FNR),Miss rate|True negative rate(TNR), Specificity|Negative likelihood ratio|Diagnostic odds ratio|F1 score
+|||True positive rate(TPR), Recall, Sensitivity, probability of detection|False positive rate(FPR), Fall-out,probability of false alarm|Positive likelihood ratio(LR+)|Diagnostic odds ratio(DOR),F1 score|
+|||False negative rate(FNR),Miss rate|True negative rate(TNR), Specificity|Negative likelihood ratio|Diagnostic odds ratio,F1 score
