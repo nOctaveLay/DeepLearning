@@ -1,7 +1,8 @@
 # Machine learning concepts
 
 ## Index
-[1. Motivation](#motivation)
+
+1. [Motivation](#motivation)
     1. Prediction
     1. Inference
     
