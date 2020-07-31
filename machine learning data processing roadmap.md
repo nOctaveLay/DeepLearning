@@ -1,4 +1,4 @@
-# machine learning data processing
+# Machine learning data processing
 
 ## Data Types
 데이터 
@@ -51,7 +51,7 @@ Difference defined (addition, subtraction) |||O|O
 Zero defined (multiplication, division) ||||O
 
 ## Data Exploration
-데이터 
+데이터 탐색
 ### Variable Identification
 Identify Predictor (Input) and Target(output) variables<br>
 Next, identify the data type and category of the variables<br>
@@ -296,15 +296,15 @@ A set of examples used to tune the parameters of a classifier<br>
 = classifier의 parameter를 조정하는데 사용되는 예제.<br><br>
 
 In the Multilayer Perceptron case, we would use the validation set to find the “optimal” number of hidden units or determine a stopping point for the back-propagation algorithm<br>
-Multilayer Perceptron case에서, hidden unit의 최적의 갯수를 찾고 싶거나, back-propagation algorithm에서 stopping point를 결정하기 위해 validation set을 사용한다.<br><br>
+= Multilayer Perceptron case에서, hidden unit의 최적의 갯수를 찾고 싶거나, back-propagation algorithm에서 stopping point를 결정하기 위해 validation set을 사용한다.<br><br>
 
 ### Cross Validation
 One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br>
-cross-validation의 첫번째 라운드는 하나의 subset에 대한 분석을 수행하는 동안 데이터 샘플을 complementary subset으로 분리하는 것을 포함한다. (이를 training set이라고 부른다.)<br>
+= cross-validation의 첫번째 라운드는 하나의 subset에 대한 분석을 수행하는 동안 데이터 샘플을 complementary subset으로 분리하는 것을 포함한다. (이를 training set이라고 부른다.)<br>
 그리고 다른 subset에 대한 유효성 분석을 한다. (이를 validation set 혹은 testing set이라고 부른다)<br><br>
 
 To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds.<br>
-variability를 줄이기 위해서, cross-validation의 여러 번의 round는 다른 partition을 사용해서 수행된다. 그리고 validation result는 round마다 평균을 낸다.<br><br>
+= variability를 줄이기 위해서, cross-validation의 여러 번의 round는 다른 partition을 사용해서 수행된다. 그리고 validation result는 round마다 평균을 낸다.<br><br>
 
 
 
