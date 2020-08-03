@@ -189,32 +189,62 @@ Bias refers to the amount of error that is introduced by approximating a real-li
 complicated, by a simple model.<br>
 = bias는 극단적으로 복잡하고, 단순한 model에 의한 현실 세계의 문제를 어림짐작함으로써 소개된 error의 양을 의미한다.
 
-If Bias is high, and/or if the algorithm performs poorly even on your training data, try adding more features, or a more flexible model.
-= 만약 Bias가 높다면, 그리고/또는 알고리즘이 training data를 동등히 나누지 못한다면, 더 많은 feature를 더하려 하거나 더 flexible한 모델을 쓰려 할 것이다.
+If Bias is high, and/or if the algorithm performs poorly even on your training data, try adding more features, or a more flexible model.<br>
+= 만약 Bias가 높다면, 그리고/또는 알고리즘이 training data를 동등히 나누지 못한다면, 더 많은 feature를 더하려 하거나 더 flexible한 모델을 쓰려 할 것이다.<br><br>
 
 Variance is the amount our model’s prediction would change when using a different training data set.
-High: Remove features, or obtain more data.
-= Variance는 다른 training data set을 사용했을 때 우리의 예측이 변화시키는 양이다.
-높을 경우, feature를 제거하거나, 더 많은 data를 얻어야한다.
+High: Remove features, or obtain more data.<br>
+= Variance는 다른 training data set을 사용했을 때 우리의 예측이 변화시키는 양이다.<br>
+높을 경우, feature를 제거하거나, 더 많은 data를 얻어야한다.<br><br>
 
 ### Goodness of Fit = R^2
-1.0 - sum of squared errors / total sum of squares(y)
+1.0 - sum of squared errors / total sum of squares(y)<br><br>
 
 ### Mean Squared Error(MSE)
 The mean squared error (MSE) or mean squared deviation (MSD) of an estimator (of a procedure for
 estimating an unobserved quantity) measures the average of the squares of the errors or deviations—that
-is, the difference between the estimator and what is estimated
+is, the difference between the estimator and what is estimated<br><br>
 
-MSE(=관측되지 않은 양을 측정하는 과정에서 나온 측정자의 MSD)는 estimator와 무엇이 측정되었는 가의 차이에서의 deviation 또는 error들의 square의 평균이다.
+MSE(=관측되지 않은 양을 측정하는 과정에서 나온 측정자의 MSD)는 estimator와 무엇이 측정되었는 가의 차이에서의 deviation 또는 error들의 square의 평균이다.<br><br>
 
 ### Error Rate
-The proportion of mistakes made if we apply out estimate model function the the training observations in a classification setting
+The proportion of mistakes made if we apply out estimate model function the the training observations in a classification setting<br><br>
 
-classification setting에서 estimate model function을 훈련된 observation에 적용시킬 때 mistake의 비율
+classification setting에서 estimate model function을 훈련된 observation에 적용시킬 때 mistake의 비율<br><br>
 
 
 ## Tuning
 ### Cross-validation
+One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br><br>
+cross-validation의 한 round는 하나의 subset (training set이라고 불림)에 대한 분석을 하면서 그리고 다른 subset에 대한 분석(validation set 또는 testing set이라고 함)에 대해 유효성 검사도 진행하면서 data의 샘플을 complementary subset으로 분리하는 것도 포함한다. <br><br>
+To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds<br><br>
+variability를 줄이기 위해서, 다양한 cross validation 라운드가 다른 파티션을 사용하면서 수행된다. 그리고 validation result는 라운드마다 평균을 낸다.<br><br>
+1. Leave-p-out cross validation
+2. Leave-one-out cross validation
+3. k-fold cross-validation
+4. Holdout method
+5. Repeated random sub-sampling validation
+
+### Hyperparameters
+    1. Grid Search
+        The traditional way of performing hyperparameter optimization has been grid search, or a parameter sweep, which is simply an exhaustive searching through a manually specified subset of the hyperparameter space of a learning algorithm. <br>
+        A grid search algorithm must be guided by some performance metric, typically measured by cross-validation on the training set or evaluation on a held-out validation set. <br><br>
+        
+        * Hyperparameter 최적화 또는 파라미터 sweep의 전통적인 방식.<br>
+            - 학습 알고리즘의 하이퍼 파라미터 공간의 수작업으로 지정된 subset을 통한 exhaustive searching이다.<br>
+        * 어떤 performance metric으로 가이드됨.<br>
+            - 특히 training set에 cross-validation으로 측정 또는 held out validation set을 평가함으로서 측정<br><br>
+             
+    2. Random Search<br>
+    Since grid searching is an exhaustive and therefore potentially expensive method, several alternatives have been proposed. 
+    In particular, a randomized search that simply samples parameter settings a fixed number of times has been found to be more effective in high-dimensional spaces than exhaustive search.
+    
+    * grid search가 너무 시간이 많이 많이 걸림 -> 새로운 방법 필요
+    * 
+
+
+
+3. Gradient-based optimization
 
 
 # 이미지 필요
