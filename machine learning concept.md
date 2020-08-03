@@ -163,7 +163,7 @@ Fraction of correct predictions, not reliable as skewed when the data set is unb
 > 다른 말로 말하자면, 암이 있다고 진단한 집단 중에서 TP의 비율.
 
 Out of all the examples the classifier labeled as positive, what fraction were correct?
-positive라고 이름 붙인 classifier있을 때, **정말로** positive한 fraction은 무엇일까.?
+positive라고 이름 붙인 classifier있을 때, **정말로** positive한 fraction은 무엇일까?
 
 #### Recall
 > (TP)/ (TP+FN)
@@ -186,11 +186,36 @@ True Positive Rate (Recall / Sensitivity) vs False Positive Rate (1-Specificity)
 
 ### Bias-Variance Tradeoff
 Bias refers to the amount of error that is introduced by approximating a real-life problem, which may be extremely
-complicated, by a simple model. 
+complicated, by a simple model.<br>
+= bias는 극단적으로 복잡하고, 단순한 model에 의한 현실 세계의 문제를 어림짐작함으로써 소개된 error의 양을 의미한다.
+
 If Bias is high, and/or if the algorithm performs poorly even on your training data, try adding more features, or a more flexible model.
+= 만약 Bias가 높다면, 그리고/또는 알고리즘이 training data를 동등히 나누지 못한다면, 더 많은 feature를 더하려 하거나 더 flexible한 모델을 쓰려 할 것이다.
 
 Variance is the amount our model’s prediction would change when using a different training data set.
 High: Remove features, or obtain more data.
+= Variance는 다른 training data set을 사용했을 때 우리의 예측이 변화시키는 양이다.
+높을 경우, feature를 제거하거나, 더 많은 data를 얻어야한다.
+
+### Goodness of Fit = R^2
+1.0 - sum of squared errors / total sum of squares(y)
+
+### Mean Squared Error(MSE)
+The mean squared error (MSE) or mean squared deviation (MSD) of an estimator (of a procedure for
+estimating an unobserved quantity) measures the average of the squares of the errors or deviations—that
+is, the difference between the estimator and what is estimated
+
+MSE(=관측되지 않은 양을 측정하는 과정에서 나온 측정자의 MSD)는 estimator와 무엇이 측정되었는 가의 차이에서의 deviation 또는 error들의 square의 평균이다.
+
+### Error Rate
+The proportion of mistakes made if we apply out estimate model function the the training observations in a classification setting
+
+classification setting에서 estimate model function을 훈련된 observation에 적용시킬 때 mistake의 비율
+
+
+## Tuning
+### Cross-validation
+
 
 # 이미지 필요
 [confusion Matrix]
