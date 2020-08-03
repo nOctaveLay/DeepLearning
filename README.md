@@ -1,4 +1,4 @@
-# deep_learning_mindmap
+# Deep Learning mindmap source
 https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva
 
 
