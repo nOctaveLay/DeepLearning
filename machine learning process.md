@@ -1,8 +1,8 @@
 # Machine learning process
+[[toc]]
 
 ## index
 
-[[toc]]
 
 1. Question
     1. Classification
