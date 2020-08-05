@@ -34,54 +34,35 @@
     1. Underfitting
     1. Bootstrap
     1. Bagging
-1. Types
+1. [Types](#types)
     1. Regression
     1. Classification
     1. Clustering
     1. Density Estimation
     1. Dimensionality Reduction
-1. Kind
+1. [Kind](#kind)
     1. Parametic
     1. Non-Parametic
-    
-1. Categories
+1. [Categories](#categories)
     1. Supervised
-    
     1. Unsupervised
-    
     1. Reinforcement Learning
-    
 1. Approaches
     1. Decision tree learning
-    
     1. Association rule learning
-    
     1. Artificial neural networks
-    
     1. Deep learning
-    
     1. Inductive logic programming
-    
     1. Support vector machines
-    
     1. Clustering
-    
     1. Bayesian networks
-    
     1. Reinforcement learning
-    
     1. Representation learning
-    
     1. Similarity and metric learning
-    
     1. Sparse dictionary learning
-    
     1. Genetic algorithms
-    
     1. Rule-based machine learning
-    
     1. Learning classifier systems
-    
 1. Taxonomy
     1. Generative Methods
         1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)
@@ -258,11 +239,65 @@ complicated, by a simple model.<br>
 - 그 다음 알고리즘을 멈춤
 
 ### Overfitting 
-When a given method yields a small training MSE (or cost), but a large test MSE (or cost), we are said to be
+>When a given method yields a small training MSE (or cost), but a large test MSE (or cost), we are said to be
 overfitting the data. <br>
-This happens because our statistical learning procedure is trying too hard to find pattens in the data, that might be due to random chance, rather than a property of our function. <br>
-In other words, the algorithms may be learning the training data too well. If model overfits, try removing some features, decreasing degrees of freedom, or adding more data.<br><br>
+>This happens because our statistical learning procedure is trying too hard to find pattens in the data, that might be due to random chance, rather than a property of our function. <br>
+>In other words, the algorithms may be learning the training data too well. <br>
+If model overfits, try removing some features, decreasing degrees of freedom, or adding more data.<br><br>
 
+- 주어진 method가 samll training MSE이지만 큰 test MSE를 할 때, data의 overfitting이 이루어진다고 말한다.<br>
+- 통계학적인 학습 방법 -> 너무 패턴을 찾기 어려워 -> overfitting 일어남<br>
+- function의 property대신 random chance이기 때문에 일어남<br>
+- 너무 잘 학습해서 일어나는 문제<br>
+- overfitting이 일어났을 경우 = feature 지움, freedom한 정도를 지움, data를 더 추가함 <br><br>
+
+### Underfitting
+>Opposite of Overfitting. <br>
+>Underfitting occurs when a statistical model or machine learning algorithm cannot capture the underlying trend of the data. <br>
+>It occurs when the model or algorithm does not fit the data enough. <br>
+>Underfitting occurs if the model or algorithm shows low variance but high bias (to contrast the opposite, overfitting from high variance and low bias). <br>
+>It is often a result of an excessively simple model.<br><br>
+
+- Overfitting의 반대<br>
+- Underfitting: statistical model/machine learning algorithm -> data의 방향성을 capture x
+- data 충분치 못할 때 발생<br>
+- low variance 그러나 high bias를 보여줄 때 일어남. (overfitting은 high variance와 low bias를 보여줄 때 일어남)<br>
+- 과도하게 심플한 모델의 결과.<br><br>
+
+### Bootstrap
+>Test that applies Random Sampling with Replacement of the available data, and assigns measures of accuracy (bias,
+variance, etc.) to sample estimates<br>
+1. Random Sampling -> 사용 가능한 data의 배치 적용 -> test<br>
+2. 정확도 측정 -> sample estimate에 적용 -> test<br>
+
+### Bagging
+>An approach to ensemble learning that is based on bootstrapping. <br>
+>Shortly, given a training set, we produce multiple different training sets (called bootstrap samples), by sampling with replacement from the original dataset. 
+>Then, for each bootstrap sample, we build a model. <br>
+>The results in an ensemble of models, where each model votes with the equal weight. <br>
+>Typically, the goal of this procedure is to reduce the variance of the model of interest (e.g. decision trees).<br><br>
+
+- bootstrapping에 기초한 ensemble learning에 대한 접근<br>
+- training set이 주어지면, original dataset에서 replacement로 sampling함으로서 다양한 training set을 생성 <br>
+- 결과는 model의 ensemble이고, 각각의 model은 동등한 weight를 가진다.<br>
+- 전형적으로, 이 과정의 목표는 흥미로운 모델의 variance를 줄이는 것.(ex decision trees)<br>
+
+## Types<a id="types"></a>
+- Regression : supervised problem, 결과는 discrete하기보단 continuous하다.<br>
+- Classification<br>
+    - input : 2개 혹은 이상의 클래스로 나뉨<br>
+    - learner : 이런 클래스에 대해 보이지 않는 input 값을 할당하는 모델 만들어야 함.<br>
+    - supervised learning으로 다뤄짐<br>
+- Clustering<br>
+    - input의 집합이 group으로 나누어짐<br>
+    - group에 대해 미리 알 필요는 없음 (classification은 미리 알아야함)<br>
+    - unsupervised learning으로 다뤄짐<br>
+- Density Estimation<br>
+    - input의 분포도를 어떤 공간에서 찾는 것<br>
+- Dimensionality Reduction <br>
+    - 낮은 차원 공간으로 매핑시킴으로서 input을 단순화 시키는 것. <br>
+    
+ ## Kind<a id="kind"></a>
 # 이미지 필요
 [confusion Matrix]
 [roc-curve]
