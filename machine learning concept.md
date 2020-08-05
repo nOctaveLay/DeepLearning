@@ -48,7 +48,6 @@
     
 1. Kind
     1. Parametic
-    
     1. Non-Parametic
     
 1. Categories
@@ -213,7 +212,7 @@ The proportion of mistakes made if we apply out estimate model function the the 
 classification setting에서 estimate model function을 훈련된 observation에 적용시킬 때 mistake의 비율<br><br>
 
 
-## Tuning
+## Tuning<a id="tuning"></a>
 ### Cross-validation
 One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br><br>
 cross-validation의 한 round는 하나의 subset (training set이라고 불림)에 대한 분석을 하면서 그리고 다른 subset에 대한 분석(validation set 또는 testing set이라고 함)에 대해 유효성 검사도 진행하면서 data의 샘플을 complementary subset으로 분리하는 것도 포함한다. <br><br>
@@ -226,26 +225,43 @@ variability를 줄이기 위해서, 다양한 cross validation 라운드가 다�
 5. Repeated random sub-sampling validation
 
 ### Hyperparameters
-    1. Grid Search
-        The traditional way of performing hyperparameter optimization has been grid search, or a parameter sweep, which is simply an exhaustive searching through a manually specified subset of the hyperparameter space of a learning algorithm. <br>
-        A grid search algorithm must be guided by some performance metric, typically measured by cross-validation on the training set or evaluation on a held-out validation set. <br><br>
+
+1. Grid Search
+    The traditional way of performing hyperparameter optimization has been grid search, or a parameter sweep, which is simply an exhaustive searching through a manually specified subset of the hyperparameter space of a learning algorithm. <br>
+    A grid search algorithm must be guided by some performance metric, typically measured by cross-validation on the training set or evaluation on a held-out validation set. <br><br>
         
-        * Hyperparameter 최적화 또는 파라미터 sweep의 전통적인 방식.<br>
-            - 학습 알고리즘의 하이퍼 파라미터 공간의 수작업으로 지정된 subset을 통한 exhaustive searching이다.<br>
-        * 어떤 performance metric으로 가이드됨.<br>
-            - 특히 training set에 cross-validation으로 측정 또는 held out validation set을 평가함으로서 측정<br><br>
+    * Hyperparameter 최적화 또는 파라미터 sweep의 전통적인 방식.<br>
+        - 학습 알고리즘의 하이퍼 파라미터 공간의 수작업으로 지정된 subset을 통한 exhaustive searching이다.<br>
+    * 어떤 performance metric으로 가이드됨.<br>
+        - 특히 training set에 cross-validation으로 측정 또는 held out validation set을 평가함으로서 측정<br><br>
              
-    2. Random Search<br>
-    Since grid searching is an exhaustive and therefore potentially expensive method, several alternatives have been proposed. 
-    In particular, a randomized search that simply samples parameter settings a fixed number of times has been found to be more effective in high-dimensional spaces than exhaustive search.
+2. Random Search
+    Since grid searching is an exhaustive and therefore potentially expensive method, several alternatives have been proposed. <br>
+    In particular, a randomized search that simply samples parameter settings a fixed number of times has been found to be more effective in high-dimensional spaces than exhaustive search.<br><br>
     
     * grid search가 너무 시간이 많이 많이 걸림 -> 새로운 방법 필요
-    * 
-
-
+    * randomized search는 고정된 시간동안 exhaustive search 보다 high-dimensional space에서 더 효과적이라고 밝혀진다.
 
 3. Gradient-based optimization
+    For specific learning algorithms, it is possible to compute the gradient with respect to hyperparameters and then optimize the hyperparameters using gradient descent. <br>
+    The first usage of these techniques was focused on neural networks. <br>
+Since then, these methods have been extended to other models such as support vector machines or logistic regression<br>
 
+- 대부분의 hyperparameter의 경우, gradient를 계산하는 것이 가능하다. -> 따라서 gradient descent를 이용해 최적화한다.
+- 신경망에서 처음 쓰였다.
+- support vector machine이나 logistic regression같은 다른 모델로 확장된다.
+
+### Early Stopping(Regularization)
+Early stopping rules provide guidance as to how many iterations can be run before the learner begins to over-fit, and stop the algorithm then.<br><br>
+
+- learner가 over-fit을 시작하기 전에 얼마나 많은 iteration이 돌아야 하는 지에 대해 가이드라인을 제공.
+- 그 다음 알고리즘을 멈춤
+
+### Overfitting 
+When a given method yields a small training MSE (or cost), but a large test MSE (or cost), we are said to be
+overfitting the data. <br>
+This happens because our statistical learning procedure is trying too hard to find pattens in the data, that might be due to random chance, rather than a property of our function. <br>
+In other words, the algorithms may be learning the training data too well. If model overfits, try removing some features, decreasing degrees of freedom, or adding more data.<br><br>
 
 # 이미지 필요
 [confusion Matrix]
