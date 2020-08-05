@@ -65,35 +65,23 @@
     1. Learning classifier systems
 1. Taxonomy
     1. Generative Methods
-        1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)
-            
+        1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)  
         1. Gaussians, Naïve Bayes, Mixtures of multinomials
-            
         1. Sigmoidal belief networks, Bayesian networks, Markov random fields
-            
     1. Discriminative Methods
         1. Logistic regression, SVMs
         1. Traditional neural networks, Nearest neighbor
         1. Conditional Random Fields (CRF)
-
 1. Selection Criteria
     1. Prediction Accuracy vs Model Interpretability
-    
 1. Libraries
     1. Numpy
-    
     1. Pandas
-    
     1. Scikit-Learn
-    
     1. Tensorflow
-    
     1. MXNet
-    
     1. Keras
-    
     1. Torch
-    
     1. Microsoft Cognitive Toolkit
 
 
