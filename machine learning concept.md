@@ -208,8 +208,8 @@ complicated, by a simple model.<br>
 >Since grid searching is an exhaustive and therefore potentially expensive method, several alternatives have been proposed. <br>
 >In particular, a randomized search that simply samples parameter settings a fixed number of times has been found to be more effective in high-dimensional spaces than exhaustive search.<br><br>
     
-    * grid search가 너무 시간이 많이 많이 걸림 -> 새로운 방법 필요
-    * randomized search는 고정된 시간동안 exhaustive search 보다 high-dimensional space에서 더 효과적이라고 밝혀진다.
+* grid search가 너무 시간이 많이 많이 걸림 -> 새로운 방법 필요
+* randomized search는 고정된 시간동안 exhaustive search 보다 high-dimensional space에서 더 효과적이라고 밝혀진다.
 
 #### Gradient-based optimization
 >For specific learning algorithms, it is possible to compute the gradient with respect to hyperparameters and then optimize the hyperparameters using gradient descent. <br>
@@ -286,6 +286,42 @@ variance, etc.) to sample estimates<br>
     - 낮은 차원 공간으로 매핑시킴으로서 input을 단순화 시키는 것. <br>
     
  ## Kind<a id="kind"></a>
+ 1. Parametric
+    1. Making an assumption about the functional form or shape of our function (f),<br>
+        - i.e: f is linear, thus we will select a linear model<br>
+    2.  Selecting a procedure to fit or train our model. <br>
+    This means estimating the Beta parameters in the linear function.<br> 
+    A common approach is the (ordinary) least squares, amongst others<br><br>
+    
+    1. 함수의 모양이나 기능적인 형태에 대한 가정을 함(f) -> f가 linear 하니까, linear model 선택<br>
+    2. 모델에 맞는 방법이나 모델을 훈련시킬 방법 선택<br>
+        - 이 방법은 linear function의 Beta parameter를 추정하는 것이다.<br>
+        - 일반적인 방법은 다른 것들 중에서 매우 작은 square<br>
+ 2. Non-Parametric<br>
+When we do not make assumptions about the form of our function (f).<br>
+However, since these methods do not reduce the problem of estimating f to a small number of parameters, a large number of observations is required in order to obtain an accurate estimate for f. An example would be the thin-plate
+spline model.<br><br>
+
+* 함수의 형태에 대해 가정하지 않을 때.
+* 그렇지만, 이러한 방법이 추정하는 f의 문제를 적은 수의 parameter로 줄일 수 없을 때.
+* 수많은 observation이 f를 위한 정확한 추정을 얻기 위해 필요됨
+* thin-plate spline model
+
+## Categories
+1. Supervised
+The computer is presented with example inputs and their desired outputs, given by a "teacher", and the goal is to learn a general rule that maps inputs to outputs.
+
+2. Unsupervised
+No labels are given to the learning algorithm, leaving it on its own to find structure in its input. Unsupervised learning can be a goal in itself (discovering hidden patterns in data) or a means towards an end (feature learning).
+
+3. Reinforcement Learning<br>
+A computer program interacts with a dynamic environment in which it must perform a certain goal (such as driving a vehicle or playing a game against an opponent). 
+The program is provided feedback in terms of rewards and punishments as it navigates its problem space.
+
+* 특정한 목표를 수행해야 하는 dynamic environment와 상호작용할 때.
+* 프로그램은 reward와 punishment로 피드백을 받는다. -> problem space로 안내
+
+
 # 이미지 필요
 [confusion Matrix]
 [roc-curve]
