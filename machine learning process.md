@@ -74,3 +74,18 @@
 >The cost function will provide a measure of how far my algorithm and its parameters are from accurately representing my training data.<br>
 >Sometimes referred to as Cost or Loss function when the goal is to minimise it, or Objective function when the goal is to maximise it.<br>
 
+* 얼마나 나의 알고리즘과 그 parameter가 training data에서 멀리 떨어져 있는지에 대한 측정을 알려준다.
+* 때때로 목표가 이걸 최적화하기 위한 것이라면 Cost 또는 Loss function이라고도 말한다.<br>
+
+### Optimization
+>Having selected a cost function, we need a method to minimise the Cost function, or maximise the Objective function.
+>Typically this is done by Gradient Descent or Stochastic Gradient Descent.<br>
+
+* Cost function을 최소화하는 것, 혹은 Objective function을 최대화하는 것.
+* Gradient Descent 혹은 Stochastic Gradient Descent로 구함
+<br>
+### Tuning
+Different Algorithms have different Hyperparameters, which will affect
+the algorithms performance. There are multiple methods for
+Hyperparameter Tuning, such as Grid and Random search.
+### Results and Benchmarking
