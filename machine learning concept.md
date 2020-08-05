@@ -309,19 +309,128 @@ spline model.<br><br>
 
 ## Categories
 1. Supervised
-The computer is presented with example inputs and their desired outputs, given by a "teacher", and the goal is to learn a general rule that maps inputs to outputs.
-
+The computer is presented with example inputs and their desired outputs, given by a "teacher", and the goal is to learn a general rule that maps inputs to outputs. <br>
+- example input과 원하는 output이 제공됨.<br>
+- 일반적인 input과 output의 rule을 알기 위함.<br>
+<br>
 2. Unsupervised
-No labels are given to the learning algorithm, leaving it on its own to find structure in its input. Unsupervised learning can be a goal in itself (discovering hidden patterns in data) or a means towards an end (feature learning).
+No labels are given to the learning algorithm, leaving it on its own to find structure in its input. Unsupervised learning can be a goal in itself (discovering hidden patterns in data) or a means towards an end (feature learning).<br>
+- 알고리즘에 어떤 label도 없는 것. => 스스로 input을 보고 구조를 찾아내도록 놔두는 것<br>
+- 목표 그 자체거나(data의 숨겨진 패턴을 파악), 목표로 향하는 수단을 학습하기를 원함(특징 학습 : feature learning)<br><br>
 
 3. Reinforcement Learning<br>
-A computer program interacts with a dynamic environment in which it must perform a certain goal (such as driving a vehicle or playing a game against an opponent). 
-The program is provided feedback in terms of rewards and punishments as it navigates its problem space.
+A computer program interacts with a dynamic environment in which it must perform a certain goal (such as driving a vehicle or playing a game against an opponent). <br>
+The program is provided feedback in terms of rewards and punishments as it navigates its problem space.<br>
 
-* 특정한 목표를 수행해야 하는 dynamic environment와 상호작용할 때.
-* 프로그램은 reward와 punishment로 피드백을 받는다. -> problem space로 안내
+- 특정한 목표를 수행해야 하는 dynamic environment와 상호작용할 때.<br>
+- 프로그램은 reward와 punishment로 피드백을 받는다. -> problem space로 안내<br><br>
 
+## Approaches
+1. Decision tree learning
+1. Association rule learning
+1. Artificial neural networks
+1. Deep learning
+1. Inductive logic programming
+1. Support vector machines
+1. Clustering
+1. Bayesian networks
+1. Reinforcement learning
+1. Representation learning
+1. Similarity and metric learning
+1. Sparse dictionary learning
+1. Genetic algorithms
+1. Rule-based machine learning
+1. Learning classifier systems
 
+## Taxonomy
+1. Generative Methods
+    1. Model class-conditional pdfs and prior probabilities. “Generative” since sampling can generate synthetic data points.
+        - 모델의 class-conditional pdfs 이고, prior probabilities (이전 확률)이다.<br>
+        - "Generative" 하다 = synthetic data point를 생성한다.<br>
+    2. Popular Models
+        1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)
+        2. Gaussians Naive Bayes, Mixtures of multinomials
+        3. Sigmoidal belief networks, Bayesian networks, Markov random fields
+1. Discriminative Methods<br>
+    * Directly estimate posterior probabilities. 
+    * No attempt to model underlying probability distributions. 
+    * Focus computational resources on given task– better performance<br><br>
+    
+    * 다음에 올 확률을 직접적으로 측정<br>
+    * probability distribution에 놓여있는 모델에 어떠한 시도도 하지 않음<br>
+    * 계산해야하는 자원을 주어진 일에 더 특화된 성능에 넣음.<br>
+    <br>
+2. Popular Models<br>
+    1. Logistic regression, SVMs<br>
+    2. Traditional neural networks, Nearest neighbor<br>
+    3. Conditional Random Fields (CRF)<br><br>
+
+## Selection Criteria
+**Prediction Accuracy vs Model Interpretability**
+>There is an inherent tradeoff between Prediction Accuracy and Model Interpretability, that is to say that as the model get more flexible in the way the function (f) is selected, they get obscured, and are hard to interpret.<br>
+>Flexible methods are better for inference, and inflexible methods are preferable for prediction.<br><br>
+
+- Prediction Accuracy(예측 정확도)와 Model Interpretability(해석도) 사이에선 내부적인 tradeoff O<br>
+    - 모델이 flexible 해질 때 -> 해석 어려움, 예측 쉬움
+
+## Libraries
+* Python
+    1. Numpy
+    >Adds support for large, multi-dimensional arrays and matrices, along with a large library of high-level mathematical functions to operate on these arrays
+    - 높은, 다중 차원의 array와 metrices를 지원.
+    - 이런 array를 다루기 위해서 높은 수준의 수학적 함수들이 많음.
+    
+    2. Pandas
+    >Offers data structures and operations for manipulating numerical tables and time series
+    - numerical table들과 time series를 다루기 위해서 data structure와 operation을 제공.
+    
+    3. Scikit-Learn
+    >It features various classification, regression and clustering algorithms including support vector machines, random forests, gradient boosting, k-means and DBSCAN, and is designed to interoperate with the Python numerical and scientific libraries NumPy and SciPy<br><br>
+    - 다양한 classification, regression, clustering 알고리즘을 제공.
+      = support vector machine, random forests, gradient booting, k-means, DBSCAN
+    - Python numerical과 과학적인 libraries인 NumPy, SciPy와 상호작용을 하게끔 만들어져 있음
+    
+    4. Tensorflow
+    [tensorflow]
+   
+    5. MXNet
+    >Is an modern open-source deep learning framework used to train, and deploy deep neural networks. <br>
+    >MXNet library is portable and can scale to multiple GPUs and multiple machines. <br>
+    >MXNet is supported by major Public Cloud providers including AWS and Azure. <br>
+    >Amazon has chosen MXNet as its deep learning framework of choice at AWS.<br><br>
+    - open-source deep learning framework
+    - DNN을 전개
+    - 많은 GPU와 많은 machine을 가지고 다닐 수 있거나 확장가능하다.
+    - 주로 AWS와 Azure를 포함한 Public Cloud provider가 지원한다.
+    
+    6. Keras
+    >Is an open source neural network library written in Python. <br>
+    >It is capable of running on top of MXNet, Deeplearning4j, Tensorflow, CNTK or Theano. <br>
+    >Designed to enable fast experimentation with deep neural networks, it focuses on being minimal, modular and extensible.<br><br>
+    - Python으로 쓰여진 open source neural network library이다.
+    - MXNet, Deeplearning4j, Tensorflow, CNTK 또는 Theano 위에서 돌 수 있다.
+    - DNN에 빠른 실험을 할 수 있도록 고안됬다.
+    - 작고, modular(모듈이 되고) 하고, extensible(확장)할 수 있다.
+
+    7. Torch
+    >Torch is an open source machine learning library, a scientific computing framework, and a script language based on the Lua programming language. <br> 
+    >It provides a wide range of algorithms for deep machine learning, and uses the scripting language LuaJIT, and an underlying C implementation.<br><br>
+    - open source machine learning library이다.
+    - 과학적으로 계산된 framework
+    - Lua로 짜여진 script language이다.
+    - deep machine learning에 대해 넓은 범위의 알고리즘 제공
+    - LuaJIT라고 불리는 스크립트 언어를 사용
+    - 기본적으로 C 실행을 한다.
+
+    8. Microsoft Cognitive Toolkit
+    >Previously known as CNTK and sometimes styled as The Microsoft Cognitive Toolkit, is a deep learning framework developed by Microsoft Research. <br>
+    >Microsoft Cognitive Toolkit describes neural networks as a series of computational steps via a directed graph.<br><br>
+    - CNTK라고 알려진 것, 때때로 The Microsoft Cognitive Toolkit이라고 스타일되어있다.
+    - Microsoft Research에서 개발한 deep learning framework
+    - neural network를 directed graph를 통한 computational step의 연속이라고 묘사
+    
+    
 # 이미지 필요
 [confusion Matrix]
 [roc-curve]
+[tensorflow]
