@@ -1,9 +1,6 @@
 # Machine learning process
-[[toc]]
 
 ## index
-
-
 1. Question
     1. Classification
     1. Regression
@@ -12,19 +9,9 @@
     1. Reinforcement Learning
 1. Direction
     1. SaaS
-        1. Google Cloud
-        1. AWS
-        1. extra
+    1. Data Science and Applied Machine Learning
+    1. Machine Learning Research 
 1. Data
-    1. Find
-    1. Collect
-    1. Explore
-    1. Clean Features
-    1. Impute Features
-    1. Engineer Features
-    1. Select Features
-    1. Encode Features
-    1. Build Datasets
 1. Model
 1. Cost Function
 1. Optimization
@@ -65,4 +52,25 @@
     1. MXNet
     1. Torch
     1. 그 외 여러가지
----
+    
+### Data
+1. Find
+1. Collect
+1. Explore
+1. Clean Features
+1. Impute Features
+1. Engineer Features
+1. Select Features
+1. Encode Features
+1. Build Datasets
+    - Machine Learning = math (Linear Algebra)
+    - data가 반드시 numeric해야 한다.
+
+### Model
+>Select Algorithm based on question and data available<br>
+* question에 기반을 둔 Algorithm을 선택, 그리고 가능한 data 선택<br>
+
+### Cost Function
+>The cost function will provide a measure of how far my algorithm and its parameters are from accurately representing my training data.<br>
+>Sometimes referred to as Cost or Loss function when the goal is to minimise it, or Objective function when the goal is to maximise it.<br>
+
