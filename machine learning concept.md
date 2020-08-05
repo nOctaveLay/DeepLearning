@@ -2,11 +2,11 @@
 
 ## Index
 
-1. [Motivation](#motivation)
+1. [Motivation](#motivation)<a id="moti-top"></a>
     1. Prediction
     1. Inference
     
-1. [Performance Analysis](#performance-analysis)
+1. [Performance Analysis](#performance-analysis)<a id="perfo-top"></a>
     1. Confusion Matrix
     1. Accuracy
     1. f1 score
@@ -18,7 +18,7 @@
     1. Goodness of Fit = R^2 
     1. Mean Squared Error
     1. Error Rate 
-1. [Tuning](#tuning)
+1. [Tuning](#tuning)<a id="tune-top"></a>
     1. Cross-validation
         1. Leave-p-out cross-validation
         1. Leave-one-out cross validation
@@ -34,21 +34,21 @@
     1. Underfitting
     1. Bootstrap
     1. Bagging
-1. [Types](#types)
+1. [Types](#types)<a id="types-top"></a>
     1. Regression
     1. Classification
     1. Clustering
     1. Density Estimation
     1. Dimensionality Reduction
-1. [Kind](#kind)
+1. [Kind](#kind)<a id = "kind-top"></a>
     1. Parametic
     1. Non-Parametic
-1. [Categories](#categories)
+1. [Categories](#categories)<a id="cate-top"></a>
     1. Supervised
     1. Unsupervised
     1. Reinforcement Learning
-1. [Approaches](#approaches)
-1. [Taxonomy](#taxonomy)
+1. [Approaches](#approaches)<a id="appro-top"></a>
+1. [Taxonomy](#taxonomy)<a id="tax-top"></a>
     1. Generative Methods
         1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)  
         1. Gaussians, Naïve Bayes, Mixtures of multinomials
@@ -57,13 +57,13 @@
         1. Logistic regression, SVMs
         1. Traditional neural networks, Nearest neighbor
         1. Conditional Random Fields (CRF)
-1. [Selection Criteria](#selection-criteria)
+1. [Selection Criteria](#selection-criteria)<a id="selc-top"></a>
     1. Prediction Accuracy vs Model Interpretability
-1. [Libraries](#libraries)
+1. [Libraries](#libraries)<a id="lib-top"></a>
 
 
 
-## Motivation<a id="motivation"></a>
+## [Motivation](#moti-top)<a id="motivation"></a>
 ### Prediction
 
 >When we are interested mainly in the predicted variable as a result of the inputs, <br>
@@ -86,7 +86,7 @@
 * 대표적인 예제 : 내가 바닷가가 보이는 집을 가지려면, 얼마나 들까요?<br>
 * Linear model은 inference에 적합 <- 모델이 Non linear counterpart보다 이해하기 쉬움<br>
 
-## Performance Analysis<a id="performance-analysis"></a> 
+## [Performance Analysis](#perfo-top)<a id="performance-analysis"></a> 
 ### Confusion Matrix
 [confusion Matrix]
 
@@ -152,7 +152,7 @@ complicated, by a simple model.<br>
 * classification setting에서 estimate model function을 훈련된 observation에 적용시킬 때 mistake의 비율<br><br>
 
 
-## Tuning<a id="tuning"></a>
+## [Tuning](#tune-top)<a id="tuning"></a>
 ### Cross-validation
 >One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br>
 >To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds<br><br>
@@ -248,7 +248,7 @@ variance, etc.) to sample estimates<br>
 - 결과는 model의 ensemble이고, 각각의 model은 동등한 weight를 가진다.<br>
 - 전형적으로, 이 과정의 목표는 흥미로운 모델의 variance를 줄이는 것.(ex decision trees)<br>
 
-## Types<a id="types"></a>
+## [Types](#types-top)<a id="types"></a>
 - Regression : supervised problem, 결과는 discrete하기보단 continuous하다.<br>
 - Classification<br>
     - input : 2개 혹은 이상의 클래스로 나뉨<br>
@@ -263,7 +263,7 @@ variance, etc.) to sample estimates<br>
 - Dimensionality Reduction <br>
     - 낮은 차원 공간으로 매핑시킴으로서 input을 단순화 시키는 것. <br>
     
- ## Kind<a id="kind"></a>
+ ## [Kind](#kind-top)<a id="kind"></a>
  1. Parametric
     1. Making an assumption about the functional form or shape of our function (f),<br>
         - i.e: f is linear, thus we will select a linear model<br>
@@ -285,7 +285,7 @@ spline model.<br><br>
 * 수많은 observation이 f를 위한 정확한 추정을 얻기 위해 필요됨
 * thin-plate spline model
 
-## Categories<a id="categories"></a>
+## [Categories](#cate-top)<a id="categories"></a>
 1. Supervised
 The computer is presented with example inputs and their desired outputs, given by a "teacher", and the goal is to learn a general rule that maps inputs to outputs. <br>
 - example input과 원하는 output이 제공됨.<br>
@@ -303,7 +303,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
 - 특정한 목표를 수행해야 하는 dynamic environment와 상호작용할 때.<br>
 - 프로그램은 reward와 punishment로 피드백을 받는다. -> problem space로 안내<br><br>
 
-## Approaches<a id="approaches"></a>
+## [Approaches](#appro-top)<a id="approaches"></a>
 1. Decision tree learning
 1. Association rule learning
 1. Artificial neural networks
@@ -320,7 +320,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
 1. Rule-based machine learning
 1. Learning classifier systems
 
-## Taxonomy<a id="taxonomy"></a>
+## [Taxonomy](#tax-top)<a id="taxonomy"></a>
 1. Generative Methods
     1. Model class-conditional pdfs and prior probabilities. “Generative” since sampling can generate synthetic data points.
         - 모델의 class-conditional pdfs 이고, prior probabilities (이전 확률)이다.<br>
@@ -343,7 +343,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
     2. Traditional neural networks, Nearest neighbor<br>
     3. Conditional Random Fields (CRF)<br><br>
 
-## Selection Criteria<a id="selection-criteria"></a>
+## [Selection Criteria](#selc-top)<a id="selection-criteria"></a>
 **Prediction Accuracy vs Model Interpretability**
 >There is an inherent tradeoff between Prediction Accuracy and Model Interpretability, that is to say that as the model get more flexible in the way the function (f) is selected, they get obscured, and are hard to interpret.<br>
 >Flexible methods are better for inference, and inflexible methods are preferable for prediction.<br><br>
@@ -352,7 +352,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
 - Prediction Accuracy(예측 정확도)와 Model Interpretability(해석도) 사이에선 내부적인 tradeoff O
     - 모델이 flexible 해질 때 -> 해석 어려움, 예측 쉬움
 
-## Libraries<a id="libraries"></a>
+## [Libraries](#lib-top)<a id="libraries"></a>
 * **Python**
     1. **Numpy**
     >Adds support for large, multi-dimensional arrays and matrices, along with a large library of high-level mathematical functions to operate on these arrays
