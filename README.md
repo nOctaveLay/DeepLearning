@@ -11,11 +11,6 @@ https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learni
 ## Machine Learning Process
 https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md
 
-
-개인적으로 많은 정보가 들어있다고 생각하는 사이트 : https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
-
-deview 2019 : https://deview.kr/2019/schedule
-
 ## 딥러닝 + 자연어처리
 
 1. 데이터 전처리 : https://blog.pingpong.us/dialog-bert-tokenizer/?fbclid=IwAR0O2mtCrn4ilEusZE2fV3waGWl1BGE7Q3ifV6TBHu-nbQ5XViflE271B2U
@@ -25,3 +20,7 @@ deview 2019 : https://deview.kr/2019/schedule
 1. BERT : http://docs.likejazz.com/bert/?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w#fn:fn-2
 https://acl2020.org/blog/ACL-2020-best-papers/
 
+## 정보 모음
+개인적으로 많은 정보가 들어있다고 생각하는 사이트 : https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
+
+deview 2019 : https://deview.kr/2019/schedule
