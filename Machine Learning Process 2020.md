@@ -34,7 +34,7 @@
 - no rigid structure
 - image, video, natural language text, speech
 
-### Data Preparation
+## Data Preparation
 - Exploratory data analysis (EDA), learning about the data you're working with
   - What are the feature variables(input) and the target variables(output)
     - have a disease or not
@@ -92,4 +92,56 @@
         - 두개의 feature의 차이
       - Indicator features
         - 가능한 중요한 어떤 것을 가리키기 위해서 data의 다른 part를 사용
+  - Feature selection
+    - Dimensionality reduction
+        - 일반적인 차원 축소 방법.
+        - Principal Component Analysis (PCA) 는 더 많은 차원(feature)을 다룰 수 있다.
+    - Feature importance (post modelling)
+        - 모델을 데이터 셋에 맞춘다.
+        - 어떤 feature가 result에 더 중요할 지 조사한다.
+        - 가장 중요치 않은 것을 지운다.
+    - Wrapper methods (ex genetic algorithm) & recursive feature elimination
+        - create large subsets of feature options
+        - 중요치 않은 것을 지움
+        - 좋은 feature을 찾을 가능성을 높여줌
+        - computation time이 많이 들어감
+        - TPot이 이걸 함
+  - Dealing with imbalances
+    - 한 클래스엔 10000 개의 데이터가 있고, 다른 한 쪽에는 100 개의 데이터밖에 없는 걸 다루는 문제
+        - Collect more data (if you can)
+        - scikit-learn-contrib imbalanced-learn package 써보기.
+        - SMOTE (synthetic minority over-sampling technique) 쓰기
+            - 샘플이 부족한 class의 샘플을 임의로 만들어 줌.
+            - scikit-learn-contrib imbalanced-learn package를 이용해서 만들 수 있음.
+        - "Learning from Imbalanced Data" paper 참조.
 - Data splitting
+    - Training set (usually 70-80% of data)
+        - Model은 이걸 가지고 학습한다.
+    - Validation set (typically 10-15% of data)
+        - 모델 hyperparameter는 이걸 가지고 tune된다.
+    - Test set (usually 10-15%) 
+        - 모델의 최종 성능이 평가되는 곳
+        - 옳게만 끝낸다면, 희망적으로 test set에 있는 result는 어떻게 모델이 현실 세계에서 수행하는지에 대해 좋은 indication을 준다.
+        - model을 tune하기 위해서 이 dataset을 사용하지 마라.
+        
+## Train model on data
+3 steps: choose an algorithm, overfit the model, reduce overfitting with regularization
+### Choosing an algorithm
+#### Supervised algorithms
+- Linear Regression
+    - 그래프에 흩어져 있는 data에 가장 잘 맞는 line을 그리는 것
+    - 연속적인 변수를 생산한다 (예를 들어, 인치에 있는 높이)
+- Logisitic Regression 
+    - 독립적인 변수를 다루는 과정을 바탕으로 두 개의 결과를 예측한다.
+    - 병을 갖고 있는지 아닌지를 예측하는 과정
+- k-Nearest Neighbours
+    - 각각 매우 유사한 'k'개의 예제를 찾는다. 
+    - 
+#### Unsupervised algorithms
+
+### Type of learning
+### Underfitting
+### Overfitting
+### Hyperparameter Tuning 
+
+        
