@@ -35,25 +35,25 @@
 - image, video, natural language text, speech
 
 ## Data Preparation
-- Exploratory data analysis (EDA), learning about the data you're working with
-  - What are the feature variables(input) and the target variables(output)
+### Exploratory data analysis (EDA), learning about the data you're working with
+- What are the feature variables(input) and the target variables(output)
     - have a disease or not
-  - What kid of data do you have? 
+- What kid of data do you have? 
     - Create a data dictionary for what each feature is.
-  - Are there missing values? 
+- Are there missing values? 
     - Should you remove them or fill them with feature imputation
-  - Where are the outliers?
+- Where are the outliers?
     - How many of them are there?
     - Are they out by much (3+ standard deviations)?
     - Why are they there?
-  - Are there questions you could ask a domain expert about the data?
-- Data preprocessing, preparing your data to be modelled
-  - Feature imputation(특징 삽입) : filling missing values 
+- Are there questions you could ask a domain expert about the data?
+### Data preprocessing, preparing your data to be modelled
+- Feature imputation(특징 삽입) : filling missing values 
     - Single imputation : Fill with mean, median of column.
     - Multiple imputation : Model other missing values and fill with what your model finds.
     - KNN : Fill data with a value from another example which is similar.
     - Many more, such as, random imputation, last observation carried forward, moving window, most frequent
-  - Feature encoding (value -> numbers, all value numerical.)
+- Feature encoding (value -> numbers, all value numerical.)
     - OneHotEncoding 
       - 모든 고유 벡터를 0 또는 1로 바꾸는 것
       - target value를 1로, 그 나머지를 0으로 한다.
@@ -65,7 +65,7 @@
       - 모든 다른 data point를 통해 representation을 배우는 것.
       - 예를 들면, 언어 모델은 단어들이 얼마나 가까이 있는지에 대한 표현으로 나타낸다.
       - Embedding은 structed data에 많이 쓰인다.
-  - Feature normalization (scaling) or standardization
+- Feature normalization (scaling) or standardization
     - numerical variables -> 전부 다른 scale
     - 어떤 머신러닝 알고리즘은 잘 수행하지 못한다.
     - scaling 과 standardization이 이걸 고치는 데 도움을 준다.
@@ -78,7 +78,7 @@
         - 모든 value를 standard하게 만든다.
         - 평균이 0이 되고, unit variance를 갖게 만든다.
         - 특정 특징에 standard diviation(표준 편차)로 나누고 평균을 뺌으로서 만든다.
-  - Feature engineering
+- Feature engineering
     - data -> 더 의미있는 표현으로 바꿈 (domain knowledge 첨가)
     - 종류
       - Decompose
@@ -106,7 +106,7 @@
         - 좋은 feature을 찾을 가능성을 높여줌
         - computation time이 많이 들어감
         - TPot이 이걸 함
-  - Dealing with imbalances
+- Dealing with imbalances
     - 한 클래스엔 10000 개의 데이터가 있고, 다른 한 쪽에는 100 개의 데이터밖에 없는 걸 다루는 문제
         - Collect more data (if you can)
         - scikit-learn-contrib imbalanced-learn package 써보기.
@@ -114,15 +114,15 @@
             - 샘플이 부족한 class의 샘플을 임의로 만들어 줌.
             - scikit-learn-contrib imbalanced-learn package를 이용해서 만들 수 있음.
         - "Learning from Imbalanced Data" paper 참조.
-- Data splitting
-    - Training set (usually 70-80% of data)
-        - Model은 이걸 가지고 학습한다.
-    - Validation set (typically 10-15% of data)
-        - 모델 hyperparameter는 이걸 가지고 tune된다.
-    - Test set (usually 10-15%) 
-        - 모델의 최종 성능이 평가되는 곳
-        - 옳게만 끝낸다면, 희망적으로 test set에 있는 result는 어떻게 모델이 현실 세계에서 수행하는지에 대해 좋은 indication을 준다.
-        - model을 tune하기 위해서 이 dataset을 사용하지 마라.
+### Data splitting
+- Training set (usually 70-80% of data)
+    - Model은 이걸 가지고 학습한다.
+- Validation set (typically 10-15% of data)
+    - 모델 hyperparameter는 이걸 가지고 tune된다.
+- Test set (usually 10-15%) 
+    - 모델의 최종 성능이 평가되는 곳
+    - 옳게만 끝낸다면, 희망적으로 test set에 있는 result는 어떻게 모델이 현실 세계에서 수행하는지에 대해 좋은 indication을 준다.
+    - model을 tune하기 위해서 이 dataset을 사용하지 마라.
         
 ## Train model on data
 3 steps: choose an algorithm, overfit the model, reduce overfitting with regularization
@@ -135,7 +135,14 @@
     - 독립적인 변수를 다루는 과정을 바탕으로 두 개의 결과를 예측한다.
     - 병을 갖고 있는지 아닌지를 예측하는 과정
 - k-Nearest Neighbours
-    - 각각 매우 유사한 'k'개의 예제를 찾는다. 
+    - 매우 유사한 'k'개의 예제를 찾는다. 
+    - 그러면, 새로운 샘플이 주어졌을 때, 새로운 샘플은 어디와 더 유사한가?
+- Support Vector Machines (SVMs)
+    - classification 또는 regression에 쓰인다.
+    - 많은 평면을 사용해서 data point를 분리하는 가장 좋은 방법을 찾는 것이다. (Hyperplanes라고 불린다.)
+- Decision Trees and Random Forests
+    - classification과 regression에 쓰인다. (structured data에 매우 좋은 알고리즘이다.)
+    - 50이상, 65이하 같은 분류로 데이터를 나눈다.
     - 
 #### Unsupervised algorithms
 
