@@ -143,7 +143,25 @@
 - Decision Trees and Random Forests
     - classification과 regression에 쓰인다. (structured data에 매우 좋은 알고리즘이다.)
     - 50이상, 65이하 같은 분류로 데이터를 나눈다.
-    - 
+    - 결론적으로, 더이상 나눌 수 없는 data에서 point를 잡아내는 것이다.(우리가 이걸 정한다.)
+    - Random Forest는 많은 decision tree가 결합한 것이다.
+    - 효율적으로 많은 모델들을 결합하고, 이점을 얻는다. (이걸 ensembling이라고 부른다.)
+    - explained.ai에서 더 훌륭한 방법들을 볼 수 있다.
+- AdaBoost/Gradient Boosting Machines (also just known as boosting)
+    - Classification과 Regression에 쓰임.
+    - 약한 learner를 강한 learner로 바꿀 수 있을까?
+    - 종류
+        - XGBoost Algorithm
+        - CatBoost Algorithm
+        - LightGBM Algorithm
+    - Neural networks (also called deep learning)
+        - Classification 또는 Regression에 사용됨
+        - input 여러개를 넣고, linear로 input을 다룸 (weight와 input 사이에서 dot product)
+        - nonlinear functions (activation function)
+        - 종류
+            - Convolutional neural networks (typically used for computer vision)
+            - Recurrent neural networks (typically used for sequence modelling)
+            - Transformer networks (can be used for vision and text, starting to replace RNNs)
 #### Unsupervised algorithms
 
 ### Type of learning
