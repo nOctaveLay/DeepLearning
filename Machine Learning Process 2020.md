@@ -162,9 +162,37 @@
             - Convolutional neural networks (typically used for computer vision)
             - Recurrent neural networks (typically used for sequence modelling)
             - Transformer networks (can be used for vision and text, starting to replace RNNs)
+<More information ...>                                                                                        <top>
 #### Unsupervised algorithms
+- Clustering
+    - K-Means clustering
+        - k개의 클러스터 선택
+        - 각각의 클러스터는 랜덤하게 centre node를 받음
+        - 각 iteration마다 centre node들은 서로보다 더 멀리 움직임
+        - centroid가 움직임을 멈추면, 각각의 샘플은 가까운 centroid에 동등한 가치로 할당됨
+- Visualization and dimensionality reduction
+    - Principal Component Analysis
+        - 많은 차원에서 적은 자원으로 데이터를 줄이는 것.
+        - 이럼에도 불구하고, variance를 보존한다.
+    - Autoencoders
+        - 낮은 차원의 데이터의 encoding을 배운다.
+        - 같은 정보를 가지고 있으면서, 100개의 픽셀을 압축해 50개의 픽셀로 나타낼 수 있도록 만드는 기법.
+    - t-Distributed Stochastic Neighbor Embedding (t-SNE)
+        - 2D 또는 3D 공간에서 높은 차원을 가지고 있는 데이터를 보여주기에 좋다.
+- Ananomaly detection
+    - Autoencoder
+        - 시스템 input들의 차원을 줄이기 위해 사용
+        - 어떤 threshold 안에 이러한 input들을 재생성함
+        - recreation이 threshold를 맞출 수 없다면, outlier로 분류된다.
+    - One-class classification 
+        - 오직 하나의 클래스만 학습시키는 모델
+        - computer network traffic의 normal event 같은 것
+        - class의 바깥쪽에 있으면 이를 anomaly로 부른다.
+        - one-class K-Means, one-class SVM, isolation forest, local outlier factor가 여기에 속한다.
 
+<More information ...>                                                                                        <top>    
 ### Type of learning
+- 
 ### Underfitting
 ### Overfitting
 ### Hyperparameter Tuning 
