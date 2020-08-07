@@ -218,8 +218,11 @@
 - 인간 전문가가 모델과 상호작용하고, 가장 불확실하게 느끼는 label에 대한 업데이트를 제공하는 것이다.
 - 어떻게 Nvidia가 active learning을 사용하는지를 확인해봐라!
 #### Ensembling
--
+- 학습의 형태가 아니더라도, 이미 학습된 알고리즘에 더 나은 결과를 내도록 결합하는 알고리즘이다.
+- 예를 들면, "wisdom of the crowd" 를 레버리지 하는 것이다.
 ### Underfitting
+- 모델이 수행하지 않을 때 일어난다.
+- 
 ### Overfitting
 ### Hyperparameter Tuning 
 
