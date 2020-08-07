@@ -163,7 +163,7 @@
             - Recurrent neural networks (typically used for sequence modelling)
             - Transformer networks (can be used for vision and text, starting to replace RNNs)
 
-<More information ...>                                   <top>
+<More information ...> <top>
 #### Unsupervised algorithms
 - Clustering
     - K-Means clustering
@@ -191,9 +191,16 @@
         - class의 바깥쪽에 있으면 이를 anomaly로 부른다.
         - one-class K-Means, one-class SVM, isolation forest, local outlier factor가 여기에 속한다.
 
-<More information ...>                                    <top>    
+<More information ...> <top> 
+    
 ### Type of learning
-- 
+#### Batch learning
+
+#### Online learning
+#### Transfer learning
+#### Active learning
+#### Ensembling
+
 ### Underfitting
 ### Overfitting
 ### Hyperparameter Tuning 
