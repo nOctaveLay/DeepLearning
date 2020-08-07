@@ -222,8 +222,11 @@
 - 예를 들면, "wisdom of the crowd" 를 레버리지 하는 것이다.
 ### Underfitting
 - 모델이 수행하지 않을 때 일어난다.
-- 
+- 더 오래 혹은 더 진보된 모델을 훈련하는 것을 시도한다.
 ### Overfitting
+- validation loss가 증가하기 시작했을 때 발생한다.
+- 얼마나 validation dataset에서 잘 수행되는지를 본다, 작을 수록 좋다.
+- 또는 validation set을 가지고 있지 않을 때, test set보다 training set에서 얼마나 잘 수행하는 지를 본다. 
 ### Hyperparameter Tuning 
 
         
