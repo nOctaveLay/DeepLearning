@@ -195,12 +195,30 @@
     
 ### Type of learning
 #### Batch learning
-
+- 큰 통계학적 창고에 모든 데이터가 존재한다. 그걸로 모델을 학습시킨다.
+- 당신이 새로운 모델을 얻는 날마다 한 달씩 새로운 모델을 돌려야한다.
+- 학습하는데 시간이 오래 걸리고, 잘 완료되지 않는다.
+- 학습 없이 production에서 실행 (비록 이게 나중에 다시 훈련되어야 하지만)
 #### Online learning
+- data는 지속적으로 update 된다.
+- 지속적으로 새로운 모델에 그걸 학습시킨다.
+- 각각의 learning step이 빠르고 쌈
+- production에서 실행, 지속적으로 학습
 #### Transfer learning
+- 하나의 모델이 배운 지식을 취하고 그것을 써라.
+- SOTA(state of the art) model 에 이득을 얻는 ability를 줘라.
+- data가 많지 않거나, 광범위한 계산 자원이 없다면 유용하다.
+- 종류
+    - TensorFlow Hub
+    - PyTorch Hub
+    - Hugging Face transformers (NLP models)
+    - Detectron2 (computer vision models)
 #### Active learning
+- "human in the loop" learning이라고 불린다.
+- 인간 전문가가 모델과 상호작용하고, 가장 불확실하게 느끼는 label에 대한 업데이트를 제공하는 것이다.
+- 어떻게 Nvidia가 active learning을 사용하는지를 확인해봐라!
 #### Ensembling
-
+-
 ### Underfitting
 ### Overfitting
 ### Hyperparameter Tuning 
