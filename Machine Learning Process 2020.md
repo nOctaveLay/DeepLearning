@@ -227,6 +227,37 @@
 - validation loss가 증가하기 시작했을 때 발생한다.
 - 얼마나 validation dataset에서 잘 수행되는지를 본다, 작을 수록 좋다.
 - 또는 validation set을 가지고 있지 않을 때, test set보다 training set에서 얼마나 잘 수행하는 지를 본다. 
+- 정규화
+    - L1 (lasso) 와 L2(ridge) 정규화:
+        - L1 정규화 : 필요하지 않은 특징 변수를 0로 설정
+            - 가장 필수적인 곳에 feature selection을 수행하고, 필수적이지 않은 곳에 feature selection을 수행한다.
+            - model explainability에 유용하다.
+        - L2 정규화 : 0으로 설정하지 않고 model feature를 포함하는 것
+        - Dropout : 모델의 부분들을 random하게 지운다. 그래서 나머지 부분들이 더 나아지게 만든다. (일명 가지치기)
+        - Early stopping : validation loss가 너무 증가하기 전에(더 일반화 되기 전에) 학습하는 것을 멈추는 것.
+            - 다른 어떤 metric도 모델을 향상시키는 것을 멈춘다.
+            - Early stopping은 model callback의 형태로 수행된다.
+        - Data augmentation : 더 어렵게 배우는 인공적인 방식으로 dataset을 다루는 것.
+        - Batch normalization : 다음 레이어로 가기 전 2개의 파라미터(beta, W)를 더하는 것 뿐만 아니라 input을 표준화
+            - W : 각각의 layer 마다 parameter를 얼마나 offset 시킬 수 있는지. 그리고 0으로 나누는 것을 피하기 위한 epsilon
+            - zero mean과 normalize 방식 이용
+            - update할 파라미터가 적기 때문에, 빠른 학습 속도를 가져온다.
+            - 일부 network에서는 dropout을 위한 대체가 일어날 수 있다.
 ### Hyperparameter Tuning 
-
-        
+1. 학습률을 설정한다. (종종 가장 중요한 hyperparameter가 된다.)
+    - 일반적으로, 높은 학습률을 가진 알고리즘 -> 새 데이터에 빠르게 적응
+    - 최적의 학습률을 찾는다.
+        - 낮은 학습률에서부터 시작해 몇 백개의 iteration으로 모델을 학습시킨다.
+        - 매우 큰 숫자로 학습률을 천천히 증가시킨다.
+        - 학습률과 비교해서 loss를 보여준다(plot) : learning rate를 위해 log scale을 쓴다.
+        - U-shaped curve일 경우 최적의 학습법은 밑에서 1-2 notch정도 왼쪽으로 간 것이다.
+    - Adam optimizer를 사용하는 학습률 스케쥴링은 학습률을 천천히 낮추는 것을 포함한다. (수렴한다.)
+    - Cyclic learning rate: 다이나믹하게 학습을 빠르게 할 수 있는 가능성과 threshold 사이에서 학습률을 올리고 낮춘다.
+2. <paper>A disciplined approach to neural network hyperparameters by Leslie Smith.
+    - learning rate, batch size, momentum, weight decay and more
+3. 조정해야 하는 다른 파라미터
+    - layer의 수 (딥러닝을 경우에만)
+    - Batch size (모델이 한 번에 얼마나 많은 데이터 예제를 보는 지)
+    - tree들의 수 (decision tree algorithm을 했을 때)
+    - iteration 수 (얼마나 많은 시간동안 model이 데이터를 통과시킬것이냐)
+        - tuning iteration 대신에, early-stopping을 쓴다.
