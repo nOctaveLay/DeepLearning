@@ -261,3 +261,53 @@
     - tree들의 수 (decision tree algorithm을 했을 때)
     - iteration 수 (얼마나 많은 시간동안 model이 데이터를 통과시킬것이냐)
         - tuning iteration 대신에, early-stopping을 쓴다.
+
+### Analysis/Evaluation
++ Evaluation metrics
+    - Classification
+        - Accuracy
+        - Precision
+        - Recall
+        - f1
+        - Confusion matrix
+        - Mean average precision (object detection)
+    - Regression
+        - MSE (mean squared error)
+        - MAE (mean absolute error)
+        - R^2 (r-squared)
+    - Task-based metric 
+        - create one based on your specific problem
++ Feature importance
+    - 어떤 특징이 가장 모델에 잘 기여할까?
+    - 일부가 지워져야 될까?
+    - 모델을 설명할 때 유용함
++ Training/inference time/cost
+    - 학습하는 데 얼마나 시간이 오래 걸릴까? 이게 feasible 할까?
+    - 추론이 얼마나 걸릴까, 이게 우리의 제품에 적합할까?
++ What-if tool
+    - 어떻게 다른 모델과 비교할 수 있을까?
+    - 데이터를 더 추가해서 바꾼다면 어떨까?
+    - 이게 결과에 얼마나 영향을 줄까?
++ Least confident example
+    - 모델이 왜 나빠질까
+    - 보통 많은 example을 가질 필요가 없는 긴 tail instance 때문
++ Bias/variance trade-off
+    - 높은 bias는 새로운 sample에 대한 일반화의 부족과 underfitting을 일으킨다. 
+    - 높은 변수는 랜덤한 noise가 있는 data의 패턴을 찾기 때문에 overfitting을 일으킨다.
+### Serve model (deploying a model)
+- production으로 모델을 넣고, 어떻게 진행되는 지를 본다.
+- vivo에 있는 evaluation metrix들이 매우 훌륭하다. 
+- 하지만 진짜로 어떻게 수행되는 지는 알 수가 없다.
+- Tools you can use
+    - TensorFlow Serving (part of TFX, TensorFlow Extended)
+    - PyTorch Serving (TorchServe)
+    - Google AI Platform : REST API로 너의 모델을 가능하게 만들어라
+    - Sagemaker
+- MLOps
+    - 소프트웨어 엔지니어링이 머신 러닝을 만족시키는 곳
+    - 머신 러닝 모델 주위에서 필요로 하는 모든 기술들이 production 동안에 일하도록 하는 것을 필요로 한다.
+### Retrain model
+- 다양한 evaluation metric들에 기초하여 serving 후 모델이 어떻게 수행하는 지를 보는 것 (또는 serving 이전에)
+- 필요한 만큼 위에 있는 step을 반복 (machine learning은 experimental하다, 그러므로 여기가 당신의 data와 experiment가 추적하기를 원하는 곳임을 기억하라)
+- data source가 변하거나 upgrade될 때 'age'(fine-wine style에 있지 않은)나 'drift'에서 시작하는 모델 예측을 찾을 수 있다.
+- 이건 재학습을 원할 때 하면 된다.
