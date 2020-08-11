@@ -16,6 +16,7 @@
 ### [Serve model (deploying a model)](#serve-model) 
 ### [Retrain model](#retrain-model)
 _ _ _
+
 ## Data Collection <a id="data-collection"></a>
 ### Question to ask <a id="question-to-ask"></a>
 * What kind of problem are we trying to solve? (see machine learning problems)
@@ -264,7 +265,7 @@ _ _ _
     - iteration 수 (얼마나 많은 시간동안 model이 데이터를 통과시킬것이냐)
         - tuning iteration 대신에, early-stopping을 쓴다.
 
-### Analysis/Evaluation
+### Analysis/Evaluation<a id = "analysis"></a>
 + Evaluation metrics
     - Classification
         - Accuracy
