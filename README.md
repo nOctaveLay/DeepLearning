@@ -11,6 +11,12 @@ https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learni
 ## Machine Learning Process
 https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md
 
+## 딥러닝 + Sementic segmentation
+U-net : https://arxiv.org/pdf/1505.04597.pdf
+
+SegNet : https://arxiv.org/pdf/1511.00561.pdf
+
+DeepLab : https://arxiv.org/pdf/1606.00915.pdf
 ## 딥러닝 + 자연어처리
 
 1. 데이터 전처리 : https://blog.pingpong.us/dialog-bert-tokenizer/?fbclid=IwAR0O2mtCrn4ilEusZE2fV3waGWl1BGE7Q3ifV6TBHu-nbQ5XViflE271B2U
