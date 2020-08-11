@@ -12,6 +12,8 @@ https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learni
 https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md
 
 ## 딥러닝 + Sementic segmentation
+출처 : https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw
+
 U-net : https://arxiv.org/pdf/1505.04597.pdf
 
 SegNet : https://arxiv.org/pdf/1511.00561.pdf
