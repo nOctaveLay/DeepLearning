@@ -1,25 +1,30 @@
 
 # Index
 
-### Data collection
-### Data preparation
-### Train model on data
-1. choose an algorithm
-1. overfit the model
-1. reduce overfitting with regularization
-### Analysis/Evaluation
-### Serve model (deploying a model)
-### Retrain model
-
-## Data Collection
-### Question to ask
+### [Data collection](#data-collection)
+1. [Question to ask](#question-to-ask)
+2. [Types of data](#type-data)
+### [Data preparation](#data-pre)
+1. [Exploratory data analysis (EDA), learning about the data you're working with ](#eda)
+2. [Data preprocessing, preparing your data to be modelled](#data-pre-processing)
+3. [Data splitting](#data-split)
+### [Train model on data](#train-model)
+1. [choose an algorithm](#choose-algorithm)
+1. [Type of learning](#type-of-learning)
+1. [Hyperparameter Tuning](#hyper-tuning)
+### [Analysis/Evaluation](#analysis)
+### [Serve model (deploying a model)](#serve-model) 
+### [Retrain model](#retrain-model)
+_ _ _
+## Data Collection <a id="data-collection"></a>
+### Question to ask <a id="question-to-ask"></a>
 * What kind of problem are we trying to solve? (see machine learning problems)
 * What data sources already exist?
 * What privacy concerns are there?
 * Is the data public?
 * Where should we store the data?
 
-### Types of data
+### Types of data <a id="type-data"></a>
 #### Structured data
 - appears in tabulated format
 - rows and columns style
@@ -34,8 +39,8 @@
 - no rigid structure
 - image, video, natural language text, speech
 
-## Data Preparation
-### Exploratory data analysis (EDA), learning about the data you're working with
+## Data Preparation<a id = "data-pre"></a>
+### Exploratory data analysis (EDA), learning about the data you're working with <a id = "eda"></a>
 - What are the feature variables(input) and the target variables(output)
     - have a disease or not
 - What kid of data do you have? 
@@ -47,7 +52,7 @@
     - Are they out by much (3+ standard deviations)?
     - Why are they there?
 - Are there questions you could ask a domain expert about the data?
-### Data preprocessing, preparing your data to be modelled
+### Data preprocessing, preparing your data to be modelled<a id = "data-pre-processing"></a>
 - Feature imputation(특징 삽입) : filling missing values 
     - Single imputation : Fill with mean, median of column.
     - Multiple imputation : Model other missing values and fill with what your model finds.
@@ -114,7 +119,7 @@
             - 샘플이 부족한 class의 샘플을 임의로 만들어 줌.
             - scikit-learn-contrib imbalanced-learn package를 이용해서 만들 수 있음.
         - "Learning from Imbalanced Data" paper 참조.
-### Data splitting
+### Data splitting <a id = "data-split"></a>
 - Training set (usually 70-80% of data)
     - Model은 이걸 가지고 학습한다.
 - Validation set (typically 10-15% of data)
@@ -124,7 +129,7 @@
     - 옳게만 끝낸다면, 희망적으로 test set에 있는 result는 어떻게 모델이 현실 세계에서 수행하는지에 대해 좋은 indication을 준다.
     - model을 tune하기 위해서 이 dataset을 사용하지 마라.
         
-## Train model on data
+## Train model on data <a id = "train-model"></a>
 3 steps: choose an algorithm, overfit the model, reduce overfitting with regularization
 ### Choosing an algorithm
 #### Supervised algorithms
@@ -163,7 +168,6 @@
             - Recurrent neural networks (typically used for sequence modelling)
             - Transformer networks (can be used for vision and text, starting to replace RNNs)
 
-<More information ...> <top>
 #### Unsupervised algorithms
 - Clustering
     - K-Means clustering
@@ -191,9 +195,7 @@
         - class의 바깥쪽에 있으면 이를 anomaly로 부른다.
         - one-class K-Means, one-class SVM, isolation forest, local outlier factor가 여기에 속한다.
 
-<More information ...> <top> 
-    
-### Type of learning
+### Type of learning<a id = "type-of-learning"></a>
 #### Batch learning
 - 큰 통계학적 창고에 모든 데이터가 존재한다. 그걸로 모델을 학습시킨다.
 - 당신이 새로운 모델을 얻는 날마다 한 달씩 새로운 모델을 돌려야한다.
@@ -243,7 +245,7 @@
             - zero mean과 normalize 방식 이용
             - update할 파라미터가 적기 때문에, 빠른 학습 속도를 가져온다.
             - 일부 network에서는 dropout을 위한 대체가 일어날 수 있다.
-### Hyperparameter Tuning 
+### Hyperparameter Tuning <a id = "hyper-tuning"></a>
 1. 학습률을 설정한다. (종종 가장 중요한 hyperparameter가 된다.)
     - 일반적으로, 높은 학습률을 가진 알고리즘 -> 새 데이터에 빠르게 적응
     - 최적의 학습률을 찾는다.
@@ -294,7 +296,7 @@
 + Bias/variance trade-off
     - 높은 bias는 새로운 sample에 대한 일반화의 부족과 underfitting을 일으킨다. 
     - 높은 변수는 랜덤한 noise가 있는 data의 패턴을 찾기 때문에 overfitting을 일으킨다.
-### Serve model (deploying a model)
+### Serve model (deploying a model)<a id = "serve-model"></a>
 - production으로 모델을 넣고, 어떻게 진행되는 지를 본다.
 - vivo에 있는 evaluation metrix들이 매우 훌륭하다. 
 - 하지만 진짜로 어떻게 수행되는 지는 알 수가 없다.
@@ -306,7 +308,7 @@
 - MLOps
     - 소프트웨어 엔지니어링이 머신 러닝을 만족시키는 곳
     - 머신 러닝 모델 주위에서 필요로 하는 모든 기술들이 production 동안에 일하도록 하는 것을 필요로 한다.
-### Retrain model
+### Retrain model<a id = "retrain-model"></a>
 - 다양한 evaluation metric들에 기초하여 serving 후 모델이 어떻게 수행하는 지를 보는 것 (또는 serving 이전에)
 - 필요한 만큼 위에 있는 step을 반복 (machine learning은 experimental하다, 그러므로 여기가 당신의 data와 experiment가 추적하기를 원하는 곳임을 기억하라)
 - data source가 변하거나 upgrade될 때 'age'(fine-wine style에 있지 않은)나 'drift'에서 시작하는 모델 예측을 찾을 수 있다.
