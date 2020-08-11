@@ -14,9 +14,9 @@
 1. [Hyperparameter Tuning](#hyper-tuning)
 ### [Analysis/Evaluation](#analysis)
 ### [Serve model (deploying a model)](#serve-model) 
-### [Retrain model](#retrain-model)
-_ _ _
+### [Retrain model](#re-model)
 
+_ _ _
 ## Data Collection <a id="data-collection"></a>
 ### Question to ask <a id="question-to-ask"></a>
 * What kind of problem are we trying to solve? (see machine learning problems)
@@ -311,8 +311,9 @@ _ _ _
     - 소프트웨어 엔지니어링이 머신 러닝을 만족시키는 곳
     - 머신 러닝 모델 주위에서 필요로 하는 모든 기술들이 production 동안에 일하도록 하는 것을 필요로 한다.
     
-### Retrain model <a id = "retrain-model"></a>
+### Retrain model <a id = "re-model"></a>
 - 다양한 evaluation metric들에 기초하여 serving 후 모델이 어떻게 수행하는 지를 보는 것 (또는 serving 이전에)
 - 필요한 만큼 위에 있는 step을 반복 (machine learning은 experimental하다, 그러므로 여기가 당신의 data와 experiment가 추적하기를 원하는 곳임을 기억하라)
 - data source가 변하거나 upgrade될 때 'age'(fine-wine style에 있지 않은)나 'drift'에서 시작하는 모델 예측을 찾을 수 있다.
 - 이건 재학습을 원할 때 하면 된다.
+
