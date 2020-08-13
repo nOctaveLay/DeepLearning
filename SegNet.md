@@ -1,6 +1,7 @@
 
 # SegNet Review
 - SegNet : A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation
+- https://arxiv.org/pdf/1511.00561.pdf
 
 # Abstract
 - pixel-wise classification layer를 위한 Encoder network와 Decoder Network로 구성
@@ -68,4 +69,24 @@
 <생략>
 
 # Architecture
++ pixelwise classification layer로 가기 전에 encoder network와 corresponding decoder가 있다.
++ Fig3로 이 아키텍쳐가 표현된다.
++ Encoder network 
+  - 처음의 object classification을 위해 디자인된 VGG16 network 안에 있는 13개의 convolutional layer에 상호응답하는 13개의 convolutional layer로 구성됨
+  - training process를 큰 데이타 셋에서 classification을 위해 학습된 weight로부터 초기화한다.
+  - 가장 깊은 encoder output에서 높은 resolution feature map을 유지시키기 위해 fully connected layer를 버릴 수 있습니다.
+    - SegNet encoder network의 파라미터 갯수를 줄입니다.
+  - 각각의 encoder network는 feature map 집합을 생성하기 위해서 filter bank와 함께 convolution을 수행합니다.
+    - batch normalized 되어야 합니다.
+  - 각각의 element별로 rectified linear non-linearity (ReLU) max(0,x)가 적용됩니다.
+  - max-pooling with a 2x2 window and stride 2 (non-overlapping window)가 수행됨.
+    - max-pooling은 input image의 작은 공간 이동을 넘어선 translation invariance를 성취하기 위해서 쓰임.
+  - 결과로 나온 output은 2의 배수로 sub-sample됨
+    - sub-sampling은 feature map에서 각각의 pixel을 위해 large input image context (spatial window)를 초래함 
+  - max-pooling과 sub-sampling의 여러 layer들이 robust classification에 대해 더 translation invariance를 얻을 수 있지만, feature map의 spatial resolution의 loss가 발생한다.
+  
+- Decoder network
+  - 각각의 encoder layer는 corresponding decoder layer를 가지고 있습니다.
+  - 따라서 decoder layer는 총 13개 (encoder layer가 13개 이므로)
+  - 마지막 decoder output은 각 픽셀에 독립적으로 class probability를 생산하기 위해서 multi-class soft-max classifer에게 먹여진다.
 
