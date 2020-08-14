@@ -121,7 +121,7 @@
     - upsampled decoder feature map으로 feature map을 concatenate한다.(합친다)
     - VGG net architecture처럼 conv5나 max-pool 5같은 게 없다.
   - SegNet은 VGG net에서 사용된 convolutional layer weight를 미리 학습된 weight로서 사용한다.
-    - 
+
 ## 3.1 Decoder Variants
 - encoder는 다 똑같기 때문에([2][3][4]) decoder만 분석하면 됨
 - SegNet-Basic (SegNet의 작은 버전, 4개의 encoder와 4개의 decoder로 구성)을 FCN(decoder variants)과 비교해서 설명하겠슴.
@@ -137,11 +137,26 @@
   - SegNet-Basic과 같은 encoder를 가지고 있음
   - 모든 decoder에 FCN decoding tech를 가지고 있음
 - Fig 3 의 왼쪽은 SegNet에서 사용되는 decoding tech이다. (upsampling step에서 어떤 학습도 없을 경우)
-- upsampled map은 공간적 input의 밀도를 높이기 위해서 학습가능한 multi-channel decoder filter와 convolve 연산 됨.
-- 각각의 decoder filter는 upsampled feature map의 수와 동등한 채널의 수를 가지고 있음
-
+  - upsampled map은 공간적 input의 밀도를 높이기 위해서 학습가능한 multi-channel decoder filter와 convolve 연산 됨.
+  - 각각의 decoder filter는 upsampled feature map의 수와 동등한 채널의 수를 가지고 있음
+  - 더 작은 variant는 decoder filter가 single channel이라는 것이다.
+    - 다시 말하자면, 오직 decoder의 corresponding upsampled feature map만 convolve 한다는 것이다.
+    - 이런 variant(SegNet-Basic-SingleChannelDecoder)은 훈련가능한 파라미터의 수와 추론 시간을 제거합니다.
+- Fig 3.의 오른쪽은 FCN의 decoding technique입니다.
+  - FCN 모델의 가장 중요한 디자인 요소는 encoder feature map의 dimensionality reduction step입니다.
+  - 이것은 corresponding(상호응답하는) decoder들 안에서 쓰이는 encoder feature map을 *압축*합니다.
+  - Dimensionality reduction은, 64개의 채널 중에서, 1 x 1 x 64 x K 의 훈련 가능한 필터와 encoder feature map을 convolving 함으로서 수행됩니다.
+  - K : class의 갯수입니다.
+  - 압축된 K개의 channel을 가지는 최종 encoder layer의 feature map은 decoder network의 input이 됩니다.
+  - 이 network의 decoder안에서 고정되고 훈련가능한 multi-channel upsampling kernel을 사용해서 upsampling이 inverse convolution에 의해 수행된다. (이를 deconvolution이라고 이름붙인다.)
+  - **Segnet에서 trainable decoder filter를 사용한 multi-channel convolution은 feature map을 집적(고밀도)화하는 upsampling 후에 수행된다.**
+  - 8x8 kernel size 
+  - FCN의 upsampled feature map은 K 채널을 가진다.
+  - upsampled feature map은 decoder feature map의 output을 생산하기 위하여 그 다음 element별로 corresponding resolution encoder feature map에 더한다.
+  - upsampling kernel은 bilinear interpolation weights를 사용해서 초기화된다.
+  - FCN decoder model은 추론하는 과정 동안 encoder feature map을 저장하는 것이 필요하다.
+  - 이건 embedded application을 위해 memory intensive하다
   
-    
 ## 3.2 Training
 
 ## 3.3 Analysis
