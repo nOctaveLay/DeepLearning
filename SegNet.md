@@ -3,7 +3,7 @@
 - SegNet : A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation
 - https://arxiv.org/pdf/1511.00561.pdf
 
-# Abstract
+# 0.Abstract
 - pixel-wise classification layer를 위한 Encoder network와 Decoder Network로 구성
 - Encoder Network
   - VGG16에서 13개의 convolutional layer에 topologically identical하다. (위상학적으로 동일하다)
@@ -19,7 +19,7 @@
  - Stochastic gradient descent를 이용해 end-to-end로 트레인 되었으며, 다른 구조에 비해 훈련 가능한 parameter의 수가 훨씬 적다.
  - http://mi.eng.cam.ac.uk/projects/segnet/
  
-# Introduction
+# 1.Introduction
 - 이러한 최근 접근의 일부는 픽셀 단위 라벨링에 category 예측을 위해 제작된 deep architectures에 직접적으로 채택했다.
   - 이러한 결과는 coarse하게 나타났다.
   - 이건 주로 max pooling과 sub-sampling이 feature map resolution을 지웠기 때문이다.
@@ -65,10 +65,10 @@
   - Sec 5. 미래 연구
   - Sec 6. 결론
 
-# Literature Review
+# 2.Literature Review
 <생략>
 
-# Architecture
+# 3.Architecture
 + pixelwise classification layer로 가기 전에 encoder network와 corresponding decoder가 있다.
 + Encoder network 
   - 처음의 object classification을 위해 디자인된 VGG16 network 안에 있는 13개의 convolutional layer에 상호응답하는 13개의 convolutional layer로 구성됨
@@ -121,9 +121,27 @@
     - upsampled decoder feature map으로 feature map을 concatenate한다.(합친다)
     - VGG net architecture처럼 conv5나 max-pool 5같은 게 없다.
   - SegNet은 VGG net에서 사용된 convolutional layer weight를 미리 학습된 weight로서 사용한다.
+    - 
+## 3.1 Decoder Variants
+- encoder는 다 똑같기 때문에([2][3][4]) decoder만 분석하면 됨
+- SegNet-Basic (SegNet의 작은 버전, 4개의 encoder와 4개의 decoder로 구성)을 FCN(decoder variants)과 비교해서 설명하겠슴.
+  - 모든 SegNet-Basic에 있는 encoder는 max-pooling과 sub-sampling을 수행
+  - corresponding decoder는 받은 max-pooling indices로 input을 upsampling함
+  - encoder와 decoder 안에 있는 각각의 convolutional layer 후에 batch normalization이 수행
+  - convolution 후에 어떤 bias도 첨부 안됨
+  - decoder network에서 ReLU함수도 제시 안됨
+  - 7x7 constant kernel size -> smooth labelling을 위한 wide context를 주기 위함
+    - 즉, 가장 깊은 layer feature map안의 pixel이 106x106 pixel의 input image 안에 있는 context window로 trace back 할 수 있도록 도와줌
+  - 수많은 다른 variant(decoder)를 탐색하도록 도와주고, 적절한 시간에 train할 수 있도록 도와줌
+- FCN-basic (FCN의 comparable version)
+  - SegNet-Basic과 같은 encoder를 가지고 있음
+  - 모든 decoder에 FCN decoding tech를 가지고 있음
+- Fig 3 의 왼쪽은 SegNet에서 사용되는 decoding tech이다. (upsampling step에서 어떤 학습도 없을 경우)
+- upsampled map은 공간적 input의 밀도를 높이기 위해서 학습가능한 multi-channel decoder filter와 convolve 연산 됨.
+- 각각의 decoder filter는 upsampled feature map의 수와 동등한 채널의 수를 가지고 있음
+
   
-## Decoder Variants
+    
+## 3.2 Training
 
-## Training
-
-## Analysis
+## 3.3 Analysis
