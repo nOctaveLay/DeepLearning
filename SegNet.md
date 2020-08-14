@@ -59,11 +59,11 @@
     - 다른 factor가 성능을 향상시킬 수는 있겠지만, 그들의 양적인 결과에서 좋은 성능을 성취하기 위해 반드시 필요한 key design factor를 분리하는 것은 어렵다.
     - 그래서 decoding process를 분석하고, 장점과 단점을 드러내기로 했다.
 - 개론
-- Sec 2. 최근 논문과 관련된 내용을 리뷰
-- Sec 3. SegNet architecture와 그에 대한 분석
-- Sec 4. SegNet performance를 평가함
-- Sec 5. 미래 연구
-- Sec 6. 결론
+  - Sec 2. 최근 논문과 관련된 내용을 리뷰
+  - Sec 3. SegNet architecture와 그에 대한 분석
+  - Sec 4. SegNet performance를 평가함
+  - Sec 5. 미래 연구
+  - Sec 6. 결론
 
 # Literature Review
 <생략>
