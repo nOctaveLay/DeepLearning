@@ -3,7 +3,7 @@
 - SegNet : A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation
 - https://arxiv.org/pdf/1511.00561.pdf
 
-# 0.Abstract
+# 0. Abstract
 - pixel-wise classification layer를 위한 Encoder network와 Decoder Network로 구성
 - Encoder Network
   - VGG16에서 13개의 convolutional layer에 topologically identical하다. (위상학적으로 동일하다)
@@ -19,7 +19,7 @@
  - Stochastic gradient descent를 이용해 end-to-end로 트레인 되었으며, 다른 구조에 비해 훈련 가능한 parameter의 수가 훨씬 적다.
  - http://mi.eng.cam.ac.uk/projects/segnet/
  
-# 1.Introduction
+# 1. Introduction
 - 이러한 최근 접근의 일부는 픽셀 단위 라벨링에 category 예측을 위해 제작된 deep architectures에 직접적으로 채택했다.
   - 이러한 결과는 coarse하게 나타났다.
   - 이건 주로 max pooling과 sub-sampling이 feature map resolution을 지웠기 때문이다.
@@ -65,10 +65,10 @@
   - Sec 5. 미래 연구
   - Sec 6. 결론
 
-# 2.Literature Review
+# 2. Literature Review
 <생략>
 
-# 3.Architecture
+# 3. Architecture
 + pixelwise classification layer로 가기 전에 encoder network와 corresponding decoder가 있다.
 + Encoder network 
   - 처음의 object classification을 위해 디자인된 VGG16 network 안에 있는 13개의 convolutional layer에 상호응답하는 13개의 convolutional layer로 구성됨
