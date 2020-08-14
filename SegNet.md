@@ -156,7 +156,9 @@
   - upsampling kernel은 bilinear interpolation weights를 사용해서 초기화된다.
   - FCN decoder model은 추론하는 과정 동안 encoder feature map을 저장하는 것이 필요하다.
   - 이건 embedded application을 위해 memory intensive하다
-    - 예를 들어, 180 x 240 resolution에서 FCN-Basic의 첫번째 layer의 64개 feature map을 저장하기 위함
+    - 예를 들어, 180 x 240 resolution에서 FCN-Basic의 첫번째 layer의 64개 feature map을 저장하는 것이 32bit floating point precision에서 11MB를 차지하는 것이다.
+    - 이건 11개의 feature map에 대한 dimensionality reduction을 사용하면서 더 작게 만들 수 있다.
+    - 
 ## 3.2 Training
 
 ## 3.3 Analysis
