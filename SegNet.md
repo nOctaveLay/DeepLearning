@@ -70,7 +70,6 @@
 
 # Architecture
 + pixelwise classification layer로 가기 전에 encoder network와 corresponding decoder가 있다.
-+ Fig3로 이 아키텍쳐가 표현된다.
 + Encoder network 
   - 처음의 object classification을 위해 디자인된 VGG16 network 안에 있는 13개의 convolutional layer에 상호응답하는 13개의 convolutional layer로 구성됨
   - training process를 큰 데이타 셋에서 classification을 위해 학습된 weight로부터 초기화한다.
@@ -83,10 +82,48 @@
     - max-pooling은 input image의 작은 공간 이동을 넘어선 translation invariance를 성취하기 위해서 쓰임.
   - 결과로 나온 output은 2의 배수로 sub-sample됨
     - sub-sampling은 feature map에서 각각의 pixel을 위해 large input image context (spatial window)를 초래함 
-  - max-pooling과 sub-sampling의 여러 layer들이 robust classification에 대해 더 translation invariance를 얻을 수 있지만, feature map의 spatial resolution의 loss가 발생한다.
-  
-- Decoder network
+  - 만약 추론을 하는 동안 메모리가 제한되어 있지 않으면, 모든 encoder feature map은 sub-sampling 후에 저장된다.
+    - practical application한 경우가 아니며, 이러한 정보를 저장할 훨씬 더 효율적인 방법을 제시해야 한다.
+      - max-pooling *indice*만을 저장하는 것을 포함
+    - 즉, 각각의 pooling window에서 나오는 최대 feature value의 위치는 각각의 encoder feature map에 저장되는 것이다.
+      - 실제로, 각각의 2x2 pooling window에 2비트만 사용해서 이것이 가능하다.
+    - float precision 안에 feature map을 저장하는 것과 비교하면 훨씬 더 효율적이다.
+    - 메모리를 덜 쓰는 방식은 accuracy를 살짝 줄이는 효과를 가져오지만, 현실적으로 적용하는데에는 알맞다.
++ Decoder network
   - 각각의 encoder layer는 corresponding decoder layer를 가지고 있습니다.
   - 따라서 decoder layer는 총 13개 (encoder layer가 13개 이므로)
   - 마지막 decoder output은 각 픽셀에 독립적으로 class probability를 생산하기 위해서 multi-class soft-max classifer에게 먹여진다.
+  - 적절한 decoder는 상호응답하는 encoder feature map으로부터 저장된 max-pooling indices를 이용해서 input feature map을 upsample함
+    - sparse feature map 생성
+  - Fig.3.에서 decoding tech 표현
+  - 이러한 feature map은 dense feature map을 생산하기 위해서 train 가능한 decoder filter bank와 convolve 연산을 함
+  - batch normalization step은 이러한 맵들 각각에 적용됨.
+  - 첫번째 encoder와 상호응답하는 decoder는 multi-channel feature map을 생성 
+    - encoder input과 같은 수의 size와 channel을 생성하는 다른 decoder와는 다름.
+  - 최종 디코더의 출력에서 고차원 feature 표현은 훈련 가능한 soft-max classifier에 공급된다.
+    - 이 soft-max는 각각의 pixel을 독립적으로 classify 한다.
+    - soft-max의 output은 K channel개의 확률 이미지이다. (K는 class의 수를 의미한다.)
+  - 예측된 segmentation은 각각의 픽셀의 최대 확률을 가진 class와 상호응답한다.
++ loss
+  - max-pooling과 sub-sampling의 여러 layer들이 robust classification에 대해 더 translation invariance를 얻을 수 있지만, feature map의 spatial resolution의 loss가 발생한다.  
+  - 이미지 표현의 증가하는 lossy는 (boundary detail) boundary delineation이 필수적인 segmentation에 유용하지는 않다.
+  - sub-sampling이 수행되기 전에 encoder feature map에 있는 boundary information을 capture하고 저장하는 것은 필수적이다.
++ 유사한 넷
+  - DeconvNet과 U-net
+  - DeconvNet
+    - 훨씬 더 많은 parameterization을 가진다.
+    - 더 계산적 자원이 많이 필요하다.
+    - convolutional 방법을 택하고 있다 할지라도, end-to-end 학습이 힘들다. (fully connected layer를 사용하고 있기 때문)
+    - Sec. 4에서 자세히 비교
+  - U-Net (의학적인 image community에 의해 제한됨)
+    - pooling indice를 재사용 하지 않는다.
+    - 대신, 전체적인 feature map을 corresponding decoder로 옮긴다. (더 많은 메모리 사용 필요)
+    - upsampled decoder feature map으로 feature map을 concatenate한다.(합친다)
+    - VGG net architecture처럼 conv5나 max-pool 5같은 게 없다.
+  - SegNet은 VGG net에서 사용된 convolutional layer weight를 미리 학습된 weight로서 사용한다.
+  
+## Decoder Variants
 
+## Training
+
+## Analysis
