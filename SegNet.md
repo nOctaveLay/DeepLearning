@@ -158,7 +158,13 @@
   - 이건 embedded application을 위해 memory intensive하다
     - 예를 들어, 180 x 240 resolution에서 FCN-Basic의 첫번째 layer의 64개 feature map을 저장하는 것이 32bit floating point precision에서 11MB를 차지하는 것이다.
     - 이건 11개의 feature map에 대한 dimensionality reduction을 사용하면서 더 작게 만들 수 있다.
-    - 
+  - pooling indices에 대해서 negligible storage의 비용이 필요하다.
+    - 만약 2bit를 사용해 2x2 pooling window를 저장한다면, .17MB 필요)
+  - endoer feature map의 추가적인 스텝을 버리고 오직 upsampling kernel만 배우는 FCN-basic model의 variant를 생성(**FCN-Basic-NoAddition**)
+  - upsampling을 위해 학습할 필요가 없는 고정된 bilinear interpolation weight를 사용해서 upsampling 학습(Bilinear-Interpolation)
+  - 다른 끝단에서, 각각의 layer의 64개의 feature map을 SegNet decoder에서 나온 상호 응답하는 output feature map에 더했다. (SegNet-Basic-EncoderAddition)
+    - SegNet의 더 메모리에 intensive한 variant를 생성하기 위해서이다.
+  - pooling indice들을 upsampling을 위해 사용했으며, 이는 convolution step이 뒤를 잇는다. 
 ## 3.2 Training
 
 ## 3.3 Analysis
