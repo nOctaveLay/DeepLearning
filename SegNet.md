@@ -128,8 +128,8 @@
   - 모든 SegNet-Basic에 있는 encoder는 max-pooling과 sub-sampling을 수행
   - corresponding decoder는 받은 max-pooling indices로 input을 upsampling함
   - encoder와 decoder 안에 있는 각각의 convolutional layer 후에 batch normalization이 수행
-  - convolution 후에 어떤 bias도 첨부 안됨
-  - decoder network에서 ReLU함수도 제시 안됨
+  - convolution 후에 bias X
+  - decoder network에서 ReLU X
   - 7x7 constant kernel size -> smooth labelling을 위한 wide context를 주기 위함
     - 즉, 가장 깊은 layer feature map안의 pixel이 106x106 pixel의 input image 안에 있는 context window로 trace back 할 수 있도록 도와줌
   - 수많은 다른 variant(decoder)를 탐색하도록 도와주고, 적절한 시간에 train할 수 있도록 도와줌
@@ -150,8 +150,7 @@
   - 압축된 K개의 channel을 가지는 최종 encoder layer의 feature map은 decoder network의 input이 됩니다.
   - 이 network의 decoder안에서 고정되고 훈련가능한 multi-channel upsampling kernel을 사용해서 upsampling이 inverse convolution에 의해 수행된다. (이를 deconvolution이라고 이름붙인다.)
   - **Segnet에서 trainable decoder filter를 사용한 multi-channel convolution은 feature map을 집적(고밀도)화하는 upsampling 후에 수행된다.**
-  - 8x8 kernel size 
-  - FCN의 upsampled feature map은 K 채널을 가진다.
+  - 8x8 kernel size, FCN의 upsampled feature map은 K 채널을 가진다.
   - upsampled feature map은 decoder feature map의 output을 생산하기 위하여 그 다음 element별로 corresponding resolution encoder feature map에 더한다.
   - upsampling kernel은 bilinear interpolation weights를 사용해서 초기화된다.
   - FCN decoder model은 추론하는 과정 동안 encoder feature map을 저장하는 것이 필요하다.
@@ -160,11 +159,42 @@
     - 이건 11개의 feature map에 대한 dimensionality reduction을 사용하면서 더 작게 만들 수 있다.
   - pooling indices에 대해서 negligible storage의 비용이 필요하다.
     - 만약 2bit를 사용해 2x2 pooling window를 저장한다면, .17MB 필요)
-  - endoer feature map의 추가적인 스텝을 버리고 오직 upsampling kernel만 배우는 FCN-basic model의 variant를 생성(**FCN-Basic-NoAddition**)
+- encoder feature map의 추가적인 스텝을 버리고 오직 upsampling kernel만 배우는 FCN-basic model의 variant를 생성(**FCN-Basic-NoAddition**)
   - upsampling을 위해 학습할 필요가 없는 고정된 bilinear interpolation weight를 사용해서 upsampling 학습(Bilinear-Interpolation)
-  - 다른 끝단에서, 각각의 layer의 64개의 feature map을 SegNet decoder에서 나온 상호 응답하는 output feature map에 더했다. (SegNet-Basic-EncoderAddition)
-    - SegNet의 더 메모리에 intensive한 variant를 생성하기 위해서이다.
-  - pooling indice들을 upsampling을 위해 사용했으며, 이는 convolution step이 뒤를 잇는다. 
+- SegNet-basic model의 varient에서, 각각의 layer의 64개의 feature map을 SegNet decoder에서 나온 상호 응답하는 output feature map에 더했다. (**SegNet-Basic-EncoderAddition**)
+  - SegNet의 더 메모리에 intensive한 variant를 생성하기 위해서이다.
+- 이 두 가지 방법에 pooling indice들을 upsampling을 위해 사용했으며, 이는 convolution step이 뒤를 잇는다. 
+  - 공간 input을 고밀도화 하기 위함
+- 이것은 decoder의 output을 생산하기 위해서 element별로 corresponding encoder에 feature map을 더한다.
+- 또 다른, 더 memory intensive 한 FCN-Basic variant는 (**FCN-Basic-NoDimReduction**) encoder feature map을 위해 수행되는 dimensionality reduction이 없는 것이다.
+  - 이것은 FCN-BAsic과는 다르게, final encoder feature map이 decoder network를 거치기 전에 K channel로 압축되지 않는다.
+  - 그러므로, 채널의 갯수는 corresponding decoder (즉 64개)와 같다.
+- 또다른 generic varient를 시도해 보았는데, 이건 feature map이 단순히 replication에 의해 upsampling 되거나, 고정된(그리고 거친) indice의 array를 upsampling을 위해 사용된 것이다.
+- 이는 위의 variant와 비교해봤을 땐 잘 수행되지 않는다.
+- **encoder network에서 max-pooling과 sub-sampling이 없는 varient는 (decoder는 redundant하다) 더 많은 메모리를 쓰고, 수렴하는 데 오래 걸리고, 잘 수행하지 못한다.**
+
 ## 3.2 Training
+- 367개의 training, 233개의 testing RGB 이미지를 썼다. (360 x 480 해상도)
+- 11개의 class로 나누는 것이 문제
+- local contrast normalization을 RGB input에 수행
+- encoder와 decoder는 He et al. [55]에 의해 설명되었던 방식으로 초기화했다.
+- 모든 varient를 SegNet-Basic을 이용해 learning rate 0.1(고정), momentum 0.9(고정) stochastic gradient descent(SGD) 방식으로 학습시켰다.
+- training loss가 수렴할 때까지 variant를 학습시켰다.
+- 각각의 epoch 전에, training set은 섞어지고, 각각의 mini-batch는 각각의 이미지가 epoch별로 한 번만 사용되는 것을 보장하면서 순서대로 뽑아진다. 
+- validation dataset에서 가장 높게 수행하는 모델을 선택한다.
+- network를 훈련할 때 cross-entropy loss를 objective function으로 사용한다.
+- mini-batch 안에서 모든 픽셀들에 대해 loss가 요약된다.
+- training set 안에서 각각의 클래스에 있는 픽셀의 수에 큰 변화가 있을 때, base class에 기초하여 loss의 weight가 다르게 되어야 할 필요가 있다. (class balancing)
+- *median frequency balancing*을 사용했다. [이해 필요]
+  - median frequency balancing : class에 할당된, loss function에서 쓰이는 weight가 class frequency에 의해 나뉘어 지는 전체 training set에서 계산되는 class frequency들의 중간값의 비율이다.
+  - 이건 training set에 있는 더 큰 클래스가 weight를 1보다 작게 가진다는 것과, 가장 작은 클래스에 있는 weight가 가장 높은 값을 가진다라는 것을 의미한다.
+- class balancing이나 또한 *natural frequency balancing*을 사용하는 것 없이 다른 varient 학습을 실험했다.
 
 ## 3.3 Analysis
+- 다른 decoder variant의 양적인 수행을 비교하기 위하여, 3개의 일반적으로 성능을 측정할 때 사용하는 방법을 사용함
+  - global accuracy
+    - dataset에서 올바르게 분류되는 픽셀의 퍼센티지
+  - class average accuracy (C) 
+    - 모든 클래스에 대해 예측 가능한 정확도의 평균
+  - mean intersection over union(mIoU)
+    - 
