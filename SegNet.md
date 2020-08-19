@@ -197,4 +197,8 @@
   - class average accuracy (C) 
     - 모든 클래스에 대해 예측 가능한 정확도의 평균
   - mean intersection over union(mIoU)
-    - 
+    - mIoU 매트릭은 class average accuracy보다 훨씬 더 엄격한 매트릭(stringent metric)이다.
+      - 이것이 false positive(실제로는 양성인데 검사는 음성) prediction을 관통하기 때문
+    - mIoU 매트릭은 cross-entropy loss와 밸런스를 맞춘 class에 직접적으로 최적화되어있지 않다.
+    - mIoU metirc은 다른 말로는 Jacard Index라고 불린다. (benchmarking에서 자주 쓰인다)
+    
