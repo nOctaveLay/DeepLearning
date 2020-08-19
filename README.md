@@ -12,6 +12,7 @@ https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva
 U-net : https://arxiv.org/pdf/1505.04597.pdf
 
 SegNet : https://arxiv.org/pdf/1511.00561.pdf
++ 정리 : https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md
 
 DeepLab : https://arxiv.org/pdf/1606.00915.pdf
 ## 딥러닝 + 자연어처리
