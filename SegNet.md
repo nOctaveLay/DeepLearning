@@ -201,4 +201,22 @@
       - 이것이 false positive(실제로는 양성인데 검사는 음성) prediction을 관통하기 때문
     - mIoU 매트릭은 cross-entropy loss와 밸런스를 맞춘 class에 직접적으로 최적화되어있지 않다.
     - mIoU metirc은 다른 말로는 Jacard Index라고 불린다. (benchmarking에서 자주 쓰인다)
-    
+    - 하지만 Csurka et al. [57]은 이런 metric이 항상 인간에게 좋은 segmentation의 qualitative judgements(ranks)에 상호 응답하는 것은 아니라는 점에 주목했다.
+      - mIoU가 region smoothness를 좋아하고, boundary accuracy를 평가하지 않는다는 예제를 보여줬다.
+        - boundary accuracy : FCN의 저자에 의해 최근에 암시된 point이다.
+      - mIoU를 보강할, unsupervised image segmentation quality를 평가하는 데 일반적으로 사용되는 score을 맞추는 Berkeley contour에 기초한 boundary measure을 제시했다.
+    - Csurka et al. [57]은 단순히 이러한 것을 semantic segmentation의 영역으로 확장했다.
+      - mIoU metric과 같이 conjunction에서 사용되는 semantic contour accuracy의 측정이 segmentation output에서 인간이 매긴 ranking에 더 맞음을 보여줬다.
+- semantic contour score을 계산하는 핵심 방법은 F1-measure을 평가하는 것이다.
+  - F1-measure? pixel tolerance distance가 주어진 predicted, ground truth class boundary 사이에서 precision value와 recall value를 측정하는 것.
+    - 이미지 diagonal의 0.75%의 value를 tolerance distance로 사용했다.
+- ground truth test image 안에서 제안된 F1-measure은 이미지 F1-measure을 생산하기 위해서 평균이 계산됬다.
+- 이후 전체 test set 평균을 계산했으며, 'boundary F1-measure(BF)'를 '평균 image F1 measure'로 표시했다.
+- training loss가 수렴할 때까지 1000개의 최적화 iteration을 CamVid validation set에서 각각 돈 후 각각의 architectural variant를 테스트 했다.
+- 12개의 mini-batch size를 학습시키는 것과 동시에, 이것은 training sete을 통해서 거의 모든 33개의 epoch와 상호응답한다.
+- global accuracy가 validation set안의 평균들 중에 가장 높은 iteration을 선택한다.
+- 3가지의 성능 측정 방식을 held-out CamVid test set에서 이러한 관점으로 보고한다.
+- 비록 variant를 학습하는 동안 class balancing을 사용한다 할지라도, 전체적인 smooth segmentation에서 높은 global accuracy를 얻는 것은 중요한 것이다.
+- 또다른 이유는 무인 자동차 쪽으로 segmentation이 사용되는 곳은 주로 클래스를 delineate 하기 위함이다. (roads, building, side-walk, sky 등을 분류)
+  - 이러한 클래스는 이미지에서 pixel의 대다수와 높은, 좋은 segmentation에 상호 응답하는 global accuracy를 압도한다.
+- class average가 가장 높을 때 numerical performance를 보고하는 것은 종종 perceptually noisy segmentation output을 지시하는 낮은 global accuracy와 상호 응답할 수 있다.
