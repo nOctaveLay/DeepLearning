@@ -6,6 +6,9 @@ https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva
 ## [Machine Learning Concept](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md)
 ## [Machine Learning Process](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md)
 
+## 딥러닝 + Vision
+Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
+
 ## 딥러닝 + Sementic segmentation
 출처 : https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw
 
