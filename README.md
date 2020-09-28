@@ -1,10 +1,9 @@
-# Deep Learning mindmap source 2020
-https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva
+# 딥러닝에 대해 정리한 내용
 
-
-## [Machine Learning Data Processing](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20data%20processing%20roadmap.md)
-## [Machine Learning Concept](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md)
-## [Machine Learning Process](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md)
+## [Deep Learning mindmap source 2020] (https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
+1. [Machine Learning Data Processing](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20data%20processing%20roadmap.md)
+2. [Machine Learning Concept](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md)
+3. [Machine Learning Process](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md)
 
 ## 딥러닝 + Vision
 Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
