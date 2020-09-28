@@ -1,15 +1,15 @@
-Rethinking Atrous Convolution for Semantic Image Segmentation
+# Rethinking Atrous Convolution for Semantic Image Segmentation
 
 1.	DeepLab v3는 DeepLab v1에서 발전한 모델이므로, DeepLab v1, DeepLab v2에 대한 논문을 봐야 한다.
 2.	Atrous Convolution (introduced by DeepLab v1) 에 대한 이해가 필요하다.
 
-Abstract
+## Abstract
 1.	Revisit atrous convolution
 -	Powerful tool to adjust filter’s field-of-view 
 -	Powerful tool to control the resolution of feature responses computed by Deep Convolutional Neural Networks (DCNN)
 2.	Atrous conbolution을 cascade 하거나 parallel하게 적용시킬 수 있는 module을 디자인 해야 한다.
-A.	Multiple scale에서 segmenting object[오브젝트 분리]에 대한 문제를 해결하기 위함
-B.	Multiple atrous rate를 적용함으로써 Multi-scale context를 잡기 위함
+- Multiple scale에서 segmenting object[오브젝트 분리]에 대한 문제를 해결하기 위함
+- Multiple atrous rate를 적용함으로써 Multi-scale context를 잡기 위함
 3.	기존에 제시된 Atrous Spatial Pyramid Pooling module(multiple scale에서의 convolutional feature를 증명하는 것)을 증강시키는 것을 목적으로 해야 한다.
 -	Global context를 해독하는 이미지 level feature와 함께 가야 함
 -	이는 Performance를 향상시킨다.
@@ -18,58 +18,60 @@ B.	Multiple atrous rate를 적용함으로써 Multi-scale context를 잡기 위�
 6.	DenseCRF라는 선행 processing없이 이전의 DeepLab version을 향상시킴
 7.	다른 최신 모델들과 PASCAL VOC 2012 semantic image segmentation benchmark에서 비교할 수 있을만한 성과를 얻음
 
-Introduction
+## Introduction
 Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challenges에 대해 고려해야 한다.
 1.	Reduced Feature Resolution
-i.	Consecutive pooling operations나 convolution striding에 의해 일어난다.
-ii.	이는 DCNN이 증가하는 추상적인 특징 표현을 학습하는 것을 허가한다.
-iii.	하지만 이런 local image에 대한 invariance는 세부적인 공간 정보를 필요로 하는 dense prediction 업무를 방해한다. 
-iv.	이런 문제를 극복하기 위해서, atrous convolution을 사용했다.
-v.	이 Atrous convolution은 semantic image segmentation에 효과적이라고 한다.
-	Atorus convolution
-	Dilated convolution이라고 불린다.
-	ImageNet의 사용을 변경하는 것을 허용한다.
-	ImageNet 
-	마지막 몇 개의 layer의 downsampling operations을 지우고, corresponding filter kernel의 upsampling을 지움으로써denser feature map을 추출하기 위해 미리 학습된 네트워크이다.
-	이는 hole을 filter weights사이에 삽입하는 것과 동등하다.
-	Learning extra parameter를 필요로 하는 것 없이Feature responses가 DCNN에서 계산되는 Resolution을 control할 수 있다.
+- Consecutive pooling operations나 convolution striding에 의해 일어난다.
+- 이는 DCNN이 증가하는 추상적인 특징 표현을 학습하는 것을 허가한다.
+- 하지만 이런 local image에 대한 invariance는 세부적인 공간 정보를 필요로 하는 dense prediction 업무를 방해한다. 
+- 이런 문제를 극복하기 위해서, atrous convolution을 사용했다.
+- 이 Atrous convolution은 semantic image segmentation에 효과적이라고 한다.
+
+**Atorus convolution**
+- Dilated convolution이라고 불린다.
+- ImageNet의 사용을 변경하는 것을 허용한다.
+- ImageNet 
+- 마지막 몇 개의 layer의 downsampling operations을 지우고, corresponding filter kernel의 upsampling을 지움으로써denser feature map을 추출하기 위해 미리 학습된 네트워크이다.
+- 이는 hole을 filter weights사이에 삽입하는 것과 동등하다.
+- Learning extra parameter를 필요로 하는 것 없이Feature responses가 DCNN에서 계산되는 Resolution을 control할 수 있다.
+
 2.	Multiple scale에서 object의 존재를 도출하는 것
-A.	DCNN은 각각의 scale input을 위해 특징을 뽑아내기 위해서 image pyramid에 적용된다.
-i.	다른 scale에 있는 object들이 다른 feature map들에서는 현저하게 눈에 띈다.
-ii.	Encoder-decoder 구조는 다양한 scale feature을 decoder part에서 얻습니다.
-iii.	추가적인 모듈은 긴 범위의 정보를 잡기 위해서 original network의 위로 cascaded된다.
-1.	특히, DenseCRF는 pixel level pairwise similarities를 encode하기 위해서 채택되었다.
-2.	while [59, 90] develop several extra convolutional layers in cascade to gradually capture long range context.
-3.	하지만 점층적으로 (cascade) DenseCRF는 점진적으로 긴 범위의 context를 capture하기 위해서 여러 개의 추가적인 convolutional layer를 발전시켰다. 
-4.	Spatial pyramid pooling은 multiple rate와 multiple effective field of view에서 filter를 가지고 들어오는 feature map과 pooling operation들을 증명한다.
-A.	그러므로 다양한 scale에서 object를 capture한다.
-iv.	이 작업에서, atrous convolution을 다시 적용한다.
-1.	이는 다양한 크기의 context를 하기 위해서 cascaded module들과 spatial pyramid pooling의 framework 안에서 효과적으로 filter view의 field를 확장시킨다.
-2.	제시된 모듈은 다양한 비율과 훈련 되야 하는 batch normalization layer를 갖고 있는 atrous convolution으로 되어있다. 
-3.	Module을 cascade 혹은 parallel로 lay out하는 것으로 실험했다.(특히, Atrous Spatial Pyramid Pooling (ASPP) method) 
-4.	3 x 3 atrous convolution을 극단적으로 큰 rate로 적용할 때 중요한 practical issue가 있다.
-A.	Practival issue : 효과적으로 단순히 1x1 convolution으로 degenerating 할 때 image boundary 효과 때문에 긴 범위의 정보를 잡는 데 실패하는 것. 
-B.	그리고 image-level feature들을 ASPP 모듈로 통합하기 위해 제시
-v.	제시된 모델의 훈련에 대한 Implementation detail과 경험 공유
-1.	특별하고 잘 주석이 적혀있는 (finely annotated) object들을 다루는 단순히 효과적인 bootstrapping method를 포함
-2.	결론적으로, “DeepLabv3”는 이전의 작업을 향상시켰으며, PASCAL VOC 2012에서 85.7%의 performance를 가진다.
+- DCNN은 각각의 scale input을 위해 특징을 뽑아내기 위해서 image pyramid에 적용된다.
+  - 다른 scale에 있는 object들이 다른 feature map들에서는 현저하게 눈에 띈다.
+  - Encoder-decoder 구조는 다양한 scale feature을 decoder part에서 얻습니다.
+  - 추가적인 모듈은 긴 범위의 정보를 잡기 위해서 original network의 위로 cascaded된다.
+  - 특히, DenseCRF는 pixel level pairwise similarities를 encode하기 위해서 채택되었다.
+  - while [59, 90] develop several extra convolutional layers in cascade to gradually capture long range context.
+  - 하지만 점층적으로 (cascade) DenseCRF는 점진적으로 긴 범위의 context를 capture하기 위해서 여러 개의 추가적인 convolutional layer를 발전시켰다. 
+  - Spatial pyramid pooling은 multiple rate와 multiple effective field of view에서 filter를 가지고 들어오는 feature map과 pooling operation들을 증명한다.
+  - 그러므로 다양한 scale에서 object를 capture한다.
+- 이 작업에서, atrous convolution을 다시 적용한다.
+  - 이는 다양한 크기의 context를 하기 위해서 cascaded module들과 spatial pyramid pooling의 framework 안에서 효과적으로 filter view의 field를 확장시킨다.
+- 제시된 모듈은 다양한 비율과 훈련 되야 하는 batch normalization layer를 갖고 있는 atrous convolution으로 되어있다. 
+  - Module을 cascade 혹은 parallel로 lay out하는 것으로 실험했다.(특히, Atrous Spatial Pyramid Pooling (ASPP) method) 
+  - 3 x 3 atrous convolution을 극단적으로 큰 rate로 적용할 때 중요한 practical issue가 있다.
+    - Practival issue : 효과적으로 단순히 1x1 convolution으로 degenerating 할 때 image boundary 효과 때문에 긴 범위의 정보를 잡는 데 실패하는 것. 
+    - image-level feature들을 ASPP 모듈로 통합하기 위해 제시
+  - 제시된 모델의 훈련에 대한 Implementation detail과 경험 공유
+    - 특별하고 잘 주석이 적혀있는 (finely annotated) object들을 다루는 단순히 효과적인 bootstrapping method를 포함
+    - 결론적으로, “DeepLabv3”는 이전의 작업을 향상시켰으며, PASCAL VOC 2012에서 85.7%의 performance를 가진다.
  
-Related Work
+## Related Work
 -	Semantic Segmentation에서 Pixel을 올바르게 classify하는 데에 있어 global features 또는 contextual interaction들은 유용하다.
 -	Semantic segmentation을 위한 context information을 얻는 FCNs의 4가지 type에 대해 다뤄볼 것
-3.	Image pyramid
-A.	같은 모델, 일반적으로 weight를 공유함
-B.	Multi-scale input에 적용됨.
-C.	작은 크기의 input에서 feature response가 긴 범위의 context를 암호화함.
-D.	큰 크기의 input은 작은 object detail을 보존
-E.	전형적인 예는 input image를 Laplacian pyramid를 통해 변환시키고, 각각의 scale input을 DCNN에게 주고, 모든 크기의 feature map을 합치는 Farabet et al.을 포함한다.
-i.	[19,69]는 연속적으로 coarse-to-fine으로부터 multi-scale input을 적용한다.
-ii.	[55,12,11]은 직접적으로 input을 다양한 scale에 대해 resize 한다.
-1.	이런 타입의 모델의 단점은 더 크고 더 깊은 DCNN들에 대해 이미지의 크기를 변형시키지 못한다는 것이다. (networks like [32,91,86]
-2.	GPU 메모리의 한계 때문, 그리고 inference stage 동안 이게 일반적으로 적용된다.
-4.	Encoder-decoder
-A.	이 모델은 encoder와 decoder로 이루어진다.
-B.	Encoder
+- Image pyramid
+  - 같은 모델, 일반적으로 weight를 공유함
+  - Multi-scale input에 적용됨.
+  - 작은 크기의 input에서 feature response가 긴 범위의 context를 암호화함.
+  - 큰 크기의 input은 작은 object detail을 보존
+  - 전형적인 예는 input image를 Laplacian pyramid를 통해 변환시키고, 각각의 scale input을 DCNN에게 주고, 모든 크기의 feature map을 합치는 Farabet et al.을 포함한다.
+    - [19,69]는 연속적으로 coarse-to-fine으로부터 multi-scale input을 적용한다.
+    - [55,12,11]은 직접적으로 input을 다양한 scale에 대해 resize 한다.
+    - 이런 타입의 모델의 단점은 더 크고 더 깊은 DCNN들에 대해 이미지의 크기를 변형시키지 못한다는 것이다. (networks like [32,91,86]
+    - GPU 메모리의 한계 때문, 그리고 inference stage 동안 이게 일반적으로 적용된다.
+- Encoder-decoder
+  - 이 모델은 encoder와 decoder로 이루어진다.
+  - Encoder
 i.	Feature map의 공간적인 차원이 점진적으로 감소
 ii.	더 긴 범위의 정보가 더 깊은 encoder output에서 더 쉽게 잡아짐.
 C.	Decoder
