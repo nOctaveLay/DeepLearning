@@ -118,7 +118,7 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
 ## Methods
 -	Semantic segmentation에서 어떻게 atrous convolution이 dense feature들을 추출 하는 데에 적용되는지를 review
 -	제시된 모듈을 계단식 혹은 병행으로 실행된 atrous convolution module로 토론할 것이다.
-1. Atrous Convolution for Dense Feature Extraction
+### Atrous Convolution for Dense Feature Extraction
   - Fully convolutional fashion에서 deploy된 DCNNs은 semantic segmentation의 일에서 효과적으로 보여진다.
   - 하지만, max-pooling과 연속적인 layer에서 striding의 반복된 combination은 feature map들의 spatial resolution을 줄인다.
   - 이는 최근 DCNN [47,78,32] 에서 각각의 방향을 거친 32개의 factor에 의한다.
@@ -134,6 +134,7 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
     - 표준 convolution은 rate r = 1인 special한 case이다.
     - atrous convolution은 rate value를 수정함으로써 적합하게 filter의 field-of-view를 수정하도록 했다.
     - Fig 1 for illustration
+    - [Fig 1]
     - Atrous convolution은 fully convolutional network에서 고밀도로 feature response를 계산하는 방법을 명확히 제어할 수 있도록 해준다. 
   - output_stride로 입력 이미지의 공간 resolution을 최종 출력 resolution의 비율로 나타낸다.
   - 최종 feature response는 (fully connected layer 또는 global pooling 전에) input image dimension보다 32배 작다. 
@@ -145,25 +146,27 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
   - Rate = 2
     - 이건 추가적인 parameter로 학습하는 것 없이 더 밀도 있는 feature response를 추출하기 위함이다.
     - 더 많은 detail을 원한다면 [11]을 참조
-2. Going Deeper with Atrous Convolution
-A.	계단식으로 보여지는 atrous convolution을 가지고 module을 designing한다.
-B.	더 자세하게 말하면, 마지막 ResNet block의 여러 개의 copy를 복사한다.
-C.	이는 Fig 3에 기재되어있다.
-D.	 
-E.	그리고 이들을 계단식으로 재배치 합니다.
-F.	3x3 convolution들이 이들의 block에 있습니다.
-G.	마지막 convolution은 마지막 block에 있는 하나를 제외하고 stride 2를 포함합니다. 이는 original ResNet과 같습니다.
-H.	이 모델 뒤에 숨겨져 있는 동기는 소개된 striding이 더 깊은 block들에서 긴 범위의 정보를 잡기가 쉽기 때문입니다.
-i.	예를 들어, Fig3 (a) 에 나온 것처럼 전체 이미지 feature은 마지막 작은 resolution feature map으로 요약될 수 있습니다..
-ii.	하지만 우리는 연속적인 striding이 semantic segmentation에서 매우 좋지 않다는 것을 알 수 있습니다. 
-1.	왜냐하면 세부 정보들이 decimate되기 때문입니다.
-iii.	그래서 atrous convolution을 요구되는 output_stride value에 의해 결정된 rate로 적용시켰습니다. 
-1.	이는 Fig 3(b)에서 볼 수 있습니다. 이 때의 output_stride = 16
-I.	이 제시된 모델 안에서, 우리는 cascaded ResNet block들을 7까지 실험합니다. 
-i.	이 때의 추가적인 block5, block6, block7은 block4의 복제품입니다.
-ii.	Output_stride = 256입니다.
-iii.	어떤 atrous convolution도 적용되지 않았다고 가정합니다.
-3.	Multi-grid Method
+    
+### Going Deeper with Atrous Convolution
+  - 계단식으로 보여지는 atrous convolution을 가지고 module을 designing한다.
+  - 더 자세하게 말하면, 마지막 ResNet block의 여러 개의 copy를 복사한다.
+  - 이는 Fig 3에 기재되어있다.
+  - [Fig 3]
+  - 그리고 이들을 계단식으로 재배치 합니다.
+  - 3x3 convolution들이 이들의 block에 있습니다.
+  - 마지막 convolution은 마지막 block에 있는 하나를 제외하고 stride 2를 포함합니다. 이는 original ResNet과 같습니다.
+  - 이 소개된 striding이 더 깊은 block들에서 긴 범위의 정보를 잡기가 쉬웠습니다.
+    - 예를 들어, Fig3 (a) 에 나온 것처럼 전체 이미지 feature은 마지막 작은 resolution feature map으로 요약될 수 있습니다.
+  - 하지만 우리는 연속적인 striding이 semantic segmentation에서 매우 좋지 않다는 것을 알 수 있습니다. 
+    - 왜냐하면 세부 정보들이 decimate되기 때문입니다.
+  - 그래서 atrous convolution을 요구되는 output_stride value에 의해 결정된 rate로 적용시켰습니다. 
+  - 이 때의 output_stride = 16이며, 이는 Fig 3(b)에서 볼 수 있습니다. 
+  - 이 제시된 모델 안에서, 우리는 cascaded ResNet block들을 7까지 실험합니다. 
+    - 이 때의 추가적인 block5, block6, block7은 block4의 복제품입니다.
+    - 이 때의 Output_stride = 256입니다.
+    - 이 때 어떤 atrous convolution도 적용되지 않았다고 가정합니다.
+
+### Multi-grid Method
 A.	다른 사이즈의 grid에 계층을 적용한 multi-grid method에 동기를 얻음
 B.	Block4 ~ block7안에 제시된 모델 안에서 다른 atrous rate를 적용
 C.	특히 block4 ~ block4안에 있는 convolutional layer들에게 unit rate들을 Multi_Grid = (r1,r2,r3)로 정함.
