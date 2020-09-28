@@ -16,7 +16,8 @@ Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : 
 
 - U-net : https://arxiv.org/pdf/1505.04597.pdf
 - SegNet : https://arxiv.org/pdf/1511.00561.pdf
-  - [논문 번역 및 정리](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md)
+  - [논문 번역](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md)
+  - [정리]
 - DeepLab : https://arxiv.org/pdf/1606.00915.pdf
   - DeepLabv1 :
   - DeepLabv2 :
