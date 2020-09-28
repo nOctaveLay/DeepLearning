@@ -1,5 +1,5 @@
 # Rethinking Atrous Convolution for Semantic Image Segmentation
-**DeepLab v3**
+## DeepLab v3
 1.	DeepLab v3는 DeepLab v1에서 발전한 모델이므로, DeepLab v1, DeepLab v2에 대한 논문을 봐야 한다.
 2.	Atrous Convolution (introduced by DeepLab v1) 에 대한 이해가 필요하다.
 
@@ -90,32 +90,32 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
     - Context information을 capture하기 위함입니다.
 - 최근에, [41]은 일반적이고 공간적으로 높은 차원을 가지고 있는 convolution을 배우는 것을 목표로 했습니다.
 - 그리고 [82,8]은 semantic segmentation을 위해 Gaussian Conditional Random Fields를 DCNN들과 결합했습니다.
-6.	Spatial pyramid pooling
-A.	이 모델은 여러 범위에서 context를 잡기 위해서 spatial pyramid pooling을 사용합니다.
-B.	Image-level 특징들은 global context information을 위해 ParseNet에서 얻어집니다.
-C.	DeepLabv2[11]은 atrous spatial pyramid pooling (ASPP)를 제시했습니다.
-i.	다른 비율들을 가진 Parallel atrous convolution layer들은 ASPP에서 다양한 크기의 정보를 얻었습니다.
-D.	최근에, Pyramid Scene Parsing Net (PSP)는 여러 개의 grid scale에서 공간적인 pooling을 수행하고, 다양한 semantic segmentation benchmark에서 outstanding performance를 설명한다.
-E.	Global context를 묶기 위해서 LSTM에 기반을 둔 다른 method들이 있다.
-F.	Spatial pyramid pooling은 object detection에서 또한 적용된다.
-7.	atrous convolution을 spatial pyramid pooling을 위한 툴과 context module로서 주로 탐방한다.
-A.	Deeplabv3는 일반적으로 어떤 network에도 적용될 수 있다.
-B.	ResNet의 original 마지막 block의 여러 개의 copy들을 복제했고, 이를 계단식으로 배치했으며, ASPP 모듈을 재 방문했다.
-C.	ASPP 모듈은 여러 개의 atrous convolution을 병행으로 한다.
-D.	우리의 계단식 모듈은 belief map 대신에 직접적으로 feature map에 관여하는 것을 기억해라.
-E.	실험적으로 batch normalization을 훈련하는 가장 중요한 방법을 찾았다.
-F.	Global context를 더 잡기 위해서, augment ASPP를 image-level feature에 제시했다. [58,95]와 유사한 방식이다.
-8.	Atrous convolution:
-A.	Atrous convolution에 기반한 model들은 active하게 semantic segmentation을 위해 쓰여진다.
-i.	넓은 범위의 정보를 잡기 위해서 Atrous rate를 수정한 효과에 대한 실험들은 ResNet의 마지막 두 개의 block에 hybrid atrous rate를 적용했다.
-ii.	반면에 더욱더 학습된 offset을 가지고 input feature을 sample하는 deformable convolution을 배우도록 제시했다. 이는 atrous convolution을 일반화한다.
-B.	더 segmentation model 정확성을 향상시키기 위해서, 
-i.	[83]은 image caption을 얻었다. 
-ii.	[40]은 video motion을 활용했다.
-iii.	[44]는 depth정보를 통합한다.
-iv.	Atrous convolution은 [66,17,37]에 의해 object detection이 적용된다.
+- **Spatial pyramid pooling**
+  - 이 모델은 여러 범위에서 context를 잡기 위해서 spatial pyramid pooling을 사용합니다.
+  - Image-level 특징들은 global context information을 위해 ParseNet에서 얻어집니다.
+  - DeepLabv2[11]은 atrous spatial pyramid pooling (ASPP)를 제시했습니다.
+    - 다른 비율들을 가진 Parallel atrous convolution layer들은 ASPP에서 다양한 크기의 정보를 얻었습니다.
+    - 최근에, Pyramid Scene Parsing Net (PSP)는 여러 개의 grid scale에서 공간적인 pooling을 수행하고, 다양한 semantic segmentation benchmark에서 outstanding performance를 설명한다.
+    - Global context를 묶기 위해서 LSTM에 기반을 둔 다른 method들이 있다.
+  - Spatial pyramid pooling은 object detection에서 또한 적용된다.
+    - atrous convolution을 spatial pyramid pooling을 위한 툴과 context module로서 주로 탐방한다.
+- Deeplabv3는 일반적으로 어떤 network에도 적용될 수 있다.
+  - ResNet의 original 마지막 block의 여러 개의 copy들을 복제했고, 이를 계단식으로 배치했으며, ASPP 모듈을 재 방문했다.
+  - ASPP 모듈은 여러 개의 atrous convolution을 병행으로 한다.
+  - 우리의 계단식 모듈은 belief map 대신에 직접적으로 feature map에 관여하는 것을 기억해라.
+  - 실험적으로 batch normalization을 훈련하는 가장 중요한 방법을 찾았다.
+  - Global context를 더 잡기 위해서, augment ASPP를 image-level feature에 제시했다. [58,95]와 유사한 방식이다.
+- Atrous convolution:
+  - Atrous convolution에 기반한 model들은 active하게 semantic segmentation을 위해 쓰여진다.
+  - 넓은 범위의 정보를 잡기 위해서 Atrous rate를 수정한 효과에 대한 실험들은 ResNet의 마지막 두 개의 block에 hybrid atrous rate를 적용했다.
+  - 반면에 더욱더 학습된 offset을 가지고 input feature을 sample하는 deformable convolution을 배우도록 제시했다. 이는 atrous convolution을 일반화한다.
+  - 더 segmentation model 정확성을 향상시키기 위해서, 
+    - [83]은 image caption을 얻었다. 
+    - [40]은 video motion을 활용했다.
+    - [44]는 depth정보를 통합한다.
+    - Atrous convolution은 [66,17,37]에 의해 object detection이 적용된다.
 
-Methods
+## Methods
 -	Semantic segmentation에서 어떻게 atrous convolution이 dense feature들을 추출 하는 데에 적용되는지를 review
 -	제시된 모듈을 계단식 혹은 병행으로 실행된 atrous convolution module로 토론할 것이다.
 1.	Atrous Convolution for Dense Feature Extraction
@@ -342,4 +342,4 @@ C.	New training protocol
 i.	[10,11]에 있는 training protocol을 바꿨다.
 
  
-조사해야 되는 논문 : RefineNet
+조사해야 되는 논문 : RefineNet, ParseNet
