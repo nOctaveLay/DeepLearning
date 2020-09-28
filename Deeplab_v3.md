@@ -201,38 +201,39 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
 
 ## Experimental Evaluation
 -	미리 학습된 ImageNet과 ResNet을 atrous convolution을 적용시킴으로써 semantic segmentation에 맞게 변형시켰다.
-	이는 더 정밀한 feature들을 뽑아내기 위함이다.
+  -	이는 더 정밀한 feature들을 뽑아내기 위함이다.
 -	Ouput_stride가 최종 output resolution에 대한 input image spatial resolution의 비율로 정의된다라는 점을 명심해라.
 -	예를 들어, output_stride = 8일 때, 마지막 두 개의 block은 (우리의 notation에서 block 3와 block 4) original ResNet에서 rate = 2와 rate = 4인 atrous convolution을 각각 포함한다.
 -	Tensorflow로 구현되었다.
 -	PASCAL VOC 2012에서 semantic segmentation benchmark에서 제시된 모델을 평가한다.
-	PASCAL VOC 2012는 20개의 foreground object class와 1개의 background class로 구성되어 있다.
-	Original dataset은 1,464(train) 1,449(val) 그리고 1,456(test)의 training, validation, testing을 위한 pixel-level labeled image로 구성되어 있다.
-	Dataset은 [29]에 의해 제공된 추가적인 annotations으로 확장됩니다.
-	이 dataset은 10,582개의 training image(trainaug)를 생산합니다.
-	Performance는 21개의 class를 통해 평균이 내진 pixel IOU(intersection-over-union)으로 측정됩니다.
+  - PASCAL VOC 2012는 20개의 foreground object class와 1개의 background class로 구성되어 있다.
+  -	Original dataset은 1,464(train) 1,449(val) 그리고 1,456(test)의 training, validation, testing을 위한 pixel-level labeled image로 구성되어 있다.
+  -	Dataset은 [29]에 의해 제공된 추가적인 annotations으로 확장됩니다.
+  -	이 dataset은 10,582개의 training image(trainaug)를 생산합니다.
+  -	Performance는 21개의 class를 통해 평균이 내진 pixel IOU(intersection-over-union)으로 측정됩니다.
+
 1.	Training Protocol
-A.	Learning rate policy
-i.	[58,11]과 유사하게, 우리는 “poly” learning rate policy를 employ 해야 한다.
-ii.	처음의 learning rate는 (1 − iter /max iter ) ^ (power) with power = 0.9.
-B.	Crop Size
-i.	일반적인 training protocol[11]을 따르면, patch들은 training 중 image에서 모아진다.
-ii.	큰 rate를 가진 atrous convolution이 효과적이기 때문에, 크게 자른 size가 무조건 필요해진다.
-1.	다른 말로 하자면, 큰 atrous rate를 가진 filter weight가 대부분 pad된 zero 영역에 적용된다.
-iii.	그러므로 training 과 test를 할 동안 crop size를 513으로 적용시켰다.
-C.	Batch normalization
-i.	ResNet의 위에 있는 추가된 모듈은 모두 batch normalization parameter를 갖고 있다.
-ii.	이는 잘 훈련되기 위해서 매우 중요한 사항이었다.
-iii.	큰 batch size는 batch normalization parameter를 훈련하기 위해서 필요로 되어지기 때문에 output_stride = 16으로 뒀고, batch normalization에서 batch size 16으로 계산한다.
-iv.	Decay = 0.9997을 가지고 batch normalization parameter를 학습시킨다.
-v.	첫 번째 훈련
-1.	Trainaug set으로 30k의 iteration과 learning rate = 0.007로 훈련을 한 다음에,
-2.	 batch normalization parameter을 고정시켰다.
-3.	Output_stride = 8을 employ했다.
-vi.	공식적인 PASCAL VOC 2012 trainval set에서 또 다른 30K iteration으로 학습시켰다.
-1.	그 때는 더 작은 base learning rate = 0.001을 가졌다.
-vii.	Atrous convolution은 output_stride를 다른 훈련 과정에서 다른 model parameter를 학습하는 것 없이 control할 수 있게 허락해준다.
-viii.	Output_stride = 16이 output_stride = 8보다 빠르다.
+  - Learning rate policy
+    - [58,11]과 유사하게, 우리는 “poly” learning rate policy를 employ 해야 한다.
+    - 처음의 learning rate는 (1 − iter /max iter ) ^ (power) with power = 0.9.
+  - Crop Size
+    - 일반적인 training protocol[11]을 따르면, patch들은 training 중 image에서 모아진다.
+    - 큰 rate를 가진 atrous convolution이 효과적이기 때문에, 크게 자른 size가 무조건 필요해진다.
+    - 다른 말로 하자면, 큰 atrous rate를 가진 filter weight가 대부분 pad된 zero 영역에 적용된다.
+    - 그러므로 training 과 test를 할 동안 crop size를 513으로 적용시켰다.
+  - Batch normalization
+    - ResNet의 위에 있는 추가된 모듈은 모두 batch normalization parameter를 갖고 있다.
+    - 이는 잘 훈련되기 위해서 매우 중요한 사항이었다.
+    - 큰 batch size는 batch normalization parameter를 훈련하기 위해서 필요로 되어지기 때문에 output_stride = 16으로 뒀고, batch normalization에서 batch size 16으로 계산한다.
+    - Decay = 0.9997을 가지고 batch normalization parameter를 학습시킨다.
+  - 첫 번째 훈련
+    - Training set으로 30k의 iteration과 learning rate = 0.007로 훈련을 한 다음에,
+    - batch normalization parameter을 고정시켰다.
+    - Output_stride = 8을 employ했다.
+  - 공식적인 PASCAL VOC 2012 trainval set에서 또 다른 30K iteration으로 학습시켰다.
+    - 그 때는 더 작은 base learning rate = 0.001을 가졌다.
+    - Atrous convolution은 output_stride를 다른 훈련 과정에서 다른 model parameter를 학습하는 것 없이 control할 수 있게 허락해준다.
+    - Output_stride = 16이 output_stride = 8보다 빠르다.
 1.	Intermediate feature map이 공간적으로 4배나 줄기 때문이다.
 2.	하지만 정확도의 희생은 더 거친 feature map을 준다.
 D.	Upsampling logits
