@@ -1,9 +1,12 @@
-# 딥러닝에 대해 정리한 내용
+# 머신러닝/딥러닝에 대해 정리한 내용
 
-## [Deep Learning mindmap source 2020] (https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
+## 전체적인 마인드맵을 알기위해 공부한 것
+### [Deep Learning mindmap source 2020](https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
 1. [Machine Learning Data Processing](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20data%20processing%20roadmap.md)
 2. [Machine Learning Concept](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md)
 3. [Machine Learning Process](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md)
+
+## 딥러닝 기초
 
 ## 딥러닝 + Vision
 Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
@@ -30,3 +33,4 @@ https://acl2020.org/blog/ACL-2020-best-papers/
 개인적으로 많은 정보가 들어있다고 생각하는 사이트 : https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
 
 deview 2019 : https://deview.kr/2019/schedule
+ 
