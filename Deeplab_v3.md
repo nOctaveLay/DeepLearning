@@ -71,16 +71,16 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
     - GPU 메모리의 한계 때문, 그리고 inference stage 동안 이게 일반적으로 적용된다.
 - Encoder-decoder
   - 이 모델은 encoder와 decoder로 이루어진다.
-  - Encoder
-i.	Feature map의 공간적인 차원이 점진적으로 감소
-ii.	더 긴 범위의 정보가 더 깊은 encoder output에서 더 쉽게 잡아짐.
-C.	Decoder
-i.	Object detail과 공간 차원이 점진적으로 회복됨
-ii.	[60,64]는 low resolution feature의 upsampling을 배우기 위해서 deconvolution을 적용
-D.	SegNet [3]은 pooling indices를 encoder에서 재사용하고, feature response를 densify 하기 위해서 추가적인 convolutional layer를 배움.
-E.	U-Net은 encoder feature에서 corresponding decoder activation으로 skip connections을 더한다. 그리고 Laplacian pyramid reconstruction network를 사용한다.
-F.	더 최근에, RefineNet [54] 와 [70,68,39]는 model의 effectiveness를 several semantic segmentation benchmark에 대한 encoder-decoder 구조에 바탕을 두고 설명해왔다. 
-G.	이런 타입의 모델은 object detection의 문맥에서도 감지된다.
+  - **Encoder**
+    - Feature map의 공간적인 차원이 점진적으로 감소
+    - 더 긴 범위의 정보가 더 깊은 encoder output에서 더 쉽게 잡아짐.
+  - **Decoder**
+    - Object detail과 공간 차원이 점진적으로 회복됨
+    - [60,64]는 low resolution feature의 upsampling을 배우기 위해서 deconvolution을 적용
+  - SegNet [3]은 pooling indices를 encoder에서 재사용하고, feature response를 densify 하기 위해서 추가적인 convolutional layer를 배움.
+  - U-Net은 encoder feature에서 corresponding decoder activation으로 skip connections을 더한다. 그리고 Laplacian pyramid reconstruction network를 사용한다.
+  - 더 최근에, RefineNet [54] 와 [70,68,39]는 model의 effectiveness를 several semantic segmentation benchmark에 대한 encoder-decoder 구조에 바탕을 두고 설명해왔다. 
+    - 이런 타입의 모델은 object detection의 문맥에서도 감지된다.
 5.	Context module
 A.	이 모델은 긴 범위의 context를 암호화 하기 위해서 계단식으로 보여지는 추가적인 모듈을 포함한다.
 B.	효율적인 방법 중 하나는 높은 차원의 filtering algorithm을 갖고 있는DenseCRF를 DCNN 통합하는 것입니다.
@@ -342,3 +342,4 @@ C.	New training protocol
 i.	[10,11]에 있는 training protocol을 바꿨다.
 
  
+조사해야 되는 논문 : RefineNet
