@@ -12,14 +12,16 @@
 Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
 
 ## 딥러닝 + Sementic segmentation
-출처 : https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw
+공부하기로 한 내용: https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw
 
-U-net : https://arxiv.org/pdf/1505.04597.pdf
-
-SegNet : https://arxiv.org/pdf/1511.00561.pdf
-+ 정리 : https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md
-
-DeepLab : https://arxiv.org/pdf/1606.00915.pdf
+- U-net : https://arxiv.org/pdf/1505.04597.pdf
+- SegNet : https://arxiv.org/pdf/1511.00561.pdf
+  - [논문 번역 및 정리](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md)
+- DeepLab : https://arxiv.org/pdf/1606.00915.pdf
+  - DeepLabv1 :
+  - DeepLabv2 :
+  - DeepLabv3 :
+  - DeepLabv3+:
 ## 딥러닝 + 자연어처리
 
 1. 데이터 전처리 : https://blog.pingpong.us/dialog-bert-tokenizer/?fbclid=IwAR0O2mtCrn4ilEusZE2fV3waGWl1BGE7Q3ifV6TBHu-nbQ5XViflE271B2U
