@@ -1,5 +1,5 @@
 # Rethinking Atrous Convolution for Semantic Image Segmentation
-
+**DeepLab v3**
 1.	DeepLab v3는 DeepLab v1에서 발전한 모델이므로, DeepLab v1, DeepLab v2에 대한 논문을 봐야 한다.
 2.	Atrous Convolution (introduced by DeepLab v1) 에 대한 이해가 필요하다.
 
@@ -81,15 +81,15 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
   - U-Net은 encoder feature에서 corresponding decoder activation으로 skip connections을 더한다. 그리고 Laplacian pyramid reconstruction network를 사용한다.
   - 더 최근에, RefineNet [54] 와 [70,68,39]는 model의 effectiveness를 several semantic segmentation benchmark에 대한 encoder-decoder 구조에 바탕을 두고 설명해왔다. 
     - 이런 타입의 모델은 object detection의 문맥에서도 감지된다.
-5.	Context module
-A.	이 모델은 긴 범위의 context를 암호화 하기 위해서 계단식으로 보여지는 추가적인 모듈을 포함한다.
-B.	효율적인 방법 중 하나는 높은 차원의 filtering algorithm을 갖고 있는DenseCRF를 DCNN 통합하는 것입니다.
-C.	더욱이 [96,55,73]은 여러 개의 부가적인 convolutional layer들을 DCNN의 belief maps들의 위에 올리는 것 대신에 CRF와 DCNN 요소를 jointly하게 train하는 것을 제시합니다. 
-D.	반면에 [59,90]은 몇 개의 다른 convolutional layer를 DCNN의 belief map의 위에 올립니다.
-i.	Belief map들은 예측된 class들의 수와 같은 수의 output channel들을 포함하는 마지막 DCNN feature map들입니다.
-ii.	Context information을 capture하기 위함입니다.
-E.	최근에, [41]은 일반적이고 공간적으로 높은 차원을 가지고 있는 convolution을 배우는 것을 목표로 했습니다.
-F.	그리고 [82,8]은 semantic segmentation을 위해 Gaussian Conditional Random Fields를 DCNN들과 결합했습니다.
+- Context module
+  - 이 모델은 긴 범위의 context를 암호화 하기 위해서 계단식으로 보여지는 추가적인 모듈을 포함한다.
+  - 효율적인 방법 중 하나는 높은 차원의 filtering algorithm을 갖고 있는 DenseCRF를 DCNN으로 통합하는 것입니다.
+  - 더욱이 [96,55,73]은 여러 개의 부가적인 convolutional layer들을 DCNN의 belief maps들의 위에 올리는 것 대신에 CRF와 DCNN 요소를 jointly하게 train하는 것을 제시합니다. 
+  - 반면에 [59,90]은 몇 개의 다른 convolutional layer를 DCNN의 belief map의 위에 올립니다.
+    - Belief map들은 예측된 class들의 수와 같은 수의 output channel들을 포함하는 마지막 DCNN feature map들입니다.
+    - Context information을 capture하기 위함입니다.
+- 최근에, [41]은 일반적이고 공간적으로 높은 차원을 가지고 있는 convolution을 배우는 것을 목표로 했습니다.
+- 그리고 [82,8]은 semantic segmentation을 위해 Gaussian Conditional Random Fields를 DCNN들과 결합했습니다.
 6.	Spatial pyramid pooling
 A.	이 모델은 여러 범위에서 context를 잡기 위해서 spatial pyramid pooling을 사용합니다.
 B.	Image-level 특징들은 global context information을 위해 ParseNet에서 얻어집니다.
