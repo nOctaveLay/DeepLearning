@@ -167,38 +167,39 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
     - 이 때 어떤 atrous convolution도 적용되지 않았다고 가정합니다.
 
 ### Multi-grid Method
-A.	다른 사이즈의 grid에 계층을 적용한 multi-grid method에 동기를 얻음
-B.	Block4 ~ block7안에 제시된 모델 안에서 다른 atrous rate를 적용
-C.	특히 block4 ~ block4안에 있는 convolutional layer들에게 unit rate들을 Multi_Grid = (r1,r2,r3)로 정함.
-D.	Convolutional layer에서 마지막 atrous rate는 unit rate와 그에 따르는 (corresponding) rate의 곱과 동일하다.
-i.	예를 들어, output_stride = 16이고, Multi_Grid = (1,2,4)일 때, 3개의 convolution은 rates = 2 • (1, 2, 4) = (2, 4, 8) 를 block4에 각각 가진다.
-4.	Atrous Spatial Pyramid Pooling
-A.	[11]에서 제시된 Atrous Spatial Pyramid Pooling을 재 방문한다.
-B.	[11]에서는 다른 atrous rate들을 가진 4개의 parallel atrous convolution이 feature map의 위에 적용된다.
-C.	ASPP는 spatial pyramid pooling의 성공에 영향을 받았다.
-i.	Spatial pyramid pooling은 다른 scale에서feature을 resample하는 것이 효과적이라는 것을 보여준다.
-ii.	이는 자의로 정한 scale에서의 범위를 효과적이고 정확하게 classify하기 위함이다.
-iii.	[11]과는 다르게, ASPP에 batch normalization을 포함시킨다.
-D.	다른 atrous rate를 가진 ASPP는 multi-scale information을 잡는다.
-E.	하지만, sampling rate가 커지면 커질수록, valid filter weight의 수는 점점 작아집니다.
-i.	Valid filter weight = valid feature region에 적용되는 weight들, zero로 패딩된 것 대신.
-F.	이 효과는 3x3 filter를 65x65 feature map에 다른 atrous rate로 적용시켰을 때 Fig.4에서 나타난다.
-G.	 
-H.	Rate value가 feature map size와 가까운 극단적인 상황에서, 3x3 filter는 전체 image context를 잡는 대신에 1x1 filter로 degenerate된다.
-i.	이는 오직 center filter weight가 효과적일 때에만 가능하다.
-I.	[58,95]와 비슷한 image level feature를 적용시킨다.
-i.	이 문제를 극복하기 위함이다.
-ii.	model에게 global context 정보를 통합하기 위함이다.
-J.	특히, global average pooling을 모델의 마지막 feature map에 적용시킬것이다.
-i.	그 후 결과 image-level 특징들을 1x1 convolution에 256개의 filter로 줄 것이다.
-ii.	그 다음 bilinear하게 feature을 요구된 공간 차원으로 upsample할 것이다.
-iii.	마지막에, 향상된 ASPP는 output_stride = 16일 때 1개의 1x1 convolution과 3개의 3x3 convolution으로 rate = (6,12,18)로 구성한다.
-1.	256 filter와 batch normalization이 위의 과정에서 무조건 들어간다.
-2.	Image-level feature는 Fig 5.에서 보여진다.
-3.	Output_stride = 8일 때 그 rate들이 double이 된다.
-4.	모든 branch들로부터 나온 결과적인 feature은 합쳐집니다.
-5.	그리고 final logit을 생산하기 전의 마지막 1x1 convolution을 지나가기 전에 또 다른 1x1 convolution을 지나갑니다. (당연하지만 256 filter와 batch normalization)
-Experimental Evaluation
+  - 다른 사이즈의 grid에 계층을 적용한 multi-grid method에 동기를 얻음
+  - Block4 ~ block7안에 제시된 모델 안에서 다른 atrous rate를 적용
+  - 특히 block4 ~ block4안에 있는 convolutional layer들에게 unit rate들을 Multi_Grid = (r1,r2,r3)로 정함.
+  - Convolutional layer에서 마지막 atrous rate는 unit rate와 그에 따르는 (corresponding) rate의 곱과 동일하다.
+    - 예를 들어, output_stride = 16이고, Multi_Grid = (1,2,4)일 때, 3개의 convolution은 rates = 2 • (1, 2, 4) = (2, 4, 8) 를 block4에 각각 가진다.
+  - Atrous Spatial Pyramid Pooling
+    - [11]에서 제시된 Atrous Spatial Pyramid Pooling을 재 방문한다.
+    - [11]에서는 다른 atrous rate들을 가진 4개의 parallel atrous convolution이 feature map의 위에 적용된다.
+    - ASPP는 spatial pyramid pooling의 성공에 영향을 받았다.
+      - Spatial pyramid pooling은 다른 scale에서feature을 resample하는 것이 효과적이라는 것을 보여준다.
+      - 이는 자의로 정한 scale에서의 범위를 효과적이고 정확하게 classify하기 위함이다.
+      - [11]과는 다르게, ASPP에 batch normalization을 포함시킨다.
+    - 다른 atrous rate를 가진 ASPP는 multi-scale information을 잡는다.
+      - 하지만, sampling rate가 커지면 커질수록, valid filter weight의 수는 점점 작아집니다.
+      - Valid filter weight = zero로 패딩된 것 대신 valid feature region에 적용되는 weight들
+    - 이 효과는 3x3 filter를 65x65 feature map에 다른 atrous rate로 적용시켰을 때 Fig.4에서 나타난다.
+    - [Fig 4]
+    - Rate value가 feature map size와 가까운 극단적인 상황에서, 3x3 filter는 전체 image context를 잡는 대신에 1x1 filter로 degenerate된다.
+      - 이는 오직 center filter weight가 효과적일 때에만 가능하다.
+    - [58,95]와 비슷한 image level feature를 적용시킨다.
+      - 위에서 언급한 문제를 극복하기 위함이다.
+      - model에게 global context 정보를 통합하기 위함이다.
+    - 특히, global average pooling을 모델의 마지막 feature map에 적용시킬것이다.
+    - 그 후 결과 image-level 특징들을 1x1 convolution에 256개의 filter로 줄 것이다.
+    - 그 다음 bilinear하게 feature을 요구된 공간 차원으로 upsample할 것이다.
+    - 마지막에, 향상된 ASPP는 output_stride = 16일 때 1개의 1x1 convolution과 3개의 3x3 convolution으로 rate = (6,12,18)로 구성한다.
+      1.	256 filter와 batch normalization이 위의 과정에서 무조건 들어간다.
+      2.	Image-level feature는 Fig 5.에서 보여진다.
+      3.	Output_stride = 8일 때 그 rate들이 double이 된다.
+      4.	모든 branch들로부터 나온 결과적인 feature은 합쳐집니다.
+      5.	그리고 final logit을 생산하기 전의 마지막 1x1 convolution을 지나가기 전에 또 다른 1x1 convolution을 지나갑니다. (당연하지만 256 filter와 batch normalization)
+
+## Experimental Evaluation
 -	미리 학습된 ImageNet과 ResNet을 atrous convolution을 적용시킴으로써 semantic segmentation에 맞게 변형시켰다.
 	이는 더 정밀한 feature들을 뽑아내기 위함이다.
 -	Ouput_stride가 최종 output resolution에 대한 input image spatial resolution의 비율로 정의된다라는 점을 명심해라.
