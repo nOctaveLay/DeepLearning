@@ -118,35 +118,34 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
 ## Methods
 -	Semantic segmentation에서 어떻게 atrous convolution이 dense feature들을 추출 하는 데에 적용되는지를 review
 -	제시된 모듈을 계단식 혹은 병행으로 실행된 atrous convolution module로 토론할 것이다.
-1.	Atrous Convolution for Dense Feature Extraction
-A.	Fully convolutional fashion에서 deploy된 DCNNs은 semantic segmentation의 일에서 효과적으로 보여진다.
-B.	하지만, max-pooling과이러한 network의 연속적인 layer에서 striding의 반복된 combination은 결과적인 feature map들의 spatial resolution을 줄인다.
-C.	최근 DCNN [47,78,32] 에서 각각의 방향을 거친 32개의 factor에 의한다.
-D.	Deconvolutional layer(또는 transposed convolution) [92,60,64,4,71,68]은 공간적인 해상도를 회복시키기 위해서 employ된다.
-E.	대신에, 우리는 atrous convolution의 사용을 주장한다.
-i.	Atrous convolution은 undecimated wavelet transform의 효과적인 계산을 위해 개발되었다.
-ii.	[26,74,66]에 의하면 이전에 DCNN context 안에서 사용되었다. 
-F.	2차원 시그널에서 각각의 location을 i, output을 y, 그리고 filter를 w 라고 하자.
-i.	Atrous convolution은 input feature map x에 대해 적용된다.
-ii.	 
-iii.	Atrous rate, r이 input signal을 sample한 것을 갖고 있는 stride에 상호 반응해야한다.
-iv.	이는 input x를 2개의 연속된 filter value들을 각각의 공간 차원에 따라서 r-1개의 zero를 넣음으로써 생산된 upsampled filter와 convolve 연산을 하는 것과 같다.
-v.	(따라서 atrous convolution의 이름은 영어에서 hole을 의미하는 프랑스 언어 trous에서 왔다.)
-vi.	표준 convolution은 rate r = 1인 special한 case이다.
-vii.	그리고 atrous convolution은 rate value를 수정함으로써 적합하게 filter의 field-of-view를 수정하도록 했다.
-viii.	Fig 1 for illustration
-G.	Atrous convolution은 fully convolutional network에서 고밀도로 feature response를 계산하는 방법을 명확히 제어할 수 있도록 해준다. 
-H.	따라서, 우리는 output_stride로 입력 이미지의 공간 resolution을 최종 출력 resolution의 비율로 나타낸다.
-I.	최종 feature response는 (fully connected layer 또는 global pooling 전에) input image dimension보다 32배 작다. 
-i.	이는 DCNN [47,78,32]은image classification을 위해 deploy 됐기 때문이다.
-ii.	그러므로 output_stride = 32
-J.	만약 DCNN에 있는 계산된 feature response들의 공간적 밀도를 2배로 하기를 원한다면, 해상도를 감소시키는 마지막 pooling 또는 convolutional layer의 stride는 1로 설정되어야 한다.
-i.	이는 signal decimation을 피하기 위함이다.
-ii.	그 다음, 모든 뒤에 따라오는 convolutional layer들은 atrous convolutional layer로 대체되어야 한다.
-1.	Rate = 2
-2.	이건 추가적인 parameter로 학습하는 것 없이 더 밀도 있는 feature response를 추출하기 위함이다.
-3.	더 많은 detail을 원한다면 [11]을 참조
-2.	Going Deeper with Atrous Convolution
+1. Atrous Convolution for Dense Feature Extraction
+  - Fully convolutional fashion에서 deploy된 DCNNs은 semantic segmentation의 일에서 효과적으로 보여진다.
+  - 하지만, max-pooling과 연속적인 layer에서 striding의 반복된 combination은 feature map들의 spatial resolution을 줄인다.
+  - 이는 최근 DCNN [47,78,32] 에서 각각의 방향을 거친 32개의 factor에 의한다.
+  - Deconvolutional layer(또는 transposed convolution) [92,60,64,4,71,68]은 공간적인 해상도를 회복시키기 위해서 employ된다.
+  - 대신에, 우리는 atrous convolution의 사용을 주장한다.
+  - Atrous convolution은 undecimated wavelet transform의 효과적인 계산을 위해 개발되었다.
+    - [26,74,66]에 의하면 이전에 DCNN context 안에서 사용되었다. 
+    - 2차원 시그널에서 각각의 location을 i, output을 y, 그리고 filter를 w 라고 하자.
+    - Atrous convolution은 input feature map x에 대해 적용된다.
+    - Atrous rate, r이 input signal을 sample한 것을 갖고 있는 stride에 상호 반응해야한다.
+    - 이는 input x를 2개의 연속된 filter value들을 각각의 공간 차원에 따라서 r-1개의 zero를 넣음으로써 생산된 upsampled filter와 convolve 연산을 하는 것과 같다.
+    - (따라서 atrous convolution의 이름은 영어에서 hole을 의미하는 프랑스 언어 trous에서 왔다.)
+    - 표준 convolution은 rate r = 1인 special한 case이다.
+    - atrous convolution은 rate value를 수정함으로써 적합하게 filter의 field-of-view를 수정하도록 했다.
+    - Fig 1 for illustration
+    - Atrous convolution은 fully convolutional network에서 고밀도로 feature response를 계산하는 방법을 명확히 제어할 수 있도록 해준다. 
+  - output_stride로 입력 이미지의 공간 resolution을 최종 출력 resolution의 비율로 나타낸다.
+  - 최종 feature response는 (fully connected layer 또는 global pooling 전에) input image dimension보다 32배 작다. 
+    - 이는 DCNN [47,78,32]은image classification을 위해 deploy 됐기 때문이다.
+    - 그러므로 output_stride = 32
+  - 만약 DCNN에 있는 계산된 feature response들의 공간적 밀도를 2배로 하기를 원한다면, 해상도를 감소시키는 마지막 pooling 또는 convolutional layer의 stride는 1로 설정되어야 한다.
+    - 이는 signal decimation을 피하기 위함이다.
+    - 그 다음, 모든 뒤에 따라오는 convolutional layer들은 atrous convolutional layer로 대체되어야 한다.
+  - Rate = 2
+    - 이건 추가적인 parameter로 학습하는 것 없이 더 밀도 있는 feature response를 추출하기 위함이다.
+    - 더 많은 detail을 원한다면 [11]을 참조
+2. Going Deeper with Atrous Convolution
 A.	계단식으로 보여지는 atrous convolution을 가지고 module을 designing한다.
 B.	더 자세하게 말하면, 마지막 ResNet block의 여러 개의 copy를 복사한다.
 C.	이는 Fig 3에 기재되어있다.
