@@ -1,4 +1,5 @@
 # Rethinking Atrous Convolution for Semantic Image Segmentation
+
 ## DeepLab v3
 1.	DeepLab v3는 DeepLab v1에서 발전한 모델이므로, DeepLab v1, DeepLab v2에 대한 논문을 봐야 한다.
 2.	Atrous Convolution (introduced by DeepLab v1) 에 대한 이해가 필요하다.
