@@ -234,49 +234,48 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
     - 그 때는 더 작은 base learning rate = 0.001을 가졌다.
     - Atrous convolution은 output_stride를 다른 훈련 과정에서 다른 model parameter를 학습하는 것 없이 control할 수 있게 허락해준다.
     - Output_stride = 16이 output_stride = 8보다 빠르다.
-1.	Intermediate feature map이 공간적으로 4배나 줄기 때문이다.
-2.	하지만 정확도의 희생은 더 거친 feature map을 준다.
-D.	Upsampling logits
-i.	 [10,11]이라는 과거의 작업에 의하면, target의 ground truth는 8로 downsample된다. 
-1.	이는 훈련 도중 진행된다.
-2.	Output_stride = 8이다.
-ii.	Groundtruth를 손상되지 않게 유지하는 것이 중요하다.
-1.	Final logit을 upsample하는 것보다.
-2.	Groundtruth를 downsampling 하는 것이 올바른 annotaion을 제거하기 때문이다.
-3.	이는 세부적인 부분의 back-propagation이 불가능하게 만든다.
-E.	Data augmentation
-i.	Input image를 0.5배에서 2배 사이에서 random하게 크기를 조절했다.
-ii.	훈련 도중 왼쪽과 오른쪽을 랜덤하게 뒤집었다.
+      -	Intermediate feature map이 공간적으로 4배나 줄기 때문이다.
+      - 하지만 정확도의 희생은 더 거친 feature map을 준다.
+   - Upsampling logits
+    - [10,11]이라는 과거의 작업에 의하면, target의 ground truth는 8로 downsample된다. 
+      - 이는 훈련 도중 진행된다.
+      - Output_stride = 8이다.
+    - Final logit을 upsample하는 것보다 Groundtruth를 손상되지 않게 유지하는 것이 중요하다.
+      - Groundtruth를 downsampling 하는 것이 올바른 annotaion을 제거하기 때문이다.
+      - 이는 세부적인 부분의 back-propagation이 불가능하게 만든다.
+  - Data augmentation
+    - Input image를 0.5배에서 2배 사이에서 random하게 크기를 조절했다.
+    - 훈련 도중 왼쪽과 오른쪽을 랜덤하게 뒤집었다.
 2.	Going Deeper with Atrous Convolution
-A.	ResNet-50
-i.	Tab.1에서, ResNet-50에 적용시킬 때의 output_stride의 효과를 실험했다.
-1.	Block7 (다시 말하자면, 추가적인 block5, block6, block7존재)
-2.	table에서 보여주다시피, output_stride = 256일 경우 다른 것들보다 performance가 훨씬 더 악화된다.
-A.	이는 atrous convolution이 적용되지 않았을 때다
-B.	Severe signal decimation 때문에 더 나빠진다.
-3.	Output_stride가 더 커질때, 그리고 correspondingly하게 atrous convolution을 적용할 때, performance가 20.29%에서 75.18%로 증가했다. 
-A.	이는 semantic segmentation에서 cascadedly하게 block을 더 많이 쌓을 때 atrous convolution이 필수적임을 보여준다.
-B.	ResNet-50 vs ResNet-101
-i.	ResNet-50을 더 깊은 network ResNet-101로 대체한다.
-ii.	Cascaded block의 수를 바꾼다.
-iii.	Tab.2에서 보여준 것처럼, 더 많은 block이 추가될수록 성능이 증가한다.
-iv.	그렇지만, 향상의 이득이 점점 줄어든다.
-v.	ResNet-50에서 block7을 employ 하는 것은 performance를 살짝 감소시킨다.
-vi.	하지만 여전히 ResNet-101의 performance보다 높다.
-C.	Multi-grid
-i.	Multi-grid method를 Tab.3안의 여러 개의 block이 cascaded하게 더해진  ResNet-101에 적용시킨다. 
-ii.	Multi_Grid = (r1,r2,r3) = The unit rates
-iii.	Unit rate는 block 4 그리고 이 이후에 추가된 block들에게 모두 적용된다. 
-iv.	table에서 보여지듯, multi-grid method가 된 (a)가 일반적인 version보다 일반적으로 더 좋다.
-1.	일반적인 version = (1,1,1)을 적용시켰을 경우.
-2.	(2,2,2)는 별로 효과적이지 않았다.
-3.	가장 좋은 모델은 (1,2,1)이 적용되었을 때였다.
-D.	Interference strategy on val set
-i.	제시된 모델은 output_stride = 16으로 훈련된 것이었다.
-ii.	추론 과정 동안, 더 정밀한 feature map을 얻기 위하여 output_stride = 8로 적용시켰다.
-iii.	Tab. 4에서 보여지듯, 흥미롭게도, 가장 cascaded model을 평가했을 때 output_stride를 16으로 했을 때보다 1.39%의 성능이 나아졌다.
-iv.	성능은 다양한 크기의 input(0.5, 0.75, 1.0, 1.25, 1.5, 1.75)과 좌우 반전 이미지에 추론을 수행하기 위해 향상됩니다.
-v.	특히, 마지막 결과로서 평균적인 확률을 각각의 크기와 뒤집힌 이미지로부터 구한다.
+- ResNet-50
+  - Tab.1에서, ResNet-50에 적용시킬 때의 output_stride의 효과를 실험했다.
+  - Block7이 존재한다. (다시 말하자면, 추가적인 block5, block6, block7존재)
+  - table에서 보여주다시피, output_stride = 256일 경우 다른 것들보다 performance가 훨씬 더 악화된다.
+    - 이는 atrous convolution이 적용되지 않았을 때다
+    - 이는 Severe signal decimation 때문에 더 나빠진다.
+  - Output_stride가 더 커질때, 그리고 correspondingly하게 atrous convolution을 적용할 때, performance가 20.29%에서 75.18%로 증가했다. 
+    - 이는 semantic segmentation에서 cascadedly하게 block을 더 많이 쌓을 때 atrous convolution이 필수적임을 보여준다.
+- ResNet-50 vs ResNet-101
+  - ResNet-50을 더 깊은 network ResNet-101로 대체한다.
+  - Cascaded block의 수를 바꾼다.
+  - Tab.2에서 보여준 것처럼, 더 많은 block이 추가될수록 성능이 증가한다.
+  - 그렇지만, 향상의 이득이 점점 줄어든다.
+  - ResNet-50에서 block7을 employ 하는 것은 performance를 살짝 감소시킨다.
+  -  하지만 여전히 ResNet-101의 performance보다 높다.
+- Multi-grid
+  - Multi-grid method를 Tab.3안의 여러 개의 block이 cascaded하게 더해진  ResNet-101에 적용시킨다. 
+  - Multi_Grid = (r1,r2,r3) = The unit rates
+  - Unit rate는 block 4 그리고 이 이후에 추가된 block들에게 모두 적용된다. 
+  - table에서 보여지듯, multi-grid method가 된 (a)가 일반적인 version보다 일반적으로 더 좋다.
+    - 일반적인 version : (1,1,1)을 적용시켰을 경우.
+    - (2,2,2)는 별로 효과적이지 않았다.
+    - 가장 좋은 모델은 (1,2,1)이 적용되었을 때였다.
+- Interference strategy on val set
+  - 제시된 모델은 output_stride = 16으로 훈련된 것이었다.
+  - 추론 과정 동안, 더 정밀한 feature map을 얻기 위하여 output_stride = 8로 적용시켰다.
+  - Tab. 4에서 보여지듯, 흥미롭게도, 가장 cascaded model을 평가했을 때 output_stride를 16으로 했을 때보다 1.39%의 성능이 나아졌다.
+  - 성능은 다양한 크기의 input(0.5, 0.75, 1.0, 1.25, 1.5, 1.75)과 좌우 반전 이미지에 추론을 수행하기 위해 향상됩니다.
+  - 특히, 마지막 결과로서 평균적인 확률을 각각의 크기와 뒤집힌 이미지로부터 구한다.
 3.	Atrous Spatial Pyramid Pooling
 A.	[11]과는 주요한 차이점을 가진 Atrous Spatial Pyramid Pooling (ASPP) 모듈을 가지고 실험한다.
 i.	이는 batch normalization parameter가 fine-tuned 되어 있고, image-level feature들은 포함되어있다.
