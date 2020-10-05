@@ -276,64 +276,63 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
   - Tab. 4에서 보여지듯, 흥미롭게도, 가장 cascaded model을 평가했을 때 output_stride를 16으로 했을 때보다 1.39%의 성능이 나아졌다.
   - 성능은 다양한 크기의 input(0.5, 0.75, 1.0, 1.25, 1.5, 1.75)과 좌우 반전 이미지에 추론을 수행하기 위해 향상됩니다.
   - 특히, 마지막 결과로서 평균적인 확률을 각각의 크기와 뒤집힌 이미지로부터 구한다.
-3.	Atrous Spatial Pyramid Pooling
-A.	[11]과는 주요한 차이점을 가진 Atrous Spatial Pyramid Pooling (ASPP) 모듈을 가지고 실험한다.
-i.	이는 batch normalization parameter가 fine-tuned 되어 있고, image-level feature들은 포함되어있다.
-B.	ASPP
-i.	향상된 ASPP module에서 우리는 Tab.5에서 봐서 알 수 있듯 block4에 있는 multi-grid를 통합하는 것에 대한 효과를 실험한다. 
-ii.	첫 번째로, ASPP = (6,12,18)로 고정했다.
-1.	즉, rates = (6,12,18)이라는 뜻이다.
-2.	Tab 3에 있는 block4 column과 비교해라
-iii.	만약 더 넓은 범위의 context를 위해 rate가 24인 다른 parallel branch를 추가적으로 employ한다면, 성능은 0.12%만큼 하락한다.
-iv.	반대로, image-level feature을 가진 ASPP 모듈을 증강하는 것은 효과적이었다.
-1.	77.21%의 결과 성능을 보여줬다.
-C.	Inference strategy on val set
-i.	유사하게, 우리는 output_stride = 8을 일단 모델이 훈련될 때 추론 과정에서 적용시킨다.
-ii.	Tab.6 에서 보이다시피, output_stride = 8은 output_stride = 16을 썼을 때보다 1.3%의 향상을 가져온다.
-1.	다양한 크기 input에 적용된다.
-iii.	좌우 반전된 이미지를 더하는 것은 각각 0.94%와 0.32%로 성능을 더욱더 향상시킨다.
-iv.	ASPP의 가장 좋은 모델은 79.77%의 성능을 가지고 있다.
-1.	이는 cascaded atrous convolution module들보다 더 좋다. 
-2.	이는 test set evaluation에서 우리의 마지막 모델로 선정되었다.
-D.	DeepLabv2와 비교했을 때
-i.	우리의 가장 cascaded가 잘 된 모델 (in Tab. 4) 그리고 ASPP 모델 (in Tab. 6)는 PASCAL VOC 2012 val set에서 이미 DeepLabv2를 능가했다.
-1.	DenseCRP post-processing또는 MS-COCO pre-training이 없는 두 가지의 경우에서 측정
-2.	DeepLabv2는 DenseCRF와 MS-COCO를 썼음에도 77.69%가 나왔다.
-ii.	제시된 모델 안에서 batch normalization parameter들을 fine-tuning하고 포함하는 것이 향상에 영향을 많이 끼쳤다.
-iii.	그리고 또한 많은 크기의 context를 암호화하는 더 좋은 방법을 갖는 것도 향상에 많은 영향을 끼쳤다.
+3. Atrous Spatial Pyramid Pooling
+  - [11]과는 주요한 차이점을 가진 Atrous Spatial Pyramid Pooling (ASPP) 모듈을 가지고 실험한다.
+    - 이는 batch normalization parameter가 fine-tuned 되어 있고, image-level feature들은 포함되어있다.
+  - ASPP
+    - 향상된 ASPP module에서 우리는 Tab.5에서 봐서 알 수 있듯 block4에 있는 multi-grid를 통합하는 것에 대한 효과를 실험한다. 
+    - 첫 번째로, ASPP = (6,12,18)로 고정했다.
+      - 즉, rates = (6,12,18)이라는 뜻이다.
+      - Tab 3에 있는 block4 column과 비교해라
+    - 만약 더 넓은 범위의 context를 위해 rate가 24인 다른 parallel branch를 추가적으로 employ한다면, 성능은 0.12%만큼 하락한다.
+    - 반대로, image-level feature을 가진 ASPP 모듈을 증강하는 것은 효과적이었다.
+      - 77.21%의 결과 성능을 보여줬다.
+- Inference strategy on val set
+  - 유사하게, 우리는 output_stride = 8을 일단 모델이 훈련될 때 추론 과정에서 적용시킨다.
+  - Tab.6 에서 보이다시피, output_stride = 8은 output_stride = 16을 썼을 때보다 1.3%의 향상을 가져온다.
+    - 다양한 크기 input에 적용된다.
+    - 좌우 반전된 이미지를 더하는 것은 각각 0.94%와 0.32%로 성능을 더욱더 향상시킨다.
+    - ASPP의 가장 좋은 모델은 79.77%의 성능을 가지고 있다.
+      - 이는 cascaded atrous convolution module들보다 더 좋다. 
+      - 이는 test set evaluation에서 우리의 마지막 모델로 선정되었다.
+- DeepLabv2와 비교했을 때
+  - 우리의 가장 cascaded가 잘 된 모델 (in Tab. 4) 그리고 ASPP 모델 (in Tab. 6)는 PASCAL VOC 2012 val set에서 이미 DeepLabv2를 능가했다.
+    - DenseCRP post-processing또는 MS-COCO pre-training이 없는 두 가지의 경우에서 측정
+    - DeepLabv2는 DenseCRF와 MS-COCO를 썼음에도 77.69%가 나왔다.
+  - 제시된 모델 안에서 batch normalization parameter들을 fine-tuning하고 포함하는 것이 향상에 영향을 많이 끼쳤다.
+  - 그리고 또한 많은 크기의 context를 암호화하는 더 좋은 방법을 갖는 것도 향상에 많은 영향을 끼쳤다.
 4.	Appendix
-A.	[14]에 대한 결과에서 Cityscape와 hyper parameter의 효과 같은 실험적인 결과
-5.	Qualitative results
-A.	Fig. 6.에서 우리의 가장 좋은 ASPP의 양적인 visual result를 줄 것이다.
-B.	figure에서 보여지듯, 우리의 모델은 어떤 DenseCRF 없이 object를 매우 잘 분리하는 것이다.
+- [14]에 대한 결과에서 Cityscape와 hyper parameter의 효과 같은 실험적인 결과
+5.  Qualitative results
+- Fig. 6.에서 우리의 가장 좋은 ASPP의 양적인 visual result를 줄 것이다.
+- figure에서 보여지듯, 우리의 모델은 어떤 DenseCRF 없이 object를 매우 잘 분리하는 것이다.
 6.	Failure mode
-A.	Fig. 5의 밑의 줄에서 보여지듯이, 우리의 모델은 sofa와 chair, dining table and chair, and rare view of objects를 구분하는데 어려움을 겪는다.
+  - Fig. 5의 밑의 줄에서 보여지듯이, 우리의 모델은 sofa와 chair, dining table and chair, and rare view of objects를 구분하는데 어려움을 겪는다.
 7.	Pretrained on COCO
-A.	다른 최신의 모델과 비교할 때, 우리는 가장 좋은 ASPP model을 MS-COCO dataset으로 미리 학습한다.[57]
-i.	MS-COCO train-val_minus_minival set에서부터, 우리는 1000개의 픽셀 이상을 갖고 있는 annotation region들을 갖는 image만 고를 것이다.
-ii.	그리고 PASCAL VOC 2012에서 정의된 class들을 포함할 것이다.
-iii.	훈련에 약 60K개의 이미지를 초래한다.
-B.	게다가, PASCAL VOC 2012에서 정의되지 않은 MS-COCO class들은 모두 background class로 분류할 것이다.
-C.	MS-COCO dataset을 미리 훈련한 후에, 제안된 모델은 val set에서 82.7%의 성능을 보여줬다.
-i.	이 때의 output_stride = 8이며, multi-scale input을 사용한다.
-ii.	추론 중에 좌우 반전된 이미지를 더한다.
-iii.	초기 learning rate = 0.0001을 적용, 같은 training protocol을 사용.
-1.	이는 PASCAL VOC 2012 dataset에서 fine-tuning이 되었을 때
-8.	Test set result and an effective bootstrapping method
-A.	PASCAL VOC 2012 dataset은 증강된 dataset보다 더 높은 quality의 annotation을 제공한다.
-B.	우리의 모델을 PASCAL VOC 2012 trainval set에서 더 fine-tune했다.
-C.	특히, 우리의 모델은 output_stride = 8로 훈련되었다.
-i.	그래서 annotation detail이 유지되었다.
-D.	게다가, pixel hard example mining을 [85,70]처럼 하는 것 대신에, 우리는 hard image에 bootstrapping을 했다.
-E.	특히, 우리는 training set에서 hard class를 담고 있는 (특히 자전거, 의자, 테이블, potted plant, 그리고 소파 같은) image를 duplicate한다.
-F.	Fig.7에서 보여지듯, 가장 단순한 bootstrapping method는 bicycle class를 segmenting하는데에 유용하다.
-G.	마지막으로, DeepLabv3는 test set에서 Tab.7에서 보여지듯 어떤 DenseCRF post-processing없이 85.7%의 성능을 성취했다.
+- 다른 최신의 모델과 비교할 때, 우리는 가장 좋은 ASPP model을 MS-COCO dataset으로 미리 학습한다.[57]
+  - MS-COCO train-val_minus_minival set에서부터, 우리는 1000개의 픽셀 이상을 갖고 있는 annotation region들을 갖는 image만 고를 것이다.
+  - 그리고 PASCAL VOC 2012에서 정의된 class들을 포함할 것이다.
+  - 훈련에 약 60K개의 이미지를 초래한다.
+- 게다가, PASCAL VOC 2012에서 정의되지 않은 MS-COCO class들은 모두 background class로 분류할 것이다.
+- MS-COCO dataset을 미리 훈련한 후에, 제안된 모델은 val set에서 82.7%의 성능을 보여줬다.
+  - 이 때의 output_stride = 8이며, multi-scale input을 사용한다.
+  - 추론 중에 좌우 반전된 이미지를 더한다.
+  - 초기 learning rate = 0.0001을 적용, 같은 training protocol을 사용.
+    - 이는 PASCAL VOC 2012 dataset에서 fine-tuning이 되었을 때
+8.  Test set result and an effective bootstrapping method
+- PASCAL VOC 2012 dataset은 증강된 dataset보다 더 높은 quality의 annotation을 제공한다.
+- 우리의 모델을 PASCAL VOC 2012 trainval set에서 더 fine-tune했다.
+- 특히, 우리의 모델은 output_stride = 8로 훈련되었다.
+  - 그래서 annotation detail이 유지되었다.
+- 게다가, pixel hard example mining을 [85,70]처럼 하는 것 대신에, 우리는 hard image에 bootstrapping을 했다.
+- 특히, 우리는 training set에서 hard class를 담고 있는 (특히 자전거, 의자, 테이블, potted plant, 그리고 소파 같은) image를 duplicate한다.
+- Fig.7에서 보여지듯, 가장 단순한 bootstrapping method는 bicycle class를 segmenting하는데에 유용하다.
+- 마지막으로, DeepLabv3는 test set에서 Tab.7에서 보여지듯 어떤 DenseCRF post-processing없이 85.7%의 성능을 성취했다.
 9.	Model pretrained on JFT-300M:
-A.	[79]에 대한 최신 연구에 의해 동기 부여 받아서, 우리는 ImageNet과 JFT-300M에 미리 훈련된 ResNet-101 모델을 고용했다.
-B.	이는 PASCAL VOC 2012 test set에서 86.9%의 성능을 보였다.
+- [79]에 대한 최신 연구에 의해 동기 부여 받아서, 우리는 ImageNet과 JFT-300M에 미리 훈련된 ResNet-101 모델을 고용했다.
+- 이는 PASCAL VOC 2012 test set에서 86.9%의 성능을 보였다.
 
- 
-결론
+## 결론
 -	Dense feature map을 추출하고 큰 범위의 context를 잡기 위해서 “DeepLabv3” upsampling filter와 같이 있는atrous convolution을 employ한다.
 -	특히, 다중 스케일 information을 encode하기 위해서, 우리의 제시된 cascaded module은 점진적으로 atrous rate를 2배로 합니다.
 -	반면에 우리의 제시된 image-level feature가 증강된 atrous spatial pyramid pooling module은 다양한 sample rate에서의 filter와 효과적인 field-of-view들을 가진 feature을 증명합니다.
