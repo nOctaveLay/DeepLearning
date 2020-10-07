@@ -77,17 +77,54 @@
   - atrous convolutional layer를 통한 feature resolution의 향상
     - 기본이 되는 network의 모든 32 픽셀 대신 모든 8 픽셀에 대한 응답을 계산할 수 있도록 한다.
   - bi-linear interpolation 적용
-    - 기본 이미지 해상도에 도달하기 위해서 8개의 요소에 의해 score map을 upsample 하기 위함
+    - 기본 이미지 해상도에 도달하기 위해서 8배에 의해 score map을 upsample 하기 위함
     - segmentation 결과를 정제하는 fully-connected CRF로 input을 산출
 - DeepLab 시스템의 3가지 장점
   1. Speed
-    - atrous convolution의 장점으로 인해, DCNN은 NVidia Titan X GPU에서 8FPS로 운영된다.
-      - fully-connected CRF를 위한 Mean Field Inference는 CPU에서 0.5초를 필요로 한다.
+      - atrous convolution의 장점으로 인해, DCNN은 NVidia Titan X GPU에서 8FPS로 운영된다.
+        - fully-connected CRF를 위한 Mean Field Inference는 CPU에서 0.5초를 필요로 한다.
   2. Accuracy
-    - PASCAL VOC 2012 semantic segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, Cityscape에서 경쟁력 있는 점수를 얻음
+      - PASCAL VOC 2012 semantic segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, Cityscape에서 경쟁력 있는 점수를 얻음
   3. Simplicity
-    - 잘 만들어진 모델 DCNNs과 CRFs의 cascade(계단식)로 구성되어 있다. 
+      - 잘 만들어진 모델 DCNNs과 CRFs의 cascade(계단식)로 구성되어 있다. 
+
+# Methods
+## Atrous Convolution for Dense Feature Extraction and Field-of-View Enlargement
+- 32배 다 거치는 것 => feature map의 spatial resolution을 감소시킴
+- 부분적인 치료제 : deconvolutional layer
+  - 하지만 추가적인 메모리와 시간이 필요
+- 얘 대신에 atrous convolution 쓸 것.
+  - 이 알고리즘은 어떤 원하는 resolution에서 어떤 layer에서의 응답이라도 계산할 수 있게끔 함
+- 일단 한 번 훈련되면 post-hoc에 적용, 그렇지만 겉보기엔 훈련과 통합시킬 수도 있다.
+- 1차원 signal
+  - output y[i], 1차원 input x[i], K length를 가진 filter w[k]
+  - (1) 그림
+  - rate parameter r : input signal을 sample한 stride에 상호응답한다.
+  - 일반적인 convolution에서는 특별한 case로, r = 1
+  - [Fig2]
+- [Fig3]에서 단순한 예제로 2차원일 때 알고리즘의 작동을 묘사했다.
+  - 일단 이미지가 주어지면, 우리는 처음에 downsampling operation을 한다.
+    - resolution을 2배로 바꾸기
+  - kernel에서(vertical Gaussian derivative) convolution을 수행하기
+  - 원본 이미지 coordinate에 feature map을 수행하면,이미지 위치의 오직 1/4만 응답으로 얻을 수 있다.
+  - 대신에, 만약 full resolution image를 '구멍이 있는' filter를 가지고 convolve 하면 모든 이미지 위치에서 응답을 계산
+    - 2배수의 original filter를 upsample 하고, filter value들 사이에 있는 zero들을 소개하는 filter이다.
+  - 비록, 효과적인 filter size가 증가한다 하더라도, 우리는 오로지 non-zero filter value를 설명해야한다.
+    - 따라서, filter parameter의 수와 position당 operation들의 수는 constant하게 남아있다.
+  - 결과적인 scheme는 쉽고 명확하게 신경망 feature responce의 spatial resolution을 control 하도록 도와준다.
+- DCNN에서의 context 안에서, atrous convolution을 layer들의 chain으로 사용할 수 있다.
+  - 효과적으로 자율적인, 높은 resolution에서 최종적인 DCNN network responce를 계산하는 걸 허용합니다.
+  - VGG-16 또는 ResNet-101 에서 계산된 feature response의 spatial density를 두 배로 하기 위해서, 마지막 pooling 또는 convolutional layer의 stride를 1로 설정합니다.
+    - 마지막 pooling 또는 convolutional layer는 resolution을 감소시키기 때문입니다.
+    - 이렇게 stride를 1로 설정하면 signal decimation을 피할 수 있습니다.
+  - 그리고 모든 부수적인 convolutional layer들을 atrous convolutional layer로 대체합니다.
+    - 이 때의 rate = 2
+  - 이 방법은 너무 비용이 많이 듭니다.
+- 따라서 hybrid 방법을 써야합니다.
+  - 계산된 feature map의 density를 4배로 만드는 방법
+  - 후에 8배의 추가적인 fast bilinear interpolation을 합니다. 
   
 코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
-
+[Fig1]
+[Fig2]
 
