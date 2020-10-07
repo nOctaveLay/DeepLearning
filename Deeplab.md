@@ -87,3 +87,7 @@
     - PASCAL VOC 2012 semantic segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, Cityscape에서 경쟁력 있는 점수를 얻음
   3. Simplicity
     - 잘 만들어진 모델 DCNNs과 CRFs의 cascade(계단식)로 구성되어 있다. 
+  
+코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
+
+
