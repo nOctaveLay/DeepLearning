@@ -70,8 +70,20 @@
         - 효율적인 계산, fine dege detail을 잡을 능력, long range dependency 
         - pixel level classifier를 기반으로 한 성능을 향상
         
-  - Fig 1.에서 DeepLab model의 전반적인 모습 확인
-  [Fig1]
-  - VGG-16 이나 ResNet-101의 재 목적화 (image classification -> semantic segmentation)
-    - fully connected layer를 convolutional layer로 변환 (즉, fully convolutional network)
-    - atrous convolutional layer를 통한 feature resolution의 향상
+- Fig 1.에서 DeepLab model의 전반적인 모습 확인
+[Fig1]
+- VGG-16 이나 ResNet-101의 재 목적화 (image classification -> semantic segmentation)
+  - fully connected layer를 convolutional layer로 변환 (즉, fully convolutional network)
+  - atrous convolutional layer를 통한 feature resolution의 향상
+    - 기본이 되는 network의 모든 32 픽셀 대신 모든 8 픽셀에 대한 응답을 계산할 수 있도록 한다.
+  - bi-linear interpolation 적용
+    - 기본 이미지 해상도에 도달하기 위해서 8개의 요소에 의해 score map을 upsample 하기 위함
+    - segmentation 결과를 정제하는 fully-connected CRF로 input을 산출
+- DeepLab 시스템의 3가지 장점
+  1. Speed
+    - atrous convolution의 장점으로 인해, DCNN은 NVidia Titan X GPU에서 8FPS로 운영된다.
+      - fully-connected CRF를 위한 Mean Field Inference는 CPU에서 0.5초를 필요로 한다.
+  2. Accuracy
+    - PASCAL VOC 2012 semantic segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, Cityscape에서 경쟁력 있는 점수를 얻음
+  3. Simplicity
+    - 잘 만들어진 모델 DCNNs과 CRFs의 cascade(계단식)로 구성되어 있다. 
