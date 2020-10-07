@@ -24,6 +24,9 @@ Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : 
   - DeepLabv3 : 
     - [논문 번역](https://github.com/nOctaveLay/DeepLearning/blob/DeepLabv3/Deeplab_v3.md)
   - DeepLabv3+:
+- Spatial pyramid: 
+  - S. Lazebnik, C. Schmid, and J. Ponce, “Beyond bags of features: Spatial pyramid matching for recognizing natural scene categories,” in CVPR, 2006.
+  - [20] K. He, X. Zhang, S. Ren, and J. Sun, “Spatial pyramid pooling in deep convolutional networks for visual recognition,” in ECCV, 2014
 ## 딥러닝 + 자연어처리
 
 1. 데이터 전처리 : https://blog.pingpong.us/dialog-bert-tokenizer/?fbclid=IwAR0O2mtCrn4ilEusZE2fV3waGWl1BGE7Q3ifV6TBHu-nbQ5XViflE271B2U
