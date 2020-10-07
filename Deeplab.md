@@ -43,7 +43,7 @@
         - 기본 image size에서 feature response의 단순한 bilinear interpolation이 선행되어야 함
         - deconvolutional layer를 사용하는 것 보다 좋음
         - 기존 convolution과 비교해서 파라미터들의 개수나 계산의 양 증가 없이 filter의 field of view를 증가 시킴
-  2. 다양한 크기에서 object의 존재 =>
+  2. 다양한 크기에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
     - 원인
       - 다양한 크기에서 object가 존재하는 것에 의해 발생
     - 해결
@@ -54,12 +54,24 @@
         - 단점 : 비용 (input image의 다양한 버전을 만들고, 모든 DCNN layer의 feature response를 계산해야 함)
       - convolution 전에 계산적으로 효율적인 스키마를 제시
         - spatial pyramid pooling에 영향을 받음.
+        - 다른 sampling rate에서 multiple parallel atrous convolutional layer를 사용해서 이런 mapping을 실행
+        - 제시된 이런 technique를 atrous spatial pyramid pooling이라고 부른다.
+  3. DCNN invariance 때문에 localization accuracy 감소 => CRF로 해결
+    - 원인
+      - object를 중앙에 놓는 classifier는 spatial transformation에 invariance를 필요로 하게 된다.
+      - 이는 본질적으로 DCNN의 spatial accuracy를 제한시킨다.
+    - 해결
+      - 일반적인 방법:
+        - 마지막 segmentation 결과를 계산할 때 다양한 network로부터 "hyper-column" feature를 추출하기 위해서 skip-layer사용
+      - 좀 더 효율적인 방법 : CRF를 사용
+        - fully connected Conditional Random Field (CRF)를 적용시킴으로서 fine detail을 잡는 model의 능력을 향상시킴
+        - 주로 semantic segmentation에서 사용
+        - semantic segmentation에서 다양한 방법의 classifier들로 계산된 class score를 pixel들과 edge들, 혹은 superpixel들의 local interaction으로 잡아진 low-level information과 결합 
+        - 효율적인 계산, fine dege detail을 잡을 능력, long range dependency 
+        - pixel level classifier를 기반으로 한 성능을 향상
         
-        
-
-
-S. Lazebnik, C. Schmid, and J. Ponce, “Beyond bags of features:
-Spatial pyramid matching for recognizing natural scene categories,” in CVPR, 2006.
-[20] K. He, X. Zhang, S. Ren, and J. Sun, “Spatial pyramid pooling in
-deep convolutional networks for visual recognition,” in ECCV,
-2014
+  - Fig 1.에서 DeepLab model의 전반적인 모습 확인
+  [Fig1]
+  - VGG-16 이나 ResNet-101의 재 목적화 (image classification -> semantic segmentation)
+    - fully connected layer를 convolutional layer로 변환 (즉, fully convolutional network)
+    - atrous convolutional layer를 통한 feature resolution의 향상
