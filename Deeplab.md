@@ -90,6 +90,7 @@
 
 # Methods
 ## Atrous Convolution for Dense Feature Extraction and Field-of-View Enlargement
+### Atrous Convolution
 - 32배 다 거치는 것 => feature map의 spatial resolution을 감소시킴
 - 부분적인 치료제 : deconvolutional layer
   - 하지만 추가적인 메모리와 시간이 필요
@@ -112,6 +113,7 @@
   - 비록, 효과적인 filter size가 증가한다 하더라도, 우리는 오로지 non-zero filter value를 설명해야한다.
     - 따라서, filter parameter의 수와 position당 operation들의 수는 constant하게 남아있다.
   - 결과적인 scheme는 쉽고 명확하게 신경망 feature responce의 spatial resolution을 control 하도록 도와준다.
+### Use for chain of layers
 - DCNN에서의 context 안에서, atrous convolution을 layer들의 chain으로 사용할 수 있다.
   - 효과적으로 자율적인, 높은 resolution에서 최종적인 DCNN network responce를 계산하는 걸 허용합니다.
   - VGG-16 또는 ResNet-101 에서 계산된 feature response의 spatial density를 두 배로 하기 위해서, 마지막 pooling 또는 convolutional layer의 stride를 1로 설정합니다.
@@ -123,7 +125,13 @@
 - 따라서 hybrid 방법을 써야합니다.
   - 계산된 feature map의 density를 4배로 만드는 방법
   - 후에 8배의 추가적인 fast bilinear interpolation을 합니다. 
-  
+    - class score map이 (log-probability와 상호응답한) 꽤 부드럽기 때문에 씁니다.
+    - 이는 Fig 5에서 나와있습니다.
+  - deconvolutional approach와 다르게, 제시된 접근은 어떤 extra parameter를 배우는 것을 필요로 하는 것 없이 image classification network를 dense feature extractors로 바꾼다. 
+    - 실제로 DCNN trainning을 빠르게 이끈다.
+
+### Enlarge Field of view of filters at any DCNN layer
+
 코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
 [Fig1]
 [Fig2]
