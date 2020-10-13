@@ -162,8 +162,12 @@
       - original image의 multiple rescaled version 에서 DCNN score map을 추출.
       - 같은 parameter를 공유하는 parallel DCNN branch들을 사용.
       - 마지막 결과를 생성하기 위해서, parallel DCNN branch들에서 original image resolution으로 feature map을 bilinearly interpolate 함.
-        - 
+      - 그리고 그것들을 다른 scale를 거쳐 가장 큰 response를 각각의 position에서 얻음으로서 합성시킴
+      - Multiscale processing은 performance를 향상시킴.
   2. 
+      - RCNN 공간 pyramid pooling method의 성공에 자극을 받아 만들어짐.
+        - pyramid pooling method 는 자율적인 scale의 영역이 정확하게 효율적으로 classify됨을 보여줌.
+        - 
 코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
 [Fig1]
 [Fig2]
