@@ -164,11 +164,22 @@
       - 마지막 결과를 생성하기 위해서, parallel DCNN branch들에서 original image resolution으로 feature map을 bilinearly interpolate 함.
       - 그리고 그것들을 다른 scale를 거쳐 가장 큰 response를 각각의 position에서 얻음으로서 합성시킴
       - Multiscale processing은 performance를 향상시킴.
-  2. 
+  2. convolutional feature -> resample
       - RCNN 공간 pyramid pooling method의 성공에 자극을 받아 만들어짐.
         - pyramid pooling method 는 자율적인 scale의 영역이 정확하게 효율적으로 classify됨을 보여줌.
           - 하나의 크기에서 추출된 convolutional features를 resample하는 것에 의한다.
-          
+      - 다른 sampling rate를 가지고 Multiple parallel atrous convolutional layer들을 사용하는 scheme의 다양성을 수행해옴
+      - 각각의 sampling rate에서 추출된 특징들은 분리된 branch들 안에서 훨씬 process가 잘 되어있고 최종 결과물을 생산하기 위해서 잘 융합되어 있다.
+      - "atrous spatial pyramid pooling" 접근은 우리의 DeepLab-LargeFOV를 일반화합니다.
+ 
+## Structured Prediction with Fully-Connected Conditional Random Fields for Accurate Boundary Recovery
+- localization accuracy와 classification performance 사이의 trade-off는 DCNN에서 본질적인 것으로 보인다.
+  - multiple max-pooling layer들을 가지고 있는 더 깊은 모델이 classification task에서 훨씬 성공적인 것으로 증명되었다.
+  - 하지만, 증가된 invariance와 큰 top-level node의 receptive fields는 smooth response만들 산출할 수 있다.
+  - Fig 5에서 묘사되었듯이, DCNN score map은 object의 대략적인 위치나 존재를 예측할 수 있다.
+  - 하지만 그 경계선을 delineate하지는 못한다.
+- 과거의 연구는 이러한 localization challenge를 설명하기 위한 2개의 방법을 쫒았다.
+  - object boundary를 더 좋게 추정하기 위해서, 
 코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
 [Fig1]
 [Fig2]
