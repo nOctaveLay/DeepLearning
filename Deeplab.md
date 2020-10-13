@@ -167,7 +167,8 @@
   2. 
       - RCNN 공간 pyramid pooling method의 성공에 자극을 받아 만들어짐.
         - pyramid pooling method 는 자율적인 scale의 영역이 정확하게 효율적으로 classify됨을 보여줌.
-        - 
+          - 하나의 크기에서 추출된 convolutional features를 resample하는 것에 의한다.
+          
 코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
 [Fig1]
 [Fig2]
