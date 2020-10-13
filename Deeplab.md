@@ -131,7 +131,39 @@
     - 실제로 DCNN trainning을 빠르게 이끈다.
 
 ### Enlarge Field of view of filters at any DCNN layer
+- 최신 DCNN은 일반적으로 공간적으로 작은 convolution kernel을 허용한다. (일반적으로 3x3)
+  - 이는 파라미터의 수와 그 계산을 포함되게 하기 위해서이다.
+- rate r을 가지고 있는 atrous convolution은 연속적인 filter value에서 r-1개의 0들을 소개한다.
+  - 효과적으로 kxk개의 filter kernel size를 키운다.
+  - k = k + (k-1)(r-1)에 적용
+  - 파라미터의 수 증가나 계산을 하는 양을 증가시킬 필요 없음.
+  - field-of-view를 control하거나 accurate localization(small field of view)와 context assimilation(large field of view)에서 가장 좋은 trade-off를 찾음.
+  - VGG-16에서 r = 12를 했더니 성공적으로 perfomance가 증가
 
+### atrous convolution을 수행하는 2개의 효과적인 방법
+1. **implicitly upsample the filters**
+- im2col이라는 function을 더해서 수행해봄
+  - vectorized patch를 feature map의 다양한 채널에서 추출
+  - 기저한 feature map을 드문드문 sample하는 option이다.  
+2. **equivalently sparsely sample the input feature maps**
+- input feature map을 atrous convolution rate r과 동일한 요소로서 subsample하는 것.
+  - r^2로 제거된 resolution map을 생산하기 위해서 이것을 deinterace한다.
+  - 각각의 rxr possible shift를 위해 만들어진다.
+- 이는 표준 convolution을 이러한 intermediate feature map에 적용시키는 것으로 이어진다.
+- 그리고 그들을 original image resolution으로 reinterlace한다.
+- atrous convolution을 regular convolution으로 줄임으로서, off-the-shelf optimized convolution routine을 사용하도록 하용
+
+## Multiscale Image Representations using Atrous Spatial Pyramid Pooling
+- DCNN은 본질적으로 scale을 보여주는 주목할만한 능력을 보여줘왔다.
+  - 다양한 사이즈의 object를 포함하는 dataset에서 단순히 훈련된 것만으로도 주목할만한 능력을 보여줌.
+- 여전히 명시적으로 object scale에 대해 설명하는 것은 성공적으로 크고 작은 object들을 다루는 DCNN의 능력을 향상시킴.
+- scale variability를 semantic segmentation에서 다루는 것에 대한 두 개의 접근 시도
+  1. standard multiscale processing
+      - original image의 multiple rescaled version 에서 DCNN score map을 추출.
+      - 같은 parameter를 공유하는 parallel DCNN branch들을 사용.
+      - 마지막 결과를 생성하기 위해서, parallel DCNN branch들에서 original image resolution으로 feature map을 bilinearly interpolate 함.
+        - 
+  2. 
 코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
 [Fig1]
 [Fig2]
