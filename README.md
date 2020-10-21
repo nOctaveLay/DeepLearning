@@ -14,11 +14,10 @@ Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : 
 ## 딥러닝 + Sementic segmentation
 공부하기로 한 내용: https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw
 
-- U-net : https://arxiv.org/pdf/1505.04597.pdf
-- SegNet : https://arxiv.org/pdf/1511.00561.pdf
-  - [논문 번역](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md)
-  - [정리]
-- DeepLab : https://arxiv.org/pdf/1606.00915.pdf
+- [U-net]https://arxiv.org/pdf/1505.04597.pdf
+- [SegNet](https://arxiv.org/pdf/1511.00561.pdf)
+  - [논문 번역](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md) [정리]
+- [DeepLab](https://arxiv.org/pdf/1606.00915.pdf) [논문 번역](https://github.com/nOctaveLay/DeepLearning/edit/master/Deeplab.md)
   - DeepLabv1 :
   - DeepLabv2 :
   - DeepLabv3 : https://arxiv.org/pdf/1706.05587.pdf
