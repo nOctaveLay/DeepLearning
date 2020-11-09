@@ -40,3 +40,4 @@ https://acl2020.org/blog/ACL-2020-best-papers/
 
 deview 2019 : https://deview.kr/2019/schedule
  
+Best paper awards in Computer Science : https://jeffhuang.com/best_paper_awards/?fbclid=IwAR1xqjapSTqkqGb_bi7qBaeTT5me8Jv8mUc2s6M6TzBVAfSzBovBYG8aotc
