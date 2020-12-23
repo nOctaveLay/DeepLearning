@@ -1,5 +1,4 @@
-# ImageNet Classification with Deep Convolutional Neural Networks [8/20]
-
+# ImageNet Classification with Deep Convolutional Neural Networks [8/20] = AlexNet
 ## Abstract
 + non-saturating neuron들과 convolution operation에 매우 효율적인 GPU실행을 사용.
 + overfitting을 줄이기 위해 최근에 개발된 정규화 방법인 "dropout" 사용.
