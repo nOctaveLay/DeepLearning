@@ -3,7 +3,7 @@
 ## Abstract
 
 - Semantic Image segmentation에 관련된 논문
-- 실험적으로 가치가 있다고 증명된 3개의 공헌 : atrous convolution, ASPP, DCNN + CRF
+- 값어치가 있다고 실험적으로 증명된 3개의 공헌 : **atrous convolution**, **ASPP**, **DCNN + CRF**
 
   1. **atrous convolution**
       - upsample 된 filter에 convolution => dense prediction을 하는 데에서 강력한 도구로서 작동.
@@ -16,19 +16,19 @@
       - 효과적인 fields-of-views와 다양한 sampling rate에 있는 filter를 사용 convolutional feature layer를 살핀다.
       - 따라서 다양한 스케일에서 image context 뿐만 아니라 object도 잡음
 
-  3. **DCNN과 확률적인 그래픽 모델의 method를 결합시킴으로서 object boundary의 localization 향상**
+  3. **DCNN + CRF method=> object boundary의 localization 향상**
       - 일반적으로 전개되는 max-pooling과 downsampling의 조합은 invariance를 향상, 그러나 localization accuracy에 영향을 끼침
       - 이를 마지막 DCNN layer의 responce를 fully connected Conditional Random Field (CRF)와 결합함으로서 극복
         - 이 결합은 질적, 양적 모든 측면에서 localization performance를 향상
   
-- **Index Terms** : Convolutional Neural Networks, Semantic Segmentation, Atrous Convolution, Conditional Random Fields.
+- **Index Terms : Convolutional Neural Networks, Semantic Segmentation, Atrous Convolution, Conditional Random Fields.**
 
 ## Introduction
 
-- DCNN의 성공에 local image transformation에서 built-in invariance가 중요하다.
+- DCNN의 성공 --> local image transformation에서 built-in invariance 때문.
   - 특히 classification에서 중요함. --> local image transformation이 추상적 데이터 표현을 배우도록 허락하기 때문.
 
-- 그렇지만 semantic segmentation같이 dense prediction task(조밀한 예측 작업)에는 방해가 된다.
+- 그렇지만 semantic segmentation같이 dense prediction task(조밀한 예측 작업)에는 방해.
   - 공간 정보의 추상화가 필요 없기 때문.
 
 - 이 논문에선 semantic image segmentation에 있어 DCNN의 3가지 문제점을 고려
@@ -53,7 +53,7 @@
     - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
     - dense prediction을 하는 데 있어, deconvolutional layer를 사용하는 것보다 단순하고, 강하다.
       - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 field of view를 효과적으로 증가시키게끔 한다.
-  ![Atrous convolution](image/DeepLab_atrous_convolution.png)
+  ![Atrous convolution](./image/DeepLab_atrous_convolution.PNG)
 
   1. 다양한 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
   - 원인
