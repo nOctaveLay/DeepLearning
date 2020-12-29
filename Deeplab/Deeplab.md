@@ -3,55 +3,61 @@
 ## Abstract
 
 - Semantic Image segmentation에 관련된 논문
-- 실용적으로 쓸 수 있는 실험적인 3개의 기여
+- 실험적으로 가치가 있다고 증명된 3개의 공헌 : atrous convolution, ASPP, DCNN + CRF
 
   1. **atrous convolution**
-      - upsample 된 filter에 convolution을 강조 => dense prediction에 강력한 tool
-      - DCNN 안에서 feature response가 계산될 때 resolution(해상도)를 명확히 control하게 만든다.
-        => 파라미터의 갯수나 계산의 양을 증가시키는 것 없이 더 큰 context을 통합하기 위해서 filter의 view의 영역을 확장시킬 수 있게 만든다.
+      - upsample 된 filter에 convolution => dense prediction을 하는 데에서 강력한 도구로서 작동.
+      - DCNN 안에서 feature response가 계산될 때 resolution(해상도)를 명확하게 제어할 수 있도록 만든다.
+      - 파라미터의 개수나 computation 양을 증가시키는 것 없이 더 넓은 context을 합치기 위해서 filter들의 view 영역을 효과적으로 확장할 수 있게 만든다.
   
   2. **ASPP**
       - atrous spatial pyramid pooling (ASPP)
-      - 다양한 scale에서 object를 견고하게 분리
-      - 다양한 sampling rate와 효과적인 fields-of-views에서 filter를 가진 convolutional feature layer를 증명
-        - 따라서 다양한 크기에서 image context 뿐만 아니라 object도 잡음
+      - 다양한 스케일에서 물체를 엄격하게 분리하기 위해서 씀.
+      - 효과적인 fields-of-views와 다양한 sampling rate에 있는 filter를 사용 convolutional feature layer를 살핀다.
+      - 따라서 다양한 스케일에서 image context 뿐만 아니라 object도 잡음
 
   3. **DCNN과 확률적인 그래픽 모델의 method를 결합시킴으로서 object boundary의 localization 향상**
-      - 일반적으로 max-pooling과 downsampling의 deploy된 결합은 invariance를 향상, 그러나 localization accuracy를 희생
-      - 이를 최종 DCNN layer의 responce와 fully connected Conditional Random Field (CRF)와 결합함으로서 극복
-        - 질적, 양적으로 localization performance를 향상
+      - 일반적으로 전개되는 max-pooling과 downsampling의 조합은 invariance를 향상, 그러나 localization accuracy에 영향을 끼침
+      - 이를 마지막 DCNN layer의 responce를 fully connected Conditional Random Field (CRF)와 결합함으로서 극복
+        - 이 결합은 질적, 양적 모든 측면에서 localization performance를 향상
+  
+- **Index Terms** : Convolutional Neural Networks, Semantic Segmentation, Atrous Convolution, Conditional Random Fields.
 
 ## Introduction
 
-- DCNNs에선 invariance 중요
-  - 추상적 데이터 표현을 배워야 하기 때문
+- DCNN의 성공에 local image transformation에서 built-in invariance가 중요하다.
+  - 특히 classification에서 중요함. --> local image transformation이 추상적 데이터 표현을 배우도록 허락하기 때문.
 
-- 그렇지만 semantic segmentation같이 dense prediction task에서는 필요가 없다.
-  - 공간 정보의 추상화가 필요 없기 때문
+- 그렇지만 semantic segmentation같이 dense prediction task(조밀한 예측 작업)에는 방해가 된다.
+  - 공간 정보의 추상화가 필요 없기 때문.
 
 - 이 논문에선 semantic image segmentation에 있어 DCNN의 3가지 문제점을 고려
   1. 감소된 feature resolution
-  2. 다양한 크기에서 object의 존재
+  2. 다양한 스케일에서 object의 존재성
   3. DCNN invariance 때문에 localization accuracy가 감소
 
 - 3가지 문제점의 극복
 
   1. 감소된 feature resoltuion => Atrous convolution으로 극복
   - 원인
-    - 이미지 분류를 위해 처음에 고안된 DCNN의 연속적인 layer에서 실행된 반복된 max-pooling과 downsampling('striding')의 결합으로 인해 발생.
+    - DCNN 안의 연속된 layer에서 실행되는 max-pooling과 downsampling('striding')의 반복적인 결합으로 인해 발생.
+    - fully convolutional fashion에서 DCNN이 적용됬을 때 감소된 spatial resolution을 가진 feature map을 만들어 냄.
   - 해결
-    - DCNN에서 몇 개의 max pooling layer로부터 온 downsampling operator를 제거, 대신 연속하는 convolutional layer에 filter를 upsample
-      - 더 높은 sampling rate를 가진 feature map을 출력
-      - Filter upsampling는 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입하는 것과 같다.
-    - 실제로, atrous convolution의 결합으로 full resolution feature map을 회복
-      - feature map을 더 dense하게 만듬
-      - 기본 image size에서 feature response의 단순한 bilinear interpolation이 선행되어야 함
-      - deconvolutional layer를 사용하는 것 보다 좋음
-      - 기존 convolution과 비교해서 파라미터들의 개수나 계산의 양 증가 없이 filter의 field of view를 증가 시킴
+    - 마지막 부분에 존재하는, 몇 개의 max pooling layer 안의 downsampling operator를 제거, 대신 다음의 convolutional layer안에서 filter를 upsample
+      => 더 높은 sampling rate를 가진 feature map을 산출한다.
+    - Filter upsampling을 할 때 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입한다.
+      - 이 방법은 undecimated wavelet transform에서 효율적인 계산을 위해 고안된 방법이다.
+      - 이를 atrous convolution으로 부르기로 한다.
+    - 실제로, atrous convolution을 조합함으로서 full resolution feature map을 회복한다.
+      - 이는 feature map을 더 조밀하게 만듬
+    - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
+    - dense prediction을 하는 데 있어, deconvolutional layer를 사용하는 것보다 단순하고, 강하다.
+      - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 field of view를 효과적으로 증가시키게끔 한다.
+  ![Atrous convolution](image/DeepLab_atrous_convolution.png)
 
-  1. 다양한 크기에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
+  1. 다양한 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
   - 원인
-    - 다양한 크기에서 object가 존재하는 것에 의해 발생
+    - 다양한 스케일에서 object가 존재하는 것에 의해 발생
   - 해결
     - 일반적인 방법 : DCNN에서 제시됨.
       - 같은 이미지에서 크기를 조절한 여러가지 이미지를 만듬
