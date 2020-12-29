@@ -52,7 +52,7 @@
       - 이는 feature map을 더 조밀하게 만듬
     - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
     - dense prediction을 하는 데 있어, deconvolutional layer를 사용하는 것보다 단순하고, 강하다.
-      - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 field of view를 효과적으로 증가시키게끔 한다.
+      - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 시야를 효과적으로 증가시킬 수 있다.
 
     ![Atrous convolution](./images/DeepLab_atrous_convolution.PNG)
 
@@ -60,15 +60,14 @@
   - 원인
     - 다양한 스케일에서 object가 존재하는 것에 의해 발생
   - 해결
-    - 일반적인 방법 : DCNN에서 제시됨.
-      - 같은 이미지에서 크기를 조절한 여러가지 이미지를 만듬
-      - feature랑 score map을 증가
-      - 장점 : 시스템의 성능을 증가
-      - 단점 : 비용 (input image의 다양한 버전을 만들고, 모든 DCNN layer의 feature response를 계산해야 함)
-    - convolution 전에 계산적으로 효율적인 스키마를 제시
-      - spatial pyramid pooling에 영향을 받음.
-      - 다른 sampling rate에서 multiple parallel atrous convolutional layer를 사용해서 이런 mapping을 실행
-      - 제시된 이런 technique를 atrous spatial pyramid pooling이라고 부른다.
+    - 일반적인 방법 : 같은 이미지를 DCNN rescaled version으로 돌림 => 나오는 feature 또는 score map들을 모음.
+      - 장점 : 이 시스템의 성능 증가
+      - 단점 : 비용 (input image에 대해 DCNN layer들의 multiple scaled version에서의 response들을 계산해야 함)
+    - atrous spatial pyramid pooling (ASPP)
+      - spatial pyramid pooling에 영향을 받아, convolution 전 주어진 feature layer를 resampling하는 계산적으로 효율적인 스키마를 제시함.
+      - 이는 상호 보완적인 효과적인 시야를 가진 다양한 filter를 가진 원본 이미지를 조사함.
+      - 그리고 이는 유용한 image context 뿐만 아니라 object들을 다양한 스케일에서 잡는다.
+      - 실제로 feature를 resampling하는 것 대신에, 다양한 parallel atrous convolutional layer에서 다른 sampling rate를 가지고 시도.
 
   1. DCNN invariance 때문에 localization accuracy 감소 => CRF로 해결
   - 원인
@@ -149,7 +148,7 @@
   - deconvolutional approach와 다르게, 제시된 접근은 어떤 extra parameter를 배우는 것을 필요로 하는 것 없이 image classification network를 dense feature extractors로 바꾼다.
     - 실제로 DCNN trainning을 빠르게 이끈다.
 
-#### Enlarge Field of view of filters at any DCNN layer
+#### Enlarge Field o`1f view of filters at any DCNN layer
 
 - 최신 DCNN은 일반적으로 공간적으로 작은 convolution kernel을 허용한다. (일반적으로 3x3)
   - 이는 파라미터의 수와 그 계산을 포함되게 하기 위해서이다.
