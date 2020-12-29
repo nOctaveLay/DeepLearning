@@ -1,4 +1,7 @@
-# Abstract
+# DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs
+
+## Abstract
+
 - Semantic Image segmentation에 관련된 논문
 - 실용적으로 쓸 수 있는 실험적인 3개의 기여
 
@@ -11,14 +14,15 @@
       - atrous spatial pyramid pooling (ASPP)
       - 다양한 scale에서 object를 견고하게 분리
       - 다양한 sampling rate와 효과적인 fields-of-views에서 filter를 가진 convolutional feature layer를 증명
-        - 따라서 다양한 크기에서 image context 뿐만 아니라 object도 잡음 
+        - 따라서 다양한 크기에서 image context 뿐만 아니라 object도 잡음
 
   3. **DCNN과 확률적인 그래픽 모델의 method를 결합시킴으로서 object boundary의 localization 향상**
       - 일반적으로 max-pooling과 downsampling의 deploy된 결합은 invariance를 향상, 그러나 localization accuracy를 희생
       - 이를 최종 DCNN layer의 responce와 fully connected Conditional Random Field (CRF)와 결합함으로서 극복
         - 질적, 양적으로 localization performance를 향상
-        
-# Introduction
+
+## Introduction
+
 - DCNNs에선 invariance 중요
   - 추상적 데이터 표현을 배워야 하기 때문
 
@@ -31,45 +35,48 @@
   3. DCNN invariance 때문에 localization accuracy가 감소
 
 - 3가지 문제점의 극복
+
   1. 감소된 feature resoltuion => Atrous convolution으로 극복
-    - 원인 
-      - 이미지 분류를 위해 처음에 고안된 DCNN의 연속적인 layer에서 실행된 반복된 max-pooling과 downsampling('striding')의 결합으로 인해 발생.
-    - 해결
-      - DCNN에서 몇 개의 max pooling layer로부터 온 downsampling operator를 제거, 대신 연속하는 convolutional layer에 filter를 upsample
-        - 더 높은 sampling rate를 가진 feature map을 출력
-        - Filter upsampling는 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입하는 것과 같다.
-      - 실제로, atrous convolution의 결합으로 full resolution feature map을 회복
-        - feature map을 더 dense하게 만듬
-        - 기본 image size에서 feature response의 단순한 bilinear interpolation이 선행되어야 함
-        - deconvolutional layer를 사용하는 것 보다 좋음
-        - 기존 convolution과 비교해서 파라미터들의 개수나 계산의 양 증가 없이 filter의 field of view를 증가 시킴
-  2. 다양한 크기에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
-    - 원인
-      - 다양한 크기에서 object가 존재하는 것에 의해 발생
-    - 해결
-      - 일반적인 방법 : DCNN에서 제시됨.
-        - 같은 이미지에서 크기를 조절한 여러가지 이미지를 만듬
-        - feature랑 score map을 증가
-        - 장점 : 시스템의 성능을 증가 
-        - 단점 : 비용 (input image의 다양한 버전을 만들고, 모든 DCNN layer의 feature response를 계산해야 함)
-      - convolution 전에 계산적으로 효율적인 스키마를 제시
-        - spatial pyramid pooling에 영향을 받음.
-        - 다른 sampling rate에서 multiple parallel atrous convolutional layer를 사용해서 이런 mapping을 실행
-        - 제시된 이런 technique를 atrous spatial pyramid pooling이라고 부른다.
-  3. DCNN invariance 때문에 localization accuracy 감소 => CRF로 해결
-    - 원인
-      - object를 중앙에 놓는 classifier는 spatial transformation에 invariance를 필요로 하게 된다.
-      - 이는 본질적으로 DCNN의 spatial accuracy를 제한시킨다.
-    - 해결
-      - 일반적인 방법:
-        - 마지막 segmentation 결과를 계산할 때 다양한 network로부터 "hyper-column" feature를 추출하기 위해서 skip-layer사용
-      - 좀 더 효율적인 방법 : CRF를 사용
-        - fully connected Conditional Random Field (CRF)를 적용시킴으로서 fine detail을 잡는 model의 능력을 향상시킴
-        - 주로 semantic segmentation에서 사용
-        - semantic segmentation에서 다양한 방법의 classifier들로 계산된 class score를 pixel들과 edge들, 혹은 superpixel들의 local interaction으로 잡아진 low-level information과 결합 
-        - 효율적인 계산, fine dege detail을 잡을 능력, long range dependency 
-        - pixel level classifier를 기반으로 한 성능을 향상
-        
+  - 원인
+    - 이미지 분류를 위해 처음에 고안된 DCNN의 연속적인 layer에서 실행된 반복된 max-pooling과 downsampling('striding')의 결합으로 인해 발생.
+  - 해결
+    - DCNN에서 몇 개의 max pooling layer로부터 온 downsampling operator를 제거, 대신 연속하는 convolutional layer에 filter를 upsample
+      - 더 높은 sampling rate를 가진 feature map을 출력
+      - Filter upsampling는 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입하는 것과 같다.
+    - 실제로, atrous convolution의 결합으로 full resolution feature map을 회복
+      - feature map을 더 dense하게 만듬
+      - 기본 image size에서 feature response의 단순한 bilinear interpolation이 선행되어야 함
+      - deconvolutional layer를 사용하는 것 보다 좋음
+      - 기존 convolution과 비교해서 파라미터들의 개수나 계산의 양 증가 없이 filter의 field of view를 증가 시킴
+
+  1. 다양한 크기에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
+  - 원인
+    - 다양한 크기에서 object가 존재하는 것에 의해 발생
+  - 해결
+    - 일반적인 방법 : DCNN에서 제시됨.
+      - 같은 이미지에서 크기를 조절한 여러가지 이미지를 만듬
+      - feature랑 score map을 증가
+      - 장점 : 시스템의 성능을 증가
+      - 단점 : 비용 (input image의 다양한 버전을 만들고, 모든 DCNN layer의 feature response를 계산해야 함)
+    - convolution 전에 계산적으로 효율적인 스키마를 제시
+      - spatial pyramid pooling에 영향을 받음.
+      - 다른 sampling rate에서 multiple parallel atrous convolutional layer를 사용해서 이런 mapping을 실행
+      - 제시된 이런 technique를 atrous spatial pyramid pooling이라고 부른다.
+
+  1. DCNN invariance 때문에 localization accuracy 감소 => CRF로 해결
+  - 원인
+    - object를 중앙에 놓는 classifier는 spatial transformation에 invariance를 필요로 하게 된다.
+    - 이는 본질적으로 DCNN의 spatial accuracy를 제한시킨다.
+  - 해결
+    - 일반적인 방법:
+      - 마지막 segmentation 결과를 계산할 때 다양한 network로부터 "hyper-column" feature를 추출하기 위해서 skip-layer사용
+    - 좀 더 효율적인 방법 : CRF를 사용
+      - fully connected Conditional Random Field (CRF)를 적용시킴으로서 fine detail을 잡는 model의 능력을 향상시킴
+      - 주로 semantic segmentation에서 사용
+      - semantic segmentation에서 다양한 방법의 classifier들로 계산된 class score를 pixel들과 edge들, 혹은 superpixel들의 local interaction으로 잡아진 low-level information과 결합
+      - 효율적인 계산, fine dege detail을 잡을 능력, long range dependency
+      - pixel level classifier를 기반으로 한 성능을 향상
+
 - Fig 1.에서 DeepLab model의 전반적인 모습 확인
 [Fig1]
 - VGG-16 이나 ResNet-101의 재 목적화 (image classification -> semantic segmentation)
@@ -86,11 +93,14 @@
   2. Accuracy
       - PASCAL VOC 2012 semantic segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, Cityscape에서 경쟁력 있는 점수를 얻음
   3. Simplicity
-      - 잘 만들어진 모델 DCNNs과 CRFs의 cascade(계단식)로 구성되어 있다. 
+      - 잘 만들어진 모델 DCNNs과 CRFs의 cascade(계단식)로 구성되어 있다.
 
-# Methods
-## Atrous Convolution for Dense Feature Extraction and Field-of-View Enlargement
-### Atrous Convolution
+## Methods
+
+### Atrous Convolution for Dense Feature Extraction and Field-of-View Enlargement
+
+#### Atrous Convolution
+
 - 32배 다 거치는 것 => feature map의 spatial resolution을 감소시킴
 - 부분적인 치료제 : deconvolutional layer
   - 하지만 추가적인 메모리와 시간이 필요
@@ -113,7 +123,9 @@
   - 비록, 효과적인 filter size가 증가한다 하더라도, 우리는 오로지 non-zero filter value를 설명해야한다.
     - 따라서, filter parameter의 수와 position당 operation들의 수는 constant하게 남아있다.
   - 결과적인 scheme는 쉽고 명확하게 신경망 feature responce의 spatial resolution을 control 하도록 도와준다.
-### Use for chain of layers
+
+#### Use for chain of layers
+
 - DCNN에서의 context 안에서, atrous convolution을 layer들의 chain으로 사용할 수 있다.
   - 효과적으로 자율적인, 높은 resolution에서 최종적인 DCNN network responce를 계산하는 걸 허용합니다.
   - VGG-16 또는 ResNet-101 에서 계산된 feature response의 spatial density를 두 배로 하기 위해서, 마지막 pooling 또는 convolutional layer의 stride를 1로 설정합니다.
@@ -124,13 +136,14 @@
   - 이 방법은 너무 비용이 많이 듭니다.
 - 따라서 hybrid 방법을 써야합니다.
   - 계산된 feature map의 density를 4배로 만드는 방법
-  - 후에 8배의 추가적인 fast bilinear interpolation을 합니다. 
+  - 후에 8배의 추가적인 fast bilinear interpolation을 합니다.
     - class score map이 (log-probability와 상호응답한) 꽤 부드럽기 때문에 씁니다.
     - 이는 Fig 5에서 나와있습니다.
-  - deconvolutional approach와 다르게, 제시된 접근은 어떤 extra parameter를 배우는 것을 필요로 하는 것 없이 image classification network를 dense feature extractors로 바꾼다. 
+  - deconvolutional approach와 다르게, 제시된 접근은 어떤 extra parameter를 배우는 것을 필요로 하는 것 없이 image classification network를 dense feature extractors로 바꾼다.
     - 실제로 DCNN trainning을 빠르게 이끈다.
 
-### Enlarge Field of view of filters at any DCNN layer
+#### Enlarge Field of view of filters at any DCNN layer
+
 - 최신 DCNN은 일반적으로 공간적으로 작은 convolution kernel을 허용한다. (일반적으로 3x3)
   - 이는 파라미터의 수와 그 계산을 포함되게 하기 위해서이다.
 - rate r을 가지고 있는 atrous convolution은 연속적인 filter value에서 r-1개의 0들을 소개한다.
@@ -140,12 +153,16 @@
   - field-of-view를 control하거나 accurate localization(small field of view)와 context assimilation(large field of view)에서 가장 좋은 trade-off를 찾음.
   - VGG-16에서 r = 12를 했더니 성공적으로 perfomance가 증가
 
-### atrous convolution을 수행하는 2개의 효과적인 방법
+#### atrous convolution을 수행하는 2개의 효과적인 방법
+
 1. **implicitly upsample the filters**
+
 - im2col이라는 function을 더해서 수행해봄
   - vectorized patch를 feature map의 다양한 채널에서 추출
   - 기저한 feature map을 드문드문 sample하는 option이다.  
-2. **equivalently sparsely sample the input feature maps**
+
+1. **equivalently sparsely sample the input feature maps**
+
 - input feature map을 atrous convolution rate r과 동일한 요소로서 subsample하는 것.
   - r^2로 제거된 resolution map을 생산하기 위해서 이것을 deinterace한다.
   - 각각의 rxr possible shift를 위해 만들어진다.
@@ -153,7 +170,8 @@
 - 그리고 그들을 original image resolution으로 reinterlace한다.
 - atrous convolution을 regular convolution으로 줄임으로서, off-the-shelf optimized convolution routine을 사용하도록 하용
 
-## Multiscale Image Representations using Atrous Spatial Pyramid Pooling
+### Multiscale Image Representations using Atrous Spatial Pyramid Pooling
+
 - DCNN은 본질적으로 scale을 보여주는 주목할만한 능력을 보여줘왔다.
   - 다양한 사이즈의 object를 포함하는 dataset에서 단순히 훈련된 것만으로도 주목할만한 능력을 보여줌.
 - 여전히 명시적으로 object scale에 대해 설명하는 것은 성공적으로 크고 작은 object들을 다루는 DCNN의 능력을 향상시킴.
@@ -171,16 +189,17 @@
       - 다른 sampling rate를 가지고 Multiple parallel atrous convolutional layer들을 사용하는 scheme의 다양성을 수행해옴
       - 각각의 sampling rate에서 추출된 특징들은 분리된 branch들 안에서 훨씬 process가 잘 되어있고 최종 결과물을 생산하기 위해서 잘 융합되어 있다.
       - "atrous spatial pyramid pooling" 접근은 우리의 DeepLab-LargeFOV를 일반화합니다.
- 
-## Structured Prediction with Fully-Connected Conditional Random Fields for Accurate Boundary Recovery
+
+### Structured Prediction with Fully-Connected Conditional Random Fields for Accurate Boundary Recovery
+
 - localization accuracy와 classification performance 사이의 trade-off는 DCNN에서 본질적인 것으로 보인다.
   - multiple max-pooling layer들을 가지고 있는 더 깊은 모델이 classification task에서 훨씬 성공적인 것으로 증명되었다.
   - 하지만, 증가된 invariance와 큰 top-level node의 receptive fields는 smooth response만들 산출할 수 있다.
   - Fig 5에서 묘사되었듯이, DCNN score map은 object의 대략적인 위치나 존재를 예측할 수 있다.
   - 하지만 그 경계선을 delineate하지는 못한다.
 - 과거의 연구는 이러한 localization challenge를 설명하기 위한 2개의 방법을 쫒았다.
-  - object boundary를 더 좋게 추정하기 위해서, 
-코드 공유 : http://liangchiehchen.com/projects/DeepLab.html
+  - object boundary를 더 좋게 추정하기 위해서,
+
+[코드 공유](http://liangchiehchen.com/projects/DeepLab.html)
 [Fig1]
 [Fig2]
-
