@@ -21,11 +21,11 @@ Imagenet classification with deep convolutional neural networks[CNN, AlexNet] : 
 - [U-net]https://arxiv.org/pdf/1505.04597.pdf
 - [SegNet](https://arxiv.org/pdf/1511.00561.pdf)
   - [논문 번역](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md) [정리]
-- [DeepLab](https://arxiv.org/pdf/1606.00915.pdf) [논문 번역](Deeplab/Deeplab.md)
+- DeepLab
+  - [DeepLab](https://arxiv.org/pdf/1606.00915.pdf) [논문 번역](Deeplab/Deeplab.md)
   - DeepLabv1 :
   - DeepLabv2 :
-  - DeepLabv3 : https://arxiv.org/pdf/1706.05587.pdf
-    - [논문 번역](https://github.com/nOctaveLay/DeepLearning/blob/DeepLabv3/Deeplab_v3.md)
+  - [DeepLabv3](https://arxiv.org/pdf/1706.05587.pdf) [논문 번역](Deeplab/Deeplab_v3.md)
   - DeepLabv3+:
 - Spatial pyramid: 
   - S. Lazebnik, C. Schmid, and J. Ponce, “Beyond bags of features: Spatial pyramid matching for recognizing natural scene categories,” in CVPR, 2006.
