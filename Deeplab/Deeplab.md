@@ -53,7 +53,8 @@
     - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
     - dense prediction을 하는 데 있어, deconvolutional layer를 사용하는 것보다 단순하고, 강하다.
       - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 field of view를 효과적으로 증가시키게끔 한다.
-  ![Atrous convolution](./images/DeepLab_atrous_convolution.PNG)
+
+    ![Atrous convolution](./images/DeepLab_atrous_convolution.PNG)
 
   1. 다양한 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
   - 원인
