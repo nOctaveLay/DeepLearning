@@ -109,7 +109,15 @@
 - 기타
   - 이 모델은 다중 스케일에서 object segmentation을 잘 한다.
     - 이는 multi-scale input processing 또는 proposed ASPP를 통해서 이루어진다.
-  - 
+  - 최신의 ResNet을 채택하여 DeepLab의 residual net을 구축.
+    - VGG-16에 쓰인 original model과 비교했을 때 훨씬 나은 semantic segmentation 성능을 보여줬다.
+  - 더 다양한 model variants들의 종합적인, 실험적인 평가를 제시함과 동시에 PASCAL VOC 2012 뿐만 아니라 다른 challenging에서도 좋은 결과를 냄
+  - 이 모델은 Caffe framework로 실험해 봄. [[코드]](http://liangchiehchen.com/projects/DeepLab.html)
+
+## Related Work
+
+- 대부분의 성공적인 semantic segmentation : flat classifier와 연관된 hand-crafted feature에 의존
+  - 대표적인 예시 : Boosting[24], Random Forests[43], Support Vector Machines[44]
 
 ## Methods
 
@@ -223,3 +231,9 @@
 배워야 할 keyword : spatial pyramid pooling, bi-linear interpolation
 
 [22] P. Krahenb ¨ uhl and V. Koltun, “Efficient inference in fully connected crfs with gaussian edge potentials,” in NIPS, 2011.
+
+[24]J. Shotton, J. Winn, C. Rother, and A. Criminisi, “Textonboost for image understanding: Multi-class object recognition and segmentation by jointly modeling texture, layout, and context,” IJCV, 2009.
+
+[42]Z. Tu and X. Bai, “Auto-context and its application to highlevel vision tasks and 3d brain image segmentation,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 32, no. 10, pp. 1744–1757, 2010.
+
+[43]  J. Shotton, M. Johnson, and R. Cipolla, “Semantic texton forests for image categorization and segmentation,” in CVPR, 2008.
