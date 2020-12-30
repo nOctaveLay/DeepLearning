@@ -2,6 +2,7 @@
 # U-Net
 
 ## Abstract
+
 * 데이터 증강의 강력한 활용에 영향을 받는 network and training strategy
 * 사용 가능한 작은 설명이 달려있는 data를 더 능률적으로 사용하기 위함
     * (approx.. 30 per application)
@@ -14,6 +15,7 @@
 * 코드 : https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/
 
 ## Introduction
+
 * 많은 visual task들에서 (특히 생물학 image processing에서) 요구되는 output은 localization을 반드시 포함해야 한다.
     * 즉, class label은 각각의 pixel에 할당된다고 가정된다.
 * 생물의학에서, 훈련 이미지를 구하기 쉽지 않다.

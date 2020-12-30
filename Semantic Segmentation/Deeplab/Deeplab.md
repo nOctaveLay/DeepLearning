@@ -125,7 +125,7 @@
 - Semantic segmentation을 목적으로 하고, DCNN을 베이스로 한 시스템
   1. 계단식, bottom-up image segmentation
   - DCNN-based region classification에 영향을 받음.
-  - ex) bounding box proposal, masked region들이 R-CNN에서 사용되고, shape 정보를 classification process로 통합하기 위해 DCNN의 input으로 쓰인 것.
+  - ex) bounding box proposal, masked region들이 [R-CNN](/Semantic%20Segmentation/R-CNN.md)에서 사용되고, shape 정보를 classification process로 통합하기 위해 DCNN의 input으로 쓰인 것.
 
 ## Methods
 
