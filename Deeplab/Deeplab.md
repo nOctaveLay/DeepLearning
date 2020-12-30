@@ -56,50 +56,60 @@
 
     ![Atrous convolution](./images/DeepLab_atrous_convolution.PNG)
 
-  1. 다양한 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
+  1. 여러 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
   - 원인
-    - 다양한 스케일에서 object가 존재하는 것에 의해 발생
+    - 여러 스케일에서 object가 존재하는 것에 의해 발생
   - 해결
     - 일반적인 방법 : 같은 이미지를 DCNN rescaled version으로 돌림 => 나오는 feature 또는 score map들을 모음.
       - 장점 : 이 시스템의 성능 증가
       - 단점 : 비용 (input image에 대해 DCNN layer들의 multiple scaled version에서의 response들을 계산해야 함)
-    - atrous spatial pyramid pooling (ASPP)
+    - Atrous spatial pyramid pooling (ASPP)
       - spatial pyramid pooling에 영향을 받아, convolution 전 주어진 feature layer를 resampling하는 계산적으로 효율적인 스키마를 제시함.
-      - 이는 상호 보완적인 효과적인 시야를 가진 다양한 filter를 가진 원본 이미지를 조사함.
-      - 그리고 이는 유용한 image context 뿐만 아니라 object들을 다양한 스케일에서 잡는다.
-      - 실제로 feature를 resampling하는 것 대신에, 다양한 parallel atrous convolutional layer에서 다른 sampling rate를 가지고 시도.
+      - 이는 여러 개의 filter들로 이루어진 원본 이미지를 조사함.
+        - 이 필터들은 각각 상호 보완적이고 효과적인 field-of-view를 가지고 있다.
+      - 그래서 이러한 방법은 유용한 image context 뿐만 아니라 object들을 여러 개의 스케일에서 잡는다.
+      - 실제로 feature를 resampling하는 것 대신에, 다양한 parallel atrous convolutional layer에서 다른 sampling rate를 가지고 효과적으로 실행하는 것이 더 나았음.
 
   1. DCNN invariance 때문에 localization accuracy 감소 => CRF로 해결
   - 원인
-    - object를 중앙에 놓는 classifier는 spatial transformation에 invariance를 필요로 하게 된다.
-    - 이는 본질적으로 DCNN의 spatial accuracy를 제한시킨다.
+    - object를 중앙에 놓는 classifier는 기본적으로 DCNN의 spatial accuracy(공간 정확도)를 제한하면서 spatial transformation 안에서 불변성을 요구하는 것과 연관이 있다.
   - 해결
-    - 일반적인 방법:
+    - 한 가지 방법:
       - 마지막 segmentation 결과를 계산할 때 다양한 network로부터 "hyper-column" feature를 추출하기 위해서 skip-layer사용
-    - 좀 더 효율적인 방법 : CRF를 사용
+    - 위 방법에 대한 대안 : CRF를 사용 (이 방법을 채택)
       - fully connected Conditional Random Field (CRF)를 적용시킴으로서 fine detail을 잡는 model의 능력을 향상시킴
-      - 주로 semantic segmentation에서 사용
-      - semantic segmentation에서 다양한 방법의 classifier들로 계산된 class score를 pixel들과 edge들, 혹은 superpixel들의 local interaction으로 잡아진 low-level information과 결합
-      - 효율적인 계산, fine dege detail을 잡을 능력, long range dependency
-      - pixel level classifier를 기반으로 한 성능을 향상
+        - CRF? class score들과 low-level information을 결합시키기 위한 목적으로 semantic segmentation에서 주로 사용
+          - 이 때의 class socre는 multi-way classifier들로 얻어진다.
+          - 이 때의 low-level information은 픽셀들과 edge들의 local interaction이나, superpixel들로 얻어진다.
+      - 향상된 정교함의 작업이 계층적 또는 segment의 높은 순서 의존성을 모델링하기 위해 제안되었음에도 불구하고 fully connected pairwise CRF를 씀
+        - 효과적인 계산을 위함.
+        - 넓은 범위 의존성으로 전달하는 동안 알맞은 edge detail을 잡기 위함.
+      - CRF는 pixel-level classifier에 기반한 성능 향상을 이끌어 냄. -> DCNN과 결합하면 최신의 결과를 얻을 수 있다.
 
-- Fig 1.에서 DeepLab model의 전반적인 모습 확인
-[Fig1]
-- VGG-16 이나 ResNet-101의 재 목적화 (image classification -> semantic segmentation)
-  - fully connected layer를 convolutional layer로 변환 (즉, fully convolutional network)
-  - atrous convolutional layer를 통한 feature resolution의 향상
-    - 기본이 되는 network의 모든 32 픽셀 대신 모든 8 픽셀에 대한 응답을 계산할 수 있도록 한다.
-  - bi-linear interpolation 적용
-    - 기본 이미지 해상도에 도달하기 위해서 8배에 의해 score map을 upsample 하기 위함
-    - segmentation 결과를 정제하는 fully-connected CRF로 input을 산출
+![Fig1]?(./images/DeepLab_Fig1.PNG)
+
+- Image classification에서 쓰인 DCNN(이 논문에서는 VGG-16 이나 ResNet-101을 쓴다)을 Semantic Segmentation에 맞게 재구성(image classification -> semantic segmentation)
+  - 방법
+  1. fully connected layer를 convolutional layer로 변환 (즉, fully convolutional network)
+  1. atrous convolutional layer를 통한 feature resolution의 향상
+  - original network에서 32 pixel에 대한 연산을 적용시켰다면, 지금은 8 픽셀에 대한 응답을 계산할 수 있도록 했다.
+  1. bi-linear interpolation 적용
+  - original 이미지 해상도에 도달하기 위해서 score map을 8배 upsample 하기 위함
+  - segmentation 결과들을 정제하는 fully-connected CRF의 input을 산출
+
 - DeepLab 시스템의 3가지 장점
   1. Speed
       - atrous convolution의 장점으로 인해, DCNN은 NVidia Titan X GPU에서 8FPS로 운영된다.
-        - fully-connected CRF를 위한 Mean Field Inference는 CPU에서 0.5초를 필요로 한다.
+      - fully-connected CRF를 위한 Mean Field Inference는 CPU에서 0.5초를 필요로 한다.
   2. Accuracy
-      - PASCAL VOC 2012 semantic segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, Cityscape에서 경쟁력 있는 점수를 얻음
+      - PASCAL VOC 2012 semantic segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, Cityscape에서 최신 결과를 얻음
   3. Simplicity
       - 잘 만들어진 모델 DCNNs과 CRFs의 cascade(계단식)로 구성되어 있다.
+
+- 기타
+  - 이 모델은 다중 스케일에서 object segmentation을 잘 한다.
+    - 이는 multi-scale input processing 또는 proposed ASPP를 통해서 이루어진다.
+  - 
 
 ## Methods
 
@@ -207,5 +217,9 @@
   - object boundary를 더 좋게 추정하기 위해서,
 
 [코드 공유](http://liangchiehchen.com/projects/DeepLab.html)
-[Fig1]
+
 [Fig2]
+
+배워야 할 keyword : spatial pyramid pooling, bi-linear interpolation
+
+[22] P. Krahenb ¨ uhl and V. Koltun, “Efficient inference in fully connected crfs with gaussian edge potentials,” in NIPS, 2011.
