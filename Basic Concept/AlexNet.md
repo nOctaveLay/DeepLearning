@@ -1,10 +1,13 @@
 # ImageNet Classification with Deep Convolutional Neural Networks [8/20] = AlexNet
+
 ## Abstract
+
 + non-saturating neuron들과 convolution operation에 매우 효율적인 GPU실행을 사용.
 + overfitting을 줄이기 위해 최근에 개발된 정규화 방법인 "dropout" 사용.
 + ILSVRC-2012 대회에 나와 15.3%의 에러율을 달성 (2등은 26.2%)
 
 ## Introduction
+
 **즉, CNN을 통해 대규모 학습을 진행하고자 함**
 + 더 많은 training set 필요
     - 왜? 실제 상황에 있는 object는 수많은 변동성을 보여줌
