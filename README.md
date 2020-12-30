@@ -14,7 +14,7 @@
 
 [Imagenet classification with deep convolutional neural networks[CNN, AlexNet]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 
-## Sementic segmentation
+## Semantic segmentation
 
 공부하기로 한 내용: https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw
 
