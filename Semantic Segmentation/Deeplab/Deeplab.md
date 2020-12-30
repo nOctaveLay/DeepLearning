@@ -39,6 +39,8 @@
 - 3가지 문제점의 극복
 
   1. 감소된 feature resoltuion => Atrous convolution으로 극복
+  
+      ![Atrous convolution](./images/DeepLab_atrous_convolution.PNG)
   - 원인
     - DCNN 안의 연속된 layer에서 실행되는 max-pooling과 downsampling('striding')의 반복적인 결합으로 인해 발생.
     - fully convolutional fashion에서 DCNN이 적용됬을 때 감소된 spatial resolution을 가진 feature map을 만들어 냄.
@@ -53,8 +55,6 @@
     - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
     - dense prediction을 하는 데 있어, deconvolutional layer를 사용하는 것보다 단순하고, 강하다.
       - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 시야를 효과적으로 증가시킬 수 있다.
-
-    ![Atrous convolution](./images/DeepLab_atrous_convolution.PNG)
 
   1. 여러 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
   - 원인
@@ -86,7 +86,7 @@
         - 넓은 범위 의존성으로 전달하는 동안 알맞은 edge detail을 잡기 위함.
       - CRF는 pixel-level classifier에 기반한 성능 향상을 이끌어 냄. -> DCNN과 결합하면 최신의 결과를 얻을 수 있다.
 
-![Fig1]?(./images/DeepLab_Fig1.PNG)
+  ![Fig1](./images/DeepLab_Fig1.PNG)
 
 - Image classification에서 쓰인 DCNN(이 논문에서는 VGG-16 이나 ResNet-101을 쓴다)을 Semantic Segmentation에 맞게 재구성(image classification -> semantic segmentation)
   - 방법
@@ -112,12 +112,20 @@
   - 최신의 ResNet을 채택하여 DeepLab의 residual net을 구축.
     - VGG-16에 쓰인 original model과 비교했을 때 훨씬 나은 semantic segmentation 성능을 보여줬다.
   - 더 다양한 model variants들의 종합적인, 실험적인 평가를 제시함과 동시에 PASCAL VOC 2012 뿐만 아니라 다른 challenging에서도 좋은 결과를 냄
-  - 이 모델은 Caffe framework로 실험해 봄. [[코드]](http://liangchiehchen.com/projects/DeepLab.html)
+  - 이 모델은 Caffe framework로 실험해 봄.
+  - [[코드]](http://liangchiehchen.com/projects/DeepLab.html)
 
 ## Related Work
 
 - 대부분의 성공적인 semantic segmentation : flat classifier와 연관된 hand-crafted feature에 의존
   - 대표적인 예시 : Boosting[24], Random Forests[43], Support Vector Machines[44]
+- context로부터 얻은 더 풍부한 정보와 구조적으로 만들어진 예측 기술들을 통합함으로서 많은 향상이 이루어짐.
+- 이러한 성능은 특징들의 제한된 표현력에 의해 저하됨.
+- 접근한 방식이 segmentation과 classification을 둘 다 포함하고 있기 때문에, **어떻게 두 가지 방법을 결합할 수 있는가**가 중요한 핵심이었다.
+- Semantic segmentation을 목적으로 하고, DCNN을 베이스로 한 시스템
+  1. 계단식, bottom-up image segmentation
+  - DCNN-based region classification에 영향을 받음.
+  - ex) bounding box proposal, masked region들이 R-CNN에서 사용되고, shape 정보를 classification process로 통합하기 위해 DCNN의 input으로 쓰인 것.
 
 ## Methods
 
@@ -179,13 +187,13 @@
 
 #### atrous convolution을 수행하는 2개의 효과적인 방법
 
-1. **implicitly upsample the filters**
+1.**Implicitly upsample the filters**
 
 - im2col이라는 function을 더해서 수행해봄
   - vectorized patch를 feature map의 다양한 채널에서 추출
   - 기저한 feature map을 드문드문 sample하는 option이다.  
 
-1. **equivalently sparsely sample the input feature maps**
+2.**Equivalently sparsely sample the input feature maps**
 
 - input feature map을 atrous convolution rate r과 동일한 요소로서 subsample하는 것.
   - r^2로 제거된 resolution map을 생산하기 위해서 이것을 deinterace한다.
