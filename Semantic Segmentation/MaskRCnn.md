@@ -4,10 +4,11 @@
 https://arxiv.org/pdf/1703.06870.pdf Facebook Research
 
 ## Mask R-CNN 요약정리
+
 ### 기본 정리
 
 * COCO suite of challenge 의 3개의 종목에서 우수한 성적을 거둔 model이다.
- 
+
 * 기본적으로 R-CNN과 Image Segmentation에 초점을 두고 있다.
 
 * Faster R-CNN을 개선한 방법이다. 이미지 detection을 잘한다.
@@ -29,9 +30,9 @@ https://arxiv.org/pdf/1703.06870.pdf Facebook Research
 * Faster R-CNN (class label, bounding-box offset) + object mask
 
 * 2개의 스테이지로 구성된다.
-    * RPN
-    * Class and box offset을 예측하는 것과 병행하면서 (parallel) 각각의 RoI를 위해 binary mask를 산출한다. 
 
+    * RPN
+    * Class and box offset을 예측하는 것과 병행하면서 (parallel) 각각의 RoI를 위해 binary mask를 산출한다.
 
 ## Mask R-CNN 전체 논문 해석
 >R-CNN -> Fast R-CNN -> Faster R-CNN -> Mask R-CNN
