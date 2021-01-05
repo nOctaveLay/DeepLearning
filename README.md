@@ -16,13 +16,13 @@
 
 ## Semantic segmentation
 
-공부하기로 한 내용: https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw
+[**Awesome Semantic Segmentation**](https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw)
 
 - [U-net](https://arxiv.org/pdf/1505.04597.pdf)
 - [SegNet](https://arxiv.org/pdf/1511.00561.pdf)
-  - [[논문 번역]](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/SegNet.md) [[정리]]
+  - [[정리]](Semantic%20Segmentation/SegNet.md)
 - DeepLab
-  - [DeepLab](https://arxiv.org/pdf/1606.00915.pdf) [[논문 번역]](Semantic%20Segmentation/Deeplab/Deeplab.md)
+  - [DeepLab](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab.md)
   - DeepLabv1 :
   - DeepLabv2 :
   - [DeepLabv3](https://arxiv.org/pdf/1706.05587.pdf) [[논문 번역]](Semantic%20Segmentation/Deeplab/Deeplab_v3.md)
@@ -33,17 +33,20 @@
 
 ## NLP
 
-1. 데이터 전처리 : https://blog.pingpong.us/dialog-bert-tokenizer/?fbclid=IwAR0O2mtCrn4ilEusZE2fV3waGWl1BGE7Q3ifV6TBHu-nbQ5XViflE271B2U
-1. RoBERTa: https://arxiv.org/abs/1907.11692?fbclid=IwAR1ZISElXegapWYpz0Ut3kV3mQFoh8IOiJevKJd5QH9P7SMt9XJWKFfrgx4
-1. ALBERT : https://arxiv.org/abs/1909.11942?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w
-1. 딥러닝을 이용한 자연어 처리 입문 : https://wikidocs.net/book/2155?fbclid=IwAR1jXkBthksuedED_dxANn_NRHzKgSw1oBEoZSPPnNJulpcDyUSg17BokG8
-1. BERT : http://docs.likejazz.com/bert/?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w#fn:fn-2
-https://acl2020.org/blog/ACL-2020-best-papers/
+1. [데이터 전처리](https://blog.pingpong.us/dialog-bert-tokenizer/?fbclid=IwAR0O2mtCrn4ilEusZE2fV3waGWl1BGE7Q3ifV6TBHu-nbQ5XViflE271B2U)
+2. [딥러닝을 이용한 자연어 처리 입문](https://wikidocs.net/book/2155?fbclid=IwAR1jXkBthksuedED_dxANn_NRHzKgSw1oBEoZSPPnNJulpcDyUSg17BokG8)
+
+---
+
+1. [Best Paper Awards at ACL 2020](https://acl2020.org/blog/ACL-2020-best-papers/)
+2. [RoBERTa](https://arxiv.org/abs/1907.11692?fbclid=IwAR1ZISElXegapWYpz0Ut3kV3mQFoh8IOiJevKJd5QH9P7SMt9XJWKFfrgx4)
+3. [ALBERT](https://arxiv.org/abs/1909.11942?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w)
+4. [BERT](http://docs.likejazz.com/bert/?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w#fn:fn-2)
 
 ## 정보 모음
 
-개인적으로 많은 정보가 들어있다고 생각하는 사이트 : https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
-
-[deview 2019](https://deview.kr/2019/schedule)
- 
-Best paper awards in Computer Science : https://jeffhuang.com/best_paper_awards/?fbclid=IwAR1xqjapSTqkqGb_bi7qBaeTT5me8Jv8mUc2s6M6TzBVAfSzBovBYG8aotc
+- [개인적으로 많은 정보가 들어있다고 생각하는 사이트](https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
+)
+- [deview 2019](https://deview.kr/2019/schedule)
+- [Best paper awards in Computer Science](https://jeffhuang.com/best_paper_awards/?fbclid=IwAR1xqjapSTqkqGb_bi7qBaeTT5me8Jv8mUc2s6M6TzBVAfSzBovBYG8aotc)
+- [Best Paper Awards at ACL 2020](https://acl2020.org/blog/ACL-2020-best-papers/)
