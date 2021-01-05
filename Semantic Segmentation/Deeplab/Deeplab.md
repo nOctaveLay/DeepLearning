@@ -133,7 +133,7 @@
 - Semantic segmentation을 목적으로 하고, DCNN을 베이스로 한 시스템
   - 계단식, bottom-up image segmentation
     - DCNN-based region classification에 영향을 받음.
-    - ex) bounding box proposal, masked region들이 [R-CNN](/Semantic%20Segmentation/R-CNN.md)에서 사용되고, shape 정보를 classification process로 통합하기 위해 DCNN의 input으로 쓰인 것.
+    - ex) bounding box proposal, masked region들이 [R-CNN](/Semantic%20Segmentation/R-CNN.md)에서 사용되고, shape 정보를 classification process로 통합하기 위해 DCNN의 input으로 쓰인 것들이 여기에 포함.
     - 유사하게, [50]의 저자는 superpixel representation에 집중하고 있다.
     - 비록 이러한 접근이 좋은 segmentation에서 생겨난 sharp boundary들로 이점을 얻을 수는 있었겠지만, 그것을 사용함으로서 얻는 오점들을 회복할 수는 없었다.
   - Dense image labeling을 위해 DCNN feature들로 계산된 convolution-ally을 사용하는 것, 그리고 그것들을 독립적으로 얻어진 segmentation들과 연관시키는 것.
@@ -161,6 +161,45 @@
       - mean field inference : 전통적인 image segmentation에서는 많이 연구됬지만, 오래된 모델들은 short range connection만 가능했다.
       - [57] 은 매우 유사한 densely connected CRF model을 material classification의 문제를 해결하기 위해 DCNN의 결과를 정제하려고 사용했다.
       - [57] 의 DCNN 모델은, 하지만, 모든 픽셀에 대한 dense supervision이 아니라 sparse point supervision에 의해서만 훈련되었다.
+  - [38] 논문에서 이미 첫 번째 버전이 공개 된 적이 있다.
+    - Multiple group들은 [17], [40], [58], [59], [60], [61], [62], [63] 과 비교했을 때 PASCAL VOC 2012에서 bar를 크게 올렸다.
+    - 이러한 방법들은 DeepLab 방식의 하나 혹은 두 개의 핵심 key 요소를 적용시켰다는 것이다.
+      - 하나는 효율적인 dense feature extraction을 위한 Atrous Convolution
+      - 또 하나는 fully connected CRF의 수단으로서 가공되지 않은 DCNN score의 정제
+  - 중요한 발전
+    - End-to-end training for structured prediction
+      - 이 DeepLab에서는 post-processing method로 CRF를 적용시킨 반면, [40], [59], [62], [64], [65] 논문은 성공적으로 DCNN과 CRF의 joint leraning을 쫒았다.
+      - 특히, [59], [65]는 전반적인 system을 end-to-end 훈련을 할 수 있는 feed-forward network로 바꾸기 위해서 CRF mean-field inference step들을 펼쳤다.
+      - 반면에 [62] 논문은 학습할 수 있는 filter들을 가지고 convolutional layer들에 의해서 dense CRF mean field inference에서 하나의 iteration의 근사치를 냈다.
+      - DCNN을 통해서 CRF의 pairwise term을 배우는 것
+        - 더 많은 계산이 들어가지만, 성능은 매우 증가한다.
+      - mean field inference에서 쓰였던 bilateral filtering module을 더 빠른 domain transform module [67]로 바꾸는 것
+        - 이는 speed를 향상시키고 전반적인 시스템의 memory 요구량을 줄여준다.
+      - [18], [68]은 semantic segmentation을 edge detection과 결합한다.
+    - Weaker supervision
+      - pixel-level semantic annotation이 전체 training set에서 가능하다는 주장을 꺾음
+      - 이는 [72]와 같은 Weakly supervised pre-DCNN system보다 더 좋은 결과를 성취했기 때문이다.
+      - 연구의 다른 라인에서는, [49], [73]이 instance segmentation을 따랐고, object detection과 semantic segmentation을 함께 다뤘다.
+  - atrous convolution의 유래
+    - undecimated wavelet transform의 효과적인 계산을 위해 개발되었다.
+    - [15] 논문에서 "algorithme a trous"라는 말에서 왔다.
+    - Atrous convolution은 또한 본질적으로 multi-rate signal processing 에서의 "noble identity"에서 왔다.
+      - multi-rate signal processing : input signal과 filter sampling rate들의 동일한 interplay를 구축함 [75]
+      - Atrous Convolution은 [6]에서 처음 사용되었다.
+      - 이는 나중에 [76]에 의해 dilated convolution이라고 부른다.
+        - 이는 operation이 upsampled (또는 dliated) filter의 regular convolution과 상호작용한다는 것에서 유래했다.
+      - Atrous convolution은 [38]에서 유용하다고 생각했던 더 큰 context를 통합하기 위해서 filter의 시야를 확장시킨다.
+      - 이러한 접근은 나중에 [76]에 의해 추적된다.
+        - 이는 multiscale context를 통합하기 위해 increasing rate들을 가지고 atrous convolutional layer들의 series를 적용시켰다.
+    - ASPP는 multiscale object를 잡기 위해 제안되었다.
+      - 그리고 context는 또한 multiple atrous convolutional layer를 다른 sampling rate로 적용시켰다.
+      - 이는 우리가, 하지만, atrous convolutional layer를 serial 방식이 아닌 parallel 방식으로 정렬하게 했다.
+    - 이런 atrous convolution technique는 더 넓은 작업들에 적용된다.
+      - object detection [12],[77]
+      - instance-level segmentation [78]
+      - visual question answering [79]
+      - optical flow [80]
+  - 또한, 더 진보된 image classification DCNN (예를 들어 [11]의 residual net)을 DeepLab에 적용시켜 더 나은 결과를 이끌었다. 이는 [81]에서 확인할 수 있다.
 
 ## Methods
 
@@ -168,18 +207,18 @@
 
 #### Atrous Convolution
 
-- 32배 다 거치는 것 => feature map의 spatial resolution을 감소시킴
-- 부분적인 치료제 : deconvolutional layer
+- max-pooling과 striding을 연속적으로 다 거치는 것 = 최신 DCNN 안에서 각각의 direction을 통과할 때마다 feature map의 spatial resolution을 32배 감소시킴
+- 부분적인 치료제 : deconvolutional layer [14]
   - 하지만 추가적인 메모리와 시간이 필요
-- 얘 대신에 atrous convolution 쓸 것.
-  - 이 알고리즘은 어떤 원하는 resolution에서 어떤 layer에서의 응답이라도 계산할 수 있게끔 함
-- 일단 한 번 훈련되면 post-hoc에 적용, 그렇지만 겉보기엔 훈련과 통합시킬 수도 있다.
+- 따라서 deconvolutional layer를 쓰기 보다 atrous convolution을 쓸 것이다.
+  - 어떤 것이든 원하는 resolution에서의, 어떤 layer의 응답이라도 계산할 수 있게끔 함
+  - 일단 한 번 훈련되면 사후에 적용, 그렇지만 겉보기엔 training과 통합되는 것처럼 보인다.
 - 1차원 signal
-  - output y[i], 1차원 input x[i], K length를 가진 filter w[k]
-  - (1) 그림
-  - rate parameter r : input signal을 sample한 stride에 상호응답한다.
-  - 일반적인 convolution에서는 특별한 case로, r = 1
-  - [Fig2]
+  - 1차원 input *x[i]*, output *y[i]*, K length를 가진 filter *w[k]*는 다음과 같이 정의된다.
+  - ![수식(1)](./images/DeepLab-수식(1).PNG)
+  - rate parameter *r* : input signal을 sample한 stride에 상호연관된다.
+  - Standard convolution에서는 r = 1을 가지는 special case이다.
+  - ![Fig2](./images/DeepLab_Fig2.PNG)
 - [Fig3]에서 단순한 예제로 2차원일 때 알고리즘의 작동을 묘사했다.
   - 일단 이미지가 주어지면, 우리는 처음에 downsampling operation을 한다.
     - resolution을 2배로 바꾸기
