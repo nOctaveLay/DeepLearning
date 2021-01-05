@@ -1,5 +1,13 @@
 # DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs
 
+## Index
+
+1. [Abstract](##Abstract)
+2. [Related Work](##Related%20Work)
+3. [Methods](##Methods)
+4. [Experimental Results](##Experimental%20Results)
+5. [Conclusion](##Conclusion)
+
 ## Abstract
 
 - Semantic Image segmentation에 관련된 논문
@@ -38,53 +46,53 @@
 
 - 3가지 문제점의 극복
 
-  1. 감소된 feature resoltuion => Atrous convolution으로 극복
-  
+  - 감소된 feature resoltuion => Atrous convolution으로 극복
+
       ![Atrous convolution](./images/DeepLab_atrous_convolution.PNG)
-  - 원인
-    - DCNN 안의 연속된 layer에서 실행되는 max-pooling과 downsampling('striding')의 반복적인 결합으로 인해 발생.
-    - fully convolutional fashion에서 DCNN이 적용됬을 때 감소된 spatial resolution을 가진 feature map을 만들어 냄.
-  - 해결
-    - 마지막 부분에 존재하는, 몇 개의 max pooling layer 안의 downsampling operator를 제거, 대신 다음의 convolutional layer안에서 filter를 upsample
-      => 더 높은 sampling rate를 가진 feature map을 산출한다.
-    - Filter upsampling을 할 때 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입한다.
-      - 이 방법은 undecimated wavelet transform에서 효율적인 계산을 위해 고안된 방법이다.
-      - 이를 atrous convolution으로 부르기로 한다.
-    - 실제로, atrous convolution을 조합함으로서 full resolution feature map을 회복한다.
-      - 이는 feature map을 더 조밀하게 만듬
-    - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
-    - dense prediction을 하는 데 있어, deconvolutional layer를 사용하는 것보다 단순하고, 강하다.
-      - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 시야를 효과적으로 증가시킬 수 있다.
+    - 원인
+      - DCNN 안의 연속된 layer에서 실행되는 max-pooling과 downsampling('striding')의 반복적인 결합으로 인해 발생.
+      - fully convolutional fashion에서 DCNN이 적용됬을 때 감소된 spatial resolution을 가진 feature map을 만들어 냄.
+    - 해결
+      - 마지막 부분에 존재하는, 몇 개의 max pooling layer 안의 downsampling operator를 제거, 대신 다음의 convolutional layer안에서 filter를 upsample
+        => 더 높은 sampling rate를 가진 feature map을 산출한다.
+      - Filter upsampling을 할 때 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입한다.
+        - 이 방법은 undecimated wavelet transform에서 효율적인 계산을 위해 고안된 방법이다.
+        - 이를 atrous convolution으로 부르기로 한다.
+      - 실제로, atrous convolution을 조합함으로서 full resolution feature map을 회복한다.
+        - 이는 feature map을 더 조밀하게 만듬
+      - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
+      - dense prediction을 하는 데 있어, deconvolutional layer를 사용하는 것보다 단순하고, 강하다.
+        - 큰 필터를 가지고 있는 정규 convolution과 비교하면, atrous convolution은 파라미터들의 개수나 computation의 양이 증가 하는 일 없이 filter의 시야를 효과적으로 증가시킬 수 있다.
+  
+  - 여러 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
+    - 원인
+      - 여러 스케일에서 object가 존재하는 것 때문에 발생
+    - 해결
+      - 일반적인 방법 : 같은 이미지를 DCNN rescaled version으로 돌림 => 나오는 feature 또는 score map들을 모음.
+        - 장점 : 이 시스템의 성능 증가
+        - 단점 : 비용 (input image에 대해 DCNN layer들의 multiple scaled version에서의 response들을 계산해야 함)
+      - Atrous spatial pyramid pooling (ASPP)
+        - spatial pyramid pooling에 영향을 받아, convolution 전 주어진 feature layer를 resampling하는 계산적으로 효율적인 스키마를 제시함.
+        - 이는 여러 개의 filter들로 이루어진 원본 이미지를 조사함.
+          - 이 필터들은 각각 상호 보완적이고 효과적인 field-of-view를 가지고 있다.
+        - 그래서 다양한 스케일에서 유용한 image context을 잡는 것만 아니라 object들도 잡는다.
+        - 실제로 feature를 resampling하는 것 대신에, 다양한 parallel atrous convolutional layer에서 다른 sampling rate를 가지고 효과적으로 실행하는 것이 더 나았다.
 
-  1. 여러 스케일에서 object의 존재 => Atrous Spatial Pyramid Pooling (ASPP)로 해결
-  - 원인
-    - 여러 스케일에서 object가 존재하는 것에 의해 발생
-  - 해결
-    - 일반적인 방법 : 같은 이미지를 DCNN rescaled version으로 돌림 => 나오는 feature 또는 score map들을 모음.
-      - 장점 : 이 시스템의 성능 증가
-      - 단점 : 비용 (input image에 대해 DCNN layer들의 multiple scaled version에서의 response들을 계산해야 함)
-    - Atrous spatial pyramid pooling (ASPP)
-      - spatial pyramid pooling에 영향을 받아, convolution 전 주어진 feature layer를 resampling하는 계산적으로 효율적인 스키마를 제시함.
-      - 이는 여러 개의 filter들로 이루어진 원본 이미지를 조사함.
-        - 이 필터들은 각각 상호 보완적이고 효과적인 field-of-view를 가지고 있다.
-      - 그래서 이러한 방법은 유용한 image context 뿐만 아니라 object들을 여러 개의 스케일에서 잡는다.
-      - 실제로 feature를 resampling하는 것 대신에, 다양한 parallel atrous convolutional layer에서 다른 sampling rate를 가지고 효과적으로 실행하는 것이 더 나았음.
-
-  1. DCNN invariance 때문에 localization accuracy 감소 => CRF로 해결
-  - 원인
-    - object를 중앙에 놓는 classifier는 기본적으로 DCNN의 spatial accuracy(공간 정확도)를 제한하면서 spatial transformation 안에서 불변성을 요구하는 것과 연관이 있다.
-  - 해결
-    - 한 가지 방법:
-      - 마지막 segmentation 결과를 계산할 때 다양한 network로부터 "hyper-column" feature를 추출하기 위해서 skip-layer사용
-    - 위 방법에 대한 대안 : CRF를 사용 (이 방법을 채택)
-      - fully connected Conditional Random Field (CRF)를 적용시킴으로서 fine detail을 잡는 model의 능력을 향상시킴
-        - CRF? class score들과 low-level information을 결합시키기 위한 목적으로 semantic segmentation에서 주로 사용
-          - 이 때의 class socre는 multi-way classifier들로 얻어진다.
-          - 이 때의 low-level information은 픽셀들과 edge들의 local interaction이나, superpixel들로 얻어진다.
-      - 향상된 정교함의 작업이 계층적 또는 segment의 높은 순서 의존성을 모델링하기 위해 제안되었음에도 불구하고 fully connected pairwise CRF를 씀
-        - 효과적인 계산을 위함.
-        - 넓은 범위 의존성으로 전달하는 동안 알맞은 edge detail을 잡기 위함.
-      - CRF는 pixel-level classifier에 기반한 성능 향상을 이끌어 냄. -> DCNN과 결합하면 최신의 결과를 얻을 수 있다.
+  - DCNN invariance 때문에 localization accuracy 감소 => CRF로 해결
+    - 원인
+      - object를 중앙에 놓는 classifier는 기본적으로 DCNN의 spatial accuracy(공간 정확도)를 제한하면서 spatial transformation 안에서 불변성을 요구하는 것과 연관이 있다.
+    - 해결
+      - 한 가지 방법:
+        - 마지막 segmentation 결과를 계산할 때 다양한 network로부터 "hyper-column" feature를 추출하기 위해서 skip-layer사용
+      - 위 방법에 대한 대안 : CRF를 사용 (이 방법을 채택)
+        - fully connected Conditional Random Field (CRF)를 적용시킴으로서 fine detail을 잡는 model의 능력을 향상시킴
+          - CRF? class score들과 low-level information을 결합시키기 위한 목적으로 semantic segmentation에서 주로 사용
+            - 이 때의 class socre는 multi-way classifier들로 얻어진다.
+            - 이 때의 low-level information은 픽셀들과 edge들의 local interaction이나, superpixel들로 얻어진다.
+        - 향상된 정교함의 작업이 계층적 또는 segment의 높은 순서 의존성을 모델링하기 위해 제안되었음에도 불구하고 fully connected pairwise CRF를 씀
+          - 효과적인 계산을 위함.
+          - 넓은 범위 의존성으로 전달하는 동안 알맞은 edge detail을 잡기 위함.
+        - CRF는 pixel-level classifier에 기반한 성능 향상을 이끌어 냄. -> DCNN과 결합하면 최신의 결과를 얻을 수 있다.
 
   ![Fig1](./images/DeepLab_Fig1.PNG)
 
@@ -123,9 +131,36 @@
 - 이러한 성능은 특징들의 제한된 표현력에 의해 저하됨.
 - 접근한 방식이 segmentation과 classification을 둘 다 포함하고 있기 때문에, **어떻게 두 가지 방법을 결합할 수 있는가**가 중요한 핵심이었다.
 - Semantic segmentation을 목적으로 하고, DCNN을 베이스로 한 시스템
-  1. 계단식, bottom-up image segmentation
-  - DCNN-based region classification에 영향을 받음.
-  - ex) bounding box proposal, masked region들이 [R-CNN](/Semantic%20Segmentation/R-CNN.md)에서 사용되고, shape 정보를 classification process로 통합하기 위해 DCNN의 input으로 쓰인 것.
+  - 계단식, bottom-up image segmentation
+    - DCNN-based region classification에 영향을 받음.
+    - ex) bounding box proposal, masked region들이 [R-CNN](/Semantic%20Segmentation/R-CNN.md)에서 사용되고, shape 정보를 classification process로 통합하기 위해 DCNN의 input으로 쓰인 것.
+    - 유사하게, [50]의 저자는 superpixel representation에 집중하고 있다.
+    - 비록 이러한 접근이 좋은 segmentation에서 생겨난 sharp boundary들로 이점을 얻을 수는 있었겠지만, 그것을 사용함으로서 얻는 오점들을 회복할 수는 없었다.
+  - Dense image labeling을 위해 DCNN feature들로 계산된 convolution-ally을 사용하는 것, 그리고 그것들을 독립적으로 얻어진 segmentation들과 연관시키는 것.
+    - [39] 번은 첫 번째 경우를 시도했다.
+      - 여러 image resolution에서 DCNN을 적용한 다음, 예측 결과를 부드럽게 하기 위해서 segmentation tree를 사용했다.
+    - 최근까지, [21]번은 pixel classification을 위해 skip layer를 사용하는 것을 제안했고, DCNN안에서 계산된 중간 중간의 feature map들을 모으는 것을 제안했다.
+    - 더욱이, [51]은 region proposal마다 중간의 feature map들을 pool하는 것을 제안했다.
+    - 이러한 연구들은 DCNN classifier의 결과로부터 분해된 segmentation algorithm을 쓰고 있다. 따라서, 조급한 결정을 내렸을 위험성이 있다.
+  - dense category-level pixel label을 직접적으로 제공하기 위해 DCNN을 쓴 경우.
+    - 심지어 이 경우, segmentation을 전부 버리는 것이 가능하다.
+    - [14], [52]같은 segmentation free 방식은 fully convolutional fashion에서 전체 이미지에 직접적으로 DCNN 을 적용한다.
+      - 이는 DCNN에서 마지막으로 fully connected layer를 convolutional layer로 바꾼다.
+      - [14]
+        - introduction에서 outline된 spatial localization issue를 upsample하고 concatenate한다.
+        - 그 동안, 또다른 DCNN으로 coarse result를 propagate하면서 예측 결과를 coarse한 것에서 fine한 것으로 만든다.
+      - [22] 논문에서, multi-scal pooling 기술을 소개하고, densely connected CRF를 통합하면서, feature resolution을 조절하고 위의 작업을 확장시킨다.
+      - 이러한 과정들이 object boundary들에 특히 도움이 될 것이라고 생각.
+  - DCNN과 CRF의 combination
+    - 기존의 연구는 locally connected CRF model에만 집중하고 있었다.
+    - 특히, [53] 연구는 CRF를 DCNN을 기초로 한 reranking system의 proposal mechanism으로 쓰였다.
+    - 반면에, [39] 연구는 local pairwise CRF를 위한 노드로서 superpixel들을 다뤘고, discrete inference를 위해 graph-cut을 사용했다.
+    - 이러한 모델들은 superpixel computation에 있는 error들에 의해 제한되었고, long-range dependency들이 무시되었다.
+    - **우리의 연구는 모든 pixel들을 DCNN에 의한 unary potential을 받는 CRF node로서 다룬다.**
+      - [22] 연구는 fully connected CRF model에서 Gaussian CRF가 long-range dependency들을 잡아낼 수 있고, 같은 시간 동안 model이 fast mean field inference를 수정할 수 있다는 사실을 알려준다.
+      - mean field inference : 전통적인 image segmentation에서는 많이 연구됬지만, 오래된 모델들은 short range connection만 가능했다.
+      - [57] 은 매우 유사한 densely connected CRF model을 material classification의 문제를 해결하기 위해 DCNN의 결과를 정제하려고 사용했다.
+      - [57] 의 DCNN 모델은, 하지만, 모든 픽셀에 대한 dense supervision이 아니라 sparse point supervision에 의해서만 훈련되었다.
 
 ## Methods
 
@@ -234,14 +269,22 @@
 
 [코드 공유](http://liangchiehchen.com/projects/DeepLab.html)
 
-[Fig2]
-
 배워야 할 keyword : spatial pyramid pooling, bi-linear interpolation
+
+[21] B. Hariharan, P. Arbelaez, R. Girshick, and J. Malik, “Hyper- ´
+columns for object segmentation and fine-grained localization,”
+in CVPR, 2015.
 
 [22] P. Krahenb ¨ uhl and V. Koltun, “Efficient inference in fully connected crfs with gaussian edge potentials,” in NIPS, 2011.
 
 [24]J. Shotton, J. Winn, C. Rother, and A. Criminisi, “Textonboost for image understanding: Multi-class object recognition and segmentation by jointly modeling texture, layout, and context,” IJCV, 2009.
 
+[39] C. Farabet, C. Couprie, L. Najman, and Y. LeCun, “Learning
+hierarchical features for scene labeling,” PAMI, 2013.
+
 [42]Z. Tu and X. Bai, “Auto-context and its application to highlevel vision tasks and 3d brain image segmentation,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 32, no. 10, pp. 1744–1757, 2010.
 
 [43]  J. Shotton, M. Johnson, and R. Cipolla, “Semantic texton forests for image categorization and segmentation,” in CVPR, 2008.
+
+[51] J. Dai, K. He, and J. Sun, “Convolutional feature masking for joint
+object and stuff segmentation,” arXiv:1412.1283, 2014.

@@ -29,7 +29,7 @@
   - DeepLabv3+:
 - Spatial pyramid:
   - S. Lazebnik, C. Schmid, and J. Ponce, “Beyond bags of features: Spatial pyramid matching for recognizing natural scene categories,” in CVPR, 2006.
-  - [20] K. He, X. Zhang, S. Ren, and J. Sun, “Spatial pyramid pooling in deep convolutional networks for visual recognition,” in ECCV, 2014
+  - K. He, X. Zhang, S. Ren, and J. Sun, “Spatial pyramid pooling in deep convolutional networks for visual recognition,” in ECCV, 2014
 
 ## NLP
 
@@ -38,10 +38,9 @@
 
 ---
 
-1. [Best Paper Awards at ACL 2020](https://acl2020.org/blog/ACL-2020-best-papers/)
-2. [RoBERTa](https://arxiv.org/abs/1907.11692?fbclid=IwAR1ZISElXegapWYpz0Ut3kV3mQFoh8IOiJevKJd5QH9P7SMt9XJWKFfrgx4)
-3. [ALBERT](https://arxiv.org/abs/1909.11942?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w)
-4. [BERT](http://docs.likejazz.com/bert/?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w#fn:fn-2)
+1. [RoBERTa](https://arxiv.org/abs/1907.11692?fbclid=IwAR1ZISElXegapWYpz0Ut3kV3mQFoh8IOiJevKJd5QH9P7SMt9XJWKFfrgx4)
+2. [ALBERT](https://arxiv.org/abs/1909.11942?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w)
+3. [BERT](http://docs.likejazz.com/bert/?fbclid=IwAR2TNdGL_aFnuB1x5e4YxhvnwfQcEgcjxFBmlFrQ8NGASu1nP1M09GgWZ4w#fn:fn-2)
 
 ## 정보 모음
 
