@@ -4,9 +4,9 @@
 
 ### [Deep Learning mindmap source 2020](https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
 
-1. [Machine Learning Data Processing](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20data%20processing%20roadmap.md)
-2. [Machine Learning Concept](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20concept.md)
-3. [Machine Learning Process](https://github.com/nOctaveLay/deep_learning_mindmap/blob/master/machine%20learning%20process.md)
+1. [Machine Learning Data Processing](MindMap/machine%20learning%20data%20processing%20roadmap.md)
+2. [Machine Learning Concept](MindMap/machine%20learning%20concept.md)
+3. [Machine Learning Process](MindMap/machine%20learning%20process.md)
 
 ## 딥러닝 기초
 
@@ -16,7 +16,7 @@
 
 ## Semantic segmentation
 
-[**Awesome Semantic Segmentation**](https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw)
+### [Awesome Semantic Segmentation](https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw)
 
 - [U-net](https://arxiv.org/pdf/1505.04597.pdf)
 - [SegNet](https://arxiv.org/pdf/1511.00561.pdf)
