@@ -207,48 +207,52 @@
 
 #### Atrous Convolution
 
-- max-pooling과 striding을 연속적으로 다 거치는 것 = 최신 DCNN 안에서 각각의 direction을 통과할 때마다 feature map의 spatial resolution을 32배 감소시킴
+- semantic segmentation, dense prediction task에 대해 DCNN을 fully convolutional fashion으로 배치해서 이용했다.
+- 하지만, max-pooling과 striding을 연속적으로 다 거치는 것 = DCNN 안에서 각각의 direction을 통과할 때마다 feature map의 spatial resolution을 32배 감소시킴
 - 부분적인 치료제 : deconvolutional layer [14]
   - 하지만 추가적인 메모리와 시간이 필요
-- 따라서 deconvolutional layer를 쓰기 보다 atrous convolution을 쓸 것이다.
-  - 어떤 것이든 원하는 resolution에서의, 어떤 layer의 응답이라도 계산할 수 있게끔 함
-  - 일단 한 번 훈련되면 사후에 적용, 그렇지만 겉보기엔 training과 통합되는 것처럼 보인다.
+- 따라서 deconvolutional layer를 쓰는 것보다 atrous convolution을 쓰는 게 낫다.
+  - 이 알고리즘은 요구하는 resolution이 어떤 것이든, 어떤 layer의 응답이든지 계산하도록 한다.
+  - 일단 한 번 훈련된 후에 적용된다. 하지만 겉보기엔 training과 통합되는 것처럼 보인다.
 - 1차원 signal
-  - 1차원 input *x[i]*, output *y[i]*, K length를 가진 filter *w[k]*는 다음과 같이 정의된다.
+  - 1차원 input *x[i]*, output *y[i]*, K length를 가진 filter *w[k]* 는 다음과 같이 정의된다.
   - ![수식(1)](./images/DeepLab-수식(1).PNG)
   - rate parameter *r* : input signal을 sample한 stride에 상호연관된다.
   - Standard convolution에서는 r = 1을 가지는 special case이다.
   - ![Fig2](./images/DeepLab_Fig2.PNG)
-- [Fig3]에서 단순한 예제로 2차원일 때 알고리즘의 작동을 묘사했다.
-  - 일단 이미지가 주어지면, 우리는 처음에 downsampling operation을 한다.
-    - resolution을 2배로 바꾸기
-  - kernel에서(vertical Gaussian derivative) convolution을 수행하기
-  - 원본 이미지 coordinate에 feature map을 수행하면,이미지 위치의 오직 1/4만 응답으로 얻을 수 있다.
-  - 대신에, 만약 full resolution image를 '구멍이 있는' filter를 가지고 convolve 하면 모든 이미지 위치에서 응답을 계산
-    - 2배수의 original filter를 upsample 하고, filter value들 사이에 있는 zero들을 소개하는 filter이다.
-  - 비록, 효과적인 filter size가 증가한다 하더라도, 우리는 오로지 non-zero filter value를 설명해야한다.
-    - 따라서, filter parameter의 수와 position당 operation들의 수는 constant하게 남아있다.
-  - 결과적인 scheme는 쉽고 명확하게 신경망 feature responce의 spatial resolution을 control 하도록 도와준다.
+- 2차원일 때 알고리즘의 작동을 묘사
+  - ![Fig3](./images/DeepLab_Fig3.PNG)
+  - atrous convolution이 없을 경우
+    - 이미지가 주어지면, 처음에 resolution을 2배로 줄이는 downsampling operation을 한다.
+    - kernel에서 vertical Gaussian derivative을 사용하여 convolution을 수행한다
+    - 만약 하나가 원본 이미지와 같은 위치에 result로 나오는 feature map을 심으면, 이미지 position의 1/4만 response로 얻을 수 있다.
+  - atrous convolution을 쓸 경우
+    - 만약 full resolution image를 '구멍이 있는' filter(atrous filter)를 가지고 convolve 연산을 시키면 모든 이미지 position들에 대한 결과들을 계산할 수 있다.
+    - 이 필터는 original filter의 2배를 upsample 하고, filter value들 사이에 있는 zero들을 소개한다.
+  - 효과적인 filter의 size가 증가한다 하더라도, 우리는 non-zero filter value만을 설명할 필요가 있다.
+    - 따라서, filter parameter의 수와 position당 operation들의 수는 constant하게 유지한다.
+  - 결과로 나오는 scheme는 쉽고 명확하게 신경망 feature response의 spatial resolution을 control 하도록 도와준다.
 
 #### Use for chain of layers
 
 - DCNN에서의 context 안에서, atrous convolution을 layer들의 chain으로 사용할 수 있다.
-  - 효과적으로 자율적인, 높은 resolution에서 최종적인 DCNN network responce를 계산하는 걸 허용합니다.
-  - VGG-16 또는 ResNet-101 에서 계산된 feature response의 spatial density를 두 배로 하기 위해서, 마지막 pooling 또는 convolutional layer의 stride를 1로 설정합니다.
-    - 마지막 pooling 또는 convolutional layer는 resolution을 감소시키기 때문입니다.
-    - 이렇게 stride를 1로 설정하면 signal decimation을 피할 수 있습니다.
-  - 그리고 모든 부수적인 convolutional layer들을 atrous convolutional layer로 대체합니다.
-    - 이 때의 rate = 2
-  - 이 방법은 너무 비용이 많이 듭니다.
-- 따라서 hybrid 방법을 써야합니다.
-  - 계산된 feature map의 density를 4배로 만드는 방법
-  - 후에 8배의 추가적인 fast bilinear interpolation을 합니다.
-    - class score map이 (log-probability와 상호응답한) 꽤 부드럽기 때문에 씁니다.
-    - 이는 Fig 5에서 나와있습니다.
-  - deconvolutional approach와 다르게, 제시된 접근은 어떤 extra parameter를 배우는 것을 필요로 하는 것 없이 image classification network를 dense feature extractors로 바꾼다.
-    - 실제로 DCNN trainning을 빠르게 이끈다.
+  - 이는 높은 해상도에서 자유롭게 마지막 DCNN network의 response들을 계산하는 걸 허용한다.
+  - 예를 들어, VGG-16 또는 ResNet-101에서 계산된 feature response의 spatial density를 두 배로 하기 위해서, 마지막 pooling이나 convolutional layer의 stride를 1로 설정해야 한다는 사실을 알았다.
+    - 이는 마지막 pooling('pool5')이나 마지막 convolutional layer('conv5_1')가 resolution을 감소시키기 때문이다.
+    - 만약 stride를 1로 설정하면 signal decimation(신호의 sampling rate가 줄어드는 것)을 피할 수 있다.
+  - 그리고 모든 부수적인 convolutional layer들을 rate가 2인 (r=2) atrous convolutional layer로 대체해야 한다는 사실도 알았다.
+  - 이 방법은 original image의 해상도에 대해 feature response들을 계산하지만, 너무 cost가 많이 듭니다.
+- 따라서 좋은 efficency/accuracy를 trade-off로 때리는 hybrid 방법을 적용했다.
+  - **atrous convolution + fast bilinear interpolation**
+  - 계산된 feature map의 density를 4배로 증가시키기 위해 **atrous convolution**을 사용
+  - 이후 original image resolution에서 feature map을 회복하기 위해 추가적인 8배의 fast bilinear interpolation을 수행.
+    - Bilinear interpolation은 이 정도 세팅으로도 class score map들이 (log-probability 로그-확률에서) 꽤 부드럽기 때문에 충분하다.
+    - 이는 Fig 5로 증명된다.
+    - ![Fig5](./images/DeepLab_Fig5.PNG)
+  - deconvolutional approach와 다르게, 이 접근은 어떤 추가적인 parameter를 학습시키는 것 없이 image classification network를 dense feature extractors로 전환시킨다.
+    - 이는 실제로 DCNN training을 빠르게 만든다.
 
-#### Enlarge Field o`1f view of filters at any DCNN layer
+#### Enlarge Field of view of filters at any DCNN layer
 
 - 최신 DCNN은 일반적으로 공간적으로 작은 convolution kernel을 허용한다. (일반적으로 3x3)
   - 이는 파라미터의 수와 그 계산을 포함되게 하기 위해서이다.
@@ -308,7 +312,7 @@
 
 [코드 공유](http://liangchiehchen.com/projects/DeepLab.html)
 
-배워야 할 keyword : spatial pyramid pooling, bi-linear interpolation
+배워야 할 keyword : spatial pyramid pooling, bi-linear interpolation, vertical Gaussian derivative, class score map
 
 [21] B. Hariharan, P. Arbelaez, R. Girshick, and J. Malik, “Hyper- ´
 columns for object segmentation and fine-grained localization,”
