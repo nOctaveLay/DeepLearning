@@ -22,11 +22,10 @@
 - [SegNet](https://arxiv.org/pdf/1511.00561.pdf)
   - [[정리]](Semantic%20Segmentation/SegNet.md)
 - DeepLab
-  - [DeepLab](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab.md)
-  - DeepLabv1 :
-  - [DeepLabv2](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab.md)
-  - [DeepLabv3](https://arxiv.org/pdf/1706.05587.pdf) [[논문 번역]](Semantic%20Segmentation/Deeplab/Deeplab_v3.md)
-  - DeepLabv3+:
+  - [DeepLabv1](https://arxiv.org/pdf/1412.7062.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v1.md)
+  - [DeepLabv2](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v2.md)
+  - [DeepLabv3](https://arxiv.org/pdf/1706.05587.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v3.md)
+  - [DeepLabv3+](https://arxiv.org/pdf/1802.02611.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v3+.md)
 - Spatial pyramid:
   - S. Lazebnik, C. Schmid, and J. Ponce, “Beyond bags of features: Spatial pyramid matching for recognizing natural scene categories,” in CVPR, 2006.
   - K. He, X. Zhang, S. Ren, and J. Sun, “Spatial pyramid pooling in deep convolutional networks for visual recognition,” in ECCV, 2014
