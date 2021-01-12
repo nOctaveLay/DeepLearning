@@ -53,3 +53,13 @@
   - simplicity : 2개의 합리적으로 잘 설계된 모듈인 DCNN과 CRF의 계단(cascade)으로 구성되어있다.
 
 ## Related Work
+
+## Convolutional Neural Networks for Dense Image Labeling
+
+- 밑은 우리의 dense semantic image segmentation 시스템을 위해 public하게 이용 가능한 미리 학습시켜놓은 최신의 16 layer classification network(VGG-16)을 효율적, 효과적인 dense feature extractor로 어떻게 목적을 다시 설정했고 어떻게 finetune 시켰는지를 설명한다.
+
+### Efficient Dense Sliding Window Feature Extraction with the Hole Algorithm
+
+- 우리의 dense CNN feature extractor의 성공에서 Dense spatial score 평가는 중요하다.
+- 이를 실행하기 위해서, VGG-16의 fully-connected layer들을 convolution한 것으로 변환한다.
+- 그리고 이미지의 original resolution에서 convolutional 방법으로 network를 돌린다.
