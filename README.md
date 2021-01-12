@@ -24,7 +24,7 @@
 - DeepLab
   - [DeepLab](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab.md)
   - DeepLabv1 :
-  - DeepLabv2 :
+  - [DeepLabv2](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab.md)
   - [DeepLabv3](https://arxiv.org/pdf/1706.05587.pdf) [[논문 번역]](Semantic%20Segmentation/Deeplab/Deeplab_v3.md)
   - DeepLabv3+:
 - Spatial pyramid:

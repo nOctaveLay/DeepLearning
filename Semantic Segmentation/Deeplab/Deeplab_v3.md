@@ -1,17 +1,20 @@
 # Rethinking Atrous Convolution for Semantic Image Segmentation
 
 ## DeepLab v3
-1.	DeepLab v3는 DeepLab v1에서 발전한 모델이므로, DeepLab v1, DeepLab v2에 대한 논문을 봐야 한다.
-2.	Atrous Convolution (introduced by DeepLab v1) 에 대한 이해가 필요하다.
+
+1. DeepLab v3는 DeepLab v1에서 발전한 모델이므로, DeepLab v1, DeepLab v2에 대한 논문을 봐야 한다.
+2. Atrous Convolution 에 대한 이해가 필요하다.
+3. [출처](https://arxiv.org/pdf/1706.05587.pdf)
 
 ## Abstract
-1.	Revisit atrous convolution
--	Powerful tool to adjust filter’s field-of-view 
--	Powerful tool to control the resolution of feature responses computed by Deep Convolutional Neural Networks (DCNN)
-2.	Atrous conbolution을 cascade 하거나 parallel하게 적용시킬 수 있는 module을 디자인 해야 한다.
-- Multiple scale에서 segmenting object[오브젝트 분리]에 대한 문제를 해결하기 위함
-- Multiple atrous rate를 적용함으로써 Multi-scale context를 잡기 위함
-3.	기존에 제시된 Atrous Spatial Pyramid Pooling module(multiple scale에서의 convolutional feature를 증명하는 것)을 증강시키는 것을 목적으로 해야 한다.
+
+- Revisit atrous convolution
+  - Powerful tool to adjust filter’s field-of-view
+  - Powerful tool to control the resolution of feature responses computed by Deep Convolutional Neural Networks (DCNN)
+- Atrous conbolution을 cascade 하거나 parallel하게 적용시킬 수 있는 module을 디자인 해야 한다.
+  - Multiple scale에서 segmenting object[오브젝트 분리]에 대한 문제를 해결하기 위함
+  - Multiple atrous rate를 적용함으로써 Multi-scale context를 잡기 위함
+- 기존에 제시된 Atrous Spatial Pyramid Pooling module(multiple scale에서의 convolutional feature를 증명하는 것)을 증강시키는 것을 목적으로 해야 한다.
 -	Global context를 해독하는 이미지 level feature와 함께 가야 함
 -	이는 Performance를 향상시킨다.
 4.	Implementation detail을 상세하게 설명

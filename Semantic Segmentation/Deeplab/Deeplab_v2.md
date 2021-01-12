@@ -10,6 +10,8 @@
 
 ## Abstract
 
+- 2017년 논문
+- [출처](https://arxiv.org/abs/1606.00915v2)
 - Semantic Image segmentation에 관련된 논문
 - 값어치가 있다고 실험적으로 증명된 3개의 공헌 : **atrous convolution**, **ASPP**, **DCNN + CRF**
 
