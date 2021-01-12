@@ -236,83 +236,128 @@
 #### Use for chain of layers
 
 - DCNN에서의 context 안에서, atrous convolution을 layer들의 chain으로 사용할 수 있다.
-  - 이는 높은 해상도에서 자유롭게 마지막 DCNN network의 response들을 계산하는 걸 허용한다.
-  - 예를 들어, VGG-16 또는 ResNet-101에서 계산된 feature response의 spatial density를 두 배로 하기 위해서, 마지막 pooling이나 convolutional layer의 stride를 1로 설정해야 한다는 사실을 알았다.
-    - 이는 마지막 pooling('pool5')이나 마지막 convolutional layer('conv5_1')가 resolution을 감소시키기 때문이다.
-    - 만약 stride를 1로 설정하면 signal decimation(신호의 sampling rate가 줄어드는 것)을 피할 수 있다.
-  - 그리고 모든 부수적인 convolutional layer들을 rate가 2인 (r=2) atrous convolutional layer로 대체해야 한다는 사실도 알았다.
-  - 이 방법은 original image의 해상도에 대해 feature response들을 계산하지만, 너무 cost가 많이 듭니다.
+  - 이는 자유롭게 높은 해상도에서 마지막 DCNN network의 response들을 계산하는 걸 허용한다.
+  - VGG-16 또는 ResNet-101에서 계산된 feature response의 spatial density를 두 배로 하기 위해서 한 일
+    - 마지막 pooling이나 convolutional layer의 stride를 1로 설정한다.
+      - 이는 마지막 pooling('pool5')이나 마지막 convolutional layer('conv5_1')가 resolution을 감소시키기 때문이다.
+      - 만약 stride를 1로 설정하면 signal decimation(신호의 sampling rate가 줄어드는 것)을 피할 수 있다.
+    - 그리고 다음에 오는 모든 convolutional layer들을 rate가 2인 (r=2) atrous convolutional layer로 대체한다.
+  - 이 방법은 original image의 해상도에 대해 feature response들을 계산할 수 있다.
+  - 하지만 너무 cost가 많이 든다.
 - 따라서 좋은 efficency/accuracy를 trade-off로 때리는 hybrid 방법을 적용했다.
   - **atrous convolution + fast bilinear interpolation**
   - 계산된 feature map의 density를 4배로 증가시키기 위해 **atrous convolution**을 사용
-  - 이후 original image resolution에서 feature map을 회복하기 위해 추가적인 8배의 fast bilinear interpolation을 수행.
+  - 이후 original image 해상도의 feature map을 회복하기 위해 추가적인 8배의 fast bilinear interpolation을 수행.
     - Bilinear interpolation은 이 정도 세팅으로도 class score map들이 (log-probability 로그-확률에서) 꽤 부드럽기 때문에 충분하다.
     - 이는 Fig 5로 증명된다.
     - ![Fig5](./images/DeepLab_Fig5.PNG)
   - deconvolutional approach와 다르게, 이 접근은 어떤 추가적인 parameter를 학습시키는 것 없이 image classification network를 dense feature extractors로 전환시킨다.
     - 이는 실제로 DCNN training을 빠르게 만든다.
 
-#### Enlarge Field of view of filters at any DCNN layer
+#### Arbitrarily enlarge Field of view of filters at any DCNN layer
 
 - 최신 DCNN은 일반적으로 공간적으로 작은 convolution kernel을 허용한다. (일반적으로 3x3)
-  - 이는 파라미터의 수와 그 계산을 포함되게 하기 위해서이다.
-- rate r을 가지고 있는 atrous convolution은 연속적인 filter value에서 r-1개의 0들을 소개한다.
+  - 이는 파라미터의 수와 그 계산을 억제하기 위해서이다.
+- rate r을 가지고 있는 atrous convolution은 연속적인 filter value에서 r-1개의 0들을 제안한다.
   - 효과적으로 kxk개의 filter kernel size를 키운다.
   - k = k + (k-1)(r-1)에 적용
-  - 파라미터의 수 증가나 계산을 하는 양을 증가시킬 필요 없음.
-  - field-of-view를 control하거나 accurate localization(small field of view)와 context assimilation(large field of view)에서 가장 좋은 trade-off를 찾음.
-  - VGG-16에서 r = 12를 했더니 성공적으로 perfomance가 증가
+  - 이 연산은 파라미터의 개수 증가나 계산량을 증가시킬 필요 없다.
+- field-of-view를 제어하거나 accurate localization(small field of view)와 context assimilation[문맥 이해](large field of view)사이에서 가장 좋은 trade-off를 찾는 효율적인 mechanism을 제공한다.
+  - VGG-16의 'fc6' layer에 r = 12인 atrous convolution을 적용시켰더니, 성공적으로 perfomance가 증가
 
-#### atrous convolution을 수행하는 2개의 효과적인 방법
+#### Atrous convolution을 수행하는 2개의 효과적인 방법
 
-1.**Implicitly upsample the filters**
+1.**Implicitly upsample the filters by inserting holes (zeros)**
 
-- im2col이라는 function을 더해서 수행해봄
+- 기초적인 feature map을 sparsely[듬성듬성] sample하는 option에 im2col이라는 function을 더해서 수행해봄
   - vectorized patch를 feature map의 다양한 채널에서 추출
-  - 기저한 feature map을 드문드문 sample하는 option이다.  
 
 2.**Equivalently sparsely sample the input feature maps**
 
 - input feature map을 atrous convolution rate r과 동일한 요소로서 subsample하는 것.
   - r^2로 제거된 resolution map을 생산하기 위해서 이것을 deinterace한다.
   - 각각의 rxr possible shift를 위해 만들어진다.
-- 이는 표준 convolution을 이러한 intermediate feature map에 적용시키는 것으로 이어진다.
-- 그리고 그들을 original image resolution으로 reinterlace한다.
-- atrous convolution을 regular convolution으로 줄임으로서, off-the-shelf optimized convolution routine을 사용하도록 하용
+- 위의 방법을 하기 전, 표준 convolution을 이러한 intermediate feature map에 적용시키는 것, 그것들이 original image resolution으로 reinterlace 하는 것이 먼저 진행된다.
+- Atrous convolution을 regular convolution으로 줄임으로서, 기존의 optimized convolution routine을 사용하도록 허용한다.
+- 이 논문에서 이는 Tensorflow framework에서 진행했다. [83]
 
 ### Multiscale Image Representations using Atrous Spatial Pyramid Pooling
 
 - DCNN은 본질적으로 scale을 보여주는 주목할만한 능력을 보여줘왔다.
   - 다양한 사이즈의 object를 포함하는 dataset에서 단순히 훈련된 것만으로도 주목할만한 능력을 보여줌.
-- 여전히 명시적으로 object scale에 대해 설명하는 것은 성공적으로 크고 작은 object들을 다루는 DCNN의 능력을 향상시킴.
+- 여전히 object scale에 대해 명시적으로 설명하는 것이 성공적으로 크고 작은 object들을 다루는 DCNN의 능력을 향상시킴.
 - scale variability를 semantic segmentation에서 다루는 것에 대한 두 개의 접근 시도
   1. standard multiscale processing
-      - original image의 multiple rescaled version 에서 DCNN score map을 추출.
-      - 같은 parameter를 공유하는 parallel DCNN branch들을 사용.
+      - 같은 parameter를 공유하는 parallel DCNN branch들을 사용하여 original image의 multiple rescaled version 에서 DCNN score map을 추출.
       - 마지막 결과를 생성하기 위해서, parallel DCNN branch들에서 original image resolution으로 feature map을 bilinearly interpolate 함.
-      - 그리고 그것들을 다른 scale를 거쳐 가장 큰 response를 각각의 position에서 얻음으로서 합성시킴
-      - Multiscale processing은 performance를 향상시킴.
+      - 이 결과들을 종합해 각각의 position에서 가장 큰 response를 얻음으로서 합성시킴
+      - Multiscale processing은 performance를 향상시켰지만, 모든 DCNN layer들에서 다양한 input의 크기를 고려하기 위한 feature response들을 계산하는 비용도 증가.
   2. convolutional feature -> resample
-      - RCNN 공간 pyramid pooling method의 성공에 자극을 받아 만들어짐.
-        - pyramid pooling method 는 자율적인 scale의 영역이 정확하게 효율적으로 classify됨을 보여줌.
-          - 하나의 크기에서 추출된 convolutional features를 resample하는 것에 의한다.
-      - 다른 sampling rate를 가지고 Multiple parallel atrous convolutional layer들을 사용하는 scheme의 다양성을 수행해옴
-      - 각각의 sampling rate에서 추출된 특징들은 분리된 branch들 안에서 훨씬 process가 잘 되어있고 최종 결과물을 생산하기 위해서 잘 융합되어 있다.
-      - "atrous spatial pyramid pooling" 접근은 우리의 DeepLab-LargeFOV를 일반화합니다.
+      - RCNN spatial pyramid pooling method의 성공에 영향을 받아 만들어짐. [R-CNN](/Semantic%20Segmentation/R-CNN.md)
+        - 하나의 크기에서 추출된 convolutional feature들을 다시 sampling 함으로서 pyramid pooling method는 다양한 scale의 영역이 정확하게 효율적으로 classify됨을 보여줌.
+      - 그래서 우리는 다른 sampling rate들을 가지고 Multiple parallel atrous convolutional layer들을 사용하는 scheme의 variant을 실행했다.
+      - 각각의 sampling rate에서 추출된 특징들은 분리된 branch들에서 훨씬 잘 진행됬고, 최종 결과물을 생산하기 위해서 잘 융합했다.
+      - 제시된 "atrous spatial pyramid pooling"(DeepLab-ASPP) 접근은 우리의 DeepLab-LargeFOV를 일반화합니다. ![Fig4](./images/DeepLab_Fig4.PNG)
 
 ### Structured Prediction with Fully-Connected Conditional Random Fields for Accurate Boundary Recovery
 
 - localization accuracy와 classification performance 사이의 trade-off는 DCNN에서 본질적인 것으로 보인다.
-  - multiple max-pooling layer들을 가지고 있는 더 깊은 모델이 classification task에서 훨씬 성공적인 것으로 증명되었다.
-  - 하지만, 증가된 invariance와 큰 top-level node의 receptive fields는 smooth response만들 산출할 수 있다.
-  - Fig 5에서 묘사되었듯이, DCNN score map은 object의 대략적인 위치나 존재를 예측할 수 있다.
-  - 하지만 그 경계선을 delineate하지는 못한다.
-- 과거의 연구는 이러한 localization challenge를 설명하기 위한 2개의 방법을 쫒았다.
-  - object boundary를 더 좋게 추정하기 위해서,
+  - Multiple max-pooling layer들을 가지고 있는 더 깊은 모델이 classification task에서 훨씬 성공적인 것으로 증명되었다.
+  - 하지만, 증가된 invariance와 큰 top-level node의 receptive(수용적인) fields는 smooth response(부드러운 응답)만을 산출할 수 있다.
+  - Fig 5에서 묘사되었듯이, DCNN score map은 object의 대략적인 위치나 존재를 예측할 수 있다. 하지만 그 경계선을 그리지는 못한다.
+- 과거의 연구는 이러한 localization challenge를 설명하기 위해 2개의 방법을 따라갔다.
+  - object의 경계선을 더 잘 추정하기 위해 convolutional network 안의 다양한 레이어에서 정보를 모으는 것
+  - Low-level segmentation method에서 localization task를 대표하는 super-pixel representation을 적용하는 것.
+- 이 연구에서는 DCNN의 인지 능력과 fully connected CRF에서 잘 얻어지는 localization accuracy를 결합을 기본으로 한다.
+  - 이 결과는 localization challenge에서 주목할만한 성과를 거두었다.
+    - 정확한 semantic segmentation 결과를 산출했다.
+    - 현재의 방법으로 알아낼 수 없는 detail의 수준까지 object boundary들을 회복했다.
+    - 이 방법은 [38]에서 첫 번째 버전을 밝힌 이후로 [17], [40], [58], [59], [60], [61], [62], [63], [65]으로 확장됬다.
+- 전통적으로, CRF는 잡음이 많은 segmentation map들을 부드럽게 하는 데에 적용되었다.
+  - 이러한 모델들은 spatially proximal pixel들에게 같은 label을 할당하는 것을 더 좋아하면서, 이웃하는 node들을 결합시킨다.
+  - 이러한 짧은 범위의 CRF의 원시적인 기능은 local hand-engineered feature들의 맨 위에서 세워진 약한 classifier들의 거짓된 예측을 제거한다.
+- 이런 약한 classifier와 비교해서, 현대 DCNN 구조는 질적으로 다른 score map과 semantic label prediction을 생성한다.
+  - Fig.5에서 제시되었듯, score map은 꽤 부드럽고, 동등한 classification 결과를 생성한다.
+  - 이러한 세팅에서, 짧은 범위의 CRF를 쓰는 것은 해로울 수 있다.
+  - 이는 우리의 목표가 score map을 부드럽게 하는 것이 아닌, detail한 local structure을 회복하고 싶은 것이기 때문이다.
+  - local-range CRF와 결합하는 데 있어 contrast에 민감한 가능성들은 localization을 잠재적으로 증가시키지만, 얇은 구조들을 놓치고 많은 비용이 들어가는 discrete optimization problem을 푸는 것을 필요로 한다.
+- 짧은 범위의 CRF의 이러한 한계를 극복하기 위해서, Deeplab을 [22]에서 나온 fully connected CRF 모델과 통합시켰다.
+  - ![수식(2)](./images/DeepLab_energy_function.PNG)
+  - **x : pixel들에 대한 label assignment**
+  - ![unary_potential](./images/DeepLab_unary_potential.PNG)
+  - P(xi) : DCNN에 의해 계산으로서 나오는 pixel i 에서의 label assignment probability
+- fully-connected graph를 사용하는 동안, pairwise potential은 효율적인 추론을 허락하는 form을 가진다.
+  - 예를 들어, 이미지 픽셀의 모든 pair를 연결할 때
+  - 특히 [22]에서, 우리는 다음과 같은 표현을 사용한다.
+  - ![binary_potential](./images/DeepLab_binary_potential.PNG)
+  - xi != xj이고, 그렇지 않으면 0인 조건에서 u(xi,yi) = 1 이어야 한다.
+  - 이는 distinct label들과 연결된 node들만이 불리해진다는 것을 의미한다.
+  - 남은 표현들은 다른 feature space들에서 두 개의 Gaussian kernel들을 사용한다.
+    - 첫 번째 : pixel position들(p라고 정의함)과 RGB color(I라고 정의함) 둘 다에 의존적인 'bilateral' kernel
+      - 유사한 color나 position을 가지는 pixel들이 비슷한 label을 가지도록 만든다.
+    - 두 번째 : pixel position들에게만 의존적인 kernel
+      - smoothness를 강요 할 때 spatial proximity (공간 인접도)만 고려한다.
+  - 시그마 알파, 시그마 베타, 시그마 감마 변수는 Gaussian kernel의 크기를 조절한다.
+- 중요한 것은, 이 모델은 효율적인 확률론적 추론(probabilistic inference)의 근사치를 내기 위해서 수정될 수 있다.
+  - Fully decomposable mean field approximation을 기초로 한 update를 통과한 message는 bilateral space에서 Gaussian convolution으로 표현될 수 있다.
+    - Fully decomposable mean field approximation
+    - ![mean%20field%approximation](./images/DeepLab_mean_field_approximation.PNG)
+  - High-demensional filtering algorithm은 실전에서 매우 빠른 알고리즘을 생성하면서 이런 계산의 스피드를 높였다.
+    - [22] public하게 사용 가능한 실행을 하면서 Pascal VOC image들에서 평균보다 0.5초 덜 걸렸다.
+
+## Experimental Results
+
+## Conclusion
+
+- DeepLab은 dense feature extraction을 하기 위해서 upsampled filter를 가진 'atrous convolution'을 적용함으로서 image classification에서 훈련되는 network를 semantic segmentation의 영역으로 재정의했다.
+- 우리는 이것을 atrous spatial pyramid pooling으로 확장했다. 이는 multiple scale에서 image context 뿐만 아니라 object도 encode 시켰다.
+- 의미론적으로 정확한 예측과 object boundary들에 따른 detailed segmentation map들을 생산하기 위해서 우리는 DCNN에서 나온 생각과 fully-connected CRF를 결합시켰다.
+- 우리의 실험의 결과는 제시된 방법이 최근에 열린 다양한 대회의 dataset에서 꽤 진보했음을 보여준다.
+  - PASCAL VOC 2012 semantic image segmentation benchmark, PASCAL-Context, PASCAL-Person-Part, 그리고 Cityscapes dataset들을 포함한다.
 
 [코드 공유](http://liangchiehchen.com/projects/DeepLab.html)
 
-배워야 할 keyword : spatial pyramid pooling, bi-linear interpolation, vertical Gaussian derivative, class score map
+배워야 할 keyword : spatial pyramid pooling, bi-linear interpolation, vertical Gaussian derivative, class score map, Gaussian kernel, Gaussian convolution
 
 [21] B. Hariharan, P. Arbelaez, R. Girshick, and J. Malik, “Hyper- ´
 columns for object segmentation and fine-grained localization,”
