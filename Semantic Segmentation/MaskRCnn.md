@@ -57,7 +57,7 @@ https://arxiv.org/pdf/1703.06870.pdf Facebook Research
 ### Introduction 
 * 목표 : instance segmentation을 위해 비교 가능한 framework를 개발하는 것이다.
 * 고려한 사항
-    * Image segmentation 
+    * Image segmentation
 
         * 문제 
             * 모든 object들의 correct detection이 필요함
