@@ -88,7 +88,7 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
 - Context module
   - 이 모델은 긴 범위의 context를 암호화 하기 위해서 계단식으로 보여지는 추가적인 모듈을 포함한다.
   - 효율적인 방법 중 하나는 높은 차원의 filtering algorithm을 갖고 있는 DenseCRF를 DCNN으로 통합하는 것입니다.
-  - 더욱이 [96,55,73]은 여러 개의 부가적인 convolutional layer들을 DCNN의 belief maps들의 위에 올리는 것 대신에 CRF와 DCNN 요소를 jointly하게 train하는 것을 제시합니다. 
+  - 더욱이 [96,55,73]은 여러 개의 부가적인 convolutional layer들을 DCNN의 belief maps들의 위에 올리는 것 대신에 CRF와 DCNN 요소를 jointly하게 train하는 것을 제시합니다.
   - 반면에 [59,90]은 몇 개의 다른 convolutional layer를 DCNN의 belief map의 위에 올립니다.
     - Belief map들은 예측된 class들의 수와 같은 수의 output channel들을 포함하는 마지막 DCNN feature map들입니다.
     - Context information을 capture하기 위함입니다.
