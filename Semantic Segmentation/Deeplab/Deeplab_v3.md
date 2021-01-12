@@ -120,8 +120,10 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
     - Atrous convolution은 [66,17,37]에 의해 object detection이 적용된다.
 
 ## Methods
--	Semantic segmentation에서 어떻게 atrous convolution이 dense feature들을 추출 하는 데에 적용되는지를 review
--	제시된 모듈을 계단식 혹은 병행으로 실행된 atrous convolution module로 토론할 것이다.
+
+- Semantic segmentation에서 어떻게 atrous convolution이 dense feature들을 추출 하는 데에 적용되는지를 review
+- 제시된 모듈을 계단식 혹은 병행으로 실행된 atrous convolution module로 토론할 것이다.
+
 ### Atrous Convolution for Dense Feature Extraction
   - Fully convolutional fashion에서 deploy된 DCNNs은 semantic segmentation의 일에서 효과적으로 보여진다.
   - 하지만, max-pooling과 연속적인 layer에서 striding의 반복된 combination은 feature map들의 spatial resolution을 줄인다.
