@@ -4,7 +4,7 @@
   - [DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs](/Semantic%20Segmentation/Deeplab/Deeplab.md)
   - Atrous convolution: Filter upsampling을 할 때 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입하는 것.
   - 이 방법은 undecimated wavelet transform에서 효율적인 계산을 위해 고안된 방법이다.
-
+  - ![atrous convolution](/Semantic%20Segmentation/Deeplab/images/DeepLab_v1_atrous_convolution.PNG)
 - 계기
   - fully convolutional fashion에서 DCNN이 적용됬을 때 DCNN 안의 연속된 layer에서 실행되는 max-pooling과 downsampling('striding')의 반복적인 결합으로 인해 signal down-sampling 발생
   - 즉, 감소된 spatial resolution을 가진 feature map을 만들어 냄.
@@ -16,6 +16,7 @@
     - Filter upsampling을 할 때 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입.
 
   - 결과
+    - 일반적으로 적용되고, 어떤 target sampling rate든 간에 어떤 aprroximation들을 소개하는 일 없이 dense CNN feature map을 효과적으로 계산할 수 있다.
     - Atrous convolution을 조합함으로서 full resolution feature map을 회복함.
     - 이는 feature map을 더 조밀하게 만듬
     - atrous convolution은 기본 image size에서 feature response의 단순한 bilinear interpolation으로 이어진다.
