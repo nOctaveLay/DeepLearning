@@ -32,6 +32,7 @@ Deep Convolutional Neural Network를 적용하는데 있어서 두 가지 challe
 - 이 Atrous convolution은 semantic image segmentation에 효과적이라고 한다.
 
 **Atorus convolution**
+
 - Dilated convolution이라고 불린다.
 - ImageNet의 사용을 변경하는 것을 허용한다.
 - ImageNet 
