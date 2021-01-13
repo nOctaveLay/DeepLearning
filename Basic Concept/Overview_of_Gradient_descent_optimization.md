@@ -136,3 +136,17 @@ for i in range ( nb_epochs ):
 ```
 
 ## Challenges
+
+- 일반적인 mini-batch gradient descent가 좋은 수렴을 보장하지는 않는다.
+- 문제점
+  - 적절한 learning rate를 선택하는 것이 매우 어렵다.
+    - learning rate가 작을 경우 : 느린 수렴
+    - learning rate가 클 경우 : 수렴을 방해
+      - loss function이 minimum 주위에서 놀거나, 심지어 발산하게끔 만듬
+  - learning rate의 계획은 annealing에 의해(즉, 미리 정의된 스케쥴 혹은 threshold 밑으로 epoch가 떨어지는 사이에서 나타나는 목표의 변화와 관련해서 learning rate를 지울 때) 훈련 하는 동안 learning rate를 adjust 하려고 노력한다.
+    - 하지만, 이러한 schedule이나 threshold가 사전에 미리 정의되어 있어야 한다.
+    - 그러므로 이러한 schedule이나 threshold는 dataset의 특징들에게 맞춰 조정할 수 없다.
+  - 모든 파라미터 업데이트에 같은 learning rate가 적용된다.
+    - 우리의 데이터가 듬성듬성 있거나, 우리의 특징이 매우 다른 빈도를 가진다면, 우리는 같은 범위에서 모든 것을 업데이트 하지 않기를 원할 것이다.
+    - 하지만 거의 일어나지 않는 특징에 대해서도 더 큰 update를 수행한다.
+  
