@@ -4,7 +4,7 @@
 
 1. [Abstract](##Abstract)
 2. [Related Work](##Related%20Work)
-3. [Methods](##Methods)
+3. [Convolutional Neural Networks for Dense Image Labeling](##Convolutional%20Neural%20Networks%20for%20Dense%20Image%20Labeling)
 4. [Experimental Results](##Experimental%20Results)
 5. [Conclusion](##Conclusion)
 
@@ -61,5 +61,30 @@
 ### Efficient Dense Sliding Window Feature Extraction with the Hole Algorithm
 
 - 우리의 dense CNN feature extractor의 성공에서 Dense spatial score 평가는 중요하다.
-- 이를 실행하기 위해서, VGG-16의 fully-connected layer들을 convolution한 것으로 변환한다.
-- 그리고 이미지의 original resolution에서 convolutional 방법으로 network를 돌린다.
+  - 이를 실행하기 위해서, VGG-16의 fully-connected layer들을 convolution한 것으로 변환한다.
+  - 그리고 이미지의 original resolution에서 convolutional 방법으로 network를 돌린다.
+  - 하지만 이러한 방법이 드문 드문 계산된 detection scores를 산출하기 때문에 충분하지 않다. (32 pixel의 stride를 갖는다.)
+- 우리의 target인 8픽셀 stride를 가진 score를 더 densely하게 계산하기 위해서, Giusti et al.이 이전에 적용시킨 방법의 변형을 개발했다.
+  - Simonyan & Zisseman (2014)의 network에서 마지막 두 개의 max-pooling layer들 후에 이뤄지는 subsampling을 skip했다. 그리고 길이를 늘리기 위해 zero들을 집어넣은 방식을 택한 layer 안에서 convolutional filter를 수정했다.(마지막 3개의 convolutional layer에서는 2배, 첫 번째 fully connected layer는 4배)
+  - filter들을 온전한 상태로 유지함으로서 이를 효율적으로 실행함
+  - filter들을 각각 2개 또는 4개의 픽셀의 input stride를 각각 사용했을 때 적용된 feature map들을 드문드문 대신 sample했다. => atrous convolution
+  - 일반적으로 적용되고, 어떤 근사치를 소개하는 일 없이 어떤 target subsampling rate에서도 dense CENN feature map을 효율적으로 계산할 수 있도록 만든다.
+- 이미지 넷을 미리 학습시킨 VGG network의 모델 weight을 finetune 시킨다.
+  - 이는 직접적으로 image classification task에 적용시키기 위해서이다.
+  - 이는 Long et al.의 과정을 따른다. (2014)
+  - 1000 개의 방법으로 되어 있는 VGG-16의 마지막 레이어의 Imagenet classifier를 21가지 방법으로 대체했다.
+  - loss function은 (original image와 비교해서 8로 subsample된) CNN output map에서 각각의 spatial position을 위해 cross-entropy의 합으로 계산했다.
+  - 모든 포지션과 라벨들은 전반적인 loss function 안에서 동등하게 weight를 매겼다.
+  - 우리의 목표는 (8로 서브샘플링 된) ground truth label들이다.
+  - 최적화는 standard SGD procedure를 사용해서 모든 network layer의 weight에 대해 objective function을 사용할 것이다.
+- 테스트 동안, 우리는 original image resolution에 대해 class score map이 필요하다.
+  - Figure 2와 Section 4.1에서 볼 수 있듯, class score map이 (log-probabilities를 따른다.) 꽤 smooth 하다. 이는 simple bilinear interpolation을 타협할 수 있는 비용으로 이미지의 해상도를 8배 증가시키기 위해 사용할 수 있다고 할 수 있다.
+  - Long et al.의 방법은 hole algorithm을 사용하지 않았고, 그래서 매우 거친 score가 생산되었다. (32배로 subsample 되었음)
+  - 이 사실은 학습된 upsampling layer를 사용하라고 강요했고, 이는 복잡성과 그들의 시스템의 훈련 시간을 증가시켰다.
+- 잘 tuning 된 우리의 network는 PASCAL VOC 2012에서 10시간이나 걸렸고, 그들은 훈련하는 데 며칠의 시간이 걸렸다고 한다. (both timing on a modern GPU)
+
+### Controlling the Receptive Field Size and Accelerating Dense Computation with Convolutional Nets
+
+## 추가적인 내용
+
+배워야 할 keyword : ground truth label
