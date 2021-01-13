@@ -10,11 +10,15 @@
 
 ## 딥러닝 기초
 
+- [Optimization](https://arxiv.org/pdf/1609.04747.pdf) [[정리]](/Basic%20Concept/Overview_of_Gradient_descent_optimization.md)
+
 ## Vision
 
 [Imagenet classification with deep convolutional neural networks[CNN, AlexNet]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 
 ## Semantic segmentation
+
+- pixel-level classification
 
 ### [Awesome Semantic Segmentation](https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw)
 
