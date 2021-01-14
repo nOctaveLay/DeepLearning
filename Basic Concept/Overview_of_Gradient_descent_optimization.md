@@ -197,5 +197,27 @@ for i in range ( nb_epochs ):
 - 이런 예상 업데이트는 너무 빠르게 진행하는 것을 막고, SGD의 스피드를 순서대로 높인다.
 - 또한 이런 업데이트는 증가된 responsiveness를 초래하며, 이는 task의 수적인 면에서 RNN의 성능을 증가시킨다.
 - 우리는 우리의 중요도에 따라서 각각의 파라미터가 더 크거나 더 작게 업데이트를 수행할 수 있도록 우리의 업데이트를 진행시킨다.
+- keras SGD code
+
+```python
+v = self.momentum * m - lr * g # velocity
+self.updates.append(K.update(m, v))
+
+if self.nesterov:
+    new_p = p + self.momentum * v - lr * g
+else:
+    new_p = p + v
+```
 
 ### Adagrad
+
+- 빈번하지 않은 파라미터엔 큰 update를, 빈번한 파라미터엔 작은 update를 한 것.
+- 듬성듬성한 데이터를 다룰 때 매우 적합하다.
+- Dean et al.은 구글에서 Adagrad가 SGD의 robustness를 크게 향상시켰고, large scale 신경망을 가지고 YOUTUBE에서 고양이를 인지하도록 하는데 이것을 썼다고 밝혔다.
+- 더욱이, Pennington et al.은 빈번하지 않은 단어들이 더 많은 update를 필요로 하기 때문에 GloVE word embedding에 Adagrad를 썼다고 밝혔다.
+- 모든 파라미터 (세타)가 같은 learning rate n을 썼기 때문에 과거엔 모든 파라미터를 업데이트 했다.
+- Adagrad는 모든 파라미터에 모든 time step t에서 다른 learning rate를 쓰기 때문에, 우리는 처음에 Adagrad의 파라미터 당 업데이트를 했고, 그것은 그 후에 vectorize 했다.
+- g(t,i) : 목적 함수의 gradient, 세타(t,i): time step t에 대한 파라미터
+- ![Adagrad gradient](./images/Adagrad_gradient.PNG)
+- SGD update
+- ![adagrad_sgd_update](./images/adagrad_sgd_update.PNG)
