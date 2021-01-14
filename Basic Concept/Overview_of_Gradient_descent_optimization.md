@@ -16,7 +16,7 @@
   - [Stochastic gradient descent](###2.%20Stochastic%20gradient%20descent)
   - [Mini-batch gradient descent](###3.%20Mini-batch%20gradient%20descent)
 - [Challenges](##Challenges)
-- Gradient descent optimization algorithms
+- [Gradient descent optimization algorithms](##Gradient%20descent%20optimization%20algorithms)
   - Momentum
   - Nesterov accelerated gradient
   - Adagrad
@@ -149,4 +149,19 @@ for i in range ( nb_epochs ):
   - 모든 파라미터 업데이트에 같은 learning rate가 적용된다.
     - 우리의 데이터가 듬성듬성 있거나, 우리의 특징이 매우 다른 빈도를 가진다면, 우리는 같은 범위에서 모든 것을 업데이트 하지 않기를 원할 것이다.
     - 하지만 거의 일어나지 않는 특징에 대해서도 더 큰 update를 수행한다.
-  
+  - 신경망에서 일반적으로 일어나는 non-convex error function의 최적화 문제는 많은 최적이 아닌 local minima에 갇히는 것을 피하는 것이다.
+    - Dauphin et al.[5]는 이 문제는 local minima가 아닌 saddle point에서 일어난다고 주장했다.
+      - saddle point 중에서도 한 쪽은 내려가고, 한 쪽은 올라가는 지점에서 일어난다고 주장했다.
+    - 이러한 saddle point는 gradient가 모든 차원에서 0로 갈 때 같은 error의 안정기에 의해 둘러쌓여있고, 이것은 SGD가 도망치는 것을 악의적으로 막는다.
+
+## Gradient descent optimization algorithms
+
+- 문제점들을 해결하기 위한 방법들을 다룬다.
+- 이 글에선 실전에서 높은 차원의 data set에 대해 쓸 수 없는 방법들은 제외한다. (예를 들어, Newton's method)
+
+### Momentum
+
+- SGD는 좁은 골짜기를 항해할 때 문제를 겪는다.
+  - 좁은 골짜기 : 다른 차원들 보다 1차원일 때 표면이 훨씬 더 가파르게 굽어있는 곳
+- 이런 상황에서, SGD는 local optimum으로 향하는 바닥을 따라서 hesitant progress를 만드는 동안 좁은 골짜기의 경사로를 거쳐 진동한다.
+- ![SGD_momentum](./images/SGD_momentum)
