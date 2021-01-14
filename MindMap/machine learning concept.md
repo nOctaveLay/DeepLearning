@@ -2,11 +2,10 @@
 
 ## Index
 
-1. [Motivation](#motivation)<a id="moti-top"></a>
+1. [Motivation](#motivation)
     1. Prediction
     1. Inference
-    
-1. [Performance Analysis](#performance-analysis)<a id="perfo-top"></a>
+1. [Performance Analysis](#performance-analysis)
     1. Confusion Matrix
     1. Accuracy
     1. f1 score
@@ -15,10 +14,10 @@
         1. Harmonic Mean of Precision and Recall
     1. ROC Curve - Receiver Operating Characteristics
     1. Bias-Variance Tradeoff
-    1. Goodness of Fit = R^2 
+    1. Goodness of Fit = R^2
     1. Mean Squared Error
-    1. Error Rate 
-1. [Tuning](#tuning)<a id="tune-top"></a>
+    1. Error Rate
+1. [Tuning](#tuning)
     1. Cross-validation
         1. Leave-p-out cross-validation
         1. Leave-one-out cross validation
@@ -34,21 +33,21 @@
     1. Underfitting
     1. Bootstrap
     1. Bagging
-1. [Types](#types)<a id="types-top"></a>
+1. [Types](#types)
     1. Regression
     1. Classification
     1. Clustering
     1. Density Estimation
     1. Dimensionality Reduction
-1. [Kind](#kind)<a id = "kind-top"></a>
+1. [Kind](#kind)
     1. Parametic
     1. Non-Parametic
-1. [Categories](#categories)<a id="cate-top"></a>
+1. [Categories](#categories)
     1. Supervised
     1. Unsupervised
     1. Reinforcement Learning
-1. [Approaches](#approaches)<a id="appro-top"></a>
-1. [Taxonomy](#taxonomy)<a id="tax-top"></a>
+1. [Approaches](#approaches)
+1. [Taxonomy](#taxonomy)
     1. Generative Methods
         1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)  
         1. Gaussians, Naïve Bayes, Mixtures of multinomials
@@ -57,66 +56,77 @@
         1. Logistic regression, SVMs
         1. Traditional neural networks, Nearest neighbor
         1. Conditional Random Fields (CRF)
-1. [Selection Criteria](#selection-criteria)<a id="selc-top"></a>
+1. [Selection Criteria](#selection-criteria)
     1. Prediction Accuracy vs Model Interpretability
-1. [Libraries](#libraries)<a id="lib-top"></a>
+1. [Libraries](#libraries)
 
+## Motivation
 
-
-## [Motivation](#moti-top)<a id="motivation"></a>
 ### Prediction
 
->When we are interested mainly in the predicted variable as a result of the inputs, <br>
->but not on the each way of the inputs affect the prediction. <br>
->In a real estate example, Prediction would answer the question of:<br> 
->Is my house over or under valued? <br>
->Non-linear models are very good at these sort of predictions, but not great for inference because the models are much less interpretable.<br>
-<br>
+> When we are interested mainly in the predicted variable as a result of the inputs, but not on the each way of the inputs affect the prediction.
+>
+> In a real estate example, Prediction would answer the question of:
+>
+> Is my house over or under valued?
+>
+> Non-linear models are very good at these sort of predictions, but not great for inference because the models are much less interpretable.
 
-* 우리가 input의 결과로서 예측된 variable을 주로 관심있어 할 때, 그렇지만 input의 각각의 방법이 예측에 영향을 끼치지 않을 때 사용<br>
-* 대표적인 예제 : 내 집의 가치가 높이 평가됬나요? 낮게 평가됬나요?<br>
-* Non-linear model O but inference x <- 모델 해석 어려움.<br>
+* 우리가 input의 결과로서 예측된 variable을 주로 관심있어 할 때, 그렇지만 input의 각각의 방법이 예측에 영향을 끼치지 않을 때 사용
+* 대표적인 예제 : 내 집의 가치가 높이 평가됬나요? 낮게 평가됬나요?
+* Non-linear model O but inference x <- 모델 해석 어려움.
 
 ### Inference
->When we are interested in the way each one of the inputs affect the prediction. <br>
->In a real estate example, Inference would answer the question of: How much would my house cost if it had a view of the sea? <br>
->Linear models are more suited for inference because the models themselves are easier to understand than their non-linear counterparts<br><br>
 
-* 우리가 input의 각각의 방법이 예측에 영향을 끼치는 것에 대해 궁금해 할 때<br>
-* 대표적인 예제 : 내가 바닷가가 보이는 집을 가지려면, 얼마나 들까요?<br>
-* Linear model은 inference에 적합 <- 모델이 Non linear counterpart보다 이해하기 쉬움<br>
+>When we are interested in the way each one of the inputs affect the prediction.
+>
+>In a real estate example, Inference would answer the question of: How much would my house cost if it had a view of the sea?
+>
+>Linear models are more suited for inference because the models themselves are easier to understand than their non-linear counterparts
 
-## [Performance Analysis](#perfo-top)<a id="performance-analysis"></a> 
+* 우리가 input의 각각의 방법이 예측에 영향을 끼치는 것에 대해 궁금해 할 때
+* 대표적인 예제 : 내가 바닷가가 보이는 집을 가지려면, 얼마나 들까요?
+* Linear model은 inference에 적합 <- 모델이 Non linear counterpart보다 이해하기 쉬움
+
+## Performance Analysis
+
 ### Confusion Matrix
-[confusion Matrix]
 
 ### Accuracy
-Fraction of correct predictions, not reliable as skewed when the data set is unbalanced (that is, when the number of samples in different classes vary greatly)<br><br>
+
+>Fraction of correct predictions, not reliable as skewed when the data set is unbalanced (that is, when the number of samples in different classes vary greatly)
 
 * 맞는 예측들의 조각, dataset이 unbalanced되어 있을 때 비뚤어져 있기 때문에 신뢰할 수 있는 게 아님.
 * 다른 샘플의 수가 매우 다양하게 있음
 
 ### f1 score
-#### Precision
-> (TP) / (TP + FP)
-> 암이 있다고 진단한 사람이 실제로 암이 있을 확률.
-> 다른 말로 말하자면, 암이 있다고 진단한 집단 중에서 TP의 비율.
 
-Out of all the examples the classifier labeled as positive, what fraction were correct?<br>
-* positive라고 이름 붙인 classifier가 있을 때, **정말로** positive한 fraction은 무엇일까?<br><br>
+#### Precision
+
+> (TP) / (TP + FP)
+
+* 암이 있다고 진단한 사람이 실제로 암이 있을 확률.
+* 다른 말로 말하자면, 암이 있다고 진단한 집단 중에서 TP의 비율.
+
+Out of all the examples the classifier labeled as positive, what fraction were correct?
+
+* positive라고 이름 붙인 classifier가 있을 때, **정말로** positive한 fraction은 무엇일까?
 
 #### Recall
-> (TP)/ (TP+FN)
-> 정말 병이 있기 때문에 병이 있다고 진단한 비율.
-> 정말 병이 있는 사람들 중에서의 TP
-> confusion matrix의 bottom row
 
->Out of all the positive examples there were, what fraction did the classifier pick up?<br>
-* 정말로 모든 예제들이 positive example일 때 어떤 fraction을 고를 것인가?<br>
+> (TP)/ (TP+FN)
+
+* 정말 병이 있기 때문에 병이 있다고 진단한 비율.
+* 정말 병이 있는 사람들 중에서의 TP
+* confusion matrix의 bottom row
+
+>Out of all the positive examples there were, what fraction did the classifier pick up?
+
+* 정말로 모든 예제들이 positive example일 때 어떤 fraction을 고를 것인가?
 
 ### Harmonic Mean of Precision and Recall
 
-(2 * p * r / (p+r))
+```(2 * p * r / (p+r))```
 
 
 ### ROC Curve - Receiver Operating Characteristics
