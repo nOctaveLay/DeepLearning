@@ -17,9 +17,9 @@
   - [Mini-batch gradient descent](###3.%20Mini-batch%20gradient%20descent)
 - [Challenges](##Challenges)
 - [Gradient descent optimization algorithms](##Gradient%20descent%20optimization%20algorithms)
-  - Momentum
-  - Nesterov accelerated gradient
-  - Adagrad
+  - [Momentum](###Momentum)
+  - [Nesterov accelerated gradient](Nesterov%20accelerated%20gradient)
+  - [Adagrad](###Adagrad)
   - Adadelta
   - RMSprop
   - Adam
@@ -164,4 +164,38 @@ for i in range ( nb_epochs ):
 - SGD는 좁은 골짜기를 항해할 때 문제를 겪는다.
   - 좁은 골짜기 : 다른 차원들 보다 1차원일 때 표면이 훨씬 더 가파르게 굽어있는 곳
 - 이런 상황에서, SGD는 local optimum으로 향하는 바닥을 따라서 hesitant progress를 만드는 동안 좁은 골짜기의 경사로를 거쳐 진동한다.
-- ![SGD_momentum](./images/SGD_momentum)
+- ![SGD_momentum](./images/SGD_momentum.PNG)
+- Momentum이란
+  - 관련된 방향으로 (relevant direction) SGD를 가속하는 것을 도와주는 방법
+  - Figure 2b에서도 볼 수 있듯이, 진동을 방해한다.
+  - 과거 time step에서 현재 update vector에 update vector의 fraction을 추가하면 된다.
+  - ![SGD_momentum](./images/SGD_momentum_수식.PNG)
+  - r은 보통 0.9로 세팅 되거나, 그와 유사한 값으로 설정된다.
+- 예시
+  - Momentum을 사용할 때, 언덕에 공을 굴리는 것과 비슷하다.
+  - 그 공은 downhill에서 굴러갈 때 momentum을 가속한다. 이러한 방식으로 점점 더 빨라진다. (이 공이 공의 정지 속도에 도달할 때까지, 만약 공기 저항이 있다면. 즉 r < 1)
+  - 여기서 쓰이는 Momentum도 이와 같다.
+  - gradient가 같은 방향을 가리키고 있으면 momentum은 증가하고, 다른 방향을 가리키고 있으면 momentum은 감소한다.
+  - 결론적으로 진동은 줄고, 더 빠른 수렴을 할 수 있다.
+  
+### Nesterov accelerated gradient
+
+- 하지만 공이 언덕을 내려올 때, blind한 채로 경사로를 내려오는 것은, 매우 만족스럽지 않다.
+- 공이 만약에 공이 어디로 갈 지를 알고 있다면 어떨까? 그래서 경사로가 다시 올라가기 전에 천천히 속도를 줄인다면?
+- NAG(Nesterov accelerated gradient)는 momentum term에게 이런 예측(prescience)을 준다.
+- 세타 변수를 움직이기 위해서 우리는 rv(t-1)라는 momentum term을 사용할 것이다.
+- 세타 - rv(t-1)을 계산하는 것은 parameter의 다음 포지션에 대한 근사치를 우리에게 준다.(전체적인 update를 위해서 gradient는 사라진다.)
+  - 이 근사치는 우리의 parameter가 어디로 갈 지에 대한 대략적인 생각이다.
+- 우리는 우리의 현재 parameter 세타가 아니라, 우리의 미래의 parameter를 통해서 gradient를 계산함으로서 효과적으로 더 멀리 볼 수 있다.
+- ![NAG](./images/NAG.PNG)
+- ![Nesterov update](./images/Nesterov_update.PNG)
+  - r = 0.9
+  - 처음에, momentum은 현재 gradient를 계산한다. (작은 파란색 벡터)
+  - 그 다음, 업데이트 된 모와진(accumulated) gradient의 방향으로 크게 도약한다. (큰 파란색 벡터)
+  - 그 동안, NAG는 처음에 과거의 모와진 gradient로 크게 점프한다.(갈색 벡터) 그리고 gradient를 평가한다.
+  - 그리고 correction을 한다. (초록색 벡터)
+- 이런 예상 업데이트는 너무 빠르게 진행하는 것을 막고, SGD의 스피드를 순서대로 높인다.
+- 또한 이런 업데이트는 증가된 responsiveness를 초래하며, 이는 task의 수적인 면에서 RNN의 성능을 증가시킨다.
+- 우리는 우리의 중요도에 따라서 각각의 파라미터가 더 크거나 더 작게 업데이트를 수행할 수 있도록 우리의 업데이트를 진행시킨다.
+
+### Adagrad
