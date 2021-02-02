@@ -105,26 +105,22 @@ Zero defined (multiplication, division) ||||O
 
 ### Missing values
 
-One may choose to either omit elements from a dataset that contain missing values or to impute a value
-= missing value를 포함하고 있는 dataset에서 수정할 element를 선택 하거나 value를 삽입하는 것<br><br>
+- 어떤 사람은 missing value를 포함하고 있는 dataset에서 element를 수정하는 것을 선택하거나 value를 삽입하는 것을 선택한다.
 
 ### Special Values
-<br>
-Numeric variables are endowed with several formalized special values including +-Inf, NA and NAN.<br>
-Calculations involving special values often result in special values, and need to be handled/cleaned <br>
-= Numerica variable들은 +-Inf, Na, NAN을 포함한 특별한 value로 여러번 formalize될 수 있다.
-= 특별한 value들을 포함한 계산은 특별한 value로 나온다. 그리고 다뤄지거나 삭제될 필요가 있다.
+
+- Numerica variable들은 +-Inf, Na, Nan같은 여러번 formal된 특별한 value들이 부여되었다.
+- 특별한 value들을 포함한 계산들은 종종 특별한 value로 나온다. 그리고 이러한 변수들은 다뤄지거나 삭제될 필요성이 있다.
 
 ### Outliers
-<br>
-They should be detected, but not necessarily removed.
-Their inclusion in the analysis is a statistical decision.
-이들은 발견될 수는 있지만, 필수적으로 삭제되지는 않는다.
-분석에서 이들의 포함은 통계적인 결정이다.
+
+- 이들은 발견될 수는 있지만, 필수적으로 삭제되지는 않는다.
+- 분석에서 이들을 포함하는 것은 통계에 의한 결정이다.
 
 ### Obvious inconsistencies
-A person's age cannot be negative, a man cannot be pregnant and under-aged person cannot possess a drivers license.
-= 절대로 될 수 없는 명제 ex) 사람의 나이가 음수
+
+- 절대로 현실에서 있을 수 없는, 당연한 명제
+- 사람의 나이는 음수가 될 수 없고, 남자는 임신을 할 수 없으며, 어린 아이들은 운전 면허를 가질 수 없다.
 
 ## Feature Imputation
 특징 삽입
