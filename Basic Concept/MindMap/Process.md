@@ -1,26 +1,27 @@
+# Machine Learning Process
 
-# Index
+## Index
 
 - [Data collection](#Data%20Collection)
-  - [Question to ask](##Question%20to%20ask)
-  - [Types of data](##Types%20of%20data)
+  - [Question to ask](#Question%20to%20ask)
+  - [Types of data](#Types%20of%20data)
 - [Data preparation](#Data%20preparation)
-  - [Exploratory data analysis (EDA)](##Exploratory%20data%20analysis%20(EDA))
-  - [Data preprocessing](##Data%20preprocessing)
-  - [Data splitting](##Data%20splitting)
+  - [Exploratory data analysis (EDA)](#Exploratory%20data%20analysis%20(EDA))
+  - [Data preprocessing](#Data%20preprocessing)
+  - [Data splitting](#Data%20splitting)
 - [Train model on data](#Train%20model%20on%20data)
-  - [Choose an algorithm](##Choose%20an%20algorithm)
-  - [Type of learning](##Type%20of%20learning)
-  - [Hyperparameter Tuning](##Hyperparameter%20Tuning)
+  - [Choose an algorithm](#Choose%20an%20algorithm)
+  - [Type of learning](#Type%20of%20learning)
+  - [Hyperparameter Tuning](#Hyperparameter%20Tuning)
 - [Analysis/Evaluation](#Analysis/Evaluation)
 - [Serve model (deploying a model)](#Serve%20model%20(deploying%20a%20model))
 - [Retrain model](#Retrain%20model)
 
 ___
 
-# Data Collection
+## Data Collection
 
-## Question to ask
+### Question to ask
 
 - What kind of problem are we trying to solve? (see machine learning problems)
 - What data sources already exist?
@@ -28,9 +29,9 @@ ___
 - Is the data public?
 - Where should we store the data?
 
-## Types of data
+### Types of data
 
-### Structured data
+#### Structured data
 
 - appears in tabulated format
 - rows and columns style
@@ -42,14 +43,14 @@ ___
   - Time series : Data across time
     - 2012 - 2018 data
 
-### Unstructed data
+#### Unstructed data
 
 - no rigid structure
 - image, video, natural language text, speech
 
-# Data Preparation
+## Data Preparation
 
-## Exploratory data analysis (EDA)
+### Exploratory data analysis (EDA)
 
 > learning about the data you're working with
 
@@ -65,7 +66,7 @@ ___
   - Why are they there?
 - Are there questions you could ask a domain expert about the data?
 
-## Data preprocessing
+### Data preprocessing
 
 > preparing your data to be modelled
 
@@ -136,7 +137,7 @@ ___
       - scikit-learn-contrib imbalanced-learn package를 이용해서 만들 수 있음.
       - "Learning from Imbalanced Data" paper 참조.
 
-## Data splitting
+### Data splitting
 
 - Training set (usually 70-80% of data)
   - Model은 이걸 가지고 학습한다.
@@ -147,13 +148,13 @@ ___
   - 올바르게 작동된다면, test set으로 나오는 결과는 모델이 현실 세계에서 예측하는 방법대로 좋은 예측을 해 준다.
   - model을 tune하기 위해서 이 dataset을 사용하면 안 된다.
 
-# Train model on data
+## Train model on data
 
 > 3 steps: choose an algorithm, overfit the model, reduce overfitting with regularization
 
-## Choose an algorithm
+### Choose an algorithm
 
-### Supervised algorithms
+#### Supervised algorithms
 
 - Linear Regression
   - 그래프에 흩어져 있는 data에 가장 잘 맞는 line을 그리는 것
@@ -190,7 +191,7 @@ ___
       - Recurrent neural networks (typically used for sequence modelling)
       - Transformer networks (can be used for vision and text, starting to replace RNNs)
 
-### Unsupervised algorithms
+#### Unsupervised algorithms
 
 - Clustering
   - K-Means clustering
@@ -218,23 +219,23 @@ ___
     - class의 바깥쪽에 있으면 이를 anomaly로 부른다.
     - one-class K-Means, one-class SVM, isolation forest, local outlier factor가 여기에 속한다.
 
-## Type of learning
+### Type of learning
 
-### Batch learning
+#### Batch learning
 
 - 큰 통계학적 창고에 모든 데이터가 존재한다. 그걸로 모델을 학습시킨다.
 - 당신이 새로운 모델을 얻는 날마다 한 달씩 새로운 모델을 돌려야한다.
 - 학습하는데 시간이 오래 걸리고, 잘 완료되지 않는다.
 - 비록 이 모델이 나중에 다시 훈련된다 할지라도 학습 없이 production에서 실행
 
-### Online learning
+#### Online learning
 
 - data는 지속적으로 update 된다.
 - 지속적으로 새로운 모델에 data를 학습시킨다.
 - 각각의 Learning step들이 빠르고 싸다.
 - production에서 실행, 지속적으로 학습
 
-### Transfer learning
+#### Transfer learning
 
 - 하나의 모델이 배워온 지식들을 취하고 그것을 당신의 모델에서 써라.
 - 당신들의 문제를 위한 SOTA(state of the art) model에 레버리지를 가지는 ability를 줘라.
@@ -245,23 +246,23 @@ ___
   - Hugging Face transformers (NLP models)
   - Detectron2 (computer vision models)
 
-### Active learning
+#### Active learning
 
 - "human in the loop" learning이라고 불린다.
 - 인간 전문가가 모델과 상호작용하고, 가장 불확실하게 느끼는 label에 대한 업데이트를 제공하는 것이다.
 - 어떻게 Nvidia가 self-driving car model에 active learning을 사용하는지를 확인해봐라!
 
-### Ensembling
+#### Ensembling
 
 - 학습의 형태가 아니더라도, 이미 학습된 알고리즘에 더 나은 결과를 내도록 결합하는 알고리즘이다.
 - 예를 들면, "wisdom of the crowd" 를 레버리지 하는 것이다.
 
-### Underfitting
+#### Underfitting
 
 - 모델이 당신의 data에 맞게끔 실행하지 않을 때 일어난다.
 - 더 오래 혹은 더 발전된 모델을 훈련하는 것을 시도한다.
 
-### Overfitting
+#### Overfitting
 
 - validation loss가 증가하기 시작했을 때 발생한다.
   - Validation loss : 얼마나 당신의 모델이 validation dataset에서 잘 실행 되는 지. 낮은 것일수록 좋은 것이다.
@@ -292,7 +293,7 @@ ___
         - update할 파라미터가 적기 때문에, 빠른 학습 속도를 가져온다.
         - 일부 network에서는 dropout때문에 대체될 수 있다.
 
-## Hyperparameter Tuning
+### Hyperparameter Tuning
 
 > 다른 모델 setting을 가지고 실험의 무더기를 돌리고, 어떤게 가장 좋은지를 보는 것
 
@@ -318,7 +319,7 @@ ___
   - iteration 수 (얼마나 많은 시간동안 model이 데이터를 통과시킬것이냐)
     - tuning iteration 대신에, early-stopping을 쓴다.
 
-## Analysis/Evaluation
+### Analysis/Evaluation
 
 - Evaluation metrics
   - Classification
@@ -352,7 +353,7 @@ ___
   - 높은 bias는 새로운 sample에 대한 일반화의 부족과 underfitting을 일으킨다.
   - 높은 변수는 랜덤한 noise가 있는 data의 패턴을 찾기 때문에 overfitting을 일으킨다.
 
-# Serve model (deploying a model)
+## Serve model (deploying a model)
 
 - production으로 모델을 넣고, 어떻게 진행되는 지를 본다.
 - vivo에 있는(notebook 안에 있는) evaluation metrix들이 매우 훌륭하다.
@@ -366,7 +367,7 @@ ___
   - 소프트웨어 엔지니어링이 머신 러닝을 만족시키는 곳
   - 머신 러닝 모델 주위에서 필요로 하는 모든 기술들이 production 동안에 일하도록 하는 것을 필요로 한다.
 
-# Retrain model
+## Retrain model
 
 - 다양한 evaluation metric들에 기초하여 serving 후 (또는 serving 이전에) 모델이 어떻게 수행하는 지를 보는 것
 - 필요한 만큼 위에 있는 step을 반복 (Machine learning은 실험적이다. 그러므로 여기가 당신의 data와 experiment가 추적할 곳임을 기억하라)
