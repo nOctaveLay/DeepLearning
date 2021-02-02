@@ -200,7 +200,7 @@ for i in range ( nb_epochs ):
 - keras SGD code
 
 ```python
-v = self.momentum * m - lr * g # velocity
+v = self.momentum * m - lr * g 
 self.updates.append(K.update(m, v))
 
 if self.nesterov:
