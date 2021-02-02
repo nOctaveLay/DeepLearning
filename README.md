@@ -22,9 +22,8 @@
 
 ### [Awesome Semantic Segmentation](https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw)
 
-- [U-net](https://arxiv.org/pdf/1505.04597.pdf)
-- [SegNet](https://arxiv.org/pdf/1511.00561.pdf)
-  - [[정리]](Semantic%20Segmentation/SegNet.md)
+- [U-net](https://arxiv.org/pdf/1505.04597.pdf) [[정리]](Semantic%20Segmentation/UNet.md)
+- [SegNet](https://arxiv.org/pdf/1511.00561.pdf) [[정리]](Semantic%20Segmentation/SegNet.md)
 - DeepLab
   - [DeepLabv1](https://arxiv.org/pdf/1412.7062.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v1.md)
   - [DeepLabv2](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v2.md)
