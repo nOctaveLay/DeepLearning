@@ -59,6 +59,8 @@ Zero defined (multiplication, division) ||||O
 
 ## Data Exploration
 
+> 특징 탐색
+
 ### Variable Identification
 
 - Predictor (Input) 과 Target(output) 변수들을 정의
@@ -103,6 +105,8 @@ Zero defined (multiplication, division) ||||O
 
 ## Feature Cleaning
 
+> 특징 제거
+
 ### Missing values
 
 - 어떤 사람은 missing value를 포함하고 있는 dataset에서 element를 수정하는 것을 선택하거나 value를 삽입하는 것을 선택한다.
@@ -123,23 +127,27 @@ Zero defined (multiplication, division) ||||O
 - 사람의 나이는 음수가 될 수 없고, 남자는 임신을 할 수 없으며, 어린 아이들은 운전 면허를 가질 수 없다.
 
 ## Feature Imputation
-특징 삽입
+
+> 특징 삽입
+
 ### Hot-Deck
-The technique then finds the first missing value and uses the cell value immediately prior to the data that are missing to impute the missing value<br>
-= first missing value를 찾음, missing value를 imput하는 것을 잃어버리는 데이터 이전에 cell value를 즉각적으로 찾음. <br><br>
+
+- 처음에 missing value를 찾는다.
+- Missing value를 삽입하는 것을 잊어버리는 데이터를 사용하기 전에 cell value를 즉시 사용한다.
 
 ### Cold-Deck
-Selects donors from another dataset to complete missing data<br>
-= missing data를 완성시키기 위해서 다른 dataset에서 donor를 선택<br><br>
+
+- Missing data를 완성시키기 위해서 다른 dataset에서 donor를 선택
 
 ### Mean-substitution
-Another imputation technique involves replacing any missing value with the mean of that variable for all other cases, which has the benefit of not changing the sample mean for that variable.<br>
-= 다른 삽입 기술은 그 varibale을 위한 샘플 평균을 변화시키는 것이 아닌 것으로 산출되는 이득을 가지는 모든 cases를 위해 있는 그 variable 의 평균으로 어떤 missing value를 대체하는 것을 포함한다.<br><br>
+
+- 다른 삽입 기술은 어떤 missing value를 모든 다른 경우에 대한 variable의 평균으로 대체하는 것을 포함한다.
+- 이는 variable을 위한 sample mean을 바꾸지 않아도 된다라는 장점을 가지고 있다.
 
 ### Regression
-A regression model is estimated to predict observed values of a variable based on other variables, and that model is then used to impute values in cases where that variable is missing <br>
-= 다른 variable에 기반한 variable의 observed value를 예측하도록 추정되는 모델.<br>
-= 이 모델은 variable이 사라진 곳에 value를 넣는데 사용한다.<br><br>
+
+- 이 모델은 다른 variable들을 기준으로 variable의 관측값을 예측하는 것으로 추정된다.
+- 그리고 이 모델은 variable이 사라진 경우 value를 넣기 위해서 사용된다.
 
 ## Feature Engineering
 
