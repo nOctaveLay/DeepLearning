@@ -1,16 +1,12 @@
 # 머신러닝/딥러닝에 대해 정리한 내용
 
-## 전체적인 마인드맵을 알기위해 공부한 것
-
-### [Deep Learning mindmap source 2020](https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
-
-1. [Machine Learning Data Processing](MindMap/machine%20learning%20data%20processing%20roadmap.md)
-2. [Machine Learning Concept](MindMap/machine%20learning%20concept.md)
-3. [Machine Learning Process](MindMap/machine%20learning%20process.md)
-
 ## 딥러닝 기초
 
-- [Optimization](https://arxiv.org/pdf/1609.04747.pdf) [[정리]](/Basic%20Concept/Overview_of_Gradient_descent_optimization.md)
+- [Deep Learning mindmap source 2020](https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
+  - [Machine Learning Data Processing](Basic%20Concept/MindMap/machine%20learning%20data%20processing%20roadmap.md)
+  - [Machine Learning Concept](Basic%20Concept/MindMap/machine%20learning%20concept.md)
+  - [Machine Learning Process](Basic%20Concept/MindMap/machine%20learning%20process.md)
+- [Optimization](https://arxiv.org/pdf/1609.04747.pdf) [[정리]](Basic%20Concept/Overview_of_Gradient_descent_optimization.md)
 
 ## Vision
 
