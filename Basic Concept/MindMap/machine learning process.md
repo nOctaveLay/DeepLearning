@@ -1,4 +1,4 @@
-# Machine learning process
+# Machine Learning Process
 
 ## Index
 
