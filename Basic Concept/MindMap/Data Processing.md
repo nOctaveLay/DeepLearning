@@ -232,18 +232,16 @@ Zero defined (multiplication, division) ||||O
   - Ridge regression은 coefficient의 크기의 **제곱**과 동등하게 페널티를 더하는 L2 정규화를 한다.
 
 ## Feature Encoding
-Machine Learning algorithms perform Linear Algebra on Matrices, which means all features must be numeric. 
-Encoding helps us do this.<br><br>
 
-= 머신 러닝 알고리즘은 모든 feature가 numeric 한 행렬에 작용하는 선형 대수를 수행한다.<br><br>
-
-* Label Encoding<br>
-* One Hot Encoding<br>
-
-In One Hot Encoding, make sure the encodings are done in a way that all features are linearly independent.<br>
-One Hot Encoding에서 모든 feature들이 선형 독립적인 방법으로 encoding이 된다는 것을 확신해라.
+- 머신 러닝 알고리즘은 선형 대수를 적용한다.
+- 이 말은 모든 feature들은 반드시 numeric 해야 함을 의미한다.
+- Encoding은 모든 feature들이 numeric하도록 돕는다.
+  - Label Encoding
+  - One Hot Encoding
+    - One Hot Encoding에서 반드시 encoding이 모든 feature들이 선형 독립적이어야 한다는 것을 보장해라
 
 ## Feature Normalisation or Scaling
+
 Since the range of values of raw data varies widely, in some machine learning algorithms, objective functions will not work properly without normalization. 
 Another reason why feature scaling is applied is that gradient descent converges much faster with feature scaling than without it.
 
