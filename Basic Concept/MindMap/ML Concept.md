@@ -262,8 +262,8 @@
     - 컴퓨터 프로그램은 특정한 목표를 반드시 수행하는 다이나믹한 환경(예를 들어 차를 가지고 운전을 한다든지, 적과 대응하는 게임을 한다던지)과 상호작용을 한다.
     - 이 프로그램은 이것이 문제 상황으로 들어갔을 때 보상과 체벌의 의미를 가진 feedback이 주어진다.
 
-## [Approaches](#appro-top)<a id="approaches"></a>
-1. Decision tree learning
+## Approaches
+
 1. Association rule learning
 1. Artificial neural networks
 1. Deep learning
@@ -279,28 +279,29 @@
 1. Rule-based machine learning
 1. Learning classifier systems
 
-## [Taxonomy](#tax-top)<a id="taxonomy"></a>
+## Taxonomy
+
+> 분류
+
 1. Generative Methods
-    1. Model class-conditional pdfs and prior probabilities. “Generative” since sampling can generate synthetic data points.
-        - 모델의 class-conditional pdfs 이고, prior probabilities (이전 확률)이다.<br>
-        - "Generative" 하다 = synthetic data point를 생성한다.<br>
-    2. Popular Models
+    - class-conditional pdfs(조건부 확률)과 prior probability(이전의 확률)의 모델.
+      - class-conditional probability density function
+        - 측정의 variability는 random variable x로 표현될 수 있다.
+        - 그리고 probability density function(pdf)는 class w에 의존한다.
+        - 이 때의 pdf는 p(x|w)로 나타낸다.
+    - sampling이 synthetic data point를 생성하기 때문에 "Generative"라고 한다.
+    - Popular Models
         1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)
         2. Gaussians Naive Bayes, Mixtures of multinomials
         3. Sigmoidal belief networks, Bayesian networks, Markov random fields
-1. Discriminative Methods<br>
-    - Directly estimate posterior probabilities. 
-    - No attempt to model underlying probability distributions. 
-    - Focus computational resources on given task– better performance<br><br>
-    
-    - 다음에 올 확률을 직접적으로 측정<br>
-    - probability distribution에 놓여있는 모델에 어떠한 시도도 하지 않음<br>
-    - 계산해야하는 자원을 주어진 일에 더 특화된 성능에 넣음.<br>
-    <br>
-2. Popular Models<br>
-    1. Logistic regression, SVMs<br>
-    2. Traditional neural networks, Nearest neighbor<br>
-    3. Conditional Random Fields (CRF)<br><br>
+1. Discriminative Methods
+    - 다음에 올 확률을 직접적으로 측정
+    - probability distribution에 입각하여 모델을 만드려는 시도가 없다.
+    - 계산에 필요한 자원을 주어진 task-better performance에 집중한다.
+    - Popular Models
+        1. Logistic regression, SVMs
+        2. Traditional neural networks, Nearest neighbor
+        3. Conditional Random Fields (CRF)
 
 ## [Selection Criteria](#selc-top)<a id="selection-criteria"></a>
 --Prediction Accuracy vs Model Interpretability--
