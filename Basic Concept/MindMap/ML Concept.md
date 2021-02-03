@@ -303,65 +303,44 @@
         2. Traditional neural networks, Nearest neighbor
         3. Conditional Random Fields (CRF)
 
-## [Selection Criteria](#selc-top)<a id="selection-criteria"></a>
---Prediction Accuracy vs Model Interpretability--
->There is an inherent tradeoff between Prediction Accuracy and Model Interpretability, that is to say that as the model get more flexible in the way the function (f) is selected, they get obscured, and are hard to interpret.<br>
->Flexible methods are better for inference, and inflexible methods are preferable for prediction.<br><br>
+## Selection Criteria
 
-<br>
-- Prediction Accuracy(예측 정확도)와 Model Interpretability(해석도) 사이에선 내부적인 tradeoff O
-    - 모델이 flexible 해질 때 -> 해석 어려움, 예측 쉬움
+- Prediction Accuracy vs Model Interpretability
+  - 본질적인 trade-off가 존재
+  - 모델이 f가 선택되는 방식보다 더 flexible 해질 수록, 모델은 더 모호해지고 interpret하기 어려워진다.
+  - 하지만 Flexible model은 추론에 좋고, Inflexible한 방법은 예측을 할 때 좋다.
 
-## [Libraries](#lib-top)<a id="libraries"></a>
-- --Python--
-    1. --Numpy--
-    >Adds support for large, multi-dimensional arrays and matrices, along with a large library of high-level mathematical functions to operate on these arrays
-    - 높은, 다중 차원의 array와 metrices를 지원.
-    - 이런 array를 다루기 위해서 높은 수준의 수학적 함수들이 많음.<br><br>
-    2. --Pandas--
-    >Offers data structures and operations for manipulating numerical tables and time series
-    - numerical table들과 time series를 다루기 위해서 data structure와 operation을 제공.<br><br>
-    3. --Scikit-Learn--
-    >It features various classification, regression and clustering algorithms including support vector machines, random forests, gradient boosting, k-means and DBSCAN, and is designed to interoperate with the Python numerical and scientific libraries NumPy and SciPy<br><br>
-    - 다양한 classification, regression, clustering 알고리즘을 제공.
-      = support vector machine, random forests, gradient booting, k-means, DBSCAN
-    - Python numerical과 과학적인 libraries인 NumPy, SciPy와 상호작용을 하게끔 만들어져 있음<br><br>
-    4. --Tensorflow--
-    [tensorflow]<br><br>
-    5. --MXNet--
-    >Is an modern open-source deep learning framework used to train, and deploy deep neural networks. <br>
-    >MXNet library is portable and can scale to multiple GPUs and multiple machines. <br>
-    >MXNet is supported by major Public Cloud providers including AWS and Azure. <br>
-    >Amazon has chosen MXNet as its deep learning framework of choice at AWS.<br><br>
-    - open-source deep learning framework
-    - DNN을 전개
-    - 많은 GPU와 많은 machine을 가지고 다닐 수 있거나 확장가능하다.
-    - 주로 AWS와 Azure를 포함한 Public Cloud provider가 지원한다.<br><br>
-    6. --Keras--
-    >Is an open source neural network library written in Python. <br>
-    >It is capable of running on top of MXNet, Deeplearning4j, Tensorflow, CNTK or Theano. <br>
-    >Designed to enable fast experimentation with deep neural networks, it focuses on being minimal, modular and extensible.<br><br>
-    - Python으로 쓰여진 open source neural network library이다.
-    - MXNet, Deeplearning4j, Tensorflow, CNTK 또는 Theano 위에서 돌 수 있다.
-    - DNN에 빠른 실험을 할 수 있도록 고안됬다.
-    - 작고, modular(모듈이 되고) 하고, extensible(확장)할 수 있다.<br><br>
-    7. --Torch--
-    >Torch is an open source machine learning library, a scientific computing framework, and a script language based on the Lua programming language. <br> 
-    >It provides a wide range of algorithms for deep machine learning, and uses the scripting language LuaJIT, and an underlying C implementation.<br><br>
-    - open source machine learning library이다.
-    - 과학적으로 계산된 framework
-    - Lua로 짜여진 script language이다.
-    - deep machine learning에 대해 넓은 범위의 알고리즘 제공
-    - LuaJIT라고 불리는 스크립트 언어를 사용
-    - 기본적으로 C 실행을 한다.<br><br>
-    8. --Microsoft Cognitive Toolkit--
-    >Previously known as CNTK and sometimes styled as The Microsoft Cognitive Toolkit, is a deep learning framework developed by Microsoft Research. <br>
-    >Microsoft Cognitive Toolkit describes neural networks as a series of computational steps via a directed graph.<br><br>
-    - CNTK라고 알려진 것, 때때로 The Microsoft Cognitive Toolkit이라고 스타일되어있다.
-    - Microsoft Research에서 개발한 deep learning framework
-    - neural network를 directed graph를 통한 computational step의 연속이라고 묘사
-    
-    
-# 이미지 필요
-[confusion Matrix]
-[tensorflow]
+## Libraries
+
+- Python
+    1. **Numpy**
+        - 이런 array들을 다룰 수 있는 높은 level의 수학적인 함수를 포함하여 높은, 다중 차원의 array와 metrices를 지원.
+    2. **Pandas**
+        - numerical table들과 time series를 다루기 위해서 data structure와 operation을 제공.
+    3. **Scikit-Learn**(사이킷런)
+        - 다양한 classification, regression, clustering 알고리즘을 제공.
+          - support vector machine, random forests, gradient booting, k-means, DBSCAN을 포함한다.
+        - Python numerical과 과학적인 libraries인 NumPy, SciPy와 상호작동(interoperate)을 하게 끔 만들어져 있음
+    4. **Tensorflow**
+    5. **MXNet**
+        - 이것은 train할 때 사용되곤 하는 현대적인 오픈소스 딥러닝 프레임워크이다. 그리고 DNN을 배치한다.
+        - MXNet library는 portable(손에 넣고 다닐 수 있을 정도로 작음) 그리고 multiple GPU와 multiple Machine으로 확장할 수 있다.
+        - MXNet은 AWS와 Azure 같은 major Public Cloud를 공급하는 사람들에 의해 지원받는다.
+        - Amazon도 AWS에서 MXNet을 아마존의 Deep Learning Framework로 선택했다.
+    6. **Keras**
+        - Python으로 쓰여진 open source neural network library이다.
+        - MXNet, Deeplearning4j, Tensorflow, CNTK 또는 Theano 위에서 돌릴 수 있다.
+        - DNN으로 빠른 실험을 할 수 있도록 고안됬다.
+        - 작고, modular(모듈을 만들 수 있고), 확장할 수 있다는 점에 초점을 맞추었다.
+    7. **Torch**
+      - open source machine learning library이다.
+      - 과학적으로 계산하는 framework
+      - Lua 프로그래밍 언어로 짜여진 script language이다.
+      - deep machine learning에 대해 넓은 범위의 알고리즘 제공
+      - LuaJIT라고 불리는 스크립트 언어를 사용
+      - C 실행을 기본으로 한다.
+    8. **Microsoft Cognitive Toolkit**
+      - 이전에 CNTK라고 알려졌다.
+      - 때때로 Microsoft Cognitive Toolkit으로서 스타일된다.
+      - 이는 Microsoft Research에 의해서 개발된 Deep Learning Framework다.
+      - Microsoft Cognitive Toolkit은 NN을 directed graph를 통한 computational step의 연속된 나열로서 묘사한다.
