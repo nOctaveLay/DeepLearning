@@ -209,16 +209,11 @@
 
 ### Bagging
 
->An approach to ensemble learning that is based on bootstrapping. <br>
->Shortly, given a training set, we produce multiple different training sets (called bootstrap samples), by sampling with replacement from the original dataset. 
->Then, for each bootstrap sample, we build a model. <br>
->The results in an ensemble of models, where each model votes with the equal weight. <br>
->Typically, the goal of this procedure is to reduce the variance of the model of interest (e.g. decision trees).<br><br>
-
-- bootstrapping에 기초한 ensemble learning에 대한 접근<br>
-- training set이 주어지면, original dataset에서 replacement로 sampling함으로서 다양한 training set을 생성 <br>
-- 결과는 model의 ensemble이고, 각각의 model은 동등한 weight를 가진다.<br>
-- 전형적으로, 이 과정의 목표는 흥미로운 모델의 variance를 줄이는 것.(ex decision trees)<br>
+- bootstrapping에 기초한 ensemble learning에 대한 접근
+- training set이 주어지면, original dataset에서 replacement로 sampling함으로서 다양한 training set을 생성
+- 각각의 bootstrap sample에서, model을 build한다.
+- 결과는 model의 ensemble이고, 각각의 model은 동등한 weight를 가진다.
+- 전형적으로, 이 과정의 목표는 관심있는 모델의 variance를 줄이는 것.(ex decision trees)
 
 ## [Types](#types-top)<a id="types"></a>
 - Regression : supervised problem, 결과는 discrete하기보단 continuous하다.<br>
