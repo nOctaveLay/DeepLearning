@@ -152,106 +152,84 @@ Zero defined (multiplication, division) ||||O
 ## Feature Engineering
 
 ### Decompose
-Converting 2014-09-20T20:45:40Z into categorical attributes like hour_of_the_day, part_of_day, etc. <br>
-= 2014-09-20T20:45:40Z를 카테고리 속성으로 바꿈 : hour_of_the_day, part_of_day 같은 식으로<br><br>
+
+- 2014-09-20T20:45:40Z를 카테고리 속성으로 바꿈
+  - hour_of_the_day, part_of_day 등
 
 ### Discretization
-**Continuous Features**<br>
-Typically data is discretized into partitions of K equal lengths/width (equal intervals) or K% of the total data (equal frequencies)<br>
-= 일반적으로 data는 K개의 같은 길이/넓이 (같은 구간)의 조각 혹은 모든 데이터 (주파수가 동등한)의 K%로 나눠진다.<br><br>
 
-**Categorical Features**<br>
-Values for categorical features may be combined, particularly when there’s few samples for some categories<br>
-= 특히 어떤 카테고리에 매우 적은량의 sample만 있을 때 카테고리로 만들 수있는 특징들은 결합된다. <br><br>
+- Continuous Features
+  - 일반적으로 data는 K개의 같은 길이/넓이 (같은 구간)의 조각 혹은 모든 데이터 (주파수가 동등한)의 K%로 나눠진다.
+- Categorical Features
+  - 특히 어떤 카테고리에 매우 적은량의 sample만 있을 때 카테고리로 만들 수있는 value들은 결합된다.
 
 ### Reframe Numerical Quantities
-Changing from grams to kg, and losing detail might be both wanted and efficient for calculation<br>
-= gram을 kg으로 바꾸면서, detail을 잃는 것은 원해서 그러거나 계산을 효율적으로 하기 위함이다.<br><br>
+
+- gram을 kg으로 바꾸는 것이나 detail을 잃는 것은 원해서 그러거나 계산에 있어서 효율적이기 때문이다.
 
 ### Crossing
 
-Creating new features as a combination of existing features. <br>
-Could be multiplying numerical features, or combining categorical variables.<br> 
-This is a great way to add domain expertise knowledge to the dataset.<br><br>
-
-= 현재 있는 특징들을 결합함으로서 새로운 특징들을 만든다.<br>
-= 셀 수 있는 특징들을 곱하거나 카테고리 변수들을 결합할 수 있다 <br>
-= 데이터 셋에 전문적인 지식의 domain을 추가하는 아주 좋은 방법이다. <br><br>
+- 현재 있는 특징들을 결합함으로서 새로운 특징들을 만든다.
+- 셀 수 있는 특징들을 곱하거나 카테고리 변수들을 결합할 수 있다.
+- 데이터 셋에 전문적인 지식의 domain을 추가하는 아주 좋은 방법이다.
 
 ## Feature Selection
+
 ### Correlation
-Features should be uncorrelated with each other and highly correlated to the feature we’re trying to predict.
-[correlation 1]<br><br>
-**Convariance** :  A measure of how much two random variables change together. <br> 
-Math: dot(de_mean(x), de_mean(y)) / (n - 1)<br><br>
+
+- 특징들은 서로 연관이 없어야 하며, 우리가 예측하려고 하는 특징들과 많이 연관 되어 있어야한다.
+![correlation 1](./images/correlation.PNG)
+- **Convariance** :  얼마나 두 개의 random variable들이 서로 서로 변화할 수 있는 지에 대한 척도
+- Math: dot(de_mean(x), de_mean(y)) / (n - 1)
 
 ### Dimensionality Reduction
-**Principal Component Analysis(PCA)**
-Principal component analysis (PCA) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components.<br><br>
 
-This transformation is defined in such a way that the first principal component has the largest possible variance (that is, accounts for as much of the variability in the data as possible), and each succeeding component in turn has the highest variance possible under the constraint that it is orthogonal to the preceding components.<br><br>
+- Principal Component Analysis(PCA)
+  - PCA는 가능한 상호 연관된 변수(possibly correlated variables)들의 관찰 집합을 principal component라고 불리는 선형 비상호 연관 변수(linearly uncorrelated variables)들의 값의 집합으로 변환하는 직교 변환을 사용하는 통계적인 과정이다.
+  - 이러한 transformation은 첫번째 principal component가 가장 큰 값을 가지는 variance를 갖는 것으로 정의된다.
+  - 이 말은 즉슨, 데이터 안에서 가능한 한 많은 variability를 갖는 것을 설명한다.
+  - 그리고 각각의 연속적인 component는 차례로 앞에 있는 component들과 직교해야 한다는 조건 아래 가능한 가장 큰 variance를 순서대로 갖는다.
+  - feature별로 변수를 plot해라, 그리고 가장 큰 variance를 가진 feature를 골라라.
 
-= PCA는 가능한 상호 연관된 변수(possibly correlated variables)들의 관찰 집합을 principal component라고 불리는 선형 비상호 연관 변수(linearly uncorrelated variables)들의 값의 집합으로 변환하는 직교 변환을 사용하는 통계적인 과정이다.<br>
-이런 변형은 first principal component가 가장 큰 가능한 변수를 갖는것이다. <br>
-(이 말은, data에서 가능한 한 variability를 많이 설명한다.) <br>
-그리고, 각각의 연속적인 component는 앞서 가는 component들에게 직교해야 한다는 제한 아래에서 차례로 가능한 가장 높은 variance를 가진다.<br>
-<br>
-Plot the variance per feature and select the features with the largest variance.<br><br>
-= feature별로 변수를 plot해라, 그리고 가장 큰 변수로 feature를 골라라.<br><br>
-
-**Singular Value Decomposition(SVD)**
-SVD is a factorization of a real or complex matrix.<br> 
-It is the generalization of the eigendecomposition of a positive semidefinite normal matrix (for example, a symmetric matrix with positive eigenvalues) to any m×n matrix via an extension of the polar decomposition.<br> 
-It has many useful applications in signal processing and statistics.<br><br>
-
-= SVD는 real or complex 행렬의 인수분해이다.<br>
-= 양극 분해(polar decomposition)의 확장을 통해 모든 mxn 행렬에 대한 positive semidefinite normal matrix(0이 포함되고, 모든 행렬이 양수인 정규행렬 예를 들어, positive 고유벡터를 가지고 있는 sysmmetric matrix 다) 의 고유값분해(eigendecomposition)의 일반화이다.<br>
-= 시그널 프로세싱과 통계학에 많이 적용된다. <br><br>
-
+- Singular Value Decomposition(SVD)
+  - SVD는 실수 혹은 복소수 행렬의 인수분해이다.
+  - 이것은 어떤 mxn 행렬에 대해 양극 분해의 확장을 통하여 정부호행렬(positive semi-define normal matrix, 예를 들면 양수의 고유값을 가지고 있는 symmetric 행렬)의 고유값분해로 일반화할 수 있다.
+  - signal processing과 통계학에서 유용하게 많이 사용되고 있다.
 
 ### Importance
-#### Filter Methods 
-Filter type methods select features based only on general metrics like the correlation with the variable to predict.<br> 
-Filter methods suppress the least interesting variables. <br>
-The other variables will be part of a classification or a regression model used to classify or to predict data.<br>
-These methods are particularly effective in computation time and robust to overfitting.<br><br>
 
-Filter type method는 예측하기 위한 variable으로 하는 correlation 처럼 일반적인 행렬에 기본을 두고 특징을 선택한다. <br>
-Filter method는 덜 흥미로운 변수들을 압도한다.<br>
-다른 variable들은 classification의 부분이거나 데이터를 분류하거나 예측하기 위해 사용되는 regression model의 부분이 된다.<br>
-이러한 방법은 계산 시간에서 특히 효과적이다. 그리고 overfitting에 robust하다.<br><br>
-* Correlation
-* Linear Discriminant Analysis
-* ANOVA: Analysis of Variance
-* Chi Square
+#### Filter Methods
+
+- Filter type method는 예측하기 위해 사용되는 variable을 가지고 하는 correlation 처럼 일반적인 행렬들에 기반하여 특징을 선택한다.
+- Filter method는 가장 흥미롭지 않는 변수들을 압도한다.
+- 다른 variable들은 classification의 일부거나 데이터를 분류하거나 예측하기 위해 사용되는 regression model의 일부가 된다.
+- 이러한 방법은 계산 시간에서 특히 효과적이다. 그리고 overfitting에 robust하다.
+- 종류
+  - Correlation
+  - Linear Discriminant Analysis
+  - ANOVA: Analysis of Variance
+  - Chi Square
 
 #### Wrapper Methods
-Wrapper methods evaluate subsets of variables which allows, unlike filter approaches, to detect the possible interactions
-between variables. <br>
-The two main disadvantages of these methods are : The increasing overfitting risk when the number of observations is insufficient.<br> 
-AND. The significant computation time when the number of variables is large.<br><br>
 
-Wrapper methods는 filter 접근과는 다르게 variable 사이에서 가능한 상호작용을 탐지하는 것을 허락하는 variable의 subset을 평가하는 것이다.<br>
-이러한 방법들에서 안 좋은 2가지 점이 있다.<br>
-첫 번째는, observation의 수가 불충분할 때 overfitting risk가 증가<br>
-두 번째는, variable의 수가 많을 때 중요한 계산 시간이다.<br><br>
-
-* Forward Selection
-* Backward Elimination
-* Recursive Feature Ellimination
-* Genetic Algorithms
+- Wrapper methods는 filter 접근과는 다르게 variable 사이에서 가능한 상호작용을 탐지하는 것을 허락하는 variable의 부분 집합을 평가하는 것이다.
+- 2가지 단점이 있다.
+  - Observation의 수가 불충분할 때 증가하는 overfitting risk
+  - Variable의 수가 많을 때 생기는 어마어마한 계산 시간
+- 종류
+  - Forward Selection
+  - Backward Elimination
+  - Recursive Feature Ellimination
+  - Genetic Algorithms
 
 #### Embedded Methods
-Embedded methods try to combine the advantages of both previous methods.<br>
-A learning algorithm takes advantage of its own variable selection process and performs feature selection and classification simultaneously.<br><br>
 
-Embedded method는 과거의 method들의 장점들을 결합하려고 한다.<br>
-학습 알고리즘은 변수 선택 과정의 이점을 취한다. 그리고 특징 선택과 분류를 동시에 한다.<br><br>
-
-* Lasso regression performs L1 regularization which adds penalty equivalent to absolute value of the magnitude of coefficients.<br>
-    = Lasso regression은 coefficient의 크기의 절댓값과 동일하게 페널티를 더하는 L1 정규화를 한다. <br>
-* Ridge regression performs L2 regularization which adds penalty equivalent to square of the magnitude of coefficients.<br>
-    = Ridge regression은 coefficient의 크기의 제곱과 동등하게 페널티를 더하는 L2 정규화를 한다.<br>
+- Embedded method는 과거의 method들의 장점들을 결합하는 것을 시도한다.
+학습 알고리즘은 알고리즘의 변수 선택 과정에서 이점을 얻는다.
+- 특징 선택과 분류를 동시에 한다.
+- 예시
+  - Lasso regression: coefficient의 크기의 **절댓값**과 동일하게 페널티를 더하는 L1 정규화를 한다.
+  - Ridge regression은 coefficient의 크기의 **제곱**과 동등하게 페널티를 더하는 L2 정규화를 한다.
 
 ## Feature Encoding
 Machine Learning algorithms perform Linear Algebra on Matrices, which means all features must be numeric. 
