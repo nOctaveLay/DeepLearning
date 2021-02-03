@@ -1,5 +1,45 @@
 # Machine Learning Data Processing
 
+## Index
+
+- [Data Types](#Data%20Types)
+- [Data Exploration](#Data%20Exploration)
+  - [Variable Identification](#Variable%20Identification)
+  - [Univariate Analysis](#Univariate%20Analysis)
+  - [Bi-variate Analysis](#Bi-variate%20Analysis)
+  - [Numerical & Numerical](#Numerical%20&%20Numerical)
+  - [Categorical & Categorical](#Categorical%20&%20Categorical)
+  - [Categorical & Numerical](#Categorical%20&%20Numerical)
+- [Feature Cleaning](#Feature%20Cleaning)
+  - [Missing values](#Missing%20values)
+  - [Special Values](#Special%20Values)
+  - [Outliers](#Outliers)
+  - [Obvious inconsistencies](#Obvious%20inconsistencies)
+- [Feature Imputation](#Feature%20Imputation)
+  - [Hot-Deck](#Hot-Deck)
+  - [Cold-Deck](#Cold-Deck)
+  - [Mean-substitution](#Mean-substitution)
+  - [Regression](#Regression)
+- [Feature Engineering](#Feature%20Engineering)
+  - [Decompose](#Decompose)
+  - [Discretization](#Discretization)
+  - [Reframe Numerical Quantities](#Reframe%20Numerical%20Quantities)
+  - [Crossing](#Crossing)
+- [Feature Selection](#Feature%20Selection)
+  - [Correlation](#Correlation)
+  - [Dimensionality Reduction](#Dimensionality%20Reduction)
+  - [Importance](#Importance)
+    - [Filter Methods](#Filter%20Methods)
+    - [Wrapper Methods](#Wrapper%20Methods)
+    - [Embedded Methods](#Embedded%20Methods)
+    - [Feature Encoding](#Feature%20Encoding)
+    - [Feature Normalisation or Scaling](#Feature%20Normalisation%20or%20Scaling)
+- [Dataset Construction](#Dataset%20Construction)
+  - [Training Dataset](#Training%20Dataset)
+  - [Test Dataset](#Test%20Dataset)
+  - [Validation Dataset](#Validation%20Dataset)
+  - [Cross Validation](#Cross%20Validation)
+
 ## Data Types
 
 Nominal
@@ -242,60 +282,46 @@ Zero defined (multiplication, division) ||||O
 
 ## Feature Normalisation or Scaling
 
-Since the range of values of raw data varies widely, in some machine learning algorithms, objective functions will not work properly without normalization. 
-Another reason why feature scaling is applied is that gradient descent converges much faster with feature scaling than without it.
+- objective function(목적 함수)은 normalization(정규화)없이는 작동 x
+  - raw data의 값의 범위가 넓기 때문
+- Feature scaling이 적용되는 이유
+  - gradient descent가 feature scaling과 함께 하면 더 빠르게 수렴되기 때문.
+- Method
+  - Rescaling
+    - 가장 단순한 방법: [0,1] [-1,1] 범위 안으로 들이기 위해서 feature의 범위를 리스케일링하는 것
+  - Standardization
+    - Feature standardization은 data안에서 각각의 특징들에 대한 value들이 zero-mean (numerator에서 평균을 빼는 것)과 unit-variance를 가지게 만드는 것이다.
+  - Scaling to unit length
+    - Feature vector의 컴포넌트를 증가시키려 한다.
+    - 그래서 complete vector는 length one을 가진다.
 
-= raw data의 값의 범위가 넓기 때문에, machine learning algorithm에서, objective function(목적 함수)은 normalization(정규화)없이는 적절하게 작동하지 않을 것이다.
-= 왜 feature scaling이 적용되는 지에 대한 또 다른 이유는, gradient descent가 feature scaling과 함께 하면 더 빠르게 수렴되기 때문이다.
+## Dataset Construction
 
-* Method
-    * Rescaling <br> 
-    The simplest method is rescaling the range of features to scale the range in [0, 1] or [-1, 1].<br>
-    가장 일반적인 방법은 [0,1] [-1,1] 범위 안으로 들이기 위해서 feature의 범위를 리스케일링하는 것이다.<br>
-    * Standardization <br>
-    Feature standardization makes the values of each feature in the data have zero-mean (when subtracting the mean in the numerator) and unitvariance.<br>
-    Feature standardization은 zero-mean (numerator에서 평균을 빼는 것)과 unitvariance를 가지는 data 안에서 각각의 feature의 value를 만드는 것이다.<br>
-    * Scaling to unit length - To scale the components of a feature vector such that the complete vector has length one.
-    Feature vector의 컴포넌트를 증가시키기 위함. 그래서 complete vector는 length one을 가진다.<br>
-    
-## Dataset Construction 
 ### Training Dataset
-A set examples used for learning <br>
-학습을 위해 사용되는 예제.<br>
 
-To fit the parameters of the classifier in the Multilayer Perceptron, for instance, we would use the training set to find the "optimal" weights when using back-progapation.<br>
-Multilayer Perceptron에서 classifier의 parameter를 맞추기 위함, 예를 들어, back propagation을 할 때 "최적의" weight를 찾기 위해서 training set을 사용한다.<br><br>
+- 학습을 위해 사용되는 예제.
+- 예를 들어, Multilayer Perceptron에서 classifier의 parameter를 맞추기 위해, back propagation을 할 때 **최적의** weight를 찾기 위해서 training set을 사용한다.
+
 ### Test Dataset
-A set of examples used only to assess the performance of a fully-trained classifier<br>
-완전히 훈련된 classifier의 performance을 측정할 때 사용되는 예제.<br>
 
-In the Multilayer Perceptron case, we would use the test to estimate the error rate after we have chosen the final model (MLP size and actual weights) <br>
-Multilayer Perceptron case에서, 최종 모델을 고른 후에 error rate를 추정하기 위해서 test를 사용한다. <br>
-After assessing the final model on the test set, YOU MUST NOT tune the model any further<br>
-test set에서의 최종 모델에 접근한 후, 더 이상 모델을 조정하면 안된다.<br>
+- 완전히 훈련된 classifier의 performance을 측정할 때 사용되는 예제.
+- Multilayer Perceptron의 경우, 최종 모델 (MLP size 그리고 실제 weight들)을 고른 후에 error rate를 측정하기 위해서 test set을 사용한다.
+- test set에서 최종 모델을 평가한 후, 더 이상 모델을 조정하면 안된다.
 
 ### Validation Dataset
-A set of examples used to tune the parameters of a classifier<br>
-= classifier의 parameter를 조정하는데 사용되는 예제.<br><br>
 
-In the Multilayer Perceptron case, we would use the validation set to find the “optimal” number of hidden units or determine a stopping point for the back-propagation algorithm<br>
-= Multilayer Perceptron case에서, hidden unit의 최적의 갯수를 찾고 싶거나, back-propagation algorithm에서 stopping point를 결정하기 위해 validation set을 사용한다.<br><br>
+- classifier의 parameter를 조정하는데 사용되는 예제.
+- Multilayer Perceptron의 경우, hidden unit의 최적의 갯수를 찾고 싶거나, back-propagation algorithm에서 stopping point를 결정하기 위해 validation set을 사용한다.
 
 ### Cross Validation
-One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br>
-= cross-validation의 첫번째 라운드는 하나의 subset에 대한 분석을 수행하는 동안 데이터 샘플을 complementary subset으로 분리하는 것을 포함한다. (이를 training set이라고 부른다.)<br>
-그리고 다른 subset에 대한 유효성 분석을 한다. (이를 validation set 혹은 testing set이라고 부른다)<br><br>
 
-To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds.<br>
-= variability를 줄이기 위해서, cross-validation의 여러 번의 round는 다른 partition을 사용해서 수행된다. 그리고 validation result는 round마다 평균을 낸다.<br><br>
+- cross-validation의 첫번째 라운드는 하나의 subset에 대한 분석을 수행하는 동안 데이터 샘플을 차집합으로 분리하는 것을 말한다. (이를 training set이라고 부른다.)
+- 그리고 다른 subset에 대한 유효성 분석을 한다. (이를 validation set 혹은 testing set이라고 부른다)
+- variability를 줄이기 위해서, cross-validation이 실행되는 여러 round는 다른 partition들을 사용해서 수행된다.
+- validation result는 round마다 평균이 난다.
 
+## 출처
 
-
-
-[correlation1] 
-
-출처 :
-https://github.com/dformoso/machine-learning-mindmap 
-https://www.graphpad.com/support/faq/what-is-the-difference-between-ordinal-interval-and-ratio-variables-why-should-i-care/
-https://www.saedsayad.com/bivariate_analysis.htm
-
+- [Mindmap](https://github.com/dformoso/machine-learning-mindmap)
+- [Additional Article of Data Type](https://www.graphpad.com/support/faq/what-is-the-difference-between-ordinal-interval-and-ratio-variables-why-should-i-care/)
+- [Additional Article of Bivariate Analysis](https://www.saedsayad.com/bivariate_analysis.htm)
