@@ -223,53 +223,44 @@
   - learner : 이런 클래스에 대해 보이지 않는 input 값을 할당하는 모델 만들어야 함.
   - supervised learning으로 다뤄짐
 - Clustering
-    - input의 집합이 group으로 나누어짐
-    - group에 대해 미리 알 필요는 없음 (classification은 미리 알아야함)
-    - unsupervised learning으로 다뤄짐
-- Density Estimation<br>
-    - input의 분포도를 어떤 공간에서 찾는 것<br>
-- Dimensionality Reduction <br>
-    - 낮은 차원 공간으로 매핑시킴으로서 input을 단순화 시키는 것. <br>
-    
- ## [Kind](#kind-top)<a id="kind"></a>
- 1. Parametric
-    1. Making an assumption about the functional form or shape of our function (f),<br>
-        - i.e: f is linear, thus we will select a linear model<br>
-    2.  Selecting a procedure to fit or train our model. <br>
-    This means estimating the Beta parameters in the linear function.<br> 
-    A common approach is the (ordinary) least squares, amongst others<br><br>
-    
-    1. 함수의 모양이나 기능적인 형태에 대한 가정을 함(f) -> f가 linear 하니까, linear model 선택<br>
-    2. 모델에 맞는 방법이나 모델을 훈련시킬 방법 선택<br>
-        - 이 방법은 linear function의 Beta parameter를 추정하는 것이다.<br>
-        - 일반적인 방법은 다른 것들 중에서 매우 작은 square<br>
- 2. Non-Parametric<br>
-When we do not make assumptions about the form of our function (f).<br>
-However, since these methods do not reduce the problem of estimating f to a small number of parameters, a large number of observations is required in order to obtain an accurate estimate for f. An example would be the thin-plate
-spline model.<br><br>
+  - input의 집합이 group으로 나누어짐
+  - group에 대해 미리 알 필요는 없음 (classification은 미리 알아야함)
+  - unsupervised learning으로 다뤄짐
+- Density Estimation
+  - input의 분포도를 어떤 공간에서 찾는 것
+- Dimensionality Reduction
+  - 낮은 차원 공간으로 매핑시킴으로서 input을 단순화 시키는 것.
 
-- 함수의 형태에 대해 가정하지 않을 때.
-- 그렇지만, 이러한 방법이 추정하는 f의 문제를 적은 수의 parameter로 줄일 수 없을 때.
-- 수많은 observation이 f를 위한 정확한 추정을 얻기 위해 필요됨
-- thin-plate spline model
+## Kind
 
-## [Categories](#cate-top)<a id="categories"></a>
+1. Parametric
+    1. 함수의 모양이나 함수의 기능적인 형태에 대한 가정을 한다.
+        - 예시: f는 linear 하니까 우리는 linear model을 고르면 되겠다.
+    2. 우리의 모델을 fit 또는 train 하는 과정을 선택한다.
+        - 이것은 linear function에서 beta parameter를 추정하는 것을 의미한다.
+        - 일반적인 방법은 다른 것들 중에서 (ordinary) least square다.
+2. Non-Parametric
+    1. 우리가 함수의 형태에 대해 가정을 할 수 없을 때 쓴다.
+    2. 하지만 이러한 방법들이 f를 추정하는 문제를 작은 parameter의 개수로 바꿔주지는 않기 때문에, f를 위한 정확한 추정을 얻기 위해서 많은 관찰이 필요하다.
+        - thin-plate spline model이 대표적이다.
+
+## Categories
+
 1. Supervised
-The computer is presented with example inputs and their desired outputs, given by a "teacher", and the goal is to learn a general rule that maps inputs to outputs. <br>
-- example input과 원하는 output이 제공됨.<br>
-- 일반적인 input과 output의 rule을 알기 위함.<br>
-<br>
+
+    - 컴퓨터는 "선생님"이 준 예제 input과 그들이 원하는 output이 제시된다.
+    - 목표는 input과 output을 연결하는 일반적인 rule을 학습하는 것이다.
+
 2. Unsupervised
-No labels are given to the learning algorithm, leaving it on its own to find structure in its input. Unsupervised learning can be a goal in itself (discovering hidden patterns in data) or a means towards an end (feature learning).<br>
-- 알고리즘에 어떤 label도 없는 것. => 스스로 input을 보고 구조를 찾아내도록 놔두는 것<br>
-- 목표 그 자체거나(data의 숨겨진 패턴을 파악), 목표로 향하는 수단을 학습하기를 원함(특징 학습 : feature learning)<br><br>
 
-3. Reinforcement Learning<br>
-A computer program interacts with a dynamic environment in which it must perform a certain goal (such as driving a vehicle or playing a game against an opponent). <br>
-The program is provided feedback in terms of rewards and punishments as it navigates its problem space.<br>
+    - 어떠한 label도 learning algorithm에게 주어지지 않는다.
+    - 그 자신이 input 안에서 구조를 찾도록 내버려둔다.
+    - Unsupervised learning은 그 자체로 목표가 되거나. (data의 숨겨진 pattern을 찾을 때) 또는 목적으로 향하는 수단 (feature learning)이 된다.
 
-- 특정한 목표를 수행해야 하는 dynamic environment와 상호작용할 때.<br>
-- 프로그램은 reward와 punishment로 피드백을 받는다. -> problem space로 안내<br><br>
+3. Reinforcement Learning
+
+    - 컴퓨터 프로그램은 특정한 목표를 반드시 수행하는 다이나믹한 환경(예를 들어 차를 가지고 운전을 한다든지, 적과 대응하는 게임을 한다던지)과 상호작용을 한다.
+    - 이 프로그램은 이것이 문제 상황으로 들어갔을 때 보상과 체벌의 의미를 가진 feedback이 주어진다.
 
 ## [Approaches](#appro-top)<a id="approaches"></a>
 1. Decision tree learning
