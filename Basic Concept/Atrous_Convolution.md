@@ -1,7 +1,7 @@
 # Atrous Convolution
 
 - 소개
-  - [DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs](/Semantic%20Segmentation/Deeplab/Deeplab.md)
+  - [DeepLab: Semantic Image Segmentation with Deep Convolutional Nets, Atrous Convolution, and Fully Connected CRFs](/Semantic%20Segmentation/Deeplab/Deeplab.md) 에서 최초로 소개되었다.
   - Atrous convolution: Filter upsampling을 할 때 zero가 아닌 값들로 이루어진 filter tap들 사이에서 hole(trous)을 삽입하는 것.
   - 이 방법은 undecimated wavelet transform에서 효율적인 계산을 위해 고안된 방법이다.
   - ![atrous convolution](/Semantic%20Segmentation/Deeplab/images/DeepLab_v1_atrous_convolution.PNG)

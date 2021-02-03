@@ -46,5 +46,3 @@
 
 ## The Dataset
 [ImageNet_fig2]
-
-  
