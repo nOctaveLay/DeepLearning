@@ -2,10 +2,10 @@
 
 ## Index
 
-1. [Motivation](#motivation)
+1. [Motivation](#Motivation)
     1. Prediction
     1. Inference
-1. [Performance Analysis](#performance-analysis)
+1. [Performance Analysis](#Performance%20Analysis)
     1. Confusion Matrix
     1. Accuracy
     1. f1 score
@@ -17,7 +17,7 @@
     1. Goodness of Fit = R^2
     1. Mean Squared Error
     1. Error Rate
-1. [Tuning](#tuning)
+1. [Tuning](#Tuning)
     1. Cross-validation
         1. Leave-p-out cross-validation
         1. Leave-one-out cross validation
@@ -33,21 +33,21 @@
     1. Underfitting
     1. Bootstrap
     1. Bagging
-1. [Types](#types)
+1. [Types](#Types)
     1. Regression
     1. Classification
     1. Clustering
     1. Density Estimation
     1. Dimensionality Reduction
-1. [Kind](#kind)
+1. [Kind](#Kind)
     1. Parametic
     1. Non-Parametic
-1. [Categories](#categories)
+1. [Categories](#Categories)
     1. Supervised
     1. Unsupervised
     1. Reinforcement Learning
-1. [Approaches](#approaches)
-1. [Taxonomy](#taxonomy)
+1. [Approaches](#Approaches)
+1. [Taxonomy](#Taxonomy)
     1. Generative Methods
         1. Mixtures of Gaussians, Mixtures of experts, Hidden Markov Models(HMM)  
         1. Gaussians, Naïve Bayes, Mixtures of multinomials
@@ -56,37 +56,27 @@
         1. Logistic regression, SVMs
         1. Traditional neural networks, Nearest neighbor
         1. Conditional Random Fields (CRF)
-1. [Selection Criteria](#selection-criteria)
+1. [Selection Criteria](#Selection%20Criteria)
     1. Prediction Accuracy vs Model Interpretability
-1. [Libraries](#libraries)
+1. [Libraries](#Libraries)
 
 ## Motivation
 
 ### Prediction
 
-> When we are interested mainly in the predicted variable as a result of the inputs, but not on the each way of the inputs affect the prediction.
->
-> In a real estate example, Prediction would answer the question of:
->
-> Is my house over or under valued?
->
-> Non-linear models are very good at these sort of predictions, but not great for inference because the models are much less interpretable.
-
-* 우리가 input의 결과로서 예측된 variable을 주로 관심있어 할 때, 그렇지만 input의 각각의 방법이 예측에 영향을 끼치지 않을 때 사용
-* 대표적인 예제 : 내 집의 가치가 높이 평가됬나요? 낮게 평가됬나요?
-* Non-linear model O but inference x <- 모델 해석 어려움.
+- 우리가 input의 결과로서 예측된 variable을 주로 관심있어 하지만 input의 각각의 방법이 예측에 영향을 끼치지 않을 때 사용
+- 만약 부동산 예제라면, Prediction은 이런 질문을 날릴 것이다:
+  - 내 집의 가치가 높이 평가됬나요? 낮게 평가됬나요?
+- Non-linear model 좋음 but inference에는 좋지 못함
+  - 모델 해석 어려움.
 
 ### Inference
 
->When we are interested in the way each one of the inputs affect the prediction.
->
->In a real estate example, Inference would answer the question of: How much would my house cost if it had a view of the sea?
->
->Linear models are more suited for inference because the models themselves are easier to understand than their non-linear counterparts
-
-* 우리가 input의 각각의 방법이 예측에 영향을 끼치는 것에 대해 궁금해 할 때
-* 대표적인 예제 : 내가 바닷가가 보이는 집을 가지려면, 얼마나 들까요?
-* Linear model은 inference에 적합 <- 모델이 Non linear counterpart보다 이해하기 쉬움
+- 우리가 각각의 input들이 예측에 영향을 끼치는 것에 대해 관심이 있을 때.
+- 부동산 예제에서, 추론은 이런 질문을 날릴 것이다:
+  - 내가 바닷가가 보이는 집을 가지려면, 얼마나 들까요?
+- Linear model은 추론(inference)에 적합
+  - 모델이 Non linear model들보다 이해하기 쉬움
 
 ## Performance Analysis
 
@@ -94,10 +84,8 @@
 
 ### Accuracy
 
->Fraction of correct predictions, not reliable as skewed when the data set is unbalanced (that is, when the number of samples in different classes vary greatly)
-
-* 맞는 예측들의 조각, dataset이 unbalanced되어 있을 때 비뚤어져 있기 때문에 신뢰할 수 있는 게 아님.
-* 다른 샘플의 수가 매우 다양하게 있음
+- 맞는 예측들의 비율, dataset이 unbalanced되어 있을 때 비뚤어져 있기 때문에 신뢰할 수 있는 게 아님.
+- Dataset이 unbalnced 되어 있을 때는 다른 class들에 있는 sample들의 수가 크게 다를 때라는 것과 같다.
 
 ### f1 score
 
@@ -105,65 +93,60 @@
 
 > (TP) / (TP + FP)
 
-* 암이 있다고 진단한 사람이 실제로 암이 있을 확률.
-* 다른 말로 말하자면, 암이 있다고 진단한 집단 중에서 TP의 비율.
-
-Out of all the examples the classifier labeled as positive, what fraction were correct?
-
-* positive라고 이름 붙인 classifier가 있을 때, **정말로** positive한 fraction은 무엇일까?
+- 암이 있다고 진단한 사람이 실제로 암이 있을 확률.
+- 다른 말로 말하자면, 암이 있다고 진단한 집단 중에서 TP의 비율.
+- positive라고 이름 붙인 classifier가 있을 때, **정말로** positive한 fraction은 무엇일까?
 
 #### Recall
 
 > (TP)/ (TP+FN)
 
-* 정말 병이 있기 때문에 병이 있다고 진단한 비율.
-* 정말 병이 있는 사람들 중에서의 TP
-* confusion matrix의 bottom row
-
->Out of all the positive examples there were, what fraction did the classifier pick up?
-
-* 정말로 모든 예제들이 positive example일 때 어떤 fraction을 고를 것인가?
+- 정말 병이 있기 때문에 병이 있다고 진단한 비율.
+- 정말 병이 있는 사람들 중에서의 TP
+- confusion matrix의 bottom row
+- 정말로 모든 예제들이 positive example일 때 classifier는 어떤 fraction을 고를 것인가?
 
 ### Harmonic Mean of Precision and Recall
 
-```(2 * p * r / (p+r))```
-
+```(2 - p - r / (p+r))```
 
 ### ROC Curve - Receiver Operating Characteristics
-[roc-curve]
-True Positive Rate (Recall / Sensitivity) vs False Positive Rate (1-Specificity)<br>
-정말 Positive한 비율 (Recall/ Sensitivity) vs 가짜 Positive한 비율 (1 - Specificity)<br>
+
+![roc-curve](./images/ROC_curve.PNG)
+
+- True Positive Rate (Recall / Sensitivity) vs False Positive Rate (1-Specificity)
+- 정말 Positive한 비율 (Recall/ Sensitivity) vs 가짜 Positive한 비율 (1 - Specificity)
 
 ### Bias-Variance Tradeoff
->Bias refers to the amount of error that is introduced by approximating a real-life problem, which may be extremely
-complicated, by a simple model.<br>
->If Bias is high, and/or if the algorithm performs poorly even on your training data, try adding more features, or a more flexible model.<br>
 
-- bias는 현실 세계의 문제를 어림짐작 -> 그 차이로 발생하는 error량<br>
-- Bias 높음 & 알고리즘이 training data를 동등히 나눔 x -> 많은 feature 더함 & flexible한 모델 사용<br><br>
-
->Variance is the amount our model’s prediction would change when using a different training data set.
->High: Remove features, or obtain more data.<br>
-= Variance는 다른 training data set을 사용했을 때 우리의 예측이 변화시키는 양이다.<br>
-높을 경우, feature를 제거하거나, 더 많은 data를 얻어야한다.<br><br>
+- Bias
+  - bias는 현실 세계의 문제를 어림짐작 -> 그 차이로 발생하는 error량
+  - Bias가 높다면, 그리고/또는 만약 알고리즘이 training data를 동등히 나누지 않는다면 많은 feature 더하려고 시도하거나 더 flexible한 모델 사용
+- Variance
+  - Variance는 다른 training data set을 사용했을 때 우리의 예측이 변화시키는 양이다.
+  - 높을 경우, feature를 제거하거나, 더 많은 data를 얻어야한다.
 
 ### Goodness of Fit = R^2
-1.0 - sum of squared errors / total sum of squares(y)<br><br>
+
+```1.0 - sum of squared errors / total sum of squares(y)```
 
 ### Mean Squared Error(MSE)
+
 >The mean squared error (MSE) or mean squared deviation (MSD) of an estimator (of a procedure for estimating an unobserved quantity) measures the average of the squares of the errors or deviations—that is, the difference between the estimator and what is estimated<br><br>
 
-- MSE(=관측되지 않은 양을 측정하는 과정에서 나온 측정자의 MSD)
-- estimator와 측정된 것의 차이에서 생기는 deviation, error들의 square 평균<br><br>
+- (관측되지 않은 것들을 추정하는 과정에서의) estimator의 Mean squared error(MSE) 또는 Mean squared deviation (MSD)는 error square의 평균 또는 deviation(분산)들의 평균을 측정한다.
+- 이는 estimator와 측정된 것의 차이에서의 분산들이다.
+- ![MSE](./images/MSE.PNG)
 
 ### Error Rate
->The proportion of mistakes made if we apply out estimate model function the the training observations in a classification setting<br><br>
 
-* classification setting에서 estimate model function을 훈련된 observation에 적용시킬 때 mistake의 비율<br><br>
+- Classification setting에서 estimate model function을 훈련된 observation에 적용시킨다고 가정 했을 때 mistake의 비율
+- ![Error Rate](./images/error_rate.PNG)
 
+## Tuning
 
-## [Tuning](#tune-top)<a id="tuning"></a>
 ### Cross-validation
+
 >One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br>
 >To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds<br><br>
 
@@ -187,17 +170,17 @@ complicated, by a simple model.<br>
 >The traditional way of performing hyperparameter optimization has been grid search, or a parameter sweep, which is simply an exhaustive searching through a manually specified subset of the hyperparameter space of a learning algorithm. <br>
 >A grid search algorithm must be guided by some performance metric, typically measured by cross-validation on the training set or evaluation on a held-out validation set. <br><br>
         
-* Hyperparameter 최적화 또는 파라미터 sweep의 전통적인 방식.<br>
+- Hyperparameter 최적화 또는 파라미터 sweep의 전통적인 방식.<br>
     - 학습 알고리즘의 하이퍼 파라미터 공간의 수작업으로 지정된 subset을 통한 exhaustive searching이다.<br>
-* 어떤 performance metric으로 가이드됨.<br>
+- 어떤 performance metric으로 가이드됨.<br>
     - 특히 training set에 cross-validation으로 측정 또는 held out validation set을 평가함으로서 측정<br><br>
              
 #### Random Search
 >Since grid searching is an exhaustive and therefore potentially expensive method, several alternatives have been proposed. <br>
 >In particular, a randomized search that simply samples parameter settings a fixed number of times has been found to be more effective in high-dimensional spaces than exhaustive search.<br><br>
     
-* grid search가 너무 시간이 많이 많이 걸림 -> 새로운 방법 필요
-* randomized search는 고정된 시간동안 exhaustive search 보다 high-dimensional space에서 더 효과적이라고 밝혀진다.
+- grid search가 너무 시간이 많이 많이 걸림 -> 새로운 방법 필요
+- randomized search는 고정된 시간동안 exhaustive search 보다 high-dimensional space에서 더 효과적이라고 밝혀진다.
 
 #### Gradient-based optimization
 >For specific learning algorithms, it is possible to compute the gradient with respect to hyperparameters and then optimize the hyperparameters using gradient descent. <br>
@@ -290,10 +273,10 @@ When we do not make assumptions about the form of our function (f).<br>
 However, since these methods do not reduce the problem of estimating f to a small number of parameters, a large number of observations is required in order to obtain an accurate estimate for f. An example would be the thin-plate
 spline model.<br><br>
 
-* 함수의 형태에 대해 가정하지 않을 때.
-* 그렇지만, 이러한 방법이 추정하는 f의 문제를 적은 수의 parameter로 줄일 수 없을 때.
-* 수많은 observation이 f를 위한 정확한 추정을 얻기 위해 필요됨
-* thin-plate spline model
+- 함수의 형태에 대해 가정하지 않을 때.
+- 그렇지만, 이러한 방법이 추정하는 f의 문제를 적은 수의 parameter로 줄일 수 없을 때.
+- 수많은 observation이 f를 위한 정확한 추정을 얻기 위해 필요됨
+- thin-plate spline model
 
 ## [Categories](#cate-top)<a id="categories"></a>
 1. Supervised
@@ -340,13 +323,13 @@ The program is provided feedback in terms of rewards and punishments as it navig
         2. Gaussians Naive Bayes, Mixtures of multinomials
         3. Sigmoidal belief networks, Bayesian networks, Markov random fields
 1. Discriminative Methods<br>
-    * Directly estimate posterior probabilities. 
-    * No attempt to model underlying probability distributions. 
-    * Focus computational resources on given task– better performance<br><br>
+    - Directly estimate posterior probabilities. 
+    - No attempt to model underlying probability distributions. 
+    - Focus computational resources on given task– better performance<br><br>
     
-    * 다음에 올 확률을 직접적으로 측정<br>
-    * probability distribution에 놓여있는 모델에 어떠한 시도도 하지 않음<br>
-    * 계산해야하는 자원을 주어진 일에 더 특화된 성능에 넣음.<br>
+    - 다음에 올 확률을 직접적으로 측정<br>
+    - probability distribution에 놓여있는 모델에 어떠한 시도도 하지 않음<br>
+    - 계산해야하는 자원을 주어진 일에 더 특화된 성능에 넣음.<br>
     <br>
 2. Popular Models<br>
     1. Logistic regression, SVMs<br>
@@ -354,7 +337,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
     3. Conditional Random Fields (CRF)<br><br>
 
 ## [Selection Criteria](#selc-top)<a id="selection-criteria"></a>
-**Prediction Accuracy vs Model Interpretability**
+--Prediction Accuracy vs Model Interpretability--
 >There is an inherent tradeoff between Prediction Accuracy and Model Interpretability, that is to say that as the model get more flexible in the way the function (f) is selected, they get obscured, and are hard to interpret.<br>
 >Flexible methods are better for inference, and inflexible methods are preferable for prediction.<br><br>
 
@@ -363,22 +346,22 @@ The program is provided feedback in terms of rewards and punishments as it navig
     - 모델이 flexible 해질 때 -> 해석 어려움, 예측 쉬움
 
 ## [Libraries](#lib-top)<a id="libraries"></a>
-* **Python**
-    1. **Numpy**
+- --Python--
+    1. --Numpy--
     >Adds support for large, multi-dimensional arrays and matrices, along with a large library of high-level mathematical functions to operate on these arrays
     - 높은, 다중 차원의 array와 metrices를 지원.
     - 이런 array를 다루기 위해서 높은 수준의 수학적 함수들이 많음.<br><br>
-    2. **Pandas**
+    2. --Pandas--
     >Offers data structures and operations for manipulating numerical tables and time series
     - numerical table들과 time series를 다루기 위해서 data structure와 operation을 제공.<br><br>
-    3. **Scikit-Learn**
+    3. --Scikit-Learn--
     >It features various classification, regression and clustering algorithms including support vector machines, random forests, gradient boosting, k-means and DBSCAN, and is designed to interoperate with the Python numerical and scientific libraries NumPy and SciPy<br><br>
     - 다양한 classification, regression, clustering 알고리즘을 제공.
       = support vector machine, random forests, gradient booting, k-means, DBSCAN
     - Python numerical과 과학적인 libraries인 NumPy, SciPy와 상호작용을 하게끔 만들어져 있음<br><br>
-    4. **Tensorflow**
+    4. --Tensorflow--
     [tensorflow]<br><br>
-    5. **MXNet**
+    5. --MXNet--
     >Is an modern open-source deep learning framework used to train, and deploy deep neural networks. <br>
     >MXNet library is portable and can scale to multiple GPUs and multiple machines. <br>
     >MXNet is supported by major Public Cloud providers including AWS and Azure. <br>
@@ -387,7 +370,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
     - DNN을 전개
     - 많은 GPU와 많은 machine을 가지고 다닐 수 있거나 확장가능하다.
     - 주로 AWS와 Azure를 포함한 Public Cloud provider가 지원한다.<br><br>
-    6. **Keras**
+    6. --Keras--
     >Is an open source neural network library written in Python. <br>
     >It is capable of running on top of MXNet, Deeplearning4j, Tensorflow, CNTK or Theano. <br>
     >Designed to enable fast experimentation with deep neural networks, it focuses on being minimal, modular and extensible.<br><br>
@@ -395,7 +378,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
     - MXNet, Deeplearning4j, Tensorflow, CNTK 또는 Theano 위에서 돌 수 있다.
     - DNN에 빠른 실험을 할 수 있도록 고안됬다.
     - 작고, modular(모듈이 되고) 하고, extensible(확장)할 수 있다.<br><br>
-    7. **Torch**
+    7. --Torch--
     >Torch is an open source machine learning library, a scientific computing framework, and a script language based on the Lua programming language. <br> 
     >It provides a wide range of algorithms for deep machine learning, and uses the scripting language LuaJIT, and an underlying C implementation.<br><br>
     - open source machine learning library이다.
@@ -404,7 +387,7 @@ The program is provided feedback in terms of rewards and punishments as it navig
     - deep machine learning에 대해 넓은 범위의 알고리즘 제공
     - LuaJIT라고 불리는 스크립트 언어를 사용
     - 기본적으로 C 실행을 한다.<br><br>
-    8. **Microsoft Cognitive Toolkit**
+    8. --Microsoft Cognitive Toolkit--
     >Previously known as CNTK and sometimes styled as The Microsoft Cognitive Toolkit, is a deep learning framework developed by Microsoft Research. <br>
     >Microsoft Cognitive Toolkit describes neural networks as a series of computational steps via a directed graph.<br><br>
     - CNTK라고 알려진 것, 때때로 The Microsoft Cognitive Toolkit이라고 스타일되어있다.
