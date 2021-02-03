@@ -215,16 +215,17 @@
 - 결과는 model의 ensemble이고, 각각의 model은 동등한 weight를 가진다.
 - 전형적으로, 이 과정의 목표는 관심있는 모델의 variance를 줄이는 것.(ex decision trees)
 
-## [Types](#types-top)<a id="types"></a>
-- Regression : supervised problem, 결과는 discrete하기보단 continuous하다.<br>
-- Classification<br>
-    - input : 2개 혹은 이상의 클래스로 나뉨<br>
-    - learner : 이런 클래스에 대해 보이지 않는 input 값을 할당하는 모델 만들어야 함.<br>
-    - supervised learning으로 다뤄짐<br>
-- Clustering<br>
-    - input의 집합이 group으로 나누어짐<br>
-    - group에 대해 미리 알 필요는 없음 (classification은 미리 알아야함)<br>
-    - unsupervised learning으로 다뤄짐<br>
+## Types
+
+- Regression : supervised problem, 결과는 discrete하기보단 continuous하다.
+- Classification
+  - input : 2개 혹은 이상의 클래스로 나뉨
+  - learner : 이런 클래스에 대해 보이지 않는 input 값을 할당하는 모델 만들어야 함.
+  - supervised learning으로 다뤄짐
+- Clustering
+    - input의 집합이 group으로 나누어짐
+    - group에 대해 미리 알 필요는 없음 (classification은 미리 알아야함)
+    - unsupervised learning으로 다뤄짐
 - Density Estimation<br>
     - input의 분포도를 어떤 공간에서 찾는 것<br>
 - Dimensionality Reduction <br>
