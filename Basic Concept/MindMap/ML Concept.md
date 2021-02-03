@@ -82,6 +82,8 @@
 
 ### Confusion Matrix
 
+![confusion matrix](./images/confusion%20matrix.PNG)
+
 ### Accuracy
 
 - 맞는 예측들의 비율, dataset이 unbalanced되어 있을 때 비뚤어져 있기 때문에 신뢰할 수 있는 게 아님.
@@ -132,9 +134,7 @@
 
 ### Mean Squared Error(MSE)
 
->The mean squared error (MSE) or mean squared deviation (MSD) of an estimator (of a procedure for estimating an unobserved quantity) measures the average of the squares of the errors or deviations—that is, the difference between the estimator and what is estimated<br><br>
-
-- (관측되지 않은 것들을 추정하는 과정에서의) estimator의 Mean squared error(MSE) 또는 Mean squared deviation (MSD)는 error square의 평균 또는 deviation(분산)들의 평균을 측정한다.
+- (관측되지 않은 것들을 추정하는 과정에서의) estimator의 Mean squared error(MSE) 또는 Mean squared deviation (MSD)는 error square의 평균 또는 deviation(분산)들의 평균을 측정하는 것이다.
 - 이는 estimator와 측정된 것의 차이에서의 분산들이다.
 - ![MSE](./images/MSE.PNG)
 
@@ -147,89 +147,68 @@
 
 ### Cross-validation
 
->One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). <br>
->To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds<br><br>
-
-- cross-validation의 한 라운드 : <br>
-    - 하나의 subset (= training set) 분석 & 다른 subset(= validation set or testing set) validating.<br>
-    - data sample -> complementary set 으로 분리<br><br>
-- variability 줄임 <br>
-    - 각기 다른 파티션을 사용하면서 많은 cross validation 라운드가 돔<br>
-    - 이 라운드마다 validation result 평균을 냄.<br>
-- 종류 <br>
-1. Leave-p-out cross validation
-2. Leave-one-out cross validation
-3. k-fold cross-validation
-4. Holdout method
-5. Repeated random sub-sampling validation
+- cross-validation의 한 라운드
+  - 하나의 subset에 대한 분석을 실행하면서 Data의 샘플을 차집합들로 분리함 (training set)
+  - 다른 subset에 대한 분석을 validating (validation set 또는 testing set)
+- 이런 variability를 줄이고 싶음
+  - cross-validation은 다른 비율을 적용해서 실행된
+  - validation 결과는 round마다 평균이 남.
+- 종류
+    1. Leave-p-out cross validation
+    2. Leave-one-out cross validation
+    3. k-fold cross-validation
+    4. Holdout method
+    5. Repeated random sub-sampling validation
 
 ### Hyperparameters
 
 #### Grid Search
 
->The traditional way of performing hyperparameter optimization has been grid search, or a parameter sweep, which is simply an exhaustive searching through a manually specified subset of the hyperparameter space of a learning algorithm. <br>
->A grid search algorithm must be guided by some performance metric, typically measured by cross-validation on the training set or evaluation on a held-out validation set. <br><br>
-        
-- Hyperparameter 최적화 또는 파라미터 sweep의 전통적인 방식.<br>
-    - 학습 알고리즘의 하이퍼 파라미터 공간의 수작업으로 지정된 subset을 통한 exhaustive searching이다.<br>
-- 어떤 performance metric으로 가이드됨.<br>
-    - 특히 training set에 cross-validation으로 측정 또는 held out validation set을 평가함으로서 측정<br><br>
-             
+- Hyperparameter 최적화의 전통적인 방식은 Grid search 또는 파라미터 sweep
+  - 이 방식들은 leraning alorithm의 hyperparameter 공간에서 수동으로 전문화된 subset을 통해 exhaustive searching을 한다.
+- 어떤 performance metric으로 안내됨.
+  - 특히 training set이 cross-validation 혹은 held-out validation set을 평가함으로서 측정됨
+
 #### Random Search
->Since grid searching is an exhaustive and therefore potentially expensive method, several alternatives have been proposed. <br>
->In particular, a randomized search that simply samples parameter settings a fixed number of times has been found to be more effective in high-dimensional spaces than exhaustive search.<br><br>
-    
-- grid search가 너무 시간이 많이 많이 걸림 -> 새로운 방법 필요
-- randomized search는 고정된 시간동안 exhaustive search 보다 high-dimensional space에서 더 효과적이라고 밝혀진다.
+
+- grid search가 exhaustive하고 매우 비싸질 가능성이 있는 method이기 때문에, 대안이 제시되었다.
+- 특히, parameter setting들을 단순하게 sample하는 randomized search는 high-dimensional space에서 고정된 시간동안 exhaustive search 보다 더 효과적이라고 알려졌다.
 
 #### Gradient-based optimization
->For specific learning algorithms, it is possible to compute the gradient with respect to hyperparameters and then optimize the hyperparameters using gradient descent. <br>
->The first usage of these techniques was focused on neural networks. <br>
->Since then, these methods have been extended to other models such as support vector machines or logistic regression<br><br>
 
-- 대부분의 hyperparameter의 경우, gradient를 계산하는 것이 가능하다. -> 따라서 gradient descent를 이용해 최적화한다.<br>
-- 신경망에서 처음 쓰였다.<br>
-- support vector machine이나 logistic regression같은 다른 모델로 확장된다.<br><br>
+- 특정한 learning algorithm들에서, hyperparameter들에 대해서 gradient를 계산하는 것이 가능하다.
+- 그러므로 gradient descent를 이용해 hyperparameter들을 최적화한다.
+- 신경망에서 처음 쓰였다.
+- 그 때 이후로, 이러한 방법들은 support vector machine이나 logistic regression같은 다른 모델로 확장되었다.
 
 ### Early Stopping(Regularization)
->Early stopping rules provide guidance as to how many iterations can be run before the learner begins to over-fit, and stop the algorithm then.<br><br>
 
-- learner가 over-fit을 시작하기 전에 얼마나 많은 iteration이 돌아야 하는 지에 대해 가이드라인을 제공.
-- 그 다음 알고리즘을 멈춤
+- Early stopping rule은 learner가 over-fit을 시작하기 전에 얼마나 많은 iteration이 돌아야 하는 지에 대해 가이드라인을 제공한다.
+- 그 다음 그 지점에서 algorithm을 멈춘다.
 
-### Overfitting 
->When a given method yields a small training MSE (or cost), but a large test MSE (or cost), we are said to be
-overfitting the data. <br>
->This happens because our statistical learning procedure is trying too hard to find pattens in the data, that might be due to random chance, rather than a property of our function. <br>
->In other words, the algorithms may be learning the training data too well. <br>
-If model overfits, try removing some features, decreasing degrees of freedom, or adding more data.<br><br>
+### Overfitting
 
-- 주어진 method가 samll training MSE이지만 큰 test MSE를 할 때, data의 overfitting이 이루어진다고 말한다.<br>
-- 통계학적인 학습 방법 -> 너무 패턴을 찾기 어려워 -> overfitting 일어남<br>
-- function의 property대신 random chance이기 때문에 일어남<br>
-- 너무 잘 학습해서 일어나는 문제<br>
-- overfitting이 일어났을 경우 = feature 지움, freedom한 정도를 지움, data를 더 추가함 <br><br>
+- 주어진 method가 samll training MSE (또는 cost)를 산출하지만, 큰 test MSE(혹은 비용)을 산출할 때에는 "overfitting the data"라고 말한다.
+- 우리의 통계학적인 학습 방법 -> 너무 패턴을 찾기 어려워서 일어난다.
+- 이것은 우리의 함수의 속성 때문이 아니라 random change 때문에 일어나는 것 같다.
+- 다른 말로하자면, 이 알고리즘이 training data를 **너무 잘 학습**해서 일어나는 문제
+- 모델이 overfit됬을 경우 feature들의 일부분을 지움, 자유로운 정도를 지움, data를 더 추가한다.
 
 ### Underfitting
->Opposite of Overfitting. <br>
->Underfitting occurs when a statistical model or machine learning algorithm cannot capture the underlying trend of the data. <br>
->It occurs when the model or algorithm does not fit the data enough. <br>
->Underfitting occurs if the model or algorithm shows low variance but high bias (to contrast the opposite, overfitting from high variance and low bias). <br>
->It is often a result of an excessively simple model.<br><br>
 
-- Overfitting의 반대<br>
-- Underfitting: statistical model/machine learning algorithm -> data의 방향성을 capture x
-- data 충분치 못할 때 발생<br>
-- low variance 그러나 high bias를 보여줄 때 일어남. (overfitting은 high variance와 low bias를 보여줄 때 일어남)<br>
-- 과도하게 심플한 모델의 결과.<br><br>
+- Overfitting의 반대
+- Underfitting: statistical model/machine learning algorithm -> data의 기저에 깔려있는 trend를 잡지 못할 것 같을 때
+- data에 충분히 fit하지 못할 때 발생
+- 또한 모델이나 알고리즘이 low variance지만 high bias(반대로 대조하)를 보여준다면 underfitting이 일어날 수 있다.
+- 과도하게 심플한 모델의 결과일 수도 있다.
 
 ### Bootstrap
->Test that applies Random Sampling with Replacement of the available data, and assigns measures of accuracy (bias,
-variance, etc.) to sample estimates<br>
-1. Random Sampling -> 사용 가능한 data의 배치 적용 -> test<br>
-2. 정확도 측정 -> sample estimate에 적용 -> test<br>
+
+- 사용 가능한 data의 배치를 가지고 Random Sampling을 적용해 test 적용
+- 정확도를 측정할 수 있는 것들을 할당(bias, variance 등등) 후에 sample estimate에 적용
 
 ### Bagging
+
 >An approach to ensemble learning that is based on bootstrapping. <br>
 >Shortly, given a training set, we produce multiple different training sets (called bootstrap samples), by sampling with replacement from the original dataset. 
 >Then, for each bootstrap sample, we build a model. <br>
@@ -397,5 +376,4 @@ The program is provided feedback in terms of rewards and punishments as it navig
     
 # 이미지 필요
 [confusion Matrix]
-[roc-curve]
 [tensorflow]

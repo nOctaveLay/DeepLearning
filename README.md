@@ -3,9 +3,9 @@
 ## 딥러닝 기초
 
 - [Deep Learning mindmap source 2020](https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
-  - [Machine Learning Data Processing](Basic%20Concept/MindMap/machine%20learning%20data%20processing%20roadmap.md)
-  - [Machine Learning Concept](Basic%20Concept/MindMap/machine%20learning%20concept.md)
-  - [Machine Learning Process](Basic%20Concept/MindMap/machine%20learning%20process.md)
+  - [Machine Learning Data Processing](Basic%20Concept/MindMap/ML%20Process.md)
+  - [Machine Learning Concept](Basic%20Concept/MindMap/ML%20concept.md)
+  - [Machine Learning Process](Basic%20Concept/MindMap/ML%20process.md)
 - [Optimization](https://arxiv.org/pdf/1609.04747.pdf) [[정리]](Basic%20Concept/Overview_of_Gradient_descent_optimization.md)
 
 ## Vision
