@@ -246,14 +246,15 @@ Hard negative mining 은 빠르게 수렴된다. 그리고 실제로 모든 이�
 Appendix B에서 왜 positive와 negative example이 SVM에 비해 fine-tuning에서 다르게 정의되는 지를 논의할 것이다. 우리는 훈련 하는데 단순히 fine-tuned CNN의 최종 softmax layer에서 나온 output을 사용하는 것 보다 detection SVM으로 훈련시키는 것에 대한 것을 포함한 trade off를 논의할 것이다.
 
 ### Results on PASCAL VOC 2010-12
+
 PASCAL VOC의 가장 좋은 시도를 따르면 [15], 우리는 모든 디자인 결정과 VOC 2007 dataset에 있는 hyperparameter를 확인해야한다.
 
-VOC 2010-12 dataset의 최종 결과물에서, VOC 2012 훈련에 있는 CNN을 잘 조정했다. 
+VOC 2010-12 dataset의 최종 결과물에서, VOC 2012 훈련에 있는 CNN을 잘 조정했다.
 그리고 VOC2012 trainval을 구동하는 SVM에 있는 detection을 최적화했다.
 
 테스트 결과를 evaluation server에 오직 한번만 두개의 major algorithm variant를 각각 돌리는 데 썼다. (with and without bounding-box regression)
 
-Table 1은 VOC 2010의 완벽한 결과를 보여준다. 
+Table 1은 VOC 2010의 완벽한 결과를 보여준다.
 
 우리는 SegDPM을 포함한 4개의 강한 baseline에 대항하여 우리의 방법을 비교한다.
 

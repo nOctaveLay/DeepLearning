@@ -1,4 +1,4 @@
-# ImageNet Classification with Deep Convolutional Neural Networks [8/20] = AlexNet
+# ImageNet Classification with Deep Convolutional Neural Networks = AlexNet
 
 ## Abstract
 
