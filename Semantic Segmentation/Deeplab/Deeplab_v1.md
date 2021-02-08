@@ -85,7 +85,7 @@
 
 ### Controlling the Receptive Field Size and Accelerating Dense Computation with Convolutional Nets
 
-> Receptive Field의 크기를 조절하고, Convolutional NEt에서 깊은 계산을 증폭시키기
+> Receptive Field의 크기를 조절하고, Convolutional Net에서 깊은 계산을 증폭시키기
 
 - 우리의 network를 dense score computation을 위해서 목적을 다시 설정하게 하는 또 다른 요소는 network의 receptive field size를 명백히 control하기 위해서이다.
 - 대부분 최신의 DCNN에 기반을 둔 이미지 인식 방법은 Imagenet large-scale classification task에서 미리 훈련된 network에게 의존한다.
