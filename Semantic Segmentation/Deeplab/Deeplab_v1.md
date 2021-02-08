@@ -85,6 +85,31 @@
 
 ### Controlling the Receptive Field Size and Accelerating Dense Computation with Convolutional Nets
 
+> Receptive Field의 크기를 조절하고, Convolutional NEt에서 깊은 계산을 증폭시키기
+
+- 우리의 network를 dense score computation을 위해서 목적을 다시 설정하게 하는 또 다른 요소는 network의 receptive field size를 명백히 control하기 위해서이다.
+- 대부분 최신의 DCNN에 기반을 둔 이미지 인식 방법은 Imagenet large-scale classification task에서 미리 훈련된 network에게 의존한다.
+- 이러한 network들은 일반적으로 거대한 receptive field size를 가진다.
+  - 우리는 VGG-16 net을 고려했다.
+    - 이 넷의 receptive field size는 224 x 224이다.
+      - (zero padding을 고려한다.)
+    - (Convolution하게 계산했을 경우) 404 x 404 픽셀들이다.
+  - network를 fully convolutional 한 것으로 바꾼 후
+    - 첫번째 fully connected layer
+      - 4096개의 filter와 커다란 7 x 7 spatial size를 가진다.
+      - 우리의 dense score map computation에서 computational bottleneck이 걸린다.
+- 첫번째 FC 레이어를 4x4 spatial size로 spatially subsampling (by simple decimation)함으로서 이 문제를 해결
+  - receptive field를 128x128(with zero padding)또는 308x308(in convolutional mode)로 줄였다.
+  - 첫 번째 FC layer들을 계산 하는 데 걸리는 시간 (computation time)을 2-3배 정도 줄였다.
+  - Caffe로 구현된 것과 Titan GPU를 사용함으로써 VGG에서 나온 network가 매우 효율적인 결과를 보여줬다.
+    - 306x306 input image가 주어졌을 때, network의 맨 위에 있는 부분에서 testing동안 약 8 frames/sec의 비율로 39x39 dense raw feature score들을 보여줬다.
+    - training 동안 스피드는 3 frames/sec이다.
+    - 우리는 성공적으로 channel들의 개수를 4096개에서 1024개로 줄이는 것을 실험소다.
+    - 이는 성능이 저하되는 일 없이 계산 하는데 드는 시간과 memory footprint를 감소시켰다.
+- Krizhevsky et al(2013)과 같은 더 작은 net을 사용하는 것은 심지어 light-weight GPU들에게서도 video-rate test-time에서 dense feature computation을 허용한다.
+
+## Detailed Boundary Recovery: Fully-Connected Conditional Random Fields and Multi-Scale Prediction
+
 ## 추가적인 내용
 
 배워야 할 keyword : ground truth label
