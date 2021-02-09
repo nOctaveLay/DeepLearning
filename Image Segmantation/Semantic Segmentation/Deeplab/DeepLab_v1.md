@@ -132,6 +132,17 @@
 
 ### Fully-Connected Conditional Random Fields for Accurate Localization
 
+- CRF는 smooth noisy segmentation map을 적용시켰다. (Rother et al. 2004; Kohli et al. 2009).
+- 전통적으로 이러한 모델은 공간적으로 인접한 픽셀들에게 같은 label을 배정하는 것을 선호하면서 이웃하는 node들을 결합시키는 energy term을 포함한다.
+- 양적으로, 이러한 짧은 범위의 CRF의 주된 기능은 local hand-engineered feature의 위에 세워진 약한 classifier들의 spurious(가짜) prediction을 지워버리는 것이었다.
+- 약한 classifier들과 비교해봤을 때, 우리가 이 작업에서 사용한 것과 같은 현대 DCNN 구조는 score map과 양적으로 다른 semantic label prediction을 생성한다.
+- Figure 2에서도 나타나있지만, score map은 전형적으로 꽤 부드럽고 동질의(homogeneous) classification 결과를 생성한다.
+- 이러한 제도에서, 짧은 범위의 CRF들을 사용한다는 것은 안 좋을 수 있다. 
+  - 이는 우리의 목적이 classification을 부드럽게 만들기 보다는 정밀한 local structure을 회복해야 하기 때문이다.
+- local-range를 가지는 CRF와 함께 대조에 민감한 요소들을 (contrast-sensitive potentials) 사용하는 것은 (Rother et al. 2004) localization을 향상시킬 가능성이 있다.
+- 하지만 얇은 구조들을 잃어버리고, 비싼 discrete optimization problem을 푸는 것을 필요로 한다.
+
+
 ## 추가적인 내용
 
 배워야 할 keyword : ground truth label

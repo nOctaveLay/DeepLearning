@@ -5,18 +5,6 @@
 - 정리를 바라거나 읽고 싶은(읽어야 하는) 논문은 **정보 모음** 헤더에 정리됩니다.
   - 추후 다른 헤더로 옮겨질 내용들이 적혀있습니다.
 
-## README.md에 적으실 때의 주의점
-
-- 만약 일치하는 항목이 없을 경우, header를 2개 붙여 새로운 헤더를 만듭니다. (ex 딥러닝 기초)
-- 모든 항목은 Header 안의 하위 항목으로 적으며, 반드시 해당 항목이 있는 위치로 이동할 수 있도록 해야합니다.
-- 모든 논문 정리들은 각 Header에 맞는 폴더로 이동되어야하며, 논문 정리에 들어갈 이미지들은 각 헤더 폴더 안에 images라는 폴더를 만들어 image를 넣어주세요.
-- 메인 Topic엔 출처 링크를, [정리]에는 논문 정리 링크(markdown)를 걸어줍니다. 
-- 이 때 요약본과 전체본이 따로라면, [요약] [전체]로 각각 걸어줍니다.
-- 논문 전체 정리시에는 반드시 첫 번째 헤더엔 논문의 제목이 들어가야합니다.
-- 두 번째 헤더부터 논문에서 정리된 내용의 Index를 삽입하시면 됩니다.
-- (Recommanded) Index를 붙여주시면 나중에 다른 분들이 보시기 쉽습니다.
-- (Recommanded) 딥러닝 기초엔 헤더에 대한 설명이 들어가면 더욱 좋습니다.
-
 ## 딥러닝 기초
 
 - [Deep Learning mindmap source 2020](https://whimsical.com/CA7f3ykvXpnJ9Az32vYXva)
@@ -24,6 +12,7 @@
   - [Machine Learning Concept](Basic%20Concept/MindMap/ML%20concept.md)
   - [Machine Learning Process](Basic%20Concept/MindMap/ML%20process.md)
 - [Optimization](https://arxiv.org/pdf/1609.04747.pdf) [[정리]](Basic%20Concept/Overview_of_Gradient_descent_optimization.md)
+- ![define](./Basic%20Concept/images/define.png)
 
 ## Image Segmentation
 
@@ -80,7 +69,24 @@
 
 - [개인적으로 많은 정보가 들어있다고 생각하는 사이트](https://deep-learning-drizzle.github.io/?fbclid=IwAR2HVeEddlfF0WaEPW4IRRq6oUVtOp1BPcTNdGHABgaKvrhKJ7HzcW8GJVo
 )
-- [deview 2019](https://deview.kr/2019/schedule)
+- [Deview 2019](https://deview.kr/2019/schedule)
 - [Best paper awards in Computer Science](https://jeffhuang.com/best_paper_awards/?fbclid=IwAR1xqjapSTqkqGb_bi7qBaeTT5me8Jv8mUc2s6M6TzBVAfSzBovBYG8aotc)
 - [Best Paper Awards at ACL 2020](https://acl2020.org/blog/ACL-2020-best-papers/)
 - [Difference](https://missinglink.ai/guides/computer-vision/image-segmentation-deep-learning-methods-applications/)
+
+## 기여
+
+- README.md에 기여하실 경우
+  - 만약 일치하는 항목이 없을 경우, header를 2개 붙여 새로운 헤더를 만듭니다. (ex 딥러닝 기초)
+  - 모든 항목은 Header 안의 하위 항목으로 적으며, 반드시 해당 항목이 있는 위치로 이동할 수 있도록 해야합니다.
+  - 모든 논문 정리들은 각 Header에 맞는 폴더로 이동되어야하며, 논문 정리에 들어갈 이미지들은 각 헤더 폴더 안에 images라는 폴더를 만들어 image를 넣어주세요.
+  - 메인 Topic엔 출처 링크를, [정리]에는 논문 정리 링크(markdown)를 걸어줍니다.
+  - 이 때 요약본과 전체본이 따로라면, [요약] [전체]로 각각 걸어줍니다.
+  - 논문 전체 정리시에는 반드시 첫 번째 헤더엔 논문의 제목이 들어가야합니다.
+  - 두 번째 헤더부터 논문에서 정리된 내용의 Index를 삽입하시면 됩니다.
+  - (Recommanded) Index를 붙여주시면 나중에 다른 분들이 보시기 쉽습니다.
+  - (Re`commanded) 딥러닝 기초엔 헤더에 대한 설명이 들어가면 더욱 좋습니다.
+
+## 출처
+
+- [분류에 대한 도움](https://missinglink.ai/guides/computer-vision/image-segmentation-deep-learning-methods-applications/)
