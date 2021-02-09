@@ -110,6 +110,30 @@
 
 ## Detailed Boundary Recovery: Fully-Connected Conditional Random Fields and Multi-Scale Prediction
 
+### Deep Convolutional Networks and the Localization Challenge
+
+- ![Figure2](./images/DeepLab_v1_Figure2.PNG)
+  - Score map(softmax function이 들어가기 전의 input)과 belief map(softmax function의 결과)
+  - 각각의 mean field iteration을 한 후의 score map(1번째 줄)과 belief(2번째 줄) map이다.
+  - 마지막 DCNN 레이어는 mean field inference에 대한 input으로서 사용된다.
+- 위의 그림에서 보다시피, DCNN score map은 대략적인 object의 위치와 존재를 신뢰성 있게 예측한다.
+- 그러나 그들의 정확한 윤곽선을 잘 집어내지는 못한다.
+- localization accuracy와 classification accuracy에는 항상 trade-off가 존재한다.
+  - 다양한 max-pooling layer를 가진 더 깊은 모델은 classification task에서 훨씬 더 성공적인 것으로 증명된다.
+  - 하지만, 그들의 증가된 불변성과 큰 receptive field는 높은 output level에서의 score들로부터 위치를 추론하는 것을 어렵게 만든다.
+- 최신 연구는 이런 localization 문제를 해결하기 위해서 2개의 방향을 따랐다.
+  - 1: 더 나은 object boundary들을 추정하기 위해서 (Long et al. 2014; Eigen & Fergus. 2014) CNN 안에서 다양한 layer들로부터 정보를 제어하는 것.
+  - 2: 본질적으로 localization task를 low-level segmentation method로 대체하면서 super-pixel representation을 적용하는 것.
+    - 이 방법은 Mostajabi et al. (2014)의 가장 성공적인 최신 방법을 따른다.
+- 다음 섹션에서,
+  - 우리는 DCNN의 인지 수용량과 fully connected CRF의 fine-grained localization accuracy를 결합함으로서 참신한 대안을 따를 것이다.
+  - 우리는 localization challenge를 푸는데 놀랄만한 성공을 거둔다는 것을 보여줄 것이다.
+    - 이는 정확한 semantic segmentation 결과를 생산하는 것과 동시에 object boundary영역에서 존재하는 방법들의 영역 그 이상으로 detail을 회복할 것이다.
+
+### Fully-Connected Conditional Random Fields for Accurate Localization
+
+
+
 ## 추가적인 내용
 
 배워야 할 keyword : ground truth label
