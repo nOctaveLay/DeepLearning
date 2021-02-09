@@ -10,7 +10,8 @@
 - 만약 일치하는 항목이 없을 경우, header를 2개 붙여 새로운 헤더를 만듭니다. (ex 딥러닝 기초)
 - 모든 항목은 Header 안의 하위 항목으로 적으며, 반드시 해당 항목이 있는 위치로 이동할 수 있도록 해야합니다.
 - 모든 논문 정리들은 각 Header에 맞는 폴더로 이동되어야하며, 논문 정리에 들어갈 이미지들은 각 헤더 폴더 안에 images라는 폴더를 만들어 image를 넣어주세요.
-- 메인 Topic엔 출처 링크를, [정리]에는 논문 정리 링크(markdown)를 걸어줍니다. 이 때 요약본과 전체본이 따로라면, [요약] [전체]로 각각 걸어줍니다.
+- 메인 Topic엔 출처 링크를, [정리]에는 논문 정리 링크(markdown)를 걸어줍니다. 
+- 이 때 요약본과 전체본이 따로라면, [요약] [전체]로 각각 걸어줍니다.
 - 논문 전체 정리시에는 반드시 첫 번째 헤더엔 논문의 제목이 들어가야합니다.
 - 두 번째 헤더부터 논문에서 정리된 내용의 Index를 삽입하시면 됩니다.
 - (Recommanded) Index를 붙여주시면 나중에 다른 분들이 보시기 쉽습니다.
@@ -24,28 +25,42 @@
   - [Machine Learning Process](Basic%20Concept/MindMap/ML%20process.md)
 - [Optimization](https://arxiv.org/pdf/1609.04747.pdf) [[정리]](Basic%20Concept/Overview_of_Gradient_descent_optimization.md)
 
-## Image Classification
+## Image Segmentation
+
+### Classification
+
+> Categorizing the entire image into a class such as "people", "animals", "outdoors"
 
 - [Imagenet classification with deep convolutional neural networks[CNN, AlexNet]](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
 
-## Image Segmentation
+### Object Detection
 
-- [R CNN](https://arxiv.org/abs/1311.2524)
-- [Mask R CNN](https://arxiv.org/pdf/1703.06870.pdf)
+> detecting objects within an image and drawing a rectangle around them, for example, a person or a sheep
 
-## Semantic segmentation
+### Segmentation
 
-- pixel-level classification
+> classifies all the pixels of an image into meaningful classes of objects.
+>
+> These classes are “semantically interpretable” and correspond to real-world categories.
+>
+>For instance, you could isolate all the pixels associated with a cat and color them green. This is also known as dense prediction because it predicts the meaning of each pixel.
 
-### [Awesome Semantic Segmentation](https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw)
+#### Semantic segmentation
 
-- [U-net](https://arxiv.org/pdf/1505.04597.pdf) [[정리]](Semantic%20Segmentation/UNet.md)
-- [SegNet](https://arxiv.org/pdf/1511.00561.pdf) [[정리]](Semantic%20Segmentation/SegNet.md)
+> pixel-level classification
+
+#### [Awesome Semantic Segmentation](https://github.com/mrgloom/awesome-semantic-segmentation?fbclid=IwAR35vXm16KQ_TG2C9361lreBhkYP82ZJioNI-UCyDdr0WpQhM_RBNVwZrPw)
+
+- [U-net](https://arxiv.org/pdf/1505.04597.pdf) [[정리]](Image%20Segmantation/Semantic%20Segmentation/UNet.md)
+- [SegNet](https://arxiv.org/pdf/1511.00561.pdf) [[정리]](Image%20Segmantation/Semantic%20Segmentation/SegNet.md)
 - DeepLab
-  - [DeepLabv1](https://arxiv.org/pdf/1412.7062.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v1.md)
-  - [DeepLabv2](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v2.md)
-  - [DeepLabv3](https://arxiv.org/pdf/1706.05587.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v3.md)
-  - [DeepLabv3+](https://arxiv.org/pdf/1802.02611.pdf) [[정리]](Semantic%20Segmentation/Deeplab/Deeplab_v3+.md)
+  - [DeepLabv1](https://arxiv.org/pdf/1412.7062.pdf) [[정리]](Image%20Segmantation/Semantic%20Segmentation/Deeplab/Deeplab_v1.md)
+  - [DeepLabv2](https://arxiv.org/pdf/1606.00915.pdf) [[정리]](Image%20Segmantation/Semantic%20Segmentation/Deeplab/Deeplab_v2.md)
+  - [DeepLabv3](https://arxiv.org/pdf/1706.05587.pdf) [[정리]](Image%20Segmantation/Semantic%20Segmentation/Deeplab/Deeplab_v3.md)
+  - [DeepLabv3+](https://arxiv.org/pdf/1802.02611.pdf) [[정리]](Image%20Segmantation/Semantic%20Segmentation/Deeplab/Deeplab_v3+.md)
+- R CNN
+  - [R CNN](https://arxiv.org/abs/1311.2524) [[정리]](Image%20Segmantation/Semantic%20Segmentation/R%20CNN/R-CNN.md)
+  - [Mask R CNN](https://arxiv.org/pdf/1703.06870.pdf) [[정리]](Image%20Segmantation/Semantic%20Segmentation/R%20CNN/Mask_R-CNN.md)
 - Spatial pyramid:
   - S. Lazebnik, C. Schmid, and J. Ponce, “Beyond bags of features: Spatial pyramid matching for recognizing natural scene categories,” in CVPR, 2006.
   - K. He, X. Zhang, S. Ren, and J. Sun, “Spatial pyramid pooling in deep convolutional networks for visual recognition,” in ECCV, 2014
