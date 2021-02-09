@@ -132,8 +132,6 @@
 
 ### Fully-Connected Conditional Random Fields for Accurate Localization
 
-
-
 ## 추가적인 내용
 
 배워야 할 keyword : ground truth label
