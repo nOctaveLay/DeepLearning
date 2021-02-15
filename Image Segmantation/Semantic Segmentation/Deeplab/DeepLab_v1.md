@@ -148,6 +148,26 @@
 - unary potential 적용
   - ![DeepLab_unary_potential.PNG](./images/DeepLab_unary_potential.PNG)
 - P(xi) = DCNN에서 계산되는 pixel i 에서 label assignment probability
+- pairwise potential
+  - ![pairwise potential](./images/Deeplab_pairwise_potential.PNG)
+  - ![u function](./images/DeepLab_u.PNG)는 xi와 xj가 같지 않을 때 1이며, 같으면 0이다.
+  - 얼마나 그들이 있는 곳에서 서로서로 떨어져 있던 간에 이미지에서 i와 j 픽셀들의 각각의 쌍을 위해 하나의 pairwise term이 있다.
+    - 예를들어, 모델의 factor graph는 fully connected되어 있다.
+  - 각각의 ![k^m](./images/DeepLab_pairwise_k.PNG)는 픽셀 i와 j로 추출된 특징들 (f로 정의한다.)에 의존하고 있는 Gaussian kernal이고, parameter wm에 의해 weighted된다.
+- 우리는 bilateral position과 color term을 적용했고, 특별히, 커널들은
+  - ![kernel](./images/DeepLab_kernel.PNG)
+  - 첫번째 커널이 모든 pixel position들(p), pixel color intensity들 (I)에 의존할 때
+  - 그리고 두번째 커널은 오직 pixel의 position에만 의존
+  - hyper parameter 시그마들은 가우시안 커널의 "크기"를 제어
+- 이 모델은 효율적인 approximate probabilistic inference 을 할정도로 충분하다. (Krahenbuhl & Koltun, 2011)
+- fully decomposable mean field approximation을 하는 update를 통과하는 message는 feature space 안의 가우시안 커널로 진행하는 convolution으로 표현된다.
+  - fully decomposable mean field approximation 
+  - ![FDMFA](./images/DeepLab_mean_field_approximation.PNG)
+- 높은 차원의 필터링 알고리즘 (Adams et al. 2012)은 크게 이런 계산들의 스피드를 빠르게 할 수 있다. 
+  - Pascal VOC image에서 0/5초 이하 걸림
+  - publicly available implementation을 사용 (Krahenbuhl & Koltun, 2011)
+
+### Multi Scale Prediction
 
 ## 추가적인 내용
 
